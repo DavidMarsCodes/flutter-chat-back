@@ -1,14 +1,14 @@
-const User = require('../models/usuario');
-const Mensaje = require('../models/mensaje');
+const User = require('../models/user');
+const Message = require('../models/message');
 
 const userConnect = async ( uid = '' ) => {
 
     try {
 
-        const usuario  = await User.findById( uid );
-        usuario.online = true;
-        await usuario.save();
-        return usuario;
+        const user  = await User.findById( uid );
+        user.online = true;
+        await user.save();
+        return user;
         
     } catch (error) {
         return false
@@ -20,10 +20,10 @@ const userDisconnect = async ( uid = '' ) => {
 
     try {
 
-        const usuario  = await User.findById( uid );
-        usuario.online = false;
-        await usuario.save();
-        return usuario;
+        const user  = await User.findById( uid );
+        user.online = false;
+        await user.save();
+        return user;
         
     } catch (error) {
         return false;
@@ -42,8 +42,8 @@ const saveMessage = async( payload ) => {
     */
 
     try {
-        const mensaje = new Mensaje( payload );
-        await mensaje.save();
+        const message = new Message( payload );
+        await message.save();
 
         return true;
     } catch (error) {

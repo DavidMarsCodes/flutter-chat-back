@@ -1,18 +1,17 @@
 const { response } = require('express');
 const bcrypt = require('bcryptjs');
 
-const Usuario = require('../models/usuario');
+const User = require('../models/user');
 const { generateJWT } = require('../helpers/jwt');
-const usuario = require('../models/usuario');
 
 
-const crearUsuario = async (req, res = response ) => {
-
+const createUser = async (req, res = response ) => {
     const { email, password } = req.body;
-
+  
+    console.log('user/.body', req.body)
     try {
 
-        const existeEmail = await Usuario.findOne({ email });
+        const existeEmail = await User.findOne({ email });
         if( existeEmail ) {
             return res.status(400).json({
                 ok: false,
@@ -20,20 +19,24 @@ const crearUsuario = async (req, res = response ) => {
             });
         }
 
-        const usuario = new Usuario( req.body );
+        const user = new User( req.body );
 
+        console.log('user', user)
+       
         // Encriptar contraseña
         const salt = bcrypt.genSaltSync();
-        usuario.password = bcrypt.hashSync( password, salt );
+        user.password = bcrypt.hashSync( password, salt );
 
-        await usuario.save();
+        await user.save();
+
 
         // Generar mi JWT
-        const token = await generateJWT( usuario.id );
+        const token = await generateJWT( user.id );
+
 
         res.json({
             ok: true,
-            usuario,
+            user,
             token
         });
 
@@ -53,8 +56,8 @@ const login = async ( req, res = response ) => {
 
     try {
         
-        const usuarioDB = await Usuario.findOne({ email });
-        if ( !usuarioDB ) {
+        const userDB = await User.findOne({ email });
+        if ( !userDB ) {
             return res.status(404).json({
                 ok: false,
                 msg: 'Email no encontrado'
@@ -62,7 +65,7 @@ const login = async ( req, res = response ) => {
         }
 
         // Validar el password
-        const validPassword = bcrypt.compareSync( password, usuarioDB.password );
+        const validPassword = bcrypt.compareSync( password, userDB.password );
         if ( !validPassword ) {
             return res.status(400).json({
                 ok: false,
@@ -72,11 +75,11 @@ const login = async ( req, res = response ) => {
 
 
         // Generar el JWT
-        const token = await generateJWT( usuarioDB.id );
+        const token = await generateJWT( userDB.id );
         
         res.json({
             ok: true,
-            usuario: usuarioDB,
+            user: userDB,
             token
         });
 
@@ -100,11 +103,11 @@ const renewToken = async( req, res = response) => {
     const token = await generateJWT( uid );
 
     // Obtener el usuario por el UID, Usuario.findById... 
-    const usuario = await Usuario.findById( uid );
+    const user = await User.findById( uid );
 
     res.json({
         ok: true,
-        usuario,
+        user,
         token
     });
 
@@ -112,7 +115,7 @@ const renewToken = async( req, res = response) => {
 
 
 module.exports = {
-    crearUsuario,
+    createUser,
     login,
     renewToken
 }

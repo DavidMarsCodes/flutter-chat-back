@@ -17,10 +17,10 @@ io.on('connection', (client) =>  {
     client.join( uid );
 
     // Escuchar del cliente el mensaje-personal
-    client.on('mensaje-personal', async( payload ) => {
+    client.on('personal-message', async( payload ) => {
         // TODO: Grabar mensaje
         await saveMessage( payload );
-        io.to( payload.para ).emit('mensaje-personal', payload );
+        io.to( payload.para ).emit('personal-message', payload );
     })
     
 
