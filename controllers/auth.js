@@ -2,11 +2,14 @@ const { response } = require('express');
 const bcrypt = require('bcryptjs');
 
 const User = require('../models/user');
+const Profile = require('../models/profile');
+
 const { generateJWT } = require('../helpers/jwt');
 
 
+
 const createUser = async (req, res = response ) => {
-    const { email, password } = req.body;
+    const { email, password, username, name } = req.body;
   
     console.log('user/.body', req.body)
     try {
@@ -19,24 +22,61 @@ const createUser = async (req, res = response ) => {
             });
         }
 
-        const user = new User( req.body );
+        const user = new User( {email: email, password: password, username: username });
 
-        console.log('user', user)
+    
+    
        
         // Encriptar contraseña
         const salt = bcrypt.genSaltSync();
         user.password = bcrypt.hashSync( password, salt );
 
         await user.save();
+        console.log('user', user)
+        const token = await generateJWT( user.id );
+
+        console.log('user.id', user.id)
+
+        const profileNew = new Profile( {user: user.id, name: name})
+
+        await profileNew.save()
+        console.log('profileNew', profileNew)
+
+        const profileFind = await 
+        Profile.findOne({user: user.id})
+        .populate('user')
+
+
+        console.log('profileFind!!', profileFind)
+    
+
 
 
         // Generar mi JWT
-        const token = await generateJWT( user.id );
-
+        const profile = {
+            
+            name: profileFind.name,
+            lastName: profileFind.lastName,
+            imageHeader: profileFind.imageHeader,
+            imageAvatar: profileFind.imageAvatar,
+            id: profileFind._id,
+            user: {
+              online: user.online,
+              uid: user.id,
+              email: user.email,
+              username:  user.username,
+           
+            },
+            createdAt: profileFind.createdAt,
+            updatedAt:profileFind.updatedAt
+           
+          }
+    
+        console.log(profile);
 
         res.json({
             ok: true,
-            user,
+            profile,
             token
         });
 
@@ -56,8 +96,8 @@ const login = async ( req, res = response ) => {
 
     try {
         
-        const userDB = await User.findOne({ email });
-        if ( !userDB ) {
+        const user = await User.findOne({ email });
+        if ( !user ) {
             return res.status(404).json({
                 ok: false,
                 msg: 'Email no encontrado'
@@ -75,11 +115,38 @@ const login = async ( req, res = response ) => {
 
 
         // Generar el JWT
-        const token = await generateJWT( userDB.id );
-        
+        const token = await generateJWT( user.id );
+    //    const profile = await getProfilebyUser(userDB.id);
+
+    const profileFind = await 
+    Profile.findOne({user: user.id})
+    .populate('user')
+
+
+    console.log('profileFind!!', profileFind)
+
+
+    const profile = {
+            
+        name: profileFind.name,
+        lastName: profileFind.lastName,
+        imageHeader: profileFind.imageHeader,
+        imageAvatar: profileFind.imageAvatar,
+        id: profileFind._id,
+        user: {
+          online: user.online,
+          uid: user.id,
+          email: user.email,
+          username:  user.username,
+       
+        },
+        createdAt: profileFind.createdAt,
+        updatedAt:profileFind.updatedAt
+       
+      }
         res.json({
             ok: true,
-            user: userDB,
+            profile,
             token
         });
 
@@ -105,9 +172,40 @@ const renewToken = async( req, res = response) => {
     // Obtener el usuario por el UID, Usuario.findById... 
     const user = await User.findById( uid );
 
+    console.log('uid', uid);
+   
+  //  const profile = await Profile.find({userId: uid})
+
+  const profileFind = await 
+  Profile.findOne({user: user.id})
+  .populate('user')
+
+
+  console.log('profileFind!!', profileFind)
+
+  
+  const profile = {
+          
+      name: profileFind.name,
+      lastName: profileFind.lastName,
+      imageHeader: profileFind.imageHeader,
+      imageAvatar: profileFind.imageAvatar,
+      id: profileFind._id,
+      user: {
+        online: user.online,
+        uid: user.id,
+        email: user.email,
+        username:  user.username,
+     
+      },
+      createdAt: profileFind.createdAt,
+      updatedAt:profileFind.updatedAt
+     
+    }
+
     res.json({
         ok: true,
-        user,
+        profile,
         token
     });
 

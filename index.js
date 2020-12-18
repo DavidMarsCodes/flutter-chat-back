@@ -31,6 +31,8 @@ app.use( express.static( publicPath ) );
 app.use( '/api/login', require('./routes/auth') );
 app.use( '/api/users', require('./routes/users') );
 app.use( '/api/messages', require('./routes/messages') );
+app.use( '/api/profile', require('./routes/profile') );
+
 
 
 

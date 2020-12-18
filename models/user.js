@@ -2,7 +2,7 @@ const { Schema, model } = require('mongoose');
 
 const UsersSchema = Schema({
 
-    name: {
+    username: {
         type: String,
         required: true
     },
@@ -15,11 +15,7 @@ const UsersSchema = Schema({
         type: String,
         required: true
     },
-    image: {
-        type: String,
-        default: '',
-        
-    },
+
     online: {
         type: Boolean,
         default: false
@@ -32,6 +28,7 @@ UsersSchema.method('toJSON', function() {
     object.uid = _id;
     return object;
 })
+
 
 
 module.exports = model('User', UsersSchema );

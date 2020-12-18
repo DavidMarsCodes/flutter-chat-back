@@ -20,7 +20,7 @@ io.on('connection', (client) =>  {
     client.on('personal-message', async( payload ) => {
         // TODO: Grabar mensaje
         await saveMessage( payload );
-        io.to( payload.para ).emit('personal-message', payload );
+        io.to( payload.for ).emit('personal-message', payload );
     })
     
 

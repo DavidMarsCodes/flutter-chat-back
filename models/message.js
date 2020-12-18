@@ -2,17 +2,17 @@ const { Schema, model } = require('mongoose');
 
 const MessagesSchema = Schema({
 
-    de: {
+    by: {
         type: Schema.Types.ObjectId,
         ref: 'User',
         required: true
     },
-    para: {
+    for: {
         type: Schema.Types.ObjectId,
         ref: 'User',
         required: true
     },
-    mensaje: {
+    message: {
         type: String,
         required: true
     }

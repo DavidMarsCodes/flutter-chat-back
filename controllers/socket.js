@@ -33,13 +33,7 @@ const userDisconnect = async ( uid = '' ) => {
 
 const saveMessage = async( payload ) => {
 
-    /*
-        payload: {
-            de: '',
-            para: '',
-            texto: ''
-        }
-    */
+   
 
     try {
         const message = new Message( payload );
