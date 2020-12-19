@@ -10,10 +10,17 @@ const RoomSchema = Schema({
         type: String,
         required: false,
     },
-    userId: {
+    user: {
         type: Schema.Types.ObjectId,
         ref: 'User',
         required: true
+    },
+
+    totalItems: 
+    {
+        type: Number,
+        required: false,
+        default: 0
     },
 
     
@@ -26,7 +33,7 @@ const RoomSchema = Schema({
 
 RoomSchema.method('toJSON', function() {
     const { __v, _id, ...object } = this.toObject();
-    object.roid = _id;
+    object.id = _id;
     return object;
 })
 
