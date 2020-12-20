@@ -65,7 +65,7 @@ const getProfilesLastUsers = async (req, res = response) => {
         .find({ user: { $ne: req.uid } })
 
         .skip(from)
-        .limit(20)
+        .limit(50)
         .populate('user')
 
         .sort('-online')
