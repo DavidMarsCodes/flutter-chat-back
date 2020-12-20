@@ -9,7 +9,7 @@ const { generateJWT } = require('../helpers/jwt');
 
 
 const createUser = async (req, res = response ) => {
-    const { email, password, username, name } = req.body;
+    const { email, password, username } = req.body;
   
     console.log('user/.body', req.body)
     try {
@@ -37,7 +37,7 @@ const createUser = async (req, res = response ) => {
 
         console.log('user.id', user.id)
 
-        const profileNew = new Profile( {user: user.id, name: name})
+        const profileNew = new Profile( {user: user.id})
 
         await profileNew.save()
         console.log('profileNew', profileNew)
