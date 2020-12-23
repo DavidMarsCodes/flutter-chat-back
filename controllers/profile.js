@@ -140,6 +140,9 @@ const loginGetProfileUser = async (req, res = response) => {
             .findOne({ user: { $ne: user.id } })
             .populate('user')
 
+        
+            const 
+
 
         // Generar mi JWT
         const profile = {

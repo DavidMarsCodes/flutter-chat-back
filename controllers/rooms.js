@@ -1,5 +1,6 @@
 const { response } = require('express');
 const Room = require('../models/room');
+const user = require('../models/user');
 
 
 
@@ -51,10 +52,34 @@ const createRoom = async (req, res = response ) => {
     }
 }
 
+const getRoomsByUser = async ( req, res = response ) => {
+
+
+    const userId = req.uid;
+
+    console.log(userId);
+
+    const rooms = await Room
+        .find({ user: userId })
+        .sort('-createAt')
+
+
+
+    console.log('rooms ', rooms)
+
+    
+    res.json({
+        ok: true,
+        rooms,
+    })
+}
+
+
 
 
 module.exports = {
-    createRoom
+    createRoom,
+    getRoomsByUser
 
 }
 
