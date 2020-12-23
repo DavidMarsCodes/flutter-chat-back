@@ -5,12 +5,12 @@ const user = require('../models/user');
 
 
 const createRoom = async (req, res = response ) => {
-    const { description, name } = req.body;
+    const { description, name, id } = req.body;
   
-    console.log('req! ', req)
+    console.log('id! ', id)
     try {
 
-        const nameExist = await Rooms.findOne({ id: req.uid, name: name });
+        const nameExist = await Room.findOne({ name: name });
 
         console.log('nameExist:', nameExist)
         if( nameExist ) {
@@ -20,26 +20,17 @@ const createRoom = async (req, res = response ) => {
             });
         }
 
-    const room = new Room( {name: name, description: description });
+    const room = new Room( {name: name, description: description, user: id });
 
-        // Encriptar contraseña
-      //  const salt = bcrypt.genSaltSync();
-       // user.password = bcrypt.hashSync( password, salt );
-
+  
         await room.save();
         console.log('room create: ', room)
-        //const token = await generateJWT( user.id );
 
-
-       // const profileNew = new Profile( {user: user.id, name: name})
-
-
-    
 
         res.json({
             ok: true,
             room,
-            token
+            
         });
 
 
