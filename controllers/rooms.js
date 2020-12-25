@@ -45,10 +45,10 @@ const createRoom = async (req, res = response ) => {
 
 const getRoomsByUser = async ( req, res = response ) => {
 
+    try {
+    const userId = req.params.id;
 
-    const userId = req.uid;
-
-    console.log(userId);
+    console.log('es:',userId);
 
     const rooms = await Room
         .find({ user: userId })
@@ -63,6 +63,48 @@ const getRoomsByUser = async ( req, res = response ) => {
         ok: true,
         rooms,
     })
+
+}
+
+catch (error) {
+    console.log(error);
+    res.status(500).json({
+        ok: false,
+        msg: 'Hable con el administrador'
+    });
+}
+
+}
+
+const deleteRoom = async (req, res = response ) => {
+
+
+    try{
+
+        console.log(req.params);
+
+    const roomId = req.params.id
+
+    console.log(roomId);
+
+    const room = await Room.findByIdAndDelete(roomId)
+
+    res.json({
+        ok: true,
+        msg: 'Eliminado con exito!'
+    })
+
+}
+
+
+catch (error) {
+    console.log(error);
+    res.status(500).json({
+        ok: false,
+        msg: 'Hable con el administrador'
+    });
+}
+
 }
 
 
@@ -70,7 +112,8 @@ const getRoomsByUser = async ( req, res = response ) => {
 
 module.exports = {
     createRoom,
-    getRoomsByUser
+    getRoomsByUser,
+    deleteRoom
 
 }
 
