@@ -6,6 +6,8 @@ const getChat = async(req, res) => {
     const miId = req.uid;
     const messageBy = req.params.by;
 
+    console.log('miId', miId, 'messageBy', messageBy)
+
     const last30 = await Message.find({
         $or: [{ by: miId, for: messageBy }, { by: messageBy, for: miId } ]
     })

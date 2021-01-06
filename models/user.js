@@ -21,6 +21,21 @@ const UsersSchema = Schema({
         default: false
     },
 
+    isAuthGoogle: {
+        type: Boolean,
+        default: false
+    },
+
+    isAuthApple: {
+        type: Boolean,
+        default: false
+    },
+
+    isAuthNormal: {
+        type: Boolean,
+        default: false
+    },
+
 });
 
 UsersSchema.method('toJSON', function() {

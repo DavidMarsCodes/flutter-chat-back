@@ -26,6 +26,7 @@ const getUsers = async ( req, res = response ) => {
 
 
 
+
 module.exports = {
     getUsers
 }

@@ -10,7 +10,7 @@ const createRoom = async (req, res = response ) => {
     console.log('id! ', id)
     try {
 
-        const nameExist = await Room.findOne({ name: name });
+        const nameExist = await Room.findOne({name: name, user:id });
 
         console.log('nameExist:', nameExist)
         if( nameExist ) {

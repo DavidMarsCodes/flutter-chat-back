@@ -33,11 +33,6 @@ const getProfilebyUser = async (req, res = response) => {
 
 
 
-
-        console.log('profile!!', profile)
-        console.log('rooms!!', rooms)
-
-
         res.json({
             ok: true,
             profile,
@@ -60,7 +55,8 @@ const getProfilesLastUsers = async (req, res = response) => {
 
     const from = Number(req.query.from) || 0;
 
-
+    
+    try {
     const profilesFind = await Profile
         .find({ user: { $ne: req.uid } })
 
@@ -68,12 +64,17 @@ const getProfilesLastUsers = async (req, res = response) => {
         .limit(50)
         .populate('user')
 
-        .sort('-online')
-
+       // .sort('-online')
 
     const profiles = [];
 
+   // console.log('profilesFind', profilesFind);
+
     profilesFind.forEach(function (item) {
+
+        if (item.user){
+
+       
 
         const profile = {
             name: item.name,
@@ -94,14 +95,28 @@ const getProfilesLastUsers = async (req, res = response) => {
         }
 
         profiles.push(profile);
+
+    }
     });
-    console.log('profiles', profiles)
+    
 
     res.json({
         ok: true,
         profiles
     })
 }
+
+    catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            ok: false,
+            msg: 'Hable con el administrador'
+        })
+    }
+
+
+}
+
 
 
 
@@ -136,10 +151,16 @@ const loginGetProfileUser = async (req, res = response) => {
         //    const profile = await getProfilebyUser(userDB.id);
 
 
+
+        console.log('user', user)
+
+
         const profileFind = await Profile
-            .findOne({ user: { $ne: user.id } })
+            .findOne({ user:  user.id } )
             .populate('user')
 
+
+            console.log('profileFind', profileFind)
 
         // Generar mi JWT
         const profile = {
@@ -162,7 +183,7 @@ const loginGetProfileUser = async (req, res = response) => {
         }
 
 
-        console.log('profile', profile)
+        //console.log('profile', profile)
 
 
         res.json({
@@ -268,7 +289,7 @@ const editUserProfile = async (req, res = response) => {
                 .populate('user')
 
 
-        console.log('profileFind!!', profileFind)
+      console.log('profileFind!!', profileFind)
 
 
 
@@ -293,7 +314,7 @@ const editUserProfile = async (req, res = response) => {
 
         }
 
-        console.log(profile);
+       // console.log(profile);
 
         res.json({
             ok: true,

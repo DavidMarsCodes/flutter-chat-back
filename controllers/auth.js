@@ -22,7 +22,7 @@ const createUser = async (req, res = response ) => {
             });
         }
 
-        const user = new User( {email: email, password: password, username: username });
+        const user = new User( {email: email, password: password, username: username , isAuthNormal: true});
 
     
     
@@ -217,3 +217,6 @@ module.exports = {
     login,
     renewToken
 }
+
+
+
