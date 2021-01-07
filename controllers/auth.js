@@ -209,17 +209,7 @@ const renewToken = async( req, res = response) => {
         ok: true,
         profile,
         token,
-        rooms: [ {
-            id: 'sddfs',
-            user: 'sdfsdf',
-            name: 'df',
-            description: 'df',
-            position: 1,
-            totalItems: 1,
-            createdAt: '',
-            updatedAt: ''
-    
-           }],
+       
     });
 
 }
