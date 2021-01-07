@@ -193,17 +193,7 @@ const renewToken = async( req, res = response) => {
       imageHeader: profileFind.imageHeader,
       imageAvatar: profileFind.imageAvatar,
       id: profileFind._id,
-      rooms: [ {
-        id: 'sddfs',
-        user: 'sdfsdf',
-        name: 'df',
-        description: 'df',
-        position: 1,
-        totalItems: 1,
-        createdAt: '',
-        updatedAt: ''
-
-       }],
+     // rooms: profileFind.rooms,
       user: {
         online: user.online,
         uid: user.id,
