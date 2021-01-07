@@ -196,10 +196,10 @@ const renewToken = async( req, res = response) => {
       rooms: [ {
         id: 'sddfs',
         user: 'sdfsdf',
-        name: '',
-        description: '',
-        position: '',
-        totalItems: '',
+        name: 'df',
+        description: 'df',
+        position: 1,
+        totalItems: 1,
         createdAt: '',
         updatedAt: ''
 
