@@ -31,6 +31,10 @@ const ProfileSchema = Schema({
         required: true
     },
 
+    rooms: [
+        
+    ]
+
   
 
 },

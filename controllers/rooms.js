@@ -1,6 +1,6 @@
 const { response } = require('express');
 const Room = require('../models/room');
-const user = require('../models/user');
+const Profile = require('../models/profile');
 
 
 
@@ -20,15 +20,36 @@ const createRoom = async (req, res = response ) => {
             });
         }
 
-        const allRooms = await Room.find({user:id });
+        const roomsTotal = await Room.find({user:id})
+      
+
+        const room = new Room( {name: name, description: description, user: id, position: roomsTotal.length });
 
         
-
-    const room = new Room( {name: name, description: description, user: id , position: allRooms.length });
-
-  
         await room.save();
+
         console.log('room create: ', room)
+
+
+        const rooms = await Room.find({user:id})
+        .sort('position')
+
+        const updateRoomsProfile =  await Profile.updateOne(
+            {
+              user: id
+            },
+            {
+              $set: {
+                rooms: rooms
+                
+              }
+            }
+          )
+
+          console.log('updateRoomsProfile: ', updateRoomsProfile)
+
+
+        
 
 
         res.json({
@@ -56,7 +77,7 @@ const getRoomsByUser = async ( req, res = response ) => {
 
     const rooms = await Room
         .find({ user: userId })
-        .sort('position')
+        .sort('-createAt')
 
 
 
@@ -120,7 +141,7 @@ const editPositionByRoom = async (req, res = response ) => {
 
       const room =  await Room.updateOne(
             {
-              _id: roomId
+              id: roomId
             },
             {
               $set: {
