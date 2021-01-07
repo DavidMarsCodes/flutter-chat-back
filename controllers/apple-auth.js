@@ -1,8 +1,12 @@
 const { response } = require('express');
 const bcrypt = require('bcryptjs');
 const fs = require('fs');
-c
+const User = require('../models/user');
+const Profile = require('../models/profile');
 
+const { generateJWT } = require('../helpers/jwt');
+
+const { validGoogleToken } = require('../helpers/google-verify-token');
 const AppleAuth = require("apple-auth");
 const jwt = require("jsonwebtoken");
 
