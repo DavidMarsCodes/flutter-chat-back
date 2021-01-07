@@ -116,7 +116,7 @@ const editPositionByRoom = async (req, res = response ) => {
 
       const room =  await Room.updateOne(
             {
-              id: roomId
+              _id: roomId
             },
             {
               $set: {
