@@ -31,27 +31,6 @@ const createRoom = async (req, res = response ) => {
         console.log('room create: ', room)
 
 
-        const rooms = await Room.find({user:id})
-        .sort('position')
-
-        const updateRoomsProfile =  await Profile.updateOne(
-            {
-              user: id
-            },
-            {
-              $set: {
-                rooms: rooms
-                
-              }
-            }
-          )
-
-          console.log('updateRoomsProfile: ', updateRoomsProfile)
-
-
-        
-
-
         res.json({
             ok: true,
             room,
