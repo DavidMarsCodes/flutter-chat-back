@@ -111,7 +111,7 @@ const editPositionByRoom = async (req, res = response ) => {
     try {
 
             console.log(req.body)
-        const roomId = req.body.room.id;
+        const roomId = req.body.id;
 
       const room =  await Room.updateOne(
             {
@@ -119,7 +119,7 @@ const editPositionByRoom = async (req, res = response ) => {
             },
             {
               $set: {
-                position: req.body.imgBanner,
+                position: req.body.position,
                 
               }
             }
