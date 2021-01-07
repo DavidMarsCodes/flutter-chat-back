@@ -1,6 +1,6 @@
 const { Schema, model } = require('mongoose');
 
-const RoomSchema = Schema({
+const ProductSchema = Schema({
 
     name: {
         type: String,
@@ -16,14 +16,20 @@ const RoomSchema = Schema({
         required: true
     },
 
-    totalItems: 
+    room: {
+        type: Schema.Types.ObjectId,
+        ref: 'Room',
+        required: true
+    },
+
+    price: 
     {
         type: Number,
         required: false,
         default: 0
     },
 
-    position: 
+    category: 
     {
         type: Number,
         required: false,
@@ -38,11 +44,11 @@ const RoomSchema = Schema({
     timestamps: true
 });
 
-RoomSchema.method('toJSON', function() {
+ProductSchema.method('toJSON', function() {
     const { __v, _id, ...object } = this.toObject();
     object.id = _id;
     return object;
 })
 
 
-module.exports = model('Room', RoomSchema );
+module.exports = model('Product', ProductSchema );
