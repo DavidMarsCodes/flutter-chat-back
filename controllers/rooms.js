@@ -110,7 +110,8 @@ catch (error) {
 const editPositionByRoom = async (req, res = response ) => {
     try {
 
-        const roomId = req.body.id;
+            console.log(req.body)
+        const roomId = req.body.room.id;
 
       const room =  await Room.updateOne(
             {
