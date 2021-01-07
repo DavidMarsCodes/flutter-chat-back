@@ -24,7 +24,7 @@ const createRoom = async (req, res = response ) => {
 
         
 
-    const room = new Room( {name: name, description: description, user: id , position: allRooms.length-1});
+    const room = new Room( {name: name, description: description, user: id , position: allRooms.length });
 
   
         await room.save();
