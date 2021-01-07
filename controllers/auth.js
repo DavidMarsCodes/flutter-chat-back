@@ -183,7 +183,7 @@ const renewToken = async( req, res = response) => {
   .populate('user')
 
 
-  console.log('profileFind!!', profileFind)
+  console.log('profileFind!!', profileFind);
 
   
   const profile = {
@@ -193,7 +193,17 @@ const renewToken = async( req, res = response) => {
       imageHeader: profileFind.imageHeader,
       imageAvatar: profileFind.imageAvatar,
       id: profileFind._id,
-      rooms: profileFind.rooms,
+      rooms: [ {
+        id: 'sddfs',
+        user: 'sdfsdf',
+        name: '',
+        description: '',
+        position: '',
+        totalItems: '',
+        createdAt: '',
+        updatedAt: ''
+
+       }],
       user: {
         online: user.online,
         uid: user.id,
