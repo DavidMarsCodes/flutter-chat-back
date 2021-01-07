@@ -107,13 +107,48 @@ catch (error) {
 
 }
 
+const editPositionByRoom = async (req, res = response ) => {
+    try {
+
+        const roomId = req.body.id;
+
+      const room =  await Room.updateOne(
+            {
+              user: roomId
+            },
+            {
+              $set: {
+                position: req.body.imgBanner,
+                
+              }
+            }
+          )
+
+          res.json({
+            ok: true,
+            msg: 'Success position!',
+            room
+
+        })
+        
+    } catch (error) {
+
+        res.status(500).json({
+            ok: false,
+            msg: 'Hable con el administrador'
+        });
+        
+    }
+}
+
 
 
 
 module.exports = {
     createRoom,
     getRoomsByUser,
-    deleteRoom
+    deleteRoom,
+    editPositionByRoom
 
 }
 
