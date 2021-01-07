@@ -37,7 +37,7 @@ const auth = new AppleAuth(
               : process.env.SERVICE_ID,
           team_id: process.env.TEAM_ID,
           redirect_uri:
-            "http://ec2-54-207-202-146.sa-east-1.compute.amazonaws.com:3000/api/apple/callbacks/sign_in_with_apple",
+            "https://api.gettymarket.com/api/apple/callbacks/sign_in_with_apple",
           key_id: process.env.KEY_ID
         },
         fs.readFileSync('./keys/keysignin.p8').toString(),
