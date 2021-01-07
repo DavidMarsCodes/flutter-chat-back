@@ -170,6 +170,7 @@ const loginGetProfileUser = async (req, res = response) => {
             imageHeader: profileFind.imageHeader,
             imageAvatar: profileFind.imageAvatar,
             id: profileFind._id,
+            rooms: profileFind.rooms,
             user: {
                 online: user.online,
                 uid: user.id,

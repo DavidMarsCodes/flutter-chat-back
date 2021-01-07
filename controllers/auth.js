@@ -60,6 +60,7 @@ const createUser = async (req, res = response ) => {
             imageHeader: profileFind.imageHeader,
             imageAvatar: profileFind.imageAvatar,
             id: profileFind._id,
+            rooms: profileFind.rooms,
             user: {
               online: user.online,
               uid: user.id,
@@ -133,6 +134,7 @@ const login = async ( req, res = response ) => {
         imageHeader: profileFind.imageHeader,
         imageAvatar: profileFind.imageAvatar,
         id: profileFind._id,
+        rooms: profileFind.rooms,
         user: {
           online: user.online,
           uid: user.id,
@@ -191,6 +193,7 @@ const renewToken = async( req, res = response) => {
       imageHeader: profileFind.imageHeader,
       imageAvatar: profileFind.imageAvatar,
       id: profileFind._id,
+      rooms: profileFind.rooms,
       user: {
         online: user.online,
         uid: user.id,
