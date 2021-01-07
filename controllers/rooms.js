@@ -20,7 +20,11 @@ const createRoom = async (req, res = response ) => {
             });
         }
 
-    const room = new Room( {name: name, description: description, user: id });
+        const allRooms = await Room.find({user:id });
+
+        
+
+    const room = new Room( {name: name, description: description, user: id , position: allRooms.length-1});
 
   
         await room.save();
