@@ -52,7 +52,7 @@ const getRoomsByUser = async ( req, res = response ) => {
 
     const rooms = await Room
         .find({ user: userId })
-        .sort('-createAt')
+        .sort('-position')
 
 
 
@@ -110,7 +110,8 @@ catch (error) {
 const editPositionByRoom = async (req, res = response ) => {
     try {
 
-            console.log(req.body)
+            console.log(req.body);
+
         const roomId = req.body.id;
 
       const room =  await Room.updateOne(
