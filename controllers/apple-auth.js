@@ -1,12 +1,8 @@
 const { response } = require('express');
 const bcrypt = require('bcryptjs');
 const fs = require('fs');
-const User = require('../models/user');
-const Profile = require('../models/profile');
+c
 
-const { generateJWT } = require('../helpers/jwt');
-
-const { validGoogleToken } = require('../helpers/google-verify-token');
 const AppleAuth = require("apple-auth");
 const jwt = require("jsonwebtoken");
 
@@ -40,7 +36,7 @@ const auth = new AppleAuth(
             "https://api.gettymarket.com/api/apple/callbacks/sign_in_with_apple",
           key_id: process.env.KEY_ID
         },
-        fs.readFileSync('./keys/keysignin.p8').toString(),
+        fs.readFileSync('../keys/keysignin.p8').toString(),
         "text"
       );
       console.log('auth', auth);
