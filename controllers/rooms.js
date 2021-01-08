@@ -136,7 +136,7 @@ const editPositionByRoom = async (req, res = response ) => {
        var updates =  NewOrderrooms.map((item) => {
 
         console.log('obj', item)
-            Room.updateOne({"id": item.id}, {"$set": {"position": item.position }});       
+            Room.updateOne({"id": item._id}, {"$set": {"position": item.position }});       
     });
     
   
