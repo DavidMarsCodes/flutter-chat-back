@@ -1,7 +1,7 @@
 const { response } = require('express');
 const Room = require('../models/room');
 const Profile = require('../models/profile');
-var async = require('async');
+
 
 
 const createRoom = async (req, res = response ) => {
