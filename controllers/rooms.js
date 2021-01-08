@@ -162,16 +162,16 @@ const promises = NewOrderrooms.map((obj) => new Promise((resolve, reject) => {
     if (err) console.log(err);
     else  
     
-    return res.json({
-        ok: true,
-        msg: 'Eliminado con exito!'
-    })
+
     resolve();
   });
 }));
 Promise.all(promises)
   .then(() => {
-    res.render("index", { arrayToSend });
+    return res.json({
+        ok: true,
+        msg: 'Eliminado con exito!'
+    })
   })
 
  
