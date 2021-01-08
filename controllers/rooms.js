@@ -155,6 +155,25 @@ const editPositionByRoom = async (req, res = response ) => {
   }); 
 
   console.log(rooms); */
+
+  const arrayToSend = [];
+const promises = NewOrderrooms.map((obj) => new Promise((resolve, reject) => {
+    Room.updateOne({ _id: obj.id }, { $set : { position: obj.position }}, done, (err,data) => {
+    if (err) console.log(err);
+    else  
+    
+    return res.json({
+        ok: true,
+        msg: 'Eliminado con exito!'
+    })
+    resolve();
+  });
+}));
+Promise.all(promises)
+  .then(() => {
+    res.render("index", { arrayToSend });
+  })
+
  
 
         async.eachSeries(NewOrderrooms, function(obj, done) {
@@ -187,18 +206,7 @@ const editPositionByRoom = async (req, res = response ) => {
 
         }); */
 
-        const rooms = await Room.find({user: req.body.userId})
-
-
-        console.log('** new rooms **', rooms)
-        
-        res.json({
-            ok: true,
-            msg: 'Success position!',
-            rooms
-            //room
-
-        })
+ 
 
         
     } catch (error) {
