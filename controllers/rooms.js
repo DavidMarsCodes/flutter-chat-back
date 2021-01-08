@@ -125,7 +125,7 @@ const editPositionByRoom = async (req, res = response ) => {
             item.position = index;
         });
 
-        console.log(NewOrderrooms);
+        console.log('NewOrderrooms**', NewOrderrooms);
     /*   const room =  await Room.updateOne(
             {
               id: roomId
