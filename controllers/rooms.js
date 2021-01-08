@@ -133,11 +133,11 @@ const editPositionByRoom = async (req, res = response ) => {
         console.log('NewOrderrooms**', NewOrderrooms);
        // Room.deleteMany({user: req.body.userId});
 
-       var updates = await NewOrderrooms.map((item) => {
+ /*       var updates = await NewOrderrooms.map((item) => {
 
         console.log('obj', item)
             Room.updateOne({ "_id": item._id }, {"$set": { "position": item.position }});       
-    });
+    }); */
     
   
 
@@ -162,15 +162,15 @@ const editPositionByRoom = async (req, res = response ) => {
   console.log(rooms);
  */
 
-    /*     async.eachSeries(NewOrderrooms, function updateObject (obj, done) {
+        async.eachSeries(NewOrderrooms, function updateObject (obj, done) {
             // Model.update(condition, doc, callback)
-            console.log('obj', obj, position)
-            Room.updateMany({ id: obj.id }, { $set : { position: obj.position }}, done);
+            console.log('obj', obj)
+            Room.updateOne({ _id: obj._id }, { $set : { position: obj.position }}, done);
 
           
         }, function allDone (err) {
             // this will be called when all the updates are done or an error occurred during the iteration
-        }); */
+        });
     /*     
       NewOrderrooms.forEach((item, index) =>  {
 
