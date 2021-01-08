@@ -175,7 +175,7 @@ Promise.all(promises)
   })
 
  
-
+/* 
         async.eachSeries(NewOrderrooms, function(obj, done) {
             // Model.update(condition, doc, callback)
             console.log('obj*', obj)
@@ -185,7 +185,7 @@ Promise.all(promises)
 
         }, function allDone (err) {
             // this will be called when all the updates are done or an error occurred during the iteration
-        });
+        }); */
     /*     
       NewOrderrooms.forEach((item, index) =>  {
 
