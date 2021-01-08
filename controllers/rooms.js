@@ -162,7 +162,7 @@ const editPositionByRoom = async (req, res = response ) => {
   console.log(rooms); */
  
 
-        async.eachSeries(NewOrderrooms, function updateObject (obj, done) {
+        async.eachSeries(NewOrderrooms, function(obj, done) {
             // Model.update(condition, doc, callback)
             console.log('obj*', obj)
             Room.updateOne({ id: obj.id }, { $set : { position: obj.position }}, done);
