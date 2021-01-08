@@ -187,10 +187,15 @@ const editPositionByRoom = async (req, res = response ) => {
 
         }); */
 
+        const rooms = Room.find({user: req.body.userId})
+
+
+        console.log('** new rooms **')
         
         res.json({
             ok: true,
             msg: 'Success position!',
+            rooms
             //room
 
         })
