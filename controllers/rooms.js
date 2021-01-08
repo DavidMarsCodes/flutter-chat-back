@@ -123,7 +123,6 @@ const editPositionByRoom = async (req, res = response ) => {
 
         const NewOrderrooms =  [] 
 
-    
 
         req.body.rooms.map((item, index) => {
             item.position = index;
@@ -134,10 +133,10 @@ const editPositionByRoom = async (req, res = response ) => {
         console.log('NewOrderrooms**', NewOrderrooms);
        // Room.deleteMany({user: req.body.userId});
 
-       NewOrderrooms.forEach((item) => {
+       req.body.rooms.forEach((item) => {
         console(item);
         Model.update({"id": item.id}, {"$set": {"position": item.position }}, callback);
-    })
+        })
     
   
         
