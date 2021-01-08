@@ -133,10 +133,10 @@ const editPositionByRoom = async (req, res = response ) => {
         console.log('NewOrderrooms**', NewOrderrooms);
        // Room.deleteMany({user: req.body.userId});
 
-       var updates =  NewOrderrooms.map((item) => {
+       var updates = await NewOrderrooms.map((item) => {
 
         console.log('obj', item)
-            Room.updateOne({"id": item._id}, {"$set": {"position": item.position }});       
+            Room.updateOne({ "_id": item._id }, {"$set": { "position": item.position }});       
     });
     
   
