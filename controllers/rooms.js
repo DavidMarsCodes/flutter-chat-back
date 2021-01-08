@@ -134,8 +134,8 @@ const editPositionByRoom = async (req, res = response ) => {
         console.log('NewOrderrooms**', NewOrderrooms);
        // Room.deleteMany({user: req.body.userId});
 
-       NewOrderrooms.forEach(function(item){
-           console(item);
+       NewOrderrooms.forEach((item) => {
+        console(item);
         Model.update({"id": item.id}, {"$set": {"position": item.position }}, callback);
     })
     
