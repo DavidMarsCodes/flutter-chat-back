@@ -57,7 +57,7 @@ const getRoomsByUser = async ( req, res = response ) => {
 
     const rooms = await Room
         .find({ user: userId })
-        .sort('-position')
+        .sort('position')
 
 
 
