@@ -133,11 +133,11 @@ const editPositionByRoom = async (req, res = response ) => {
         console.log('NewOrderrooms**', NewOrderrooms);
        // Room.deleteMany({user: req.body.userId});
 
- /*       var updates = await NewOrderrooms.map((item) => {
+       var updates = await NewOrderrooms.map((item) => {
 
         console.log('obj', item)
             Room.updateOne({ "_id": item._id }, {"$set": { "position": item.position }});       
-    }); */
+    });
     
   
 
@@ -148,11 +148,11 @@ const editPositionByRoom = async (req, res = response ) => {
         })  */
     
   
-/*  
+
        const rooms = await Room.find({ user: req.body.userId })
         .forEach(function (doc) {
 
-            console(doc);
+            console('doc:', doc);
             doc.rooms.forEach(function (room, index) {
             room.position  = index
         });
@@ -160,7 +160,7 @@ const editPositionByRoom = async (req, res = response ) => {
   }); 
 
   console.log(rooms);
- */
+ 
 
         async.eachSeries(NewOrderrooms, function updateObject (obj, done) {
             // Model.update(condition, doc, callback)
