@@ -119,7 +119,7 @@ catch (error) {
 const editPositionByRoom = async (req, res = response ) => {
     try {
 
-        console.log(req.body);
+        console.log(req.body.userId);
 
         const NewOrderrooms =  [] 
 
