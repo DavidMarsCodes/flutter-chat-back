@@ -1,7 +1,7 @@
 const { response } = require('express');
 const Room = require('../models/room');
 const Profile = require('../models/profile');
-
+var async = require('async');
 
 
 const createRoom = async (req, res = response ) => {
@@ -111,15 +111,26 @@ catch (error) {
 
 }
 
+
+
+
+
 const editPositionByRoom = async (req, res = response ) => {
     try {
 
-            console.log(req.body);
+        console.log(req.body);
 
         const NewOrderrooms = req.body.rooms;
 
 
-        NewOrderrooms.forEach((item, index) => {
+        async.eachSeries(NewOrderrooms, function updateOrderPositionRooms (obj, done) {
+            // Model.update(condition, doc, callback)
+            Room.update({ id: obj.id }, { $set : { position: obj.position }}, done);
+        }, function allDone (err) {
+            // this will be called when all the updates are done or an error occurred during the iteration
+        });
+    /*     
+      NewOrderrooms.forEach((item, index) =>  {
 
             console.log(item, index);
             item.position = index;
@@ -136,7 +147,7 @@ const editPositionByRoom = async (req, res = response ) => {
                 }
               ) 
 
-        });
+        }); */
 
         console.log('NewOrderrooms**', NewOrderrooms);
     
