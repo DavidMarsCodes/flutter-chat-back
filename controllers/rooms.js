@@ -123,20 +123,23 @@ const editPositionByRoom = async (req, res = response ) => {
 
             console.log(item, index);
             item.position = index;
+
+            const room =  await Room.updateOne(
+                {
+                  id: item.id
+                },
+                {
+                  $set: {
+                    position: item.position,
+                    
+                  }
+                }
+              ) 
+
         });
 
         console.log('NewOrderrooms**', NewOrderrooms);
-    /*   const room =  await Room.updateOne(
-            {
-              id: roomId
-            },
-            {
-              $set: {
-                position: req.body.position,
-                
-              }
-            }
-          ) */
+    
 
           res.json({
             ok: true,
