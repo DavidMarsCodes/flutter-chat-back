@@ -2,6 +2,7 @@ const { response } = require('express');
 const Room = require('../models/room');
 const Profile = require('../models/profile');
 
+var async = require('async');
 
 
 const createRoom = async (req, res = response ) => {
@@ -123,10 +124,10 @@ const editPositionByRoom = async (req, res = response ) => {
         const NewOrderrooms = req.body.rooms;
 
 
-        async.eachSeries(NewOrderrooms, function updateOrderPositionRooms (obj, done) {
-            // Model.update(condition, doc, callback)
+        
 
-            console.log('obj**',obj)
+        async.eachSeries(NewOrderrooms, function updateObject (obj, done) {
+            // Model.update(condition, doc, callback)
             Room.update({ id: obj.id }, { $set : { position: obj.position }}, done);
         }, function allDone (err) {
             // this will be called when all the updates are done or an error occurred during the iteration
