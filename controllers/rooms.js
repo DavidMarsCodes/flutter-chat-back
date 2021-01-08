@@ -158,7 +158,7 @@ const editPositionByRoom = async (req, res = response ) => {
 
   const arrayToSend = [];
 const promises = NewOrderrooms.map((obj) => new Promise((resolve, reject) => {
-    Room.updateOne({ _id: obj.id }, { $set : { position: obj.position }}, done, (err,data) => {
+    Room.updateOne({ _id: obj.id }, { $set : { position: obj.position }}, (err,data) => {
     if (err) console.log(err);
     else  
     
