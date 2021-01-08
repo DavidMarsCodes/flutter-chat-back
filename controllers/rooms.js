@@ -133,13 +133,13 @@ const editPositionByRoom = async (req, res = response ) => {
         console.log('NewOrderrooms**', NewOrderrooms);
        // Room.deleteMany({user: req.body.userId});
 
-     /*   req.body.rooms.forEach((item) => {
-        console(item);
-        Model.update({"id": item.id}, {"$set": {"position": item.position }}, callback);
-        }) */
+       NewOrderrooms.forEach((item) => {
+        console('item ', item);
+        Room.updateOne({"id": item.id}, {"$set": {"position": item.position }}, callback);
+        }) 
     
   
- 
+/*  
        const rooms = await Room.find({ user: req.body.userId })
         .forEach(function (doc) {
 
@@ -151,7 +151,7 @@ const editPositionByRoom = async (req, res = response ) => {
   }); 
 
   console.log(rooms);
-
+ */
 
     /*     async.eachSeries(NewOrderrooms, function updateObject (obj, done) {
             // Model.update(condition, doc, callback)
