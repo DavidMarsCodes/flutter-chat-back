@@ -143,10 +143,12 @@ const editPositionByRoom = async (req, res = response ) => {
  
         Room.find({ user: req.body.userId })
         .forEach(function (doc) {
+
+            console(doc);
             doc.rooms.forEach(function (room, index) {
             room.position  = index
         });
-        Room.save(doc);
+        await Room.save(doc);
   }); 
 
 
