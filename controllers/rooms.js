@@ -163,6 +163,13 @@ const editPositionByRoom = async (req, res = response ) => {
             Room.updateOne({ _id: obj.id }, { $set : { position: obj.position }}, done);
 
           
+            res.json({
+                ok: true,
+                msg: 'Success position!',
+                //room
+    
+            })
+            
         }, function allDone (err) {
             // this will be called when all the updates are done or an error occurred during the iteration
         });
@@ -188,12 +195,6 @@ const editPositionByRoom = async (req, res = response ) => {
 
     
 
-          res.json({
-            ok: true,
-            msg: 'Success position!',
-            //room
-
-        })
         
     } catch (error) {
 
