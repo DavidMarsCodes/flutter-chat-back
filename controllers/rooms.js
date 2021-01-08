@@ -132,14 +132,25 @@ const editPositionByRoom = async (req, res = response ) => {
         });
 
         console.log('NewOrderrooms**', NewOrderrooms);
+       // Room.deleteMany({user: req.body.userId});
 
+        var set = {}, i, l;
+for(i=0,l=NewOrderrooms.length;i<l;i++) {
+  if(NewOrderrooms[i].position == i) {
+    set['NewOrderrooms.' + i + '.position'] = 0;
+  }
+}
+
+Room.updateMany(req.body.userId, {$set:set});
+        
+/* 
         Room.find({ user: req.body.userId })
         .forEach(function (doc) {
             doc.rooms.forEach(function (room, index) {
             room.position  = index
         });
         Room.save(doc);
-  });
+  }); */
 
 
     /*     async.eachSeries(NewOrderrooms, function updateObject (obj, done) {
