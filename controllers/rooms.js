@@ -57,7 +57,7 @@ const getRoomsByUser = async ( req, res = response ) => {
 
     const rooms = await Room
         .find({ user: userId })
-        .sort('position')
+        .sort('-position')
 
 
 
@@ -138,8 +138,7 @@ const editPositionByRoom = async (req, res = response ) => {
         Model.update({"id": item.id}, {"$set": {"position": item.position }}, callback);
         }) */
     
-  
-        
+/*   
  
        const rooms = await Room.find({ user: req.body.userId })
         .forEach(function (doc) {
@@ -151,10 +150,10 @@ const editPositionByRoom = async (req, res = response ) => {
          Room.save(doc);
   }); 
 
-  console.log(rooms);
+  console.log(rooms); */
 
 
-    /*     async.eachSeries(NewOrderrooms, function updateObject (obj, done) {
+        async.eachSeries(NewOrderrooms, function updateObject (obj, done) {
             // Model.update(condition, doc, callback)
             console.log('obj', obj, position)
             Room.updateMany({ id: obj.id }, { $set : { position: obj.position }}, done);
@@ -162,7 +161,7 @@ const editPositionByRoom = async (req, res = response ) => {
           
         }, function allDone (err) {
             // this will be called when all the updates are done or an error occurred during the iteration
-        }); */
+        }); 
     /*     
       NewOrderrooms.forEach((item, index) =>  {
 
