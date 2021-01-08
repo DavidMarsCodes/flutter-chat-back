@@ -119,22 +119,19 @@ const deleteRoom = async (req, res = response) => {
 const editPositionByRoom = async (req, res = response) => {
     try {
 
-        console.log(req.body.userId);
-
         const onReorderRooms = []
 
-
-        req.body.rooms.map((item, index) => {
+        req.body.rooms.map((item, index) => {                                                          
             item.position = index;
-            NewOrderrooms.push(item);
+            onReorderRooms.push(item);
 
         });
 
-        console.log('onReorderRooms**', onReorderRooms);
-      
-
-        const promises = onReorderRooms.map((obj) => new Promise((resolve, reject) => {
-            Room.updateOne({ _id: obj.id }, { $set: { position: obj.position } }, (err, data) => {
+        const promises = onReorderRooms.map((obj) => 
+        
+        new Promise((resolve, reject) => {
+            Room.updateOne({ _id: obj.id }, { $set: { position: obj.position } }, 
+            (err, data) => {
                 if (err) console.log(err);
                 else
                     resolve();
@@ -147,8 +144,6 @@ const editPositionByRoom = async (req, res = response) => {
                     msg: 'Eliminado con exito!'
                 })
             })
-
-
 
     } catch (error) {
 
