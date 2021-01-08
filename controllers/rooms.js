@@ -116,9 +116,17 @@ const editPositionByRoom = async (req, res = response ) => {
 
             console.log(req.body);
 
-        const roomId = req.body.id;
+        const NewOrderrooms = req.body.rooms;
 
-      const room =  await Room.updateOne(
+
+        NewOrderrooms.forEach((item, index) => {
+
+            console.log(item, index);
+            item.position = index;
+        });
+
+        console.log(NewOrderrooms);
+    /*   const room =  await Room.updateOne(
             {
               id: roomId
             },
@@ -128,12 +136,12 @@ const editPositionByRoom = async (req, res = response ) => {
                 
               }
             }
-          )
+          ) */
 
           res.json({
             ok: true,
             msg: 'Success position!',
-            room
+            //room
 
         })
         
