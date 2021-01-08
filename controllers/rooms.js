@@ -134,14 +134,11 @@ const editPositionByRoom = async (req, res = response ) => {
         console.log('NewOrderrooms**', NewOrderrooms);
        // Room.deleteMany({user: req.body.userId});
 
-        var set = {}, i, l;
-for(i=0,l=NewOrderrooms.length;i<l;i++) {
-  if(NewOrderrooms[i].position == i) {
-    set['NewOrderrooms.' + i + '.position'] = 0;
-  }
-}
-
-Room.updateMany(req.body.userId, {$set:set});
+       NewOrderrooms.forEach(function(item){
+        Model.update({"id": item.id}, {"$set": {"value": item.position }}, callback);
+    })
+    
+  
         
 /* 
         Room.find({ user: req.body.userId })
