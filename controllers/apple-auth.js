@@ -11,6 +11,8 @@ const jwt = require("jsonwebtoken");
 
 const callbackAppleAuth = async (request, response) => {
 
+    console.log('entrooooo');
+
     const redirect = `intent://callback?${new URLSearchParams(
         request.body
       ).toString()}#Intent;package=${
