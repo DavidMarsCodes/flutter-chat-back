@@ -41,7 +41,7 @@ const auth = new AppleAuth(
         "https://api.gettymarket.com/api/apple/callbacks/sign_in_with_apple",
       key_id: process.env.KEY_ID
     },
-    fs.readFileSync('../keys/keysignin.p8').toString(),
+    fs.readFileSync('./keys/keysignin.p8').toString(),
     "text"
   );
   console.log('auth', auth);
