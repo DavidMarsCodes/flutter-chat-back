@@ -26,13 +26,14 @@ const callbackAppleAuth = async (request, response) => {
 const SignInappleAuth = async (req, res = response )  => {
 try {
 
+    console.log(req.body);
 
 const auth = new AppleAuth(
     {
       // use the bundle ID as client ID for native apps, else use the service ID for web-auth flows
       // https://forums.developer.apple.com/thread/118135
       client_id:
-        request.query.useBundleId === "true"
+      req.body.useBundleId === "true"
           ? process.env.BUNDLE_ID
           : process.env.SERVICE_ID,
       team_id: process.env.TEAM_ID,
@@ -45,10 +46,10 @@ const auth = new AppleAuth(
   );
   console.log('auth', auth);
 
-  console.log(request.query);
+  console.log(req.body);
 
 
-  const accessToken = await auth.accessToken(request.query.code);
+  const accessToken = await auth.accessToken(req.body.code);
 
   const idToken = jwt.decode(accessToken.id_token);
 
@@ -58,7 +59,7 @@ const auth = new AppleAuth(
 
   // `userEmail` and `userName` will only be provided for the initial authorization with your app
   const userEmail = idToken.email;
-  const userName = `${request.query.firstName} ${request.query.lastName}`;
+  const userName = `${req.body.firstName} ${req.body.lastName}`;
 
   // 👷🏻‍♀️ TODO: Use the values provided create a new session for the user in your system
   const sessionID = `NEW SESSION ID for ${userID} / ${userEmail} / ${userName}`;
