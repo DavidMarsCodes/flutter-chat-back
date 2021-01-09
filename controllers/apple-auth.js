@@ -28,7 +28,7 @@ const callbackAppleAuth = async (request, response) => {
 const SignInappleAuth = async (req, res = response )  => {
 try {
 
-conmsole.log(req.body)
+console.log(req.body)
 const auth =  new AppleAuth(
     {
       client_id:
