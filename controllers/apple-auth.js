@@ -26,14 +26,13 @@ const callbackAppleAuth = async (request, response) => {
 const SignInappleAuth = async (req, res = response )  => {
 try {
 
-    console.log('body**', req.body);
 
 const auth = new AppleAuth(
     {
       // use the bundle ID as client ID for native apps, else use the service ID for web-auth flows
       // https://forums.developer.apple.com/thread/118135
       client_id:
-      req.body.useBundleId === "true"
+        req.body.useBundleId === "true"
           ? process.env.BUNDLE_ID
           : process.env.SERVICE_ID,
       team_id: process.env.TEAM_ID,
@@ -44,10 +43,12 @@ const auth = new AppleAuth(
     fs.readFileSync('./keys/keysignin.p8').toString(),
     "text"
   );
-  console.log('auth', auth);
-  const accessToken = await auth.accessToken(req.body.code);
+  console.log('auth*', auth);
 
-  console.log('accessToken**', accessToken)
+  console.log(req.body);
+
+
+  const accessToken = await auth.accessToken(req.body.code);
 
   const idToken = jwt.decode(accessToken.id_token);
 
@@ -74,12 +75,12 @@ const auth = new AppleAuth(
 
     
 } catch (error) {
-    console.log(error);
-    return res.status(500).json({
-        ok: false,
-        msg: 'Hable con el administrador'
-    })
-}
+        console.log(error);
+        return res.status(500).json({
+            ok: false,
+            msg: 'Hable con el administrador'
+        })
+    }
 /* 
 
 console.log(req.body);
