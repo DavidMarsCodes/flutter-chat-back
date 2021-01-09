@@ -59,7 +59,7 @@ const auth =  new AppleAuth(
   console.log(idToken);
 
   // `userEmail` and `userName` will only be provided for the initial authorization with your app
-  const userEmail = idToken.email;
+  const email = idToken.email;
   const userName = `${req.body.firstName} ${req.body.lastName}`;
 
   // 👷🏻‍♀️ TODO: Use the values provided create a new session for the user in your system
@@ -70,7 +70,7 @@ const auth =  new AppleAuth(
 
 
 
-  const user = await User.findOne({ userEmail });
+  const user = await User.findOne({ email });
   if( user ) {
 
 
@@ -111,10 +111,10 @@ const auth =  new AppleAuth(
 
 
   }
-  var newUsername = userEmail.split('@')[0];
+  var newUsername = email.split('@')[0];
 
 
-  const newUser = new User( {email: userEmail, password: userID, username: newUsername, isAuthApple: true });
+  const newUser = new User( {email: email, password: userID, username: newUsername, isAuthApple: true });
 
 
 
