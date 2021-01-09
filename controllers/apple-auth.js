@@ -129,7 +129,7 @@ const auth =  new AppleAuth(
 
 
 
-  const profileNew = new Profile( {user: newUser.id, name: newUsername, lastName: '', imageAvatar: imageAvatar})
+  const profileNew = new Profile( {user: newUser.id, name: newUsername, lastName: '' })
 
   await profileNew.save()
 
