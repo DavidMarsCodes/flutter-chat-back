@@ -32,7 +32,7 @@ console.log(req.body)
 const auth =  new AppleAuth(
     {
       client_id:
-        req.body.useBundleId === "true"
+        req.body.useBundleId === true
           ? process.env.BUNDLE_ID
           : process.env.SERVICE_ID,
       team_id: process.env.TEAM_ID,
