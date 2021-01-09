@@ -114,7 +114,7 @@ const auth =  new AppleAuth(
   var newUsername = userEmail.split('@')[0];
 
 
-  const newUser = new User( {email: userEmail, password: userID, username: newUsername, isAuthGoogle: true });
+  const newUser = new User( {email: userEmail, password: userID, username: newUsername, isAuthApple: true });
 
 
 
