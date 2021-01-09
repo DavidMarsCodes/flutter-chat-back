@@ -28,11 +28,9 @@ const callbackAppleAuth = async (request, response) => {
 const SignInappleAuth = async (req, res = response )  => {
 try {
 
-
-const auth = await new AppleAuth(
+conmsole.log(req.body)
+const auth =  new AppleAuth(
     {
-      // use the bundle ID as client ID for native apps, else use the service ID for web-auth flows
-      // https://forums.developer.apple.com/thread/118135
       client_id:
         req.body.useBundleId === "true"
           ? process.env.BUNDLE_ID
