@@ -29,7 +29,7 @@ const SignInappleAuth = async (req, res = response )  => {
 try {
 
 
-const auth = new AppleAuth(
+const auth = await new AppleAuth(
     {
       // use the bundle ID as client ID for native apps, else use the service ID for web-auth flows
       // https://forums.developer.apple.com/thread/118135
