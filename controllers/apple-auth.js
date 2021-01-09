@@ -45,13 +45,9 @@ const auth = new AppleAuth(
     "text"
   );
   console.log('auth', auth);
-
-  console.log(req.body);
-
-
   const accessToken = await auth.accessToken(req.body.code);
 
-  console.log('accessToken', accessToken)
+  console.log('accessToken**', accessToken)
 
   const idToken = jwt.decode(accessToken.id_token);
 
