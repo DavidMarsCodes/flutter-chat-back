@@ -121,7 +121,7 @@ const auth =  new AppleAuth(
 
   // Encriptar contraseña
   const salt = bcrypt.genSaltSync();
-  newUser.password = bcrypt.hashSync( id, salt );
+  newUser.password = bcrypt.hashSync( userID, salt );
 
   await newUser.save();
 
