@@ -47,7 +47,7 @@ const auth = new AppleAuth(
   );
   console.log('auth*', auth);
 
-  console.log(req.body);
+  console.log('code!!!',req.body.code);
 
 
   const accessToken = await auth.accessToken(req.body.code);
