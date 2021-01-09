@@ -65,14 +65,108 @@ const auth =  new AppleAuth(
 
   console.log(`sessionID = ${sessionID}`);
 
-  response.json({ sessionId: sessionID });
 
-  res.json({
-    ok: true,
-  //  profile,
-   // token
-})
 
+
+  const user = await User.findOne({ userEmail });
+  if( user ) {
+
+
+
+      const profileFind = await
+      Profile.findOne({user: user.id})
+      .populate('user')
+
+
+      const profile = {
+
+          name: profileFind.name,
+          lastName: profileFind.lastName,
+          imageHeader: profileFind.imageHeader,
+          imageAvatar: profileFind.imageAvatar,
+          id: profileFind._id,
+          user: {
+            online: user.online,
+            uid: user.id,
+            email: user.email,
+            username:  user.username,
+
+          },
+          createdAt: profileFind.createdAt,
+          updatedAt:profileFind.updatedAt
+
+        }
+
+        const token = await generateJWT( user.id );
+
+
+
+  return res.json({
+          ok: true,
+          profile,
+          token
+      })
+
+
+  }
+  var newUsername = userEmail.split('@')[0];
+
+
+  const newUser = new User( {email: userEmail, password: userID, username: newUsername, isAuthGoogle: true });
+
+
+
+
+  // Encriptar contraseña
+  const salt = bcrypt.genSaltSync();
+  newUser.password = bcrypt.hashSync( id, salt );
+
+  await newUser.save();
+
+  const token = await generateJWT( newUser.id );
+
+
+
+  const profileNew = new Profile( {user: newUser.id, name: newUsername, lastName: '', imageAvatar: imageAvatar})
+
+  await profileNew.save()
+
+  const profileFind = await
+  Profile.findOne({user: newUser.id})
+
+  console.log('profileFind!!', profileFind)
+
+  // Generar mi JWT
+  const profile = {
+
+      name: profileFind.name,
+      lastName: profileFind.lastName,
+      imageHeader: profileFind.imageHeader,
+      imageAvatar: profileFind.imageAvatar,
+      id: profileFind._id,
+      user: {
+        online: newUser.online,
+        uid: newUser.id,
+        email: newUser.email,
+        username:  newUser.username,
+
+      },
+      createdAt: profileFind.createdAt,
+      updatedAt:profileFind.updatedAt
+
+    }
+
+    console.log('profile!!', profile)
+
+
+
+
+
+    return res.json({
+        ok: true,
+        profile,
+        token
+    })
     
 } catch (error) {
         console.log(error);
