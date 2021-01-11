@@ -27,14 +27,14 @@ const createRoom = async (req, res = response) => {
         const room = new Room({ name: name, description: description, user: id, position: roomsTotal.length });
 
 
-        await room.save();
+       const newroom = await room.save();
 
-        console.log('room create: ', room)
+        console.log('room create: ', newroom)
 
 
         res.json({
             ok: true,
-            room,
+            newroom,
 
         });
 
