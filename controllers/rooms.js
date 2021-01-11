@@ -24,17 +24,17 @@ const createRoom = async (req, res = response) => {
         const roomsTotal = await Room.find({ user: id })
 
 
-        const room = new Room({ name: name, description: description, user: id, position: roomsTotal.length });
+        const newRoom = new Room({ name: name, description: description, user: id, position: roomsTotal.length });
 
 
-       const newroom = await room.save();
+       const room = await newRoom.save();
 
-        console.log('room create: ', newroom)
+        console.log('room create: ', room);
 
 
         res.json({
             ok: true,
-            newroom,
+            room,
 
         });
 
