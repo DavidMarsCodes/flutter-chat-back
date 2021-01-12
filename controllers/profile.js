@@ -168,7 +168,7 @@ const loginGetProfileUser = async (req, res = response) => {
 
             name: profileFind.name,
             lastName: profileFind.lastName,
-            about: item.about,
+            about: profileFind.about,
             imageHeader: profileFind.imageHeader,
             imageAvatar: profileFind.imageAvatar,
             id: profileFind._id,
@@ -210,7 +210,7 @@ const loginGetProfileUser = async (req, res = response) => {
 
 
 const editUserProfile = async (req, res = response) => {
-    const { email, password, username, name } = req.body;
+    const { email, password, username, name, about } = req.body;
 
     console.log('user/.body', req.body)
     const uid = req.body.uid
@@ -302,7 +302,7 @@ const editUserProfile = async (req, res = response) => {
 
             name: profileFind.name,
             lastName: profileFind.lastName,
-            about: item.about,
+            about: profileFind.about,
             imageHeader: profileFind.imageHeader,
             imageAvatar: profileFind.imageAvatar,
             id: profileFind._id,
