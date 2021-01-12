@@ -25,6 +25,12 @@ const ProfileSchema = Schema({
         
     },
 
+    about: {
+        type: String,
+        default: '',
+        
+    },
+
     user: {
         type: Schema.Types.ObjectId,
         ref: 'User',

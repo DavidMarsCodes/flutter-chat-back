@@ -81,6 +81,7 @@ const getProfilesLastUsers = async (req, res = response) => {
             lastName: item.lastName,
             imageHeader: item.imageHeader,
             imageAvatar: item.imageAvatar,
+            about: item.about,
             id: item._id,
             user: {
                 online: item.user.online,
@@ -167,6 +168,7 @@ const loginGetProfileUser = async (req, res = response) => {
 
             name: profileFind.name,
             lastName: profileFind.lastName,
+            about: item.about,
             imageHeader: profileFind.imageHeader,
             imageAvatar: profileFind.imageAvatar,
             id: profileFind._id,
@@ -276,6 +278,8 @@ const editUserProfile = async (req, res = response) => {
                 {
                     $set: {
                         name: name,
+                        about: about
+                        
 
                     }
                 }
@@ -293,13 +297,12 @@ const editUserProfile = async (req, res = response) => {
       console.log('profileFind!!', profileFind)
 
 
-
-
         // Generar mi JWT
         const profile = {
 
             name: profileFind.name,
             lastName: profileFind.lastName,
+            about: item.about,
             imageHeader: profileFind.imageHeader,
             imageAvatar: profileFind.imageAvatar,
             id: profileFind._id,
