@@ -5,7 +5,7 @@ const Profile = require('../models/profile');
 
 const uploadAvatar = async (req, res = response ) => {
 
-    console.log('biody** ',req.files)
+    console.log('biody** ',req, res)
 
     try {
    
