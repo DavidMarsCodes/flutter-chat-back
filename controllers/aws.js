@@ -20,7 +20,7 @@ const uploadAvatar = async (req, res = response ) => {
     
     const s3Params = {
         Bucket: S3_BUCKET + '/' + folder,
-        Key: String(Date.now()),
+        Key: String(Date.now()) + '.' + fileType,
         Expires: 500,
         ContentType: fileType,
         ACL: 'public-read'
