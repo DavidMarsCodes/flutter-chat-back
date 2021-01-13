@@ -9,7 +9,7 @@ const uploadAvatar = async (req, res = response ) => {
     try {
 
 
-    const S3_BUCKET = process.env.bucket;
+    const S3_BUCKET = process.env.Bucket;
 
     const s3 = new aws.S3();
     const fileName = req.body.fileName;
