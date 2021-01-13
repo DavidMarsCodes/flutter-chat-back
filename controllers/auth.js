@@ -58,7 +58,7 @@ const createUser = async (req, res = response ) => {
             name: profileFind.name,
             lastName: profileFind.lastName,
          
-            imageHeader: profileFind.imageHeader,
+            imageHeader: "",
             imageAvatar: profileFind.imageAvatar,
             id: profileFind._id,
             rooms: profileFind.rooms,
