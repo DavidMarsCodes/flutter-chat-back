@@ -24,7 +24,7 @@ const uploadAvatar = async (req, res = response ) => {
         Key: 'hello',
         //Expires: 500,
         //Body: req.body.image,
-        ContentType: 'application/octet-stream',
+        ContentType: 'image/jpg',
        //ACL: 'public-read'
     };
 
