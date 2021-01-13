@@ -13,13 +13,19 @@ const app = express();
 app.use( express.json() );
 
 
+var aws = require('aws-sdk');
+
+aws.config.update({
+    region: 'sa-east-1',
+    accessKeyId: process.env.AWSAccessKeyId,
+    secretAccessKey: process.env.AWSSecretKey
+})
+
+
 // Node Server
 const server = require('http').createServer(app);
 module.exports.io = require('socket.io')(server);
 require('./sockets/socket');
-
-
-
 
 // Path público
 const publicPath = path.resolve( __dirname, 'public' );
@@ -37,6 +43,9 @@ app.use( '/api/google', require('./routes/google-auth'));
 app.use( '/api/apple', require('./routes/apple-auth'));
 
 app.use( '/api/search', require('./routes/search'));
+
+app.use( '/api/aws', require('./routes/aws'));
+
 
 
 

@@ -10,8 +10,6 @@ const getProfilebyUser = async (req, res = response) => {
     const userId = req.params.id;
 
     try {
-
-
         const profile = await Profile.findOne({ user: userId });
         if (!profile) {
             return res.status(404).json({
@@ -184,7 +182,6 @@ const loginGetProfileUser = async (req, res = response) => {
             updatedAt: profileFind.updatedAt
 
         }
-
 
         //console.log('profile', profile)
 
