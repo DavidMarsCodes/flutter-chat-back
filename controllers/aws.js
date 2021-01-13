@@ -17,7 +17,7 @@ const uploadAvatar = async (req, res = response ) => {
     const folder = 'avatar';
 
 
-    console.log(req.body.bytes)
+    console.log(req.body)
     
     const s3Params = {
         Bucket: S3_BUCKET + '/' + folder,
