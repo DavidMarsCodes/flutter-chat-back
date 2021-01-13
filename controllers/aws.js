@@ -7,6 +7,7 @@ const uploadAvatar = async (req, res = response ) => {
 
 
     try {
+   
 
 
     const S3_BUCKET = process.env.Bucket;
@@ -16,6 +17,7 @@ const uploadAvatar = async (req, res = response ) => {
     const fileType = req.body.fileType;
     const folder = 'avatar';
 
+    
     const s3Params = {
         Bucket: S3_BUCKET + '/' + folder,
         Key: fileName,
