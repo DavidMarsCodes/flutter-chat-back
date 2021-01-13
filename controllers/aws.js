@@ -24,6 +24,8 @@ const uploadAvatar = async (req, res = response ) => {
         ACL: 'public-read'
     };
 
+    console.log('s3Params', s3Params);
+
         s3.getSignedUrl('putObject', s3Params, (err, data) => {
         
         if (err) {
