@@ -119,7 +119,7 @@ console.log(email)
         
         name: profileFind.name,
         lastName: profileFind.lastName,
-        imageHeader: profileFind.imageHeader,
+        imageHeader: "",
         imageAvatar: profileFind.imageAvatar,
         id: profileFind._id,
         user: {
