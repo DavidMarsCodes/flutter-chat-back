@@ -23,9 +23,9 @@ const uploadAvatar = async (req, res = response ) => {
         Bucket: S3_BUCKET + '/' + folder,
         Key: fileName,
         //Expires: 500,
-        Body: req.body.image,
-        ContentType: fileType,
-       ACL: 'public-read'
+        //Body: req.body.image,
+        ContentType: 'application/octet-stream',
+       //ACL: 'public-read'
     };
 
     console.log('s3Params', s3Params);
