@@ -22,9 +22,9 @@ const uploadAvatar = async (req, res = response ) => {
     const s3Params = {
         Bucket: S3_BUCKET + '/' + folder,
         Key: fileName,
-        Expires: 500,
-        ContentType: fileType,
-        ACL: 'public-read'
+        //Expires: 500,
+        //ContentType: fileType,
+       // ACL: 'public-read'
     };
 
     console.log('s3Params', s3Params);
