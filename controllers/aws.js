@@ -13,7 +13,7 @@ const uploadAvatar = async (req, res = response ) => {
     const S3_BUCKET = process.env.Bucket;
 
     const s3 = new aws.S3();
-    const fileName =  String(Date.now());
+    const fileName =  "hola";
     const fileType = req.body.fileType;
     const folder = 'avatar';
 
