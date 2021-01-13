@@ -46,19 +46,15 @@ const createUser = async (req, res = response ) => {
         Profile.findOne({user: user.id})
         .populate('user')
 
-
         console.log('profileFind!!', profileFind)
     
-
-
-
         // Generar mi JWT
         const profile = {
             
             name: profileFind.name,
             lastName: profileFind.lastName,
-         
             imageHeader: "",
+            about: "",
             imageAvatar: profileFind.imageAvatar,
             id: profileFind._id,
             rooms: profileFind.rooms,
