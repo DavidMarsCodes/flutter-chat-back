@@ -61,6 +61,7 @@ console.log(email)
         
             name: profileFind.name,
             lastName: profileFind.lastName,
+            about: profileFind.about,
             imageHeader: profileFind.imageHeader,
             imageAvatar: profileFind.imageAvatar,
             id: profileFind._id,
