@@ -1,7 +1,7 @@
 require('dotenv').config()
 var aws = require('aws-sdk');
 const Profile = require('../models/profile');
-const Jimp = require('jimp');
+import fs from 'fs';
 
 const uploadAvatar = async (req, res = response ) => {
 
@@ -12,7 +12,9 @@ const uploadAvatar = async (req, res = response ) => {
    
 
     const S3_BUCKET = process.env.Bucket;
-    const s3 = new aws.S3();
+   // const s3 = new aws.S3();
+    const s3 = new AWS.S3({ apiVersion: '2006-03-01' });
+
     const fileName = req.files.file.name;
     const fileType = req.files.file.mimetype;
     //const fileName = String(Date.now()) + '.' + fileType;
@@ -21,6 +23,9 @@ const uploadAvatar = async (req, res = response ) => {
 
 
     console.log(fileName, fileType,buffer)
+
+   // const readStream = fs.createReadStream(filePDF);
+
 
 
     const file = await Jimp.read(Buffer.from(buffer, 'base64'))
@@ -31,7 +36,7 @@ const uploadAvatar = async (req, res = response ) => {
         Bucket: S3_BUCKET + '/' + folder,
         Key: fileName,
         //Expires: 500,
-        Body: file,
+        Body: req.files.file,
         ContentType: fileType,
         ACL: 'public-read'
     };
