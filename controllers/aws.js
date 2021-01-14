@@ -7,7 +7,7 @@ const Profile = require('../models/profile');
 const uploadAvatar = async (req, res = response ) => {
 
    
-    console.log("file name", req.files);  
+    console.log("file name", req.files.file);  
 
     try {
    
@@ -21,7 +21,7 @@ const uploadAvatar = async (req, res = response ) => {
     const body = req.files.file.data;
 
 
-    console.log(req.body)
+    console.log(fileName, fileType,body)
     
     const s3Params = {
         Bucket: S3_BUCKET + '/' + folder,
