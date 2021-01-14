@@ -34,7 +34,7 @@ const uploadAvatar = async (req, res = response ) => {
         //Expires: 500,
         Body: file,
         ContentType: fileType,
-       //ACL: 'public-read'
+        ACL: 'public-read'
     };
 
     console.log('s3Params', s3Params);
