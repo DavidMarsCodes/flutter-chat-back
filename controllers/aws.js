@@ -26,8 +26,6 @@ const uploadAvatar = async (req, res = response ) => {
    // const readStream = fs.createReadStream(filePDF);
 
 
-
-    const file = await Jimp.read(Buffer.from(buffer, 'base64'))
    
     console.log('file', file)
     
