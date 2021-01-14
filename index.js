@@ -10,6 +10,10 @@ require('./database/config').dbConnection();
 const app = express();
 
 // Lectura y parseo del Body
+
+var fileupload = require("express-fileupload");
+app.use(fileupload());
+
 app.use( express.json() );
 
 
