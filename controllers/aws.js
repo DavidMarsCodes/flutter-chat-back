@@ -2,37 +2,34 @@ require('dotenv').config()
 var aws = require('aws-sdk');
 const Profile = require('../models/profile');
 
+
+
 const uploadAvatar = async (req, res = response ) => {
 
    
-    console.log("file name", req.files.file);  
+    console.log("file name", req.files);  
 
     try {
    
 
     const S3_BUCKET = process.env.Bucket;
-   // const s3 = new aws.S3();
-    const s3 = new AWS.S3();
-
+    const s3 = new aws.S3();
     const fileName = req.files.file.name;
     const fileType = req.files.file.mimetype;
     //const fileName = String(Date.now()) + '.' + fileType;
     const folder = 'avatar';
-    const buffer = req.files.file.data;
-
-   // console.log(fileName, fileType,buffer);
-
-   // const readStream = fs.createReadStream(filePDF);
+    const body = req.files.file.data;
 
 
+    console.log(req.body)
     
     const s3Params = {
         Bucket: S3_BUCKET + '/' + folder,
         Key: fileName,
         //Expires: 500,
-        Body: req.files.file,
+        Body: body,
         ContentType: fileType,
-        ACL: 'public-read'
+       //ACL: 'public-read'
     };
 
     console.log('s3Params', s3Params);
