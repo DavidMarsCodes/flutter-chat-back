@@ -20,10 +20,7 @@ const uploadAvatar = async (req, res = response ) => {
     const folder = 'avatar';
     const body = req.files.file.data;
 
-
-    console.log(req.body)
-
-    const readStream = fs.createReadStream(re.files.file);
+    const readStream = fs.createReadStream(body);
     
     const s3Params = {
         Bucket: S3_BUCKET + '/' + folder,
