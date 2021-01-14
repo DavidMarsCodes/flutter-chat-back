@@ -19,17 +19,17 @@ const uploadAvatar = async (req, res = response ) => {
     const fileType = req.files.file.mimetype;
     //const fileName = String(Date.now()) + '.' + fileType;
     const folder = 'avatar';
-    const body = req.files.file.data;
+    const data = req.files.file.data;
 
 
 
-    const readStream = fs.createReadStream(body);
+    var base64data = new Buffer.from(data, 'binary').toString('base64');
     
     const s3Params = {
         Bucket: S3_BUCKET + '/' + folder,
         Key: fileName,
         //Expires: 500,
-        Body: readStream,
+        Body: base64data,
         ContentType: fileType,
        //ACL: 'public-read'
     };
