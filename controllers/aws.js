@@ -47,7 +47,7 @@ const uploadAvatar = async (req, res = response ) => {
 
         console.log(returnData)
 
-        const uid = req.headers;
+        const uid = req.headers.uid;
 
       const  profileUpdate = await Profile.updateOne(
             {
