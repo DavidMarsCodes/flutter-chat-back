@@ -14,7 +14,7 @@ const uploadAvatar = async (req, res = response ) => {
 
     const S3_BUCKET = process.env.Bucket;
   
-    const s3 = new AWS.S3({ apiVersion: '2006-03-01' });
+    const s3 = new AWS.S3();
     const fileName = req.files.file.name;
 
     console.log(fileName )
