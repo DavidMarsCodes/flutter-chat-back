@@ -3,6 +3,7 @@ var aws = require('aws-sdk');
 const Profile = require('../models/profile');
 
 
+
 const uploadAvatar = async (req, res = response ) => {
 
    
@@ -13,10 +14,11 @@ const uploadAvatar = async (req, res = response ) => {
 
     const S3_BUCKET = process.env.Bucket;
     const s3 = new aws.S3();
-    const fileName = req.body.fileName;
-    const fileType = req.body.fileType;
+    const fileName = req.files.file.name;
+    const fileType = req.files.file.mimetype;
     //const fileName = String(Date.now()) + '.' + fileType;
     const folder = 'avatar';
+    const body = req.files.file.data;
 
 
     console.log(req.body)
@@ -25,8 +27,8 @@ const uploadAvatar = async (req, res = response ) => {
         Bucket: S3_BUCKET + '/' + folder,
         Key: fileName,
         //Expires: 500,
-        //Body: req.body.image,
-        ContentType: 'image/jpg',
+        Body: body,
+        ContentType: fileType,
        //ACL: 'public-read'
     };
 
