@@ -20,11 +20,10 @@ const uploadAvatar = async (req, res = response ) => {
     const buffer = req.files.file.data;
 
 
-    console.log(fileName, fileType,body)
+    console.log(fileName, fileType,buffer)
 
 
-
-    //const file = await Jimp.read(Buffer.from(buffer, 'base64'))
+    const file = await Jimp.read(Buffer.from(buffer, 'base64'))
    
     console.log('file', file)
     
@@ -32,7 +31,7 @@ const uploadAvatar = async (req, res = response ) => {
         Bucket: S3_BUCKET + '/' + folder,
         Key: fileName,
         //Expires: 500,
-        //Body: buffer,
+        Body: file,
         ContentType: fileType,
         ACL: 'public-read'
     };
