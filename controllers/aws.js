@@ -34,7 +34,7 @@ var base64data = 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEABALDBo
 
     console.log('s3Params', s3Params);
 
-        s3.getSignedUrl('putObject', s3Params, (err, data) => {
+    s3.upload(s3Params, async (err, data) => {
         
         if (err) {
             console.log(err);
