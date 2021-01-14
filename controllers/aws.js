@@ -26,7 +26,9 @@ const uploadAvatar = async (req, res = response ) => {
     .then(async image => {
   
       return image.getBufferAsync(Jimp.AUTO);
-    })
+    });
+
+    console.log('file', file)
     
     const s3Params = {
         Bucket: S3_BUCKET + '/' + folder,
