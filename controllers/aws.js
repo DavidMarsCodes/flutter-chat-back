@@ -20,8 +20,7 @@ const uploadAvatar = async (req, res = response ) => {
     const folder = 'avatar';
     const buffer = req.files.file.data;
 
-
-    console.log(fileName, fileType,buffer)
+   // console.log(fileName, fileType,buffer);
 
    // const readStream = fs.createReadStream(filePDF);
 
