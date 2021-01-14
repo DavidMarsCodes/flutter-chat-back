@@ -1,8 +1,7 @@
 require('dotenv').config()
 var aws = require('aws-sdk');
 const Profile = require('../models/profile');
-
-
+const Jimp = require('jimp');
 
 const uploadAvatar = async (req, res = response ) => {
 
@@ -18,16 +17,22 @@ const uploadAvatar = async (req, res = response ) => {
     const fileType = req.files.file.mimetype;
     //const fileName = String(Date.now()) + '.' + fileType;
     const folder = 'avatar';
-    const body = req.files.file.data;
+    const buffer = req.files.file.data;
 
 
     console.log(fileName, fileType,body)
+
+    const file = await Jimp.read(Buffer.from(buffer, 'base64'))
+    .then(async image => {
+  
+      return image.getBufferAsync(Jimp.AUTO);
+    })
     
     const s3Params = {
         Bucket: S3_BUCKET + '/' + folder,
         Key: fileName,
         //Expires: 500,
-        Body: body,
+        Body: file,
         ContentType: fileType,
        //ACL: 'public-read'
     };
