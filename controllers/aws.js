@@ -19,11 +19,12 @@ const uploadAvatar = async (req, res = response ) => {
     const fileType = req.files.file.mimetype;
     //const fileName = String(Date.now()) + '.' + fileType;
     const folder = 'avatar';
-    const data = req.files.file.data;
+    const buffer = req.files.file.data;
 
 
+    var base64data = await new Buffer.from(buffer, 'binary').toString('base64');
 
-    var base64data = new Buffer.from(data, 'binary').toString('base64');
+    print(base64data);
     
     const s3Params = {
         Bucket: S3_BUCKET + '/' + folder,
