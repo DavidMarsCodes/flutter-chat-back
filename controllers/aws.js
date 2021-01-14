@@ -16,7 +16,10 @@ const uploadAvatar = async (req, res = response ) => {
   
     const s3 = new AWS.S3({ apiVersion: '2006-03-01' });
     const fileName = req.files.file.name;
+
+    console.log(fileName )
     const fileType = req.files.file.mimetype;
+    console.log(fileType )
     //const fileName = String(Date.now()) + '.' + fileType;
     const folder = 'avatar';
     const buffer = req.files.file.data;
