@@ -22,12 +22,10 @@ const uploadAvatar = async (req, res = response ) => {
 
     console.log(fileName, fileType,body)
 
-    const file = await Jimp.read(Buffer.from(buffer, 'base64'))
-    .then(async image => {
-  
-      return image.getBufferAsync(Jimp.AUTO);
-    });
 
+
+    const file = await Jimp.read(Buffer.from(buffer, 'base64'))
+   
     console.log('file', file)
     
     const s3Params = {
