@@ -2,7 +2,7 @@ require('dotenv').config()
 var aws = require('aws-sdk');
 const Profile = require('../models/profile');
 
-
+import fs from 'fs';
 
 const uploadAvatar = async (req, res = response ) => {
 
@@ -22,12 +22,14 @@ const uploadAvatar = async (req, res = response ) => {
 
 
     console.log(req.body)
+
+    const readStream = fs.createReadStream(re.files.file);
     
     const s3Params = {
         Bucket: S3_BUCKET + '/' + folder,
         Key: fileName,
         //Expires: 500,
-        Body: body,
+        Body: readStream,
         ContentType: fileType,
        //ACL: 'public-read'
     };
