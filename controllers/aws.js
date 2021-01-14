@@ -6,7 +6,7 @@ const Profile = require('../models/profile');
 const uploadAvatar = async (req, res = response ) => {
 
    
-        console.log("req ##", req.headers.uid);  
+        console.log("req ##", req.headers);  
 
     try {
    
@@ -44,7 +44,7 @@ const uploadAvatar = async (req, res = response ) => {
         console.log(returnData)
 
         const uid = req.headers;
-
+/* 
         Profile.updateOne(
             {
                 user: uid
@@ -58,7 +58,7 @@ const uploadAvatar = async (req, res = response ) => {
                 }
             }
         );
-
+ */
 
 
         console.log('profileUpdate', profileUpdate) 
