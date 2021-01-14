@@ -26,14 +26,12 @@ const uploadAvatar = async (req, res = response ) => {
    // const readStream = fs.createReadStream(filePDF);
 
 
-   
-    console.log('file', file)
     
     const s3Params = {
         Bucket: S3_BUCKET + '/' + folder,
         Key: fileName,
         //Expires: 500,
-        //Body: req.files.file,
+        Body: req.files.file,
         ContentType: fileType,
         ACL: 'public-read'
     };
