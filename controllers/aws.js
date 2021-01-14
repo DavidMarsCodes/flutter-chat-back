@@ -11,6 +11,8 @@ const uploadAvatar = async (req, res = response ) => {
     try {
    
 
+   
+
     const S3_BUCKET = process.env.Bucket;
     const s3 = new aws.S3();
     const fileName = req.files.file.name;
@@ -19,7 +21,7 @@ const uploadAvatar = async (req, res = response ) => {
     const folder = 'avatar';
     const buffer = req.files.file.data;
 
-
+    console.log(fileName,fileType )
     const s3Params = {
         Bucket: S3_BUCKET + '/' + folder,
         Key: fileName,
@@ -28,6 +30,8 @@ const uploadAvatar = async (req, res = response ) => {
         ContentType: fileType,
        ACL: 'public-read'
     }
+
+    console.log('s3Params', s3Params)
 
     s3.upload(s3Params, async (err, data) => {
         
