@@ -13,12 +13,15 @@ const uploadAvatar = async (req, res = response ) => {
    
 
     const S3_BUCKET = process.env.Bucket;
-    const s3 = new aws.S3();
+  
+    const s3 = new AWS.S3({ apiVersion: '2006-03-01' });
     const fileName = req.files.file.name;
     const fileType = req.files.file.mimetype;
     //const fileName = String(Date.now()) + '.' + fileType;
     const folder = 'avatar';
     const body = req.files.file.data;
+
+
 
     const readStream = fs.createReadStream(body);
     
