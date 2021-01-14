@@ -2,7 +2,7 @@ require('dotenv').config()
 var aws = require('aws-sdk');
 const Profile = require('../models/profile');
 
-import fs from 'fs';
+const fs = require('fs');
 
 const uploadAvatar = async (req, res = response ) => {
 
