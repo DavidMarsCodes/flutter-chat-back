@@ -6,7 +6,7 @@ var fs =require('fs');
 var data = fs.readFileSync('./aws/keys.json', 'utf8');
 var keys = JSON.parse(data);
 
-console.log(keys);
+console.log('index', keys);
 
 // DB Config
 require('./database/config').dbConnection();
