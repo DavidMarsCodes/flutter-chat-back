@@ -1,7 +1,7 @@
 require('dotenv').config()
 var aws = require('aws-sdk');
 const Profile = require('../models/profile');
-const envAws = require('../aws/keys');
+const { awsKeys } = require('../aws/keys');
 
 const uploadAvatar = async (req, res = response ) => {
 
@@ -13,7 +13,7 @@ const uploadAvatar = async (req, res = response ) => {
 
    
 
-    const S3_BUCKET = envAws.Bucket;
+    const S3_BUCKET = awsKeys.Bucket;
     const s3 = new aws.S3();
     const fileName = req.files.file.name;
     const fileType = req.files.file.mimetype;
@@ -90,7 +90,7 @@ try {
 
 
 
-const S3_BUCKET = envAws.Bucket;
+const S3_BUCKET = awsKeys.Bucket;
 const s3 = new aws.S3();
 const fileName = req.files.file.name;
 const fileType = req.files.file.mimetype;
