@@ -49,7 +49,7 @@ const uploadAvatar = async (req, res = response ) => {
 
         const uid = req.headers.uid;
 
-/*       const  profileUpdate = await Profile.updateOne(
+      const  profileUpdate = await Profile.updateOne(
             {
                 user: uid
             },
@@ -65,7 +65,7 @@ const uploadAvatar = async (req, res = response ) => {
  
 
 
-        console.log('profileUpdate', profileUpdate)  */
+        console.log('profileUpdate', profileUpdate)  
 
         res.json({ ok: true, data: { returnData } });
 
