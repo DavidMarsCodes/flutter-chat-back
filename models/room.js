@@ -30,7 +30,6 @@ const RoomSchema = Schema({
         default: 0
     },
 
-    
 
 },
 
