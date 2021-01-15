@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 require('dotenv').config();
+const envAws = require('./aws/keys');
 
 // DB Config
 require('./database/config').dbConnection();
@@ -21,8 +22,8 @@ var aws = require('aws-sdk');
 
 aws.config.update({
     region: 'sa-east-1',
-    accessKeyId: process.env.AWSAccessKeyId,
-    secretAccessKey: process.env.AWSSecretKey
+    accessKeyId: envAws.AWSAccessKeyId,
+    secretAccessKey: envAws.AWSSecretKey
 })
 
 
