@@ -95,7 +95,7 @@ try {
 
 
 
-const S3_BUCKET = key.Bucket;
+const S3_BUCKET = keys.Bucket;
 const s3 = new aws.S3();
 const fileName = req.files.file.name;
 const fileType = req.files.file.mimetype;
