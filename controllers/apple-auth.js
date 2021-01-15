@@ -63,7 +63,6 @@ const auth =  new AppleAuth(
 
   const sessionID = `NEW SESSION ID for ${userID} / ${email} / ${userName}`;
 
-  console.log(`sessionID = ${sessionID}`);
 
 
 
