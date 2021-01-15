@@ -1,7 +1,12 @@
 const express = require('express');
 const path = require('path');
 require('dotenv').config();
-const { awsKeys } = require('./aws/keys');
+
+var fs =require('fs');
+var data = fs.readFileSync('./aws/keys.json', 'utf8');
+var keys = JSON.parse(data);
+
+console.log(keys);
 
 // DB Config
 require('./database/config').dbConnection();
@@ -22,8 +27,8 @@ var aws = require('aws-sdk');
 
 aws.config.update({
     region: 'sa-east-1',
-    accessKeyId: awsKeys.AWSAccessKeyId,
-    secretAccessKey: awsKeys.AWSSecretKey
+    accessKeyId: keys.AWSAccessKeyId,
+    secretAccessKey: keys.AWSSecretKey
 })
 
 
