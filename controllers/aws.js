@@ -69,7 +69,7 @@ const uploadAvatar = async (req, res = response ) => {
 
         console.log('profileUpdate', profileUpdate)  
 
-        res.json({ ok: true, data: { returnData } });
+        res.json({ ok: true, url: returnData.url  });
 
     });
 
