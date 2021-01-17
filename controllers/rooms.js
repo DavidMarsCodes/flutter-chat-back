@@ -12,12 +12,18 @@ const createRoom = async (req, res = response) => {
         co2,
         co2Control,
         timeOn,
-        timeOff ,id } = req.body;
+        timeOff } = req.body.room;
 
-    console.log('id! ', id, name)
+
+
+        const uid = req.body.uid;
+
+        console.log('uid', uid)
+
+
     try {
 
-        const nameExist = await Room.findOne({ name: name, user: id });
+        const nameExist = await Room.findOne({ name: name, user: uid });
 
         console.log('nameExist:', nameExist)
         if (nameExist) {
