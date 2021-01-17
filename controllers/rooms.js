@@ -2,8 +2,6 @@ const { response } = require('express');
 const Room = require('../models/room');
 const Profile = require('../models/profile');
 
-var async = require('async');
-
 
 const createRoom = async (req, res = response) => {
     const { name,
@@ -16,7 +14,7 @@ const createRoom = async (req, res = response) => {
         timeOn,
         timeOff ,id } = req.body;
 
-    console.log('id! ', id)
+    console.log('id! ', id, name)
     try {
 
         const nameExist = await Room.findOne({ name: name, user: id });
