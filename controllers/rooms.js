@@ -12,11 +12,12 @@ const createRoom = async (req, res = response) => {
         co2,
         co2Control,
         timeOn,
-        timeOff } = req.body.room;
+        timeOff ,
+        user} = req.body.room;
 
 
 
-        const uid = req.body.uid;
+        const uid = user;
 
         console.log('uid', uid)
 
