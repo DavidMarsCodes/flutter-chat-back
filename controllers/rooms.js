@@ -6,7 +6,15 @@ var async = require('async');
 
 
 const createRoom = async (req, res = response) => {
-    const { description, name, id } = req.body;
+    const { name,
+        description,
+        wide,
+        long,
+        tall,
+        co2,
+        co2Control,
+        timeOn,
+        timeOff ,id } = req.body;
 
     console.log('id! ', id)
     try {
@@ -24,7 +32,19 @@ const createRoom = async (req, res = response) => {
         const roomsTotal = await Room.find({ user: id })
 
 
-        const newRoom = new Room({ name: name, description: description, user: id, position: roomsTotal.length });
+        const newRoom = new Room({ 
+            name: name, 
+            description: description, 
+            wide: wide,
+            long: long,
+            tall: tall,
+            co2: co2,
+            co2Control: co2Control,
+            timeOn: timeOn,
+            timeOff: timeOff,
+            user: id, 
+            position: roomsTotal.length
+         });
 
 
        const room = await newRoom.save();
