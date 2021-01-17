@@ -34,7 +34,7 @@ const createRoom = async (req, res = response) => {
             });
         }
 
-        const roomsTotal = await Room.find({ user: id })
+        const roomsTotal = await Room.find({ user: user })
 
 
         const newRoom = new Room({ 
@@ -47,7 +47,7 @@ const createRoom = async (req, res = response) => {
             co2Control: co2Control,
             timeOn: timeOn,
             timeOff: timeOff,
-            user: id, 
+            user: user, 
             position: roomsTotal.length
          });
 
