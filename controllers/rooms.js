@@ -13,7 +13,7 @@ const createRoom = async (req, res = response) => {
         co2Control,
         timeOn,
         timeOff ,
-        user} = req.body.room;
+        user} = req.body;
 
 
 
