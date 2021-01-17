@@ -31,6 +31,58 @@ const RoomSchema = Schema({
     },
 
 
+    wide: 
+    {
+        type: Number,
+        required: false,
+        default: 0
+    },
+
+    long: 
+    {
+        type: Number,
+        required: false,
+        default: 0
+    },
+    tall: 
+    {
+        type: Number,
+        required: false,
+        default: 0
+    },
+
+    co2: 
+    {
+        type: Boolean,
+        required: false,
+        default: 0
+    },
+
+
+    co2Control: 
+    {
+        type: Boolean,
+        required: false,
+        default: 0
+    },
+
+    timeOn: 
+    {
+        type: String,
+        required: false,
+        default: 0
+    },
+
+    timeOff: 
+    {
+        type: String,
+        required: false,
+        default: 0
+    },
+
+
+
+
 },
 
 {
