@@ -15,7 +15,7 @@ const createRoom = async (req, res = response) => {
         timeOff ,
         user} = req.body;
 
-
+console.log('req.body', req.body)
 
         const uid = user;
 
