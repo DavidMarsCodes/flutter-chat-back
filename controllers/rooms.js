@@ -50,7 +50,7 @@ const createRoom = async (req, res = response) => {
             user: user, 
             position: roomsTotal.length
          });
-
+         console.log('after create: ', newRoom);
 
        const room = await newRoom.save();
 
