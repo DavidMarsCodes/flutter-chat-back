@@ -33,20 +33,20 @@ const RoomSchema = Schema({
 
     wide: 
     {
-        type: Number,
+        type: String,
         required: false,
         default: 0
     },
 
     long: 
     {
-        type: Number,
+        type: String,
         required: false,
         default: 0
     },
     tall: 
     {
-        type: Number,
+        type: String,
         required: false,
         default: 0
     },
