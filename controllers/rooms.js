@@ -95,7 +95,7 @@ const editRoom = async (req, res = response) => {
 
     try {
 
-        const editRoom = { 
+        const updateRoom = { 
             name: name, 
             description: description, 
             wide: wide,
@@ -122,7 +122,7 @@ const editRoom = async (req, res = response) => {
     );
 
 
-    const room = editRoom;
+    const room = updateRoom;
         console.log('room roomUpdate: ', room);
 
 
