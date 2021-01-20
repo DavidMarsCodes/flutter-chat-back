@@ -84,13 +84,11 @@ const editRoom = async (req, res = response) => {
         co2Control,
         timeOn,
         timeOff ,
-        user} = req.body;
+        id} = req.body;
 
     console.log('req.body', req.body)
 
-        const uid = user;
-
-        console.log('uid', uid)
+   
 
 
     try {
@@ -105,7 +103,7 @@ const editRoom = async (req, res = response) => {
             co2Control: co2Control,
             timeOn: timeOn,
             timeOff: timeOff,
-            user: user, 
+           
            
          };
 
@@ -114,7 +112,7 @@ const editRoom = async (req, res = response) => {
 
        const  uodateRoom = await Room.updateOne(
         {
-            user: uid
+            _id: id
         },
         {
             $set: updateRoom
