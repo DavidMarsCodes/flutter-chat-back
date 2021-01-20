@@ -119,10 +119,10 @@ const editRoom = async (req, res = response) => {
         }
     );
 
+            const room = Room.findById(id);
 
-    const room = updateRoom;
-        console.log('room roomUpdate: ', room);
-
+            console.log(room);
+         
 
         res.json({
             ok: true,
