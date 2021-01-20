@@ -31,5 +31,4 @@ router.post('/update/room', validateJWT, editRoom );
 
 
 
-
 module.exports = router;
