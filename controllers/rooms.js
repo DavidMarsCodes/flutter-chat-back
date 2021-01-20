@@ -119,7 +119,7 @@ const editRoom = async (req, res = response) => {
         }
     );
 
-            const room = await Room.findOne({id});
+            const room = await Room.findOne({ _id: id});
 
             console.log(room);
          
