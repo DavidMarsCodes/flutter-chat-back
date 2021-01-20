@@ -126,7 +126,7 @@ const editRoom = async (req, res = response) => {
 
         res.json({
             ok: true,
-            roomUpdate,
+            room,
 
         });
 
