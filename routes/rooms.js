@@ -5,7 +5,7 @@
 const { Router } = require('express');
 const { check } = require('express-validator');
 
-const { createRoom, getRoomsByUser, deleteRoom, editPositionByRoom } = require('../controllers/rooms');
+const { createRoom, getRoomsByUser, deleteRoom, editPositionByRoom, editRoom } = require('../controllers/rooms');
 const { validarCampos } = require('../middlewares/validar-campos');
 const { validateJWT } = require('../middlewares/validar-jwt');
 const { renewToken } = require('../controllers/auth');
@@ -23,9 +23,11 @@ router.post('/new', [
 
 router.get('/rooms/user/:id', validateJWT, getRoomsByUser );
 
-router.delete('/delete/:id', validateJWT, deleteRoom)
+router.delete('/delete/:id', validateJWT, deleteRoom);
 
-router.post('/update/position', validateJWT, editPositionByRoom)
+router.post('/update/position', validateJWT, editPositionByRoom);
+
+router.post('/update/room', validateJWT, editRoom );
 
 
 

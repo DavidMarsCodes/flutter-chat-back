@@ -1,6 +1,6 @@
 const { response } = require('express');
 const Room = require('../models/room');
-const Profile = require('../models/profile');
+
 
 
 const createRoom = async (req, res = response) => {
@@ -60,6 +60,73 @@ console.log('req.body', req.body)
         res.json({
             ok: true,
             room,
+
+        });
+
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: 'Hable con el administrador'
+        });
+    }
+}
+
+
+const editRoom = async (req, res = response) => {
+    const { name,
+        description,
+        wide,
+        long,
+        tall,
+        co2,
+        co2Control,
+        timeOn,
+        timeOff ,
+        user} = req.body;
+
+    console.log('req.body', req.body)
+
+        const uid = user;
+
+        console.log('uid', uid)
+
+
+    try {
+
+        const updateRoom = { 
+            name: name, 
+            description: description, 
+            wide: wide,
+            long: long,
+            tall: tall,
+            co2: co2,
+            co2Control: co2Control,
+            timeOn: timeOn,
+            timeOff: timeOff,
+            user: user, 
+           
+         };
+
+         console.log('after newRoom: ', updateRoom);
+
+
+       const  roomUpdate = await Room.updateOne(
+        {
+            user: uid
+        },
+        {
+            $set: updateRoom
+        }
+    );
+
+        console.log('room roomUpdate: ', roomUpdate);
+
+
+        res.json({
+            ok: true,
+            roomUpdate,
 
         });
 
@@ -185,6 +252,7 @@ const editPositionByRoom = async (req, res = response) => {
 
 module.exports = {
     createRoom,
+    editRoom,
     getRoomsByUser,
     deleteRoom,
     editPositionByRoom
