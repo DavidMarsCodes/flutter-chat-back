@@ -95,7 +95,7 @@ const editRoom = async (req, res = response) => {
 
     try {
 
-        const updateRoom = { 
+        const editRoom = { 
             name: name, 
             description: description, 
             wide: wide,
@@ -112,7 +112,7 @@ const editRoom = async (req, res = response) => {
          console.log('after newRoom: ', updateRoom);
 
 
-       const  roomUpdate = await Room.updateOne(
+       const  uodateRoom = await Room.updateOne(
         {
             user: uid
         },
@@ -121,7 +121,9 @@ const editRoom = async (req, res = response) => {
         }
     );
 
-        console.log('room roomUpdate: ', roomUpdate);
+
+    const room = editRoom;
+        console.log('room roomUpdate: ', room);
 
 
         res.json({
