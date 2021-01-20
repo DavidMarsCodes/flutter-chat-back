@@ -34,7 +34,7 @@ console.log('req.body', req.body)
             });
         }
 
-        const roomsTotal = await Room.find({ user: user })
+        const roomsTotal = await Room.find({ user: user });
 
 
         const newRoom = new Room({ 

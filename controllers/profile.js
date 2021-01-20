@@ -53,7 +53,6 @@ const getProfilesLastUsers = async (req, res = response) => {
 
     const from = Number(req.query.from) || 0;
 
-    
     try {
     const profilesFind = await Profile
         .find({ user: { $ne: req.uid } })
@@ -71,8 +70,6 @@ const getProfilesLastUsers = async (req, res = response) => {
     profilesFind.forEach(function (item) {
 
         if (item.user){
-
-       
 
         const profile = {
             name: item.name,
