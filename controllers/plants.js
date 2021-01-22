@@ -9,53 +9,56 @@ const createPlant = async (req, res = response) => {
         quantity,
         sexo,
         genotype,
-        user,
         room,
         germinated,
-        flowering ,
+        flowering,
         pot,
         cbd,
         thc,
         user} = req.body;
 
-console.log('req.body', req.body)
+        console.log('req.body', req.body)
 
         const uid = user;
+        const roomid = room;
 
         console.log('uid', uid)
+        console.log('roomid', roomid)
 
 
     try {
 
-        const nameExist = await Plant.findOne({ name: name, user: uid });
+        const nameExist = await Plant.findOne({ name: name, user: uid, room: roomid });
 
         console.log('nameExist:', nameExist)
         if (nameExist) {
             return res.status(400).json({
                 ok: false,
-                msg: 'Ya tienes un room con ese nombre'
+                msg: 'Ya tienes un planta con ese nombre'
             });
         }
 
-        const plantsTotal = await Plant.find({ user: user });
+        //const plantsTotal = await Plant.find({ user: user, room: roomid });
 
 
         const newPlant = new Plant({ 
-            name: name, 
-            description: description, 
-            wide: wide,
-            long: long,
-            tall: tall,
-            co2: co2,
-            co2Control: co2Control,
-            timeOn: timeOn,
-            timeOff: timeOff,
-            user: user, 
-            position: plantsTotal.length
+            name,
+            description,
+            quantity,
+            sexo,
+            genotype,
+            user,
+            room,
+            germinated,
+            flowering,
+            pot,
+            cbd,
+            thc,
+            user
          });
          console.log('after create: ', newPlant);
 
-       const plant = await newPlant.save();
+        const plant = await newPlant.save();
 
         console.log('Plant create: ', plant);
 
@@ -77,16 +80,19 @@ console.log('req.body', req.body)
 }
 
 
-const editRoom = async (req, res = response) => {
+const editPlant= async (req, res = response) => {
     const { name,
         description,
-        wide,
-        long,
-        tall,
-        co2,
-        co2Control,
-        timeOn,
-        timeOff ,
+        quantity,
+        sexo,
+        genotype,
+        user,
+        room,
+        germinated,
+        flowering,
+        pot,
+        cbd,
+        thc,
         id} = req.body;
 
     console.log('req.body', req.body)
@@ -96,41 +102,40 @@ const editRoom = async (req, res = response) => {
 
     try {
 
-        const updateRoom = { 
-            name: name, 
-            description: description, 
-            wide: wide,
-            long: long,
-            tall: tall,
-            co2: co2,
-            co2Control: co2Control,
-            timeOn: timeOn,
-            timeOff: timeOff,
-           
-           
+        const updatePlant = { 
+            name: name,
+            description: description,
+            quantity: quantity,
+            sexo: sexo,
+            genotype: genotype,            
+            room: room,
+            germinated: germinated,
+            flowering: flowering,
+            pot: pot,
+            cbd: cbd,
+            thc: thc
          };
 
-         console.log('after newRoom: ', updateRoom);
+         console.log('after newRoom: ', updatePlant);
 
 
-       const  uodateRoom = await Room.updateOne(
-        {
-            _id: id
-        },
-        {
-            $set: updateRoom
-        }
-    );
+       const  oupdatePlant = await Plant.updateOne(
+            {
+                _id: id
+            },
+            {
+                $set: updatePlant
+            }
+        );
 
-            const room = await Room.findOne({ _id: id});
+            const plant = await Plant.findOne({ _id: id});
 
-            console.log(room);
+            console.log(plant);
          
 
         res.json({
             ok: true,
-            room,
-
+            plant
         });
 
 
@@ -143,25 +148,25 @@ const editRoom = async (req, res = response) => {
     }
 }
 
-const getRoomsByUser = async (req, res = response) => {
+const getPlantsByRoom = async (req, res = response) => {
 
     try {
-        const userId = req.params.id;
+        const roomId = req.params.id;
 
-        console.log('es:', userId);
+        console.log('roomId:', roomId);
 
-        const rooms = await Room
-            .find({ user: userId })
-            .sort('position')
+        const plants = await Plant
+            .find({ room: roomId })
+            .sort('-createdAt')
 
 
 
-        console.log('rooms** ', rooms)
+        console.log('plants** ', plants)
 
 
         res.json({
             ok: true,
-            rooms,
+            plants,
         })
 
     }
@@ -176,18 +181,18 @@ const getRoomsByUser = async (req, res = response) => {
 
 }
 
-const deleteRoom = async (req, res = response) => {
+const deletePlant = async (req, res = response) => {
 
 
     try {
 
         console.log(req.params);
 
-        const roomId = req.params.id
+        const plantId = req.params.id
 
-        console.log(roomId);
+        console.log(plantId);
 
-        const room = await Room.findByIdAndDelete(roomId)
+        const plant = await Plant.findByIdAndDelete(plantId)
 
         res.json({
             ok: true,
@@ -209,56 +214,10 @@ const deleteRoom = async (req, res = response) => {
 
 
 
-
-
-const editPositionByRoom = async (req, res = response) => {
-    try {
-
-        const onReorderRooms = []
-
-        req.body.rooms.map((item, index) => {                                                          
-            item.position = index;
-            onReorderRooms.push(item);
-
-        });
-
-        const promises = onReorderRooms.map((obj) => 
-        
-        new Promise((resolve, reject) => {
-            Room.updateOne({ _id: obj.id }, { $set: { position: obj.position } }, 
-            (err, data) => {
-                if (err) console.log(err);
-                else
-                    resolve();
-            });
-        }));
-        Promise.all(promises)
-            .then(() => {
-                return res.json({
-                    ok: true,
-                    msg: 'Eliminado con exito!'
-                })
-            })
-
-    } catch (error) {
-
-        res.status(500).json({
-            ok: false,
-            msg: 'Hable con el administrador'
-        });
-
-    }
-}
-
-
-
-
 module.exports = {
-    createRoom,
-    editRoom,
-    getRoomsByUser,
-    deleteRoom,
-    editPositionByRoom
-
+    createPlant,
+    editPlant,
+    getPlantsByRoom,
+    deletePlant
 }
 

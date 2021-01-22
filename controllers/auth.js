@@ -103,7 +103,7 @@ const login = async ( req, res = response ) => {
         }
 
         // Validar el password
-        const validPassword = bcrypt.compareSync( password, userDB.password );
+        const validPassword = bcrypt.compareSync( password, user.password );
         if ( !validPassword ) {
             return res.status(400).json({
                 ok: false,

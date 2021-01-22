@@ -9,6 +9,7 @@ const PlantSchema = Schema({
     description: {
         type: String,
         required: false,
+        default: ''
     },
     quantity: {
         type: Number,
@@ -17,20 +18,24 @@ const PlantSchema = Schema({
     sexo: 
     {
         type: String,
-        required: false
+        required: false,
+        default: ''
     },
     genotype:
     {
         type: String,
-        required: false
+        required: false,
+        default: ''
     },
     cbd: {
         type: Number,
-        required: false
+        required: false,
+        default: 0
     },
     thc: {
         type: Number,
-        required: false
+        required: false,
+        default: 0
     },
     user: {
         type: Schema.Types.ObjectId,
@@ -49,11 +54,12 @@ const PlantSchema = Schema({
     },
     flowering: {
         type: Date,
-        required: false
+        required: true
     },
     pot: {
         type: Number,
-        required: false
+        required: false,
+        default: 0
     }
     
 },

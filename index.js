@@ -49,6 +49,7 @@ app.use( '/api/users', require('./routes/users') );
 app.use( '/api/messages', require('./routes/messages') );
 app.use( '/api/profile', require('./routes/profile') );
 app.use( '/api/room', require('./routes/rooms') );
+app.use( '/api/plant', require('./routes/plants') );
 app.use( '/api/air', require('./routes/airs'));
 app.use( '/api/google', require('./routes/google-auth'));
 app.use( '/api/apple', require('./routes/apple-auth'));
