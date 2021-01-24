@@ -25,7 +25,7 @@ router.get('/plants/room/:id', validateJWT, getPlantsByRoom );
 
 router.delete('/delete/:id', validateJWT, deletePlant);
 
-router.post('/update/plant', validateJWT, editPlant );
+router.post('/update/plant', validateJWT, editPlxant );
 
 
 

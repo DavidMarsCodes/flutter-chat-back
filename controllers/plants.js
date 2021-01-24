@@ -4,7 +4,8 @@ const Plant = require('../models/plant');
 
 
 const createPlant = async (req, res = response) => {
-    const { name,
+    const { 
+        name,
         description,
         quantity,
         sexo,
@@ -15,7 +16,8 @@ const createPlant = async (req, res = response) => {
         pot,
         cbd,
         thc,
-        user} = req.body;
+        user
+    } = req.body;
 
         console.log('req.body', req.body)
 
