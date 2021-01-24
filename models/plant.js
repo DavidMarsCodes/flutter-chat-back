@@ -49,11 +49,11 @@ const PlantSchema = Schema({
         required: true
     },
     germinated: {
-        type: Date,
+        type: String,
         required: true
     },
     flowering: {
-        type: Date,
+        type: String,
         required: true
     },
     pot: {
