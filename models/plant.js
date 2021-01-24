@@ -12,7 +12,7 @@ const PlantSchema = Schema({
         default: ''
     },
     quantity: {
-        type: Number,
+        type: String,
         required: true
     },
     sexo: 
@@ -28,12 +28,12 @@ const PlantSchema = Schema({
         default: ''
     },
     cbd: {
-        type: Number,
+        type: String,
         required: false,
         default: 0
     },
     thc: {
-        type: Number,
+        type: String,
         required: false,
         default: 0
     },
@@ -57,7 +57,7 @@ const PlantSchema = Schema({
         required: true
     },
     pot: {
-        type: Number,
+        type: String,
         required: false,
         default: 0
     }
