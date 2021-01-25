@@ -1,5 +1,6 @@
 const { response } = require('express');
 const Plant = require('../models/plant');
+const Room = require('../models/room');
 
 
 
