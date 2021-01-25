@@ -152,8 +152,7 @@ const getRoomsById = async (req, res = response) => {
            
 
 
-
-        console.log('rooms** ', room)
+        console.log('room** ', room)
 
 
         res.json({
