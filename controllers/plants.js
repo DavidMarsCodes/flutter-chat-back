@@ -62,6 +62,26 @@ const createPlant = async (req, res = response) => {
 
         const plant = await newPlant.save();
 
+        const plants = await Plant
+        .find({ room: room })
+
+        const countPlants = plants.length+1;
+
+
+        console.log(' countPlants: ', countPlants);
+        await Room.updateOne(
+            {
+                _id: room
+            },
+            {
+                $set: {
+
+                    totalItems: countPlants
+                }
+            }
+        );
+
+
         console.log('Plant create: ', plant);
 
 
