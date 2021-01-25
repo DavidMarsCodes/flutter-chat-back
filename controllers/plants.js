@@ -88,8 +88,7 @@ const editPlant= async (req, res = response) => {
         quantity,
         sexo,
         genotype,
-        user,
-        room,
+
         germinated,
         flowering,
         pot,
@@ -110,7 +109,6 @@ const editPlant= async (req, res = response) => {
             quantity: quantity,
             sexo: sexo,
             genotype: genotype,            
-            room: room,
             germinated: germinated,
             flowering: flowering,
             pot: pot,
@@ -118,7 +116,7 @@ const editPlant= async (req, res = response) => {
             thc: thc
          };
 
-         console.log('after newRoom: ', updatePlant);
+         console.log('after updatePlant: ', updatePlant);
 
 
        const  oupdatePlant = await Plant.updateOne(
