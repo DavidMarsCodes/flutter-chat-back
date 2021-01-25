@@ -143,6 +143,39 @@ const editRoom = async (req, res = response) => {
 const getRoomsByUser = async (req, res = response) => {
 
     try {
+        const roomId = req.params.id;
+
+        console.log('es:', roomId);
+
+        const room = await Room
+            .findOne({ _id: roomId })
+           
+
+
+
+        console.log('rooms** ', room)
+
+
+        res.json({
+            ok: true,
+            room,
+        })
+
+    }
+
+    catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: 'Hable con el administrador'
+        });
+    }
+
+}
+
+const getRoomsByUser = async (req, res = response) => {
+
+    try {
         const userId = req.params.id;
 
         console.log('es:', userId);
@@ -253,6 +286,7 @@ const editPositionByRoom = async (req, res = response) => {
 module.exports = {
     createRoom,
     editRoom,
+    getRoomsByUser,
     getRoomsByUser,
     deleteRoom,
     editPositionByRoom
