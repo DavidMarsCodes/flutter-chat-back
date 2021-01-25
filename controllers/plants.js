@@ -66,16 +66,9 @@ const createPlant = async (req, res = response) => {
         const plants = await Plant
         .find({ room: room })
 
-        const countPlants;
+        const countPlants = plants.length;
         
-         if(plants.length == 0){
-
-            countPlants = 1;
-         }
-         else {
-            countPlants = plants.length+1;
-
-         }
+       
 
         console.log(' countPlants: ', countPlants);
         await Room.updateOne(
