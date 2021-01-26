@@ -30,12 +30,12 @@ const PlantSchema = Schema({
     cbd: {
         type: String,
         required: false,
-        default: 0
+        default: ''
     },
     thc: {
         type: String,
         required: false,
-        default: 0
+        default: ''
     },
     user: {
         type: Schema.Types.ObjectId,
@@ -59,10 +59,17 @@ const PlantSchema = Schema({
     pot: {
         type: String,
         required: false,
-        default: 0
-    }
-    
+        default: ''
+    },
+    coverImage: {
+        type: String,
+        required: false,
+        default: ''
+    },
+
 },
+
+    
 
 {
     timestamps: true
