@@ -170,6 +170,38 @@ const editPlant= async (req, res = response) => {
     }
 }
 
+const getPlantById = async (req, res = response) => {
+
+    try {
+        const plantId = req.params.id;
+
+        console.log('es:', roomId);
+
+        const plant = await Plant
+            .findOne({ _id: plantId })
+           
+
+
+        console.log('plant** ', plant)
+
+
+        res.json({
+            ok: true,
+            plant,
+        })
+
+    }
+
+    catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: 'Hable con el administrador'
+        });
+    }
+
+}
+
 const getPlantsByRoom = async (req, res = response) => {
 
     try {
@@ -239,6 +271,7 @@ const deletePlant = async (req, res = response) => {
 module.exports = {
     createPlant,
     editPlant,
+    getPlantById,
     getPlantsByRoom,
     deletePlant
 }

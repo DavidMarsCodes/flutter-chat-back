@@ -140,7 +140,7 @@ const editRoom = async (req, res = response) => {
     }
 }
 
-const getRoomsById = async (req, res = response) => {
+const getRoomById = async (req, res = response) => {
 
     try {
         const roomId = req.params.id;
@@ -285,7 +285,7 @@ const editPositionByRoom = async (req, res = response) => {
 module.exports = {
     createRoom,
     editRoom,
-    getRoomsById,
+    getRoomById,
     getRoomsByUser,
     deleteRoom,
     editPositionByRoom
