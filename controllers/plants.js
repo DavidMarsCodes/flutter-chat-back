@@ -175,7 +175,7 @@ const getPlantById = async (req, res = response) => {
     try {
         const plantId = req.params.id;
 
-        console.log('es:', roomId);
+        console.log('es:', plantId);
 
         const plant = await Plant
             .findOne({ _id: plantId })
