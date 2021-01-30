@@ -47,7 +47,7 @@ const uploadAvatar = async (req, res = response ) => {
 
         const returnData = {
             signedRequest: data,
-            url: `https://${S3_BUCKET}.s3.sa-east-1.amazonaws.com/${folder}/${fileName}`
+            url: `http://${S3_BUCKET}.s3.sa-east-1.amazonaws.com/${folder}/${fileName}`
         };
 
         console.log(returnData)

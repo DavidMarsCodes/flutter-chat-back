@@ -21,12 +21,7 @@ const PlantSchema = Schema({
         required: false,
         default: ''
     },
-    genotype:
-    {
-        type: String,
-        required: false,
-        default: ''
-    },
+
     cbd: {
         type: String,
         required: false,
