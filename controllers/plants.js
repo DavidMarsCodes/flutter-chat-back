@@ -109,7 +109,7 @@ const editPlant= async (req, res = response) => {
         description,
         quantity,
         sexo,
-
+        coverImage,
         germinated,
         flowering,
         pot,
@@ -129,6 +129,7 @@ const editPlant= async (req, res = response) => {
             description: description,
             quantity: quantity,
             sexo: sexo,
+            coverImage: coverImage,
             germinated: germinated,
             flowering: flowering,
             pot: pot,
