@@ -215,18 +215,18 @@ s3.upload(s3Params, async (err, data) => {
 
     console.log(returnData)
 
-    const uid = req.headers.uid;
+    const plantId = req.headers.id;
 
     console.log('UID: ', uid);
 
-  const  profileUpdate = await Plant.updateOne(
+  const  plantUpdate = await Plant.updateOne(
         {
-            user: uid,
-            room: roomId
+            id: plantId,
+           
         },
         {
             $set: {
-                imageHeader: returnData.url,
+                coverImage: returnData.url,
           
                 
 
@@ -236,7 +236,7 @@ s3.upload(s3Params, async (err, data) => {
 
 
 
-    console.log('profileUpdate', profileUpdate)  
+    console.log('plantUpdate', plantUpdate)  
 
     res.json({ ok: true, url: returnData.url  });
 
@@ -307,6 +307,7 @@ s3.upload(s3Params, async (err, data) => {
 
 module.exports = {
     uploadCoverPlant,
+    updateCoverPlant,
     uploadAvatar,
     uploadHeader
 }
