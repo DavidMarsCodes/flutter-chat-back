@@ -217,7 +217,7 @@ s3.upload(s3Params, async (err, data) => {
 
     const plantId = req.headers.id;
 
-    console.log('UID: ', uid);
+    console.log('UID: ', plantId);
 
   const  plantUpdate = await Plant.updateOne(
         {
