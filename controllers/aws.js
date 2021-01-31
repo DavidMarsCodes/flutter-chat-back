@@ -210,7 +210,7 @@ s3.upload(s3Params, async (err, data) => {
 
     const returnData = {
         signedRequest: data,
-        url: `https://${S3_BUCKET}.s3.sa-east-1.amazonaws.com/${folder}/${fileName}`
+        url: `http://${S3_BUCKET}.s3.sa-east-1.amazonaws.com/${folder}/${fileName}`
     };
 
     console.log(returnData)
