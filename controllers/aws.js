@@ -221,7 +221,7 @@ s3.upload(s3Params, async (err, data) => {
 
   const  plantUpdate = await Plant.updateOne(
         {
-            id: plantId,
+            _id: plantId,
            
         },
         {
