@@ -174,7 +174,7 @@ s3.upload(s3Params, async (err, data) => {
 const updateCoverPlant = async (req, res = response ) => {
 
    
-    console.log("req ##", req.headers.uid);  
+    console.log("req ##", req.headers.id);  
 
 try {
 
