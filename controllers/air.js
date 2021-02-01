@@ -116,7 +116,7 @@ const editAir = async (req, res = response) => {
     }
 }
 
-const getAirsByUser = async (req, res = response) => {
+const getAirsByRoom = async (req, res = response) => {
 
     try {
         const roomId = req.params.id;
@@ -184,7 +184,7 @@ const deleteAir = async (req, res = response) => {
 module.exports = {
     createAir,
     editAir,
-    getAirsByUser,
+    getAirsByRoom,
     deleteAir
 }
 
