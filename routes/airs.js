@@ -21,7 +21,7 @@ router.post('/new', [
     validarCampos
 ], createAir, validateJWT );
 
-router.get('/airs/user/:id', validateJWT, getAirsByUser );
+router.get('/airs/room/:id', validateJWT, getAirsByUser );
 
 router.delete('/delete/:id', validateJWT, deleteAir);
 

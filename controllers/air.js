@@ -119,10 +119,9 @@ const editAir = async (req, res = response) => {
 const getAirsByUser = async (req, res = response) => {
 
     try {
-        const userId = req.params.id;
-        const roomId = req.params.roomid;
+        const roomId = req.params.id;
 
-        console.log('es:', userId, roomId);
+        console.log('es:', roomId);
 
         const airs = await Air
             .find({ roomid: roomId })
