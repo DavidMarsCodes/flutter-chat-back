@@ -38,7 +38,7 @@ console.log('req.body', req.body)
             description: description, 
             watts: watts,
             user: user, 
-            roomid: roomid,
+            room: roomid,
             position: airsTotal.length
          });
          console.log('after create: ', newAir);
