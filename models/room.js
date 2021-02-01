@@ -16,7 +16,21 @@ const RoomSchema = Schema({
         required: true
     },
 
-    totalItems: 
+    totalPlants: 
+    {
+        type: Number,
+        required: false,
+        default: 0
+    },
+
+    totalAirs: 
+    {
+        type: Number,
+        required: false,
+        default: 0
+    },
+
+    totalLights: 
     {
         type: Number,
         required: false,

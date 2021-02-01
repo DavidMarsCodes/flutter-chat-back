@@ -78,7 +78,7 @@ const createPlant = async (req, res = response) => {
             {
                 $set: {
 
-                    totalItems: countPlants
+                    totalPlants: countPlants
                 }
             }
         );
