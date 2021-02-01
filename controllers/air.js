@@ -69,8 +69,7 @@ const editAir = async (req, res = response) => {
     const { name,
         description,
         watts,
-        id,
-        roomid} = req.body;
+        id } = req.body;
 
     console.log('req.body', req.body)
 
@@ -79,8 +78,7 @@ const editAir = async (req, res = response) => {
         const updateAir = { 
             name: name, 
             description: description, 
-            watts: watts,
-            roomid : roomid
+            watts: watts
          };
 
          console.log('after update Air: ', updateAir);
