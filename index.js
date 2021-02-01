@@ -51,6 +51,8 @@ app.use( '/api/profile', require('./routes/profile') );
 app.use( '/api/room', require('./routes/rooms') );
 app.use( '/api/plant', require('./routes/plants') );
 app.use( '/api/air', require('./routes/airs'));
+app.use( '/api/light', require('./routes/lights'));
+
 app.use( '/api/google', require('./routes/google-auth'));
 app.use( '/api/apple', require('./routes/apple-auth'));
 

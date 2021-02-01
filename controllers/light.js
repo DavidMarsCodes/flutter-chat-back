@@ -1,12 +1,13 @@
 const { response } = require('express');
-const Air = require('../models/air');
+const Light = require('../models/light');
 
 
 
-const createAir = async (req, res = response) => {
+const createLight = async (req, res = response) => {
     const { name,
         description,
         watts,
+        kelvin,
         user,
         room} = req.body;
 
@@ -20,7 +21,7 @@ console.log('req.body', req.body)
 
     try {
 
-        const nameExist = await Air.findOne({ name: name, user: uid, room: roomid });
+        const nameExist = await Light.findOne({ name: name, user: uid, room: roomid });
 
         console.log('nameExist:', nameExist)
         if (nameExist) {
@@ -30,27 +31,28 @@ console.log('req.body', req.body)
             });
         }
 
-        const airsTotal = await Air.find({ user: user });
+        const lightTotal = await Light.find({ user: user });
 
 
-        const newAir = new Air({ 
+        const newlight = new Air({ 
             name: name, 
             description: description, 
             watts: watts,
+            kelvin: kelvin,
             user: user, 
             room: roomid,
-            position: airsTotal.length
+            position: lightTotal.length
          });
-         console.log('after create: ', newAir);
+         console.log('after create: ', newlight);
 
-       const air = await newAir.save();
+       const light = await newLight.save();
 
-        console.log('newAir create: ', air);
+        console.log('newLight create: ', light);
 
 
         res.json({
             ok: true,
-            air,
+            light,
 
         });
 
@@ -65,42 +67,44 @@ console.log('req.body', req.body)
 }
 
 
-const editAir = async (req, res = response) => {
+const editLight = async (req, res = response) => {
     const { name,
         description,
         watts,
+        kelvin,
         id } = req.body;
 
     console.log('req.body', req.body)
 
     try {
 
-        const updateAir = { 
+        const updateLight = { 
             name: name, 
             description: description, 
-            watts: watts
+            watts: watts,
+            kelvin: kelvin
          };
 
-         console.log('after update Air: ', updateAir);
+         console.log('after update Light: ', updateLight);
 
 
-       const  oupdateAir = await Air.updateOne(
+       const  oupdateLight = await Light.updateOne(
         {
             _id: id
         },
         {
-            $set: updateAir
+            $set: updateLight
         }
     );
 
-            const air = await Air.findOne({ _id: id});
+            const light = await Light.findOne({ _id: id});
 
-            console.log(air);
+            console.log(light);
          
 
         res.json({
             ok: true,
-            air,
+            light,
 
         });
 
@@ -114,25 +118,25 @@ const editAir = async (req, res = response) => {
     }
 }
 
-const getAirsByRoom = async (req, res = response) => {
+const getlightByRoom = async (req, res = response) => {
 
     try {
         const roomId = req.params.id;
 
         console.log('es:', roomId);
 
-        const airs = await Air
+        const light = await Light
             .find({ room: roomId })
             .sort('position')
 
 
 
-        console.log('airs by user: ', airs)
+        console.log('light by user: ', light)
 
 
         res.json({
             ok: true,
-            airs,
+            light,
         })
 
     }
@@ -147,18 +151,18 @@ const getAirsByRoom = async (req, res = response) => {
 
 }
 
-const deleteAir = async (req, res = response) => {
+const deleteLight = async (req, res = response) => {
 
 
     try {
 
         console.log(req.params);
 
-        const airId = req.params.id
+        const lightId = req.params.id
 
-        console.log(airId);
+        console.log(lightId);
 
-        const air = await Room.findByIdAndDelete(airId)
+        const light = await Light.findByIdAndDelete(lightId)
 
         res.json({
             ok: true,
@@ -180,9 +184,9 @@ const deleteAir = async (req, res = response) => {
 
 
 module.exports = {
-    createAir,
-    editAir,
-    getAirsByRoom,
-    deleteAir
+    createLight,
+    editLight,
+    getlightByRoom,
+    deleteLight
 }
 
