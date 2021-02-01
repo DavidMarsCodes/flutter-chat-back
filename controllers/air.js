@@ -122,7 +122,7 @@ const getAirsByRoom = async (req, res = response) => {
         console.log('es:', roomId);
 
         const airs = await Air
-            .find({ roomid: roomId })
+            .find({ room: roomId })
             .sort('position')
 
 
