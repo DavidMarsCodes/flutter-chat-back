@@ -188,7 +188,7 @@ const deleteLight = async (req, res = response) => {
         
         await Room.updateOne(
             {
-                _id: roomid
+                _id: light.room
             },
             {
                 $set: {

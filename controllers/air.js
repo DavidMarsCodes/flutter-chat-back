@@ -187,7 +187,7 @@ const deleteAir = async (req, res = response) => {
 
         await Room.updateOne(
             {
-                _id: roomid
+                _id: air.room
             },
             {
                 $set: {
