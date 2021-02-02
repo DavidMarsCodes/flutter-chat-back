@@ -177,6 +177,7 @@ const deleteAir = async (req, res = response) => {
 
         const air = await Air.findByIdAndDelete(airId)
 
+        console.log("delete", air);
         res.json({
             ok: true,
             msg: 'Eliminado con exito!'
