@@ -5,7 +5,7 @@
 const { Router } = require('express');
 const { check } = require('express-validator');
 
-const { createLight, getlightByRoom, deleteLight, editLight } = require('../controllers/light');
+const { createLight, getlightstByRoom, deleteLight, editLight } = require('../controllers/light');
 const { validarCampos } = require('../middlewares/validar-campos');
 const { validateJWT } = require('../middlewares/validar-jwt');
 const { renewToken } = require('../controllers/auth');
@@ -21,11 +21,11 @@ router.post('/new', [
     validarCampos
 ], createLight, validateJWT );
 
-router.get('/airs/light/:id', validateJWT, getlightByRoom );
+router.get('/lights/room/:id', validateJWT, getlightstByRoom );
 
 router.delete('/delete/:id', validateJWT, deleteLight);
 
-router.post('/update/air', validateJWT, editLight );
+router.post('/update/light', validateJWT, editLight );
 
 
 

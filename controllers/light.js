@@ -118,7 +118,7 @@ const editLight = async (req, res = response) => {
     }
 }
 
-const getlightByRoom = async (req, res = response) => {
+const getlightstByRoom = async (req, res = response) => {
 
     try {
         const roomId = req.params.id;
@@ -186,7 +186,7 @@ const deleteLight = async (req, res = response) => {
 module.exports = {
     createLight,
     editLight,
-    getlightByRoom,
+    getlightstByRoom,
     deleteLight
 }
 

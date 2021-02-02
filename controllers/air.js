@@ -20,7 +20,7 @@ console.log('req.body', req.body)
 
     try {
 
-        const nameExist = await Air.findOne({ name: name, user: uid, room: roomid });
+        const nameExist = await Air.findOne({ name: name, user: uid, roomid: roomid });
 
         console.log('nameExist:', nameExist)
         if (nameExist) {
@@ -124,7 +124,6 @@ const getAirsByRoom = async (req, res = response) => {
         const airs = await Air
             .find({ room: roomId })
             .sort('position')
-
 
 
         console.log('airs by user: ', airs)
