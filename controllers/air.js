@@ -179,7 +179,7 @@ const deleteAir = async (req, res = response) => {
 
         const air = await Air.findByIdAndDelete(airId);
 
-        const airsTotals = await Air.find({ room: roomid });
+        const airsTotals = await Air.find({ room: air.room });
 
         const countAirs = airsTotals.length;
         

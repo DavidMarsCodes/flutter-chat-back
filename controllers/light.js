@@ -180,7 +180,7 @@ const deleteLight = async (req, res = response) => {
 
         const light = await Light.findByIdAndDelete(lightId);
 
-        const lightTotals = await Light.find({ room: roomid });
+        const lightTotals = await Light.find({ room: light.room });
 
         const countLight = lightTotals.length;
              
