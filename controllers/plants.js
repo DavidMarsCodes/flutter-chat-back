@@ -247,6 +247,26 @@ const deletePlant = async (req, res = response) => {
 
         const plant = await Plant.findByIdAndDelete(plantId)
 
+        const plants = await Plant
+        .find({ room: room })
+
+        const countPlants = plants.length;
+        
+       
+
+        console.log(' countPlants: ', countPlants);
+        await Room.updateOne(
+            {
+                _id: room
+            },
+            {
+                $set: {
+
+                    totalPlants: countPlants
+                }
+            }
+        );
+
         res.json({
             ok: true,
             msg: 'Eliminado con exito!'
