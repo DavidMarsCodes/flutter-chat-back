@@ -130,7 +130,7 @@ const getlightstByRoom = async (req, res = response) => {
 
 
 
-        console.log('light by user: ', light)
+        console.log('light by user: ', lights)
 
 
         res.json({
