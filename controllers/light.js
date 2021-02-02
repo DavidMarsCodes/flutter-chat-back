@@ -34,7 +34,7 @@ console.log('req.body', req.body)
         const lightTotal = await Light.find({ user: user });
 
 
-        const newlight = new Air({ 
+        const newlight = new Light({ 
             name: name, 
             description: description, 
             watts: watts,
@@ -78,17 +78,16 @@ const editLight = async (req, res = response) => {
 
     try {
 
-        const updateLight = { 
+        const updateLight = {
             name: name, 
             description: description, 
             watts: watts,
             kelvin: kelvin
          };
 
-         console.log('after update Light: ', updateLight);
+        console.log('after update Light: ', updateLight);
 
-
-       const  oupdateLight = await Light.updateOne(
+        await Light.updateOne(
         {
             _id: id
         },
