@@ -11,7 +11,7 @@ const createAir = async (req, res = response) => {
         user,
         room} = req.body;
 
-console.log('req.body', req.body)
+        console.log('req.body', req.body)
 
         const uid = user;
         const roomid = room
@@ -47,7 +47,9 @@ console.log('req.body', req.body)
 
        const air = await newAir.save();
 
-       const countAirs = airsTotal.length;
+       const airsTotals = await Air.find({ room: roomid });
+
+       const countAirs = airsTotals.length;
         
        
 
@@ -175,7 +177,25 @@ const deleteAir = async (req, res = response) => {
 
         console.log(airId);
 
-        const air = await Air.findByIdAndDelete(airId)
+        const air = await Air.findByIdAndDelete(airId);
+
+        const airsTotals = await Air.find({ room: roomid });
+
+        const countAirs = airsTotals.length;
+        
+        console.log(' countAirs: ', countAirs);
+
+        await Room.updateOne(
+            {
+                _id: roomid
+            },
+            {
+                $set: {
+
+                    totalAirs: countAirs
+                }
+            }
+        );
 
         console.log("delete", air);
         res.json({

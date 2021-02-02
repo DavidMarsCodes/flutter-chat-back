@@ -11,13 +11,12 @@ const createLight = async (req, res = response) => {
         user,
         room} = req.body;
 
-console.log('req.body', req.body)
+        console.log('req.body', req.body)
 
         const uid = user;
         const roomid = room
 
         console.log('uid', uid)
-
 
     try {
 
@@ -33,7 +32,6 @@ console.log('req.body', req.body)
 
         const lightTotal = await Light.find({ room: roomid  });
 
-
         const newlight = new Light({
             name: name, 
             description: description, 
@@ -47,10 +45,13 @@ console.log('req.body', req.body)
         console.log('after create: ', newlight);
 
        const light = await newlight.save();
+
+       const lightTotals = await Light.find({ room: roomid  });
        
-       const countLight = lightTotal.length;
+       const countLight = lightTotals.length;
                
        console.log(' countLight: ', countLight);
+
        await Room.updateOne(
            {
                _id: roomid
@@ -58,7 +59,7 @@ console.log('req.body', req.body)
            {
                $set: {
 
-                   totalAirs: countLight
+                   totalLight: countLight
                }
            }
        );
@@ -104,13 +105,13 @@ const editLight = async (req, res = response) => {
         console.log('after update Light: ', updateLight);
 
         await Light.updateOne(
-        {
-            _id: id
-        },
-        {
-            $set: updateLight
-        }
-    );
+            {
+                _id: id
+            },
+            {
+                $set: updateLight
+            }
+        );
 
             const light = await Light.findOne({ _id: id});
 
@@ -177,7 +178,25 @@ const deleteLight = async (req, res = response) => {
 
         console.log(lightId);
 
-        const light = await Light.findByIdAndDelete(lightId)
+        const light = await Light.findByIdAndDelete(lightId);
+
+        const lightTotals = await Light.find({ room: roomid });
+
+        const countLight = lightTotals.length;
+             
+        console.log(' countAirs: ', countAirs);
+        
+        await Room.updateOne(
+            {
+                _id: roomid
+            },
+            {
+                $set: {
+
+                    totalLight: countLight
+                }
+            }
+        );
 
         res.json({
             ok: true,
