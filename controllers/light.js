@@ -126,7 +126,7 @@ const getlightstByRoom = async (req, res = response) => {
 
         const lights = await Light
             .find({ room: roomId })
-            .sort('position')
+            .sort('-createdAt')
 
 
 

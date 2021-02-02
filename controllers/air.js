@@ -121,8 +121,7 @@ const getAirsByRoom = async (req, res = response) => {
 
         const airs = await Air
             .find({ room: roomId })
-            .sort('position')
-
+            .sort('-createdAt')
 
         console.log('airs by user: ', airs)
 
