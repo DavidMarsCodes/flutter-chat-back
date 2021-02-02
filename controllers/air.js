@@ -1,5 +1,6 @@
 const { response } = require('express');
 const Air = require('../models/air');
+const Room = require('../models/room');
 
 
 
@@ -20,7 +21,7 @@ console.log('req.body', req.body)
 
     try {
 
-        const nameExist = await Air.findOne({ name: name, user: uid, roomid: roomid });
+        const nameExist = await Air.findOne({ name: name, user: uid, room: roomid });
 
         console.log('nameExist:', nameExist)
         if (nameExist) {
@@ -30,7 +31,9 @@ console.log('req.body', req.body)
             });
         }
 
-        const airsTotal = await Air.find({ user: user });
+        const airsTotal = await Air.find({ room: roomid });
+
+
 
         const newAir = new Air({ 
             name: name, 
@@ -43,6 +46,24 @@ console.log('req.body', req.body)
          console.log('after create: ', newAir);
 
        const air = await newAir.save();
+
+       const countAirs = airsTotal.length;
+        
+       
+
+       console.log(' countAirs: ', countAirs);
+       await Room.updateOne(
+           {
+               _id: roomid
+           },
+           {
+               $set: {
+
+                   totalAirs: countAirs
+               }
+           }
+       );
+
 
         console.log('newAir create: ', air);
 

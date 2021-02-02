@@ -1,5 +1,6 @@
 const { response } = require('express');
 const Light = require('../models/light');
+const Room = require('../models/room');
 
 
 const createLight = async (req, res = response) => {
@@ -30,7 +31,7 @@ console.log('req.body', req.body)
             });
         }
 
-        const lightTotal = await Light.find({ user: user });
+        const lightTotal = await Light.find({ room: roomid  });
 
 
         const newlight = new Light({
@@ -46,6 +47,21 @@ console.log('req.body', req.body)
         console.log('after create: ', newlight);
 
        const light = await newlight.save();
+       
+       const countLight = lightTotal.length;
+               
+       console.log(' countLight: ', countLight);
+       await Room.updateOne(
+           {
+               _id: roomid
+           },
+           {
+               $set: {
+
+                   totalAirs: countLight
+               }
+           }
+       );
 
         console.log('newLight create: ', light);
 
