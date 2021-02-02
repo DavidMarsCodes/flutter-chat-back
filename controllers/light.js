@@ -2,7 +2,6 @@ const { response } = require('express');
 const Light = require('../models/light');
 
 
-
 const createLight = async (req, res = response) => {
     const { name,
         description,
@@ -34,7 +33,7 @@ console.log('req.body', req.body)
         const lightTotal = await Light.find({ user: user });
 
 
-        const newlight = new Light({ 
+        const newlight = new Light({
             name: name, 
             description: description, 
             watts: watts,
@@ -43,10 +42,10 @@ console.log('req.body', req.body)
             room: roomid,
             position: lightTotal.length
          });
-         
-         console.log('after create: ', newlight);
 
-       const light = await Light.save();
+        console.log('after create: ', newlight);
+
+       const light = await newlight.save();
 
         console.log('newLight create: ', light);
 
