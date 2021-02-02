@@ -184,7 +184,7 @@ const deleteLight = async (req, res = response) => {
 
         const countLight = lightTotals.length;
              
-        console.log(' countAirs: ', countAirs);
+        console.log(' countLight: ', countLight);
         
         await Room.updateOne(
             {
