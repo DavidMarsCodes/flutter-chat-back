@@ -250,7 +250,7 @@ const deletePlant = async (req, res = response) => {
         console.log("plant: ", plant);
 
         const plants = await Plant
-        .find({ room: room })
+        .find({ room: plant.room })
 
         const countPlants = plants.length;
         
@@ -259,7 +259,7 @@ const deletePlant = async (req, res = response) => {
         console.log(' countPlants: ', countPlants);
         await Room.updateOne(
             {
-                _id: room
+                _id: plant.room
             },
             {
                 $set: {
