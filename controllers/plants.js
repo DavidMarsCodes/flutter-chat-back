@@ -247,6 +247,8 @@ const deletePlant = async (req, res = response) => {
 
         const plant = await Plant.findByIdAndDelete(plantId)
 
+        console.log("plant: ", plant);
+
         const plants = await Plant
         .find({ room: room })
 
