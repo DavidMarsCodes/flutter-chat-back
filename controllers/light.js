@@ -193,7 +193,7 @@ const deleteLight = async (req, res = response) => {
             {
                 $set: {
 
-                    totalLight: countLight
+                    totalLights: countLight
                 }
             }
         );
