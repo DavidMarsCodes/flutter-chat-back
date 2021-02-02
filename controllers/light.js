@@ -43,9 +43,10 @@ console.log('req.body', req.body)
             room: roomid,
             position: lightTotal.length
          });
+         
          console.log('after create: ', newlight);
 
-       const light = await newLight.save();
+       const light = await Light.save();
 
         console.log('newLight create: ', light);
 
