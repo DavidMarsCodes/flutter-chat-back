@@ -154,7 +154,7 @@ const deleteAir = async (req, res = response) => {
 
         console.log(airId);
 
-        const air = await Room.findByIdAndDelete(airId)
+        const air = await Air.findByIdAndDelete(airId)
 
         res.json({
             ok: true,
