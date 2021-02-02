@@ -124,7 +124,7 @@ const getlightstByRoom = async (req, res = response) => {
 
         console.log('es:', roomId);
 
-        const light = await Light
+        const lights = await Light
             .find({ room: roomId })
             .sort('position')
 
@@ -135,7 +135,7 @@ const getlightstByRoom = async (req, res = response) => {
 
         res.json({
             ok: true,
-            light,
+            lights,
         })
 
     }

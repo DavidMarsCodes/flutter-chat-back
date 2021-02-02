@@ -32,7 +32,6 @@ console.log('req.body', req.body)
 
         const airsTotal = await Air.find({ user: user });
 
-
         const newAir = new Air({ 
             name: name, 
             description: description, 
@@ -46,7 +45,6 @@ console.log('req.body', req.body)
        const air = await newAir.save();
 
         console.log('newAir create: ', air);
-
 
         res.json({
             ok: true,
