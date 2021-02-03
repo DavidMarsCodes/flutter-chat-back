@@ -1,0 +1,29 @@
+/*
+    path: api/login
+
+*/
+const { Router } = require('express');
+const { check } = require('express-validator');
+const { createVisit, editVisit, getVisitsById, getVisitsByPlant, deleteVisit } = require('../controllers/visit');
+const { validarCampos } = require('../middlewares/validar-campos');
+const { validateJWT } = require('../middlewares/validar-jwt');
+const { renewToken } = require('../controllers/auth');
+
+const router = Router();
+
+
+router.post('/new', [
+    check('name','El nombre es obligatorio').not().isEmpty(),
+    validarCampos
+], createVisit, validateJWT );
+
+router.get('/visit/plant/:id', validateJWT, getVisitsByPlant );
+
+router.get('/visit/:id', validateJWT, getVisitsById );
+
+
+router.delete('/delete/:id', validateJWT, deleteVisit);
+
+router.post('/update/plant', validateJWT, editVisit );
+
+module.exports = router;
