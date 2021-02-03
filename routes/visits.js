@@ -12,15 +12,11 @@ const { renewToken } = require('../controllers/auth');
 const router = Router();
 
 
-router.post('/new', [
-    check('name','El nombre es obligatorio').not().isEmpty(),
-    validarCampos
-], createVisit, validateJWT );
+router.post('/new', createVisit, validateJWT );
 
-router.get('/visit/plant/:id', validateJWT, getVisitsByPlant );
+router.get('/visits/plant/:id', validateJWT, getVisitsByPlant );
 
 router.get('/visit/:id', validateJWT, getVisitsById );
-
 
 router.delete('/delete/:id', validateJWT, deleteVisit);
 
