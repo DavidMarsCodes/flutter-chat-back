@@ -15,7 +15,7 @@ router.post("/upload/cover-plant", validateJWT, uploadCoverPlant )
 
 router.post("/upload/update-cover-plant", validateJWT, updateCoverPlant )
 
-router.post("/upload/cove-visit", validateJWT, uploadCoverVisit )
+router.post("/upload/cover-visit", validateJWT, uploadCoverVisit )
 
 
 
