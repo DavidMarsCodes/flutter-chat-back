@@ -20,6 +20,8 @@ router.get('/visit/:id', validateJWT, getVisitsById );
 
 router.delete('/delete/:id', validateJWT, deleteVisit);
 
+
+
 router.post('/update/plant', validateJWT, editVisit );
 
 module.exports = router;
