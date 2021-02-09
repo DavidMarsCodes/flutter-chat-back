@@ -227,8 +227,6 @@ s3.upload(s3Params, async (err, data) => {
         {
             $set: {
                 coverImage: returnData.url,
-          
-                
 
             }
         }

@@ -22,6 +22,6 @@ router.delete('/delete/:id', validateJWT, deleteVisit);
 
 
 
-router.post('/update/plant', validateJWT, editVisit );
+router.post('/update/visit', validateJWT, editVisit );
 
 module.exports = router;
