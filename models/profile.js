@@ -38,7 +38,11 @@ const ProfileSchema = Schema({
     },
 
 
-
+    isClub: {
+        type: Boolean,
+        default: false,
+        
+    },
   
 
 },

@@ -55,7 +55,7 @@ const getProfilesLastUsers = async (req, res = response) => {
 
     try {
     const profilesFind = await Profile
-        .find({ user: { $ne: req.uid } })
+        .find({ user: { $ne: req.uid }, isClub : true })
 
         .skip(from)
         .limit(50)
