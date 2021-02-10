@@ -5,7 +5,7 @@
 const { Router } = require('express');
 const { check } = require('express-validator');
 
-const { createPlant, getPlantsByRoom, deletePlant, editPlant, getPlantById } = require('../controllers/plants');
+const { createPlant, getPlantsByRoom, getPlantsByUser, deletePlant, editPlant, getPlantById } = require('../controllers/plants');
 const { validarCampos } = require('../middlewares/validar-campos');
 const { validateJWT } = require('../middlewares/validar-jwt');
 const { renewToken } = require('../controllers/auth');
@@ -22,6 +22,9 @@ router.post('/new', [
 ], createPlant, validateJWT );
 
 router.get('/plants/room/:id', validateJWT, getPlantsByRoom );
+
+router.get('/plants/user/:id', validateJWT, getPlantsByUser );
+
 
 router.get('/plant/:id', validateJWT, getPlantById );
 

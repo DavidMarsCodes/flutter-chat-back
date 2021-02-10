@@ -234,6 +234,40 @@ const getPlantsByRoom = async (req, res = response) => {
 
 }
 
+
+
+const getPlantsByUser = async (req, res = response) => {
+
+    try {
+        const userId = req.params.id;
+
+        console.log('userId:', userId);
+
+        const plants = await Plant
+            .find({ user: userId })
+            .sort('-createdAt')
+
+
+
+        console.log('plants** ', plants)
+
+
+        res.json({
+            ok: true,
+            plants,
+        })
+
+    }
+
+    catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: 'Hable con el administrador'
+        });
+    }
+
+}
 const deletePlant = async (req, res = response) => {
 
 
@@ -294,6 +328,7 @@ module.exports = {
     editPlant,
     getPlantById,
     getPlantsByRoom,
+    getPlantsByUser,
     deletePlant
 }
 
