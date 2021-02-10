@@ -196,6 +196,40 @@ const getVisitsByPlant = async (req, res = response) => {
 
 }
 
+
+const getVisitsByUser = async (req, res = response) => {
+
+    try {
+        const userId = req.params.id;
+
+        console.log('userId:', userId);
+
+        const visits = await Visit
+            .find({ user: userId })
+            .sort('-createdAt')
+
+
+
+        console.log('visits** ', visits)
+
+
+        res.json({
+            ok: true,
+            visits,
+        })
+
+    }
+
+    catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: 'Hable con el administrador'
+        });
+    }
+
+}
+
 const deleteVisit = async (req, res = response) => {
 
     try {
@@ -234,6 +268,7 @@ module.exports = {
     editVisit,
     getVisitsById,
     getVisitsByPlant,
+    getVisitsByUser,
     deleteVisit
 }
 
