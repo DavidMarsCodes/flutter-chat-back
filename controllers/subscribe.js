@@ -64,17 +64,17 @@ const getSubscribeByClubIdAndSubId = async (req, res = response) => {
     console.log('req.params##: ', req.params)
 
     try {
-        const clubId = req.params.clubId;
+      //  const clubId = req.params.clubId;
 
-        const subId = req.params.subId;
+        const subId = req.params.id;
 
-        console.log('clubId:', clubId);
+      //  console.log('clubId:', clubId);
 
         console.log('subId:', subId);
 
 
         const subscription = await Subscription
-            .findOne({ club: clubId, subscriptor: subId })
+            .findOne({ subscriptor: subId })
            
 
         console.log('subscription by user: ', subscription)
