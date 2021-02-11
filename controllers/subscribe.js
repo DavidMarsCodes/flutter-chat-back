@@ -61,13 +61,12 @@ const createSubscription = async (req, res = response) => {
 
 const getSubscribeByClubIdAndSubId = async (req, res = response) => {
 
-    const { subId,
-        
-        clubId,
-        
-        } = req.body;
+    console.log('req.params##: ', req.params)
+
     try {
-        
+        const clubId = req.params.clubId;
+
+        const subId = req.params.subId;
 
         console.log('clubId:', clubId);
 
