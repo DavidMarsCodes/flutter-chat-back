@@ -15,7 +15,6 @@ const createSubscription = async (req, res = response) => {
         const subscId = subscriptor;
         const clubId = club
 
-        console.log('uid', uid)
 
 
     try {
