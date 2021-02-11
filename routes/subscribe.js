@@ -18,7 +18,7 @@ router.post('/new', [
 ], createSubscription, validateJWT );
 
 
-router.get('subscription/:id', validateJWT, getSubscribeByClubIdAndSubId );
+router.get('/subscription/:id', validateJWT, getSubscribeByClubIdAndSubId );
 
 
 
