@@ -22,7 +22,7 @@ const createSubscription = async (req, res = response) => {
         const subscriptionExit = await Subscription.findOne({ subscriptor: subscId, club: clubId });
 
         console.log('subscriptionExit:', subscriptionExit)
-        if (subscribeExit) {
+        if (subscriptionExit) {
             return res.status(400).json({
                 ok: false,
                 msg: 'Ya tienes un aire con ese nombre'
