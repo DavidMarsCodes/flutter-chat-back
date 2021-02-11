@@ -62,7 +62,7 @@ const createSubscription = async (req, res = response) => {
 
 
 module.exports = {
-    createSubscribe
+    createSubscription
 
 }
 

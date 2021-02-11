@@ -4,7 +4,7 @@
 */
 const { Router } = require('express');
 
-const { createSubscribe } = require('../controllers/subscribe');
+const { createSubscription } = require('../controllers/subscribe');
 const { validateJWT } = require('../middlewares/validar-jwt');
 
 
@@ -15,7 +15,7 @@ const router = Router();
 
 router.post('/new', [
    
-], createSubscribe, validateJWT );
+], createSubscription, validateJWT );
 
 
 
