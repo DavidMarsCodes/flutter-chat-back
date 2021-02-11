@@ -61,6 +61,8 @@ const createSubscription = async (req, res = response) => {
 
 const getSubscribeByClubIdAndSubId = async (req, res = response) => {
 
+    console.log('##req.params##: ', req.params)
+
     try {
         const clubId = req.params.clubId;
 
