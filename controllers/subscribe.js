@@ -64,7 +64,7 @@ const getSubscribeByClubIdAndSubId = async (req, res = response) => {
     console.log('req.params##: ', req.params)
 
     try {
-      //  const clubId = req.params.clubId;
+        const clubId = req.params.club;
 
         const subId = req.params.id;
 
@@ -80,10 +80,35 @@ const getSubscribeByClubIdAndSubId = async (req, res = response) => {
         console.log('subscription by user: ', subscription)
 
 
+        if(!subscription){
+
+            const newSubscription = new Subscription({ 
+                subscriptor: subId,
+                imageRecipe: "",
+                club: clubId,
+                isUpload: false,
+             });
+             console.log('after create: ', newSubscription);
+    
+           const subscription = await newSubscription.save();
+
+
         res.json({
             ok: true,
             subscription,
         })
+        }
+
+        else {
+
+            res.json({
+                ok: true,
+                subscription,
+            })
+        }
+        
+
+
 
     }
 
