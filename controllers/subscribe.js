@@ -59,9 +59,46 @@ const createSubscription = async (req, res = response) => {
     }
 }
 
+const getSubscribeByClubIdAndSubId = async (req, res = response) => {
+
+    try {
+        const clubId = req.params.clubId;
+
+        const subId = req.params.subId;
+
+        console.log('clubId:', clubId);
+
+        console.log('subId:', subId);
+
+
+        const subscription = await Subscription
+            .findOne({ club: clubId, subscriptor: subId })
+           
+
+        console.log('subscription by user: ', subscription)
+
+
+        res.json({
+            ok: true,
+            subscription,
+        })
+
+    }
+
+    catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: 'Hable con el administrador'
+        });
+    }
+
+}
+
 
 module.exports = {
-    createSubscription
+    createSubscription,
+    getSubscribeByClubIdAndSubId
 
 }
 
