@@ -56,7 +56,9 @@ const getProfilesChat = async(req, res) => {
             )
             .then(item => {
 
-                User.findOne({ _id: item.user.uid }
+                console.log('item.user: ', item.user);
+
+                User.findOne({ _id: item.user }
                     )
 
                     .then(user => {
