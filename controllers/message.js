@@ -61,6 +61,11 @@ const getProfilesChat = async(req, res) => {
         Promise.all(promises)
             .then(() => {
                 console.log("promises :", promises);
+
+               return  res.json({
+                    ok: true,
+                    resolve: resolve
+                })
             })
 
     
@@ -70,10 +75,7 @@ const getProfilesChat = async(req, res) => {
   console.log('promises: ', promises)
 
 
-    res.json({
-        ok: true,
-        messages: messages
-    })
+   
 
 } 
 catch (error) {
