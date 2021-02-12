@@ -62,11 +62,8 @@ const getProfilesChat = async(req, res) => {
                     (err, user) => {
 
                         console.log('user', user);
-                        if (err) console.log(err);
-                        else
-        
-                        console.log('item**', item)
-        
+                        
+    
                         const profile = {
                             name: item.name,
                             lastName: item.lastName,
