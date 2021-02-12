@@ -35,12 +35,12 @@ const getProfilesChat = async(req, res) => {
 
     console.log('messages : ',messages);
 
-    userIdList = [];
-    userIdList = Object.values(messages.reduce((acc,cur)=>Object.assign(acc,{[cur.for.toString()]:cur}),{}));
+    messagesUnique = [];
+    messagesUnique = Object.values(messages.reduce((acc,cur)=>Object.assign(acc,{[cur.for.toString()]:cur}),{}));
 
 
-    console.log('userIdList: ', userIdList);
-/*   messages.forEach(function (item) {
+    console.log('userIdList: ', messagesUnique);
+    messagesUnique.forEach(function (item) {
 
     const profiles = [];
 
@@ -48,10 +48,12 @@ const getProfilesChat = async(req, res) => {
 
    if(profile){
 
-    
+    profiles.push(profile);
    }
 
-  }); */
+  });
+
+  console.log('profiles: ', profiles)
 
 
     res.json({
