@@ -24,13 +24,12 @@ const getChat = async(req, res) => {
 
 const getProfilesChat = async(req, res) => {
 
-    const miId = req.uid;
-    const messageBy = req.params.by;
+    const uid = req.params.uid;
 
-    console.log('miId', miId, 'messageBy', messageBy)
+    console.log('uid', uid, )
 
     const messages = await Message.find({
-        $or: [{ by: miId } ]
+        $or: [{ by: uid } ]
     })
     .sort({ createdAt: 'desc' })
 
