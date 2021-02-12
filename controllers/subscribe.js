@@ -13,22 +13,11 @@ const createSubscription = async (req, res = response) => {
 
         console.log('req.body', req.body)
 
-        const subscId = subscriptor;
-        const clubId = club
 
 
 
     try {
 
-        const subscriptionExit = await Subscription.findOne({ subscriptor: subscId, club: clubId });
-
-        console.log('subscriptionExit:', subscriptionExit)
-        if (subscriptionExit) {
-            return res.status(400).json({
-                ok: false,
-                msg: 'Ya tienes un aire con ese nombre'
-            });
-        }
 
         const update = { 
             imageRecipe: imageRecipe,
