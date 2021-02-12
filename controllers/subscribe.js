@@ -89,7 +89,7 @@ const UnSubscription = async (req, res = response) => {
 
         const subscription = await Subscription
         .findOne({ _id: id })
-
+console.log(subscription);
         res.json({
             ok: true,
             subscription,
