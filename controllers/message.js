@@ -55,7 +55,10 @@ const getProfilesChat = async(req, res) => {
             )
             .then(item => {
 
-        
+                User.findOne({ _id: item.user.uid }
+                    )
+
+                    .then(user => {
                     console.log('item**', item)
     
                     const profile = {
@@ -66,10 +69,10 @@ const getProfilesChat = async(req, res) => {
                         about: item.about,
                         id: item._id,
                         user: {
-                            online: item.user.online,
-                            uid: item.user._id,
-                            email: item.user.email,
-                            username: item.user.username,
+                            online: user.online,
+                            uid: user._id,
+                            email: user.email,
+                            username: user.username,
             
                         },
                         message: obj.message,
@@ -80,6 +83,8 @@ const getProfilesChat = async(req, res) => {
     
                         profiles.push(profile);
                         resolve();
+
+                });
                 
             })
             ;
