@@ -51,16 +51,18 @@ const getProfilesChat = async(req, res) => {
         new Promise((resolve, reject) => {
 
             console.log('obj!!', obj);
-           const profile = Profile.findOne({ user: obj.for }, 
+           Profile.findOne({ user: obj.for }, 
             (err, data) => {
                 if (err) console.log(err);
                 else
+
+                console.log('data**', data)
                     resolve();
             });
         }));
         Promise.all(promises)
-            .then(() => {
-                console.log("profile :", profile);
+            .then((resolve) => {
+                console.log("resolve :", resolve);
 
                return  res.json({
                     ok: true,
