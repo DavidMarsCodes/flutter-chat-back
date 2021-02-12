@@ -1,6 +1,7 @@
 
 const Message = require('../models/message');
 const Profile = require('../models/profile');
+const User = require('../models/user');
 
 const getChat = async(req, res) => {
 
