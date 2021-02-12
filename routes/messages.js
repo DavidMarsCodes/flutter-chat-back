@@ -4,7 +4,7 @@
 const { Router } = require('express');
 const { validateJWT } = require('../middlewares/validar-jwt');
 
-const { getChat } = require('../controllers/message');
+const { getChat, getProfilesChat } = require('../controllers/message');
 
 const router = Router();
 
