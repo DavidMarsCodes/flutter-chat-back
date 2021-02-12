@@ -42,13 +42,15 @@ const getProfilesChat = async(req, res) => {
         messagesUnique = Object.values(messages.reduce((acc,cur)=>Object.assign(acc,{[cur.for.toString()]:cur}),{}));
     
     
-        console.log('userIdList: ', messagesUnique);
+        console.log('messagesUnique: ', messagesUnique);
 
         const profiles = [];
 
         const promises = messagesUnique.map((obj) => 
         
         new Promise((resolve, reject) => {
+
+            console.log('obj!!', obj);
             Profile.findOne({ user: obj.for }, 
             (err, data) => {
                 if (err) console.log(err);
@@ -65,7 +67,7 @@ const getProfilesChat = async(req, res) => {
    
   
 
-  console.log('profiles: ', profiles)
+  console.log('promises: ', promises)
 
 
     res.json({
