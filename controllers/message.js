@@ -52,7 +52,7 @@ const getProfilesChat = async(req, res) => {
 
             console.log('obj!!', obj);
            Profile.findOne({ user: obj.for }
-            ).populate('user')
+            )
             .then(item => {
 
         
