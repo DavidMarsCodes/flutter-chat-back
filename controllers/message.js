@@ -52,8 +52,8 @@ const getProfilesChat = async(req, res) => {
         new Promise((resolve, reject) => {
 
             console.log('obj!!', obj);
-           User.findOne({ _id: obj.for }
-            )
+           User.findById(obj.for )
+        
             .then(item => {
 
                 console.log('item: ', item);
