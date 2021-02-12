@@ -60,6 +60,8 @@ const getProfilesChat = async(req, res) => {
                 console.log('item**', item)
                 User.findOne({ _id: obj.for }, 
                     (err, user) => {
+
+                        console.log('user', user);
                         if (err) console.log(err);
                         else
         
