@@ -1,6 +1,6 @@
 
 const Message = require('../models/message');
-const profile = require('../models/profile');
+const Profile = require('../models/profile');
 
 const getChat = async(req, res) => {
 
@@ -24,34 +24,46 @@ const getChat = async(req, res) => {
 
 const getProfilesChat = async(req, res) => {
 
-    const uid = req.params.uid;
 
-    console.log('uid', uid, )
+    try {
 
-    const messages = await Message.find({
-        $or: [{ by: uid } ]
-    })
-    .sort({ createdAt: 'desc' })
+        const uid = req.params.uid;
 
-    console.log('messages : ',messages);
+        console.log('uid', uid, )
+    
+        const messages = await Message.find({
+            $or: [{ by: uid } ]
+        })
+        .sort({ createdAt: 'desc' })
+    
+        console.log('messages : ',messages);
 
-    messagesUnique = [];
-    messagesUnique = Object.values(messages.reduce((acc,cur)=>Object.assign(acc,{[cur.for.toString()]:cur}),{}));
+        messagesUnique = [];
+        messagesUnique = Object.values(messages.reduce((acc,cur)=>Object.assign(acc,{[cur.for.toString()]:cur}),{}));
+    
+    
+        console.log('userIdList: ', messagesUnique);
 
+        const profiles = [];
 
-    console.log('userIdList: ', messagesUnique);
-    messagesUnique.forEach(function (item) {
+        const promises = messagesUnique.map((obj) => 
+        
+        new Promise((resolve, reject) => {
+            Profile.findOne({ user: obj.for }, 
+            (err, data) => {
+                if (err) console.log(err);
+                else
+                    resolve();
+            });
+        }));
+        Promise.all(promises)
+            .then(() => {
+                console.log("promises :", promises);
+            })
 
-    const profiles = [];
-
-   const profile = await Profile.findOne({_id: item.by })
-
-   if(profile){
-
-    profiles.push(profile);
-   }
-
-  });
+    
+   
+  
 
   console.log('profiles: ', profiles)
 
@@ -61,7 +73,16 @@ const getProfilesChat = async(req, res) => {
         messages: messages
     })
 
-}
+} 
+catch (error) {
+
+    res.status(500).json({
+        ok: false,
+        msg: 'Hable con el administrador'
+    });
+
+}}
+
 
 module.exports = {
     getChat,
