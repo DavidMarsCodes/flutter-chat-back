@@ -11,6 +11,9 @@ const router = Router();
 
 router.get('/:by', validateJWT, getChat );
 
+router.get('/messages/:by', getProfilesChat, getChat );
+
+
 module.exports = router;
 
 
