@@ -1,7 +1,6 @@
 
 const Message = require('../models/message');
 const Profile = require('../models/profile');
-const User = require('../models/user');
 
 const getChat = async(req, res) => {
 
@@ -52,48 +51,38 @@ const getProfilesChat = async(req, res) => {
         new Promise((resolve, reject) => {
 
             console.log('obj!!', obj);
-           Profile.findOne({ user: obj.for }, 
-            (err, item) => {
-                if (err) console.log(err);
-                else
+           Profile.findOne({ user: obj.for }
+            ).populate('user')
+            .then(item => {
 
-                console.log('item**', item)
-                User.findOne({ id: obj.for }, 
-                    (err, user) => {
-
-                      
-                        
-                        if  (err){ console.log(err) }
-                        else {
-
-                            console.log('user', user);
-                        const profile = {
-                            name: item.name,
-                            lastName: item.lastName,
-                            imageHeader: item.imageHeader,
-                            imageAvatar: item.imageAvatar,
-                            about: item.about,
-                            id: item._id,
-                            user: {
-                                online: user.online,
-                                uid: user._id,
-                                email: user.email,
-                                username: user.username,
-                
-                            },
-                            message: obj.message,
-                            createdAt: item.createdAt,
-                            updatedAt: item.updatedAt
-                
-                        }
         
-                            profiles.push(profile);
-                            resolve();
-
+                    console.log('item**', item)
+    
+                    const profile = {
+                        name: item.name,
+                        lastName: item.lastName,
+                        imageHeader: item.imageHeader,
+                        imageAvatar: item.imageAvatar,
+                        about: item.about,
+                        id: item._id,
+                        user: {
+                            online: item.user.online,
+                            uid: item.user._id,
+                            email: item.user.email,
+                            username: item.user.username,
+            
+                        },
+                        message: obj.message,
+                        createdAt: item.createdAt,
+                        updatedAt: item.updatedAt
+            
                     }
-                    })
+    
+                        profiles.push(profile);
+                        resolve();
+                
             })
-           
+            ;
         }));
         Promise.all(promises)
             .then((resolve) => {
