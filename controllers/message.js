@@ -52,17 +52,42 @@ const getProfilesChat = async(req, res) => {
         new Promise((resolve, reject) => {
 
             console.log('obj!!', obj);
-           User.findById(obj.for )
-        
+           Profile.findOne({ user: obj.for }
+            )
             .then(item => {
 
-                console.log('item: ', item);
+                console.log('messagesUnique: ', messagesUnique);
 
+                User.findById(obj.for 
+                    )
+
+                    .then(user => {
+                    console.log('item**', item)
+    
+                    const profile = {
+                        name: item.name,
+                        lastName: item.lastName,
+                        imageHeader: item.imageHeader,
+                        imageAvatar: item.imageAvatar,
+                        about: item.about,
+                        id: item._id,
+                        user: {
+                            online: user.online,
+                            uid: user._id,
+                            email: user.email,
+                            username: user.username,
             
-                   
+                        },
+                        message: obj.message,
+                        createdAt: item.createdAt,
+                        updatedAt: item.updatedAt
+            
+                    }
+    
+                        profiles.push(profile);
                         resolve();
 
-                
+                });
                 
             })
             ;
