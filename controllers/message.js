@@ -61,10 +61,12 @@ const getProfilesChat = async(req, res) => {
                 User.findOne({ id: obj.for }, 
                     (err, user) => {
 
-                        console.log('user', user);
+                      
                         
-                        if (err) console.log(err);
-                        else
+                        if  (err){ console.log(err) }
+                        else {
+
+                            console.log('user', user);
                         const profile = {
                             name: item.name,
                             lastName: item.lastName,
@@ -87,6 +89,8 @@ const getProfilesChat = async(req, res) => {
         
                             profiles.push(profile);
                             resolve();
+
+                    }
                     })
             })
            
