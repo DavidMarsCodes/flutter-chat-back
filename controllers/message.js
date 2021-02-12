@@ -78,9 +78,11 @@ const getProfilesChat = async(req, res) => {
         
                 }
 
-                profiles.push(profile);
+                    profiles.push(profile);
                     resolve();
-            });
+            })
+            .limit(10)
+            .populate('user');
         }));
         Promise.all(promises)
             .then((resolve) => {
