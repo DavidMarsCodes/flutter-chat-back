@@ -57,16 +57,19 @@ const getProfilesChat = async(req, res) => {
                 else
 
                 console.log('data**', data)
+
+                profiles.push(data);
                     resolve();
             });
         }));
         Promise.all(promises)
             .then((resolve) => {
-                console.log("resolve :", resolve);
+                
 
+                console.log('profiles!!', profiles)
                return  res.json({
                     ok: true,
-                    resolve: profile
+                    profiles: profiles
                 })
             })
 
