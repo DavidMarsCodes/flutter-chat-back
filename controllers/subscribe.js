@@ -5,6 +5,7 @@ const Subscription = require('../models/subscription');
 
 const createSubscription = async (req, res = response) => {
     const { subscriptor,
+        id,
         imageRecipe,
         club,
         isUpload,
@@ -29,19 +30,25 @@ const createSubscription = async (req, res = response) => {
             });
         }
 
-        const newSubscription = new Subscription({ 
-            subscriptor: subscriptor,
+        const update = { 
             imageRecipe: imageRecipe,
-            club: club,
-            isUpload: isUpload,
-         });
-         console.log('after create: ', newSubscription);
-
-       const subscription = await newSubscription.save();
+            isUpload: true,
+         };
+         console.log('after create: ', update);
 
 
+   await Subscription.updateOne(
+        {
+            _id: id
+        },
+        {
+            $set: update
+        }
+    );
 
-        console.log('subscription create: ', subscription);
+
+        const subscription = await Subscription
+        .findOne({ _id: id })
 
         res.json({
             ok: true,
