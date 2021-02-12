@@ -34,6 +34,12 @@ const getProfilesChat = async(req, res) => {
     .sort({ createdAt: 'desc' })
 
     console.log('messages : ',messages);
+
+    userIdList = [];
+    userIdList = Object.values(messages.reduce((acc,cur)=>Object.assign(acc,{[cur.for.toString()]:cur}),{}));
+
+
+    console.log('userIdList: ', userIdList);
 /*   messages.forEach(function (item) {
 
     const profiles = [];
