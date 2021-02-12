@@ -37,6 +37,7 @@ const getSearchPrincipalByQuery = async (req, res = response) => {
         const profile = {
             name: item.name,
             lastName: item.lastName,
+            about: item.about,
             imageHeader: item.imageHeader,
             imageAvatar: item.imageAvatar,
             id: item._id,
