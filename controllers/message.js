@@ -52,9 +52,7 @@ const getProfilesChat = async(req, res) => {
 
             console.log('obj!!', obj);
            Profile.findOne({ user: obj.for }, 
-           )
-            .limit(10)
-            .populate('user',  (err, item) => {
+            (err, item) => {
                 if (err) console.log(err);
                 else
 
@@ -82,7 +80,9 @@ const getProfilesChat = async(req, res) => {
 
                     profiles.push(profile);
                     resolve();
-            });
+            })
+            .limit(10)
+            .populate('user');
         }));
         Promise.all(promises)
             .then((resolve) => {
