@@ -57,32 +57,38 @@ const getProfilesChat = async(req, res) => {
                 else
 
                 console.log('item**', item)
-
-                const profile = {
-                    name: item.name,
-                    lastName: item.lastName,
-                    imageHeader: item.imageHeader,
-                    imageAvatar: item.imageAvatar,
-                    about: item.about,
-                    id: item._id,
-                    user: {
-                        online: item.user.online,
-                        uid: item.user._id,
-                        email: item.user.email,
-                        username: item.user.username,
+                User.findOne({ _id: obj.for }, 
+                    (err, user) => {
+                        if (err) console.log(err);
+                        else
         
-                    },
-                    message: obj.message,
-                    createdAt: item.createdAt,
-                    updatedAt: item.updatedAt
+                        console.log('item**', item)
         
-                }
-
-                    profiles.push(profile);
-                    resolve();
+                        const profile = {
+                            name: item.name,
+                            lastName: item.lastName,
+                            imageHeader: item.imageHeader,
+                            imageAvatar: item.imageAvatar,
+                            about: item.about,
+                            id: item._id,
+                            user: {
+                                online: user.online,
+                                uid: user._id,
+                                email: user.email,
+                                username: user.username,
+                
+                            },
+                            message: obj.message,
+                            createdAt: item.createdAt,
+                            updatedAt: item.updatedAt
+                
+                        }
+        
+                            profiles.push(profile);
+                            resolve();
+                    })
             })
-            .limit(10)
-            .populate('user');
+           
         }));
         Promise.all(promises)
             .then((resolve) => {
