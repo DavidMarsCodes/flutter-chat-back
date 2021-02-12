@@ -28,6 +28,13 @@ const SubscriptionSchema = Schema({
         type: Boolean,
         required: false,
         default: false
+    },
+
+    subscribeActive:
+    {
+        type: Boolean,
+        required: false,
+        default: false
     }
 
 },

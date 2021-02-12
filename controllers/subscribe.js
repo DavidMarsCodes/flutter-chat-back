@@ -3,7 +3,7 @@ const Subscription = require('../models/subscription');
 
 
 
-const createSubscription = async (req, res = response) => {
+const UpdateImageSubscription = async (req, res = response) => {
     const { subscriptor,
         id,
         imageRecipe,
@@ -22,6 +22,7 @@ const createSubscription = async (req, res = response) => {
         const update = { 
             imageRecipe: imageRecipe,
             isUpload: true,
+            subscribeActive: true
          };
          console.log('after create: ', update);
 
@@ -54,6 +55,57 @@ const createSubscription = async (req, res = response) => {
         });
     }
 }
+
+const UnSubscription = async (req, res = response) => {
+    const { 
+        id,
+     
+        } = req.body;
+
+        console.log('req.body', req.body)
+
+
+
+
+    try {
+
+
+        const update = { 
+            subscribeActive: false,
+           
+         };
+         console.log('after create: ', update);
+
+
+   await Subscription.updateOne(
+        {
+            _id: id
+        },
+        {
+            $set: update
+        }
+    );
+
+
+        const subscription = await Subscription
+        .findOne({ _id: id })
+
+        res.json({
+            ok: true,
+            subscription,
+
+        });
+
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: 'Hable con el administrador'
+        });
+    }
+}
+
 
 const getSubscribeByClubIdAndSubId = async (req, res = response) => {
 
@@ -120,7 +172,8 @@ const getSubscribeByClubIdAndSubId = async (req, res = response) => {
 
 
 module.exports = {
-    createSubscription,
+    UpdateImageSubscription,
+    UnSubscription,
     getSubscribeByClubIdAndSubId
 
 }
