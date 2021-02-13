@@ -91,6 +91,8 @@ const auth =  new AppleAuth(
             username:  user.username,
 
           },
+          messageDate: profileFind.createdAt,
+
           createdAt: profileFind.createdAt,
           updatedAt:profileFind.updatedAt
 
@@ -150,6 +152,8 @@ const auth =  new AppleAuth(
         username:  newUser.username,
 
       },
+      messageDate: profileFind.createdAt,
+
       createdAt: profileFind.createdAt,
       updatedAt:profileFind.updatedAt
 

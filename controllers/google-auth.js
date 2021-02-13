@@ -72,6 +72,8 @@ console.log(email)
               username:  user.username,
            
             },
+            messageDate: profileFind.createdAt,
+
             createdAt: profileFind.createdAt,
             updatedAt:profileFind.updatedAt
            
@@ -130,6 +132,8 @@ console.log(email)
           username:  newUser.username,
        
         },
+        messageDate: profileFind.createdAt,
+
         createdAt: profileFind.createdAt,
         updatedAt:profileFind.updatedAt
        
