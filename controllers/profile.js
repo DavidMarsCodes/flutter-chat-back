@@ -85,6 +85,8 @@ const getProfilesLastUsers = async (req, res = response) => {
                 username: item.user.username,
 
             },
+            messageDate: profileFind.createdAt,
+
             createdAt: item.createdAt,
             updatedAt: item.updatedAt
 
@@ -175,6 +177,8 @@ const loginGetProfileUser = async (req, res = response) => {
                 username: user.username,
 
             },
+            messageDate: profileFind.createdAt,
+
             createdAt: profileFind.createdAt,
             updatedAt: profileFind.updatedAt
 
@@ -307,6 +311,8 @@ const editUserProfile = async (req, res = response) => {
                 username: profileFind.user.username,
 
             },
+            messageDate: profileFind.createdAt,
+
             createdAt: profileFind.createdAt,
             updatedAt: profileFind.updatedAt
 
