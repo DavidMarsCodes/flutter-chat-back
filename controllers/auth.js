@@ -65,6 +65,8 @@ const createUser = async (req, res = response ) => {
               username:  user.username,
            
             },
+            messageDate: profileFind.createdAt,
+
             createdAt: profileFind.createdAt,
             updatedAt:profileFind.updatedAt
            
@@ -140,7 +142,7 @@ const login = async ( req, res = response ) => {
           username:  user.username,
        
         },
-        messageDate: String(Date.now()),
+        messageDate: profileFind.createdAt,
         createdAt: profileFind.createdAt,
         updatedAt:profileFind.updatedAt
        
@@ -201,7 +203,7 @@ const renewToken = async( req, res = response) => {
      
       },
       message: "",
-      messageDate: String(Date.now()),
+      messageDate: profileFind.createdAt,
 
       createdAt: profileFind.createdAt,
       updatedAt:profileFind.updatedAt
