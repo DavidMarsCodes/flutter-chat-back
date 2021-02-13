@@ -9,6 +9,7 @@ const UpdateImageSubscription = async (req, res = response) => {
         imageRecipe,
         club,
         isUpload,
+        uid,
         } = req.body;
 
         console.log('req.body', req.body)
@@ -36,6 +37,22 @@ const UpdateImageSubscription = async (req, res = response) => {
         }
     );
 
+
+    const profileUpdate = await
+
+
+    Profile.updateOne(
+        {
+            user: uid
+        },
+        {
+            $set: {
+                imageRecipe: imageRecipe,
+                
+
+            }
+        }
+    );
 
         const subscription = await Subscription
         .findOne({ _id: id })

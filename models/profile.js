@@ -25,6 +25,12 @@ const ProfileSchema = Schema({
         
     },
 
+    imageRecipe: {
+        type: String,
+        default: '',
+        
+    },
+
     about: {
         type: String,
         default: '',
