@@ -10,7 +10,7 @@ const router = Router();
 
 
 
-router.get('/profiles/subscriptions:uid', getProfilesSubscribe, validateJWT );
+router.get('/profiles/subscriptions/:uid', getProfilesSubscribe, validateJWT );
 
 
 module.exports = router;
