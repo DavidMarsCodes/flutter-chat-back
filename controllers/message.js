@@ -79,6 +79,7 @@ const getProfilesChat = async(req, res) => {
             
                         },
                         message: obj.message,
+                        messageDate: onrejectionhandled.createdAt,
                         createdAt: item.createdAt,
                         updatedAt: item.updatedAt
             
