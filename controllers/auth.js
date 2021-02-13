@@ -140,7 +140,7 @@ const login = async ( req, res = response ) => {
           username:  user.username,
        
         },
-        messageDate: Date.now(),
+        messageDate: String(Date.now()),
         createdAt: profileFind.createdAt,
         updatedAt:profileFind.updatedAt
        
@@ -201,7 +201,7 @@ const renewToken = async( req, res = response) => {
      
       },
       message: "",
-      messageDate: Date.now(),
+      messageDate: String(Date.now()),
 
       createdAt: profileFind.createdAt,
       updatedAt:profileFind.updatedAt
