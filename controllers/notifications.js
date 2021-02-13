@@ -10,10 +10,10 @@ const getProfilesSubscribe = async(req, res) => {
 
         const uid = req.params.uid;
 
-        console.log('uid', uid, )
+        console.log('uid**', uid, )
     
         const subscription = await Subscription
-            .findOne({ subscriptor: subId, subscribeAccepted: false, isUpload: true })
+            .find({ club: uid, subscribeAccepted: false, isUpload: true })
         .sort({ createdAt: 'asc' })
     
         console.log('subscription : ',subscription);
