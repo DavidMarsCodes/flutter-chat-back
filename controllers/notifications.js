@@ -29,12 +29,12 @@ const getProfilesSubscribe = async(req, res) => {
         new Promise((resolve, reject) => {
 
             console.log('obj!!', obj);
-           Profile.findOne({ user: obj.for }
+           Profile.findOne({ user: obj.subscriptor }
             )
             .then(item => {
 
 
-                User.findById(obj.for 
+                User.findById(obj.subscriptor 
                     )
 
                     .then(user => {
