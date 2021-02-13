@@ -85,7 +85,7 @@ const getProfilesLastUsers = async (req, res = response) => {
                 username: item.user.username,
 
             },
-            messageDate: profileFind.createdAt,
+            messageDate: item.createdAt,
 
             createdAt: item.createdAt,
             updatedAt: item.updatedAt
