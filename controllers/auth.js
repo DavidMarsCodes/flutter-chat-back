@@ -200,6 +200,7 @@ const renewToken = async( req, res = response) => {
         username:  user.username,
      
       },
+      message: "",
       messageDate: Date.now(),
 
       createdAt: profileFind.createdAt,
