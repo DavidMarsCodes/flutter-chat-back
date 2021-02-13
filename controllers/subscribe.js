@@ -147,12 +147,14 @@ const getSubscribeByClubIdAndSubId = async (req, res = response) => {
 
         console.log('subscription by user: ', subscription)
 
+        const profile = await Profile
+        .findOne({ user: subId })
 
         if(!subscription){
 
             const newSubscription = new Subscription({ 
                 subscriptor: subId,
-                imageRecipe: "",
+                imageRecipe: profile? profile.imageRecipe : "",
                 club: clubId,
                 isUpload: false,
              });
