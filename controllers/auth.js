@@ -182,7 +182,7 @@ const renewToken = async( req, res = response) => {
   .populate('user')
 
 
-  console.log('profileFind!!', profileFind);
+  console.log('profileFind???!!', profileFind);
 
   
   const profile = {
@@ -207,6 +207,8 @@ const renewToken = async( req, res = response) => {
       updatedAt:profileFind.updatedAt
      
     }
+
+    console.log(profile);
 
     res.json({
         ok: true,
