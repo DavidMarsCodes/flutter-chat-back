@@ -60,6 +60,7 @@ app.use( '/api/search', require('./routes/search'));
 
 app.use( '/api/aws', require('./routes/aws'));
 app.use( '/api/subscription', require('./routes/subscribe'));
+app.use( '/api/notification', require('./routes/notifications'));
 
 
 

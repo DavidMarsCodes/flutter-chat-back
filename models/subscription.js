@@ -35,6 +35,13 @@ const SubscriptionSchema = Schema({
         type: Boolean,
         required: false,
         default: false
+    },
+
+    subscribeAccepted:
+    {
+        type: Boolean,
+        required: false,
+        default: false
     }
 
 },

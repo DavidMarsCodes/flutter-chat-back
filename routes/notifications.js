@@ -4,14 +4,13 @@
 const { Router } = require('express');
 const { validateJWT } = require('../middlewares/validar-jwt');
 
-const { getChat, getProfilesChat } = require('../controllers/message');
+const { getProfilesSubscribe } = require('../controllers/notifications');
 
 const router = Router();
 
 
-router.get('/:by', validateJWT, getChat );
 
-router.get('/profiles/:uid', getProfilesChat, validateJWT );
+router.get('/profiles/subscriptions:uid', getProfilesSubscribe, validateJWT );
 
 
 module.exports = router;
