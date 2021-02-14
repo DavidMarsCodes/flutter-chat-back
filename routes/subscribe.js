@@ -4,7 +4,7 @@
 */
 const { Router } = require('express');
 
-const { UpdateImageSubscription, getSubscribeByClubIdAndSubId, UnSubscription } = require('../controllers/subscribe');
+const { UpdateImageSubscription, getSubscribeByClubIdAndSubId, UnSubscription, disapproveSubscription } = require('../controllers/subscribe');
 const { validateJWT } = require('../middlewares/validar-jwt');
 
 
@@ -23,9 +23,12 @@ router.post('/unsubscribe', [
 ], UnSubscription, validateJWT );
 
 
+
 router.get('/subscription/:id/:club', validateJWT, getSubscribeByClubIdAndSubId );
 
-
+router.post('/disapprove/:id', [
+   
+], disapproveSubscription, validateJWT );
 
 
 module.exports = router;
