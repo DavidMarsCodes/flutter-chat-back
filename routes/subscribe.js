@@ -26,7 +26,7 @@ router.post('/unsubscribe', [
 
 router.get('/subscription/:id/:club', validateJWT, getSubscribeByClubIdAndSubId );
 
-router.post('/disapprove/:id', [
+router.post('/disapprove', [
    
 ], disapproveSubscription, validateJWT );
 
