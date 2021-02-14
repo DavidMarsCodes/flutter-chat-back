@@ -59,6 +59,7 @@ const getProfilesSubscribe = async(req, res) => {
                         messageDate: obj.createdAt,
 
                         subscribeActive: obj.subscribeActive,
+                        subId: obj._id,
                         isUpload: obj.isUpload,
                         createdAt: item.createdAt,
                         updatedAt: item.updatedAt
