@@ -212,7 +212,7 @@ const disapproveSubscription = async (req, res = response) => {
             subscribeApproved :false
            
          };
-         console.log('after create: ', update);
+         console.log('after update sub: ', update);
 
 
    await Subscription.updateOne(
