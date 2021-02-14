@@ -13,7 +13,7 @@ const getProfilesSubscribe = async(req, res) => {
         console.log('uid**', uid, )
     
         const subscription = await Subscription
-            .find({ club: uid, subscribeAccepted: false, isUpload: true })
+            .find({ club: uid, subscribeApproved: false, isUpload: true, subscribeActive: true })
         .sort({ createdAt: 'asc' })
     
         console.log('subscription : ',subscription);
@@ -59,6 +59,7 @@ const getProfilesSubscribe = async(req, res) => {
                         messageDate: obj.createdAt,
 
                         subscribeActive: obj.subscribeActive,
+                        subscribeApproved: obj.subscribeApproved,
                         subId: obj._id,
                         isUpload: obj.isUpload,
                         createdAt: item.createdAt,
@@ -104,7 +105,59 @@ catch (error) {
 
 }}
 
+const disapproveSubscription = async (req, res = response) => {
+    const { 
+        id,
+     
+        } = req.body;
+
+        console.log('req.body', req.body)
+
+
+
+
+    try {
+
+
+        const update = { 
+            subscribeActive: false,
+            subscribeApproved :false
+           
+         };
+         console.log('after create: ', update);
+
+
+   await Subscription.updateOne(
+        {
+            _id: id
+        },
+        {
+            $set: update
+        }
+    );
+
+
+        const subscription = await Subscription
+        .findOne({ _id: id })
+console.log(subscription);
+        res.json({
+            ok: true,
+            subscription,
+
+        });
+
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: 'Hable con el administrador'
+        });
+    }
+}
+
 
 module.exports = {
-    getProfilesSubscribe
+    getProfilesSubscribe,
+    disapproveSubscription
 }

@@ -37,7 +37,7 @@ const SubscriptionSchema = Schema({
         default: false
     },
 
-    subscribeAccepted:
+    subscribeApproved:
     {
         type: Boolean,
         required: false,

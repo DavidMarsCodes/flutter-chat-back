@@ -156,6 +156,7 @@ const getSubscribeByClubIdAndSubId = async (req, res = response) => {
                 subscriptor: subId,
                 imageRecipe: profile? profile.imageRecipe : "",
                 club: clubId,
+                subscribeActive: true,
                 isUpload: false,
              });
              console.log('after create: ', newSubscription);
