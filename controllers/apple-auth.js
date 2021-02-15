@@ -91,6 +91,8 @@ const auth =  new AppleAuth(
             username:  user.username,
 
           },
+          isClub: profileFind.isClub,
+
           messageDate: profileFind.createdAt,
 
           createdAt: profileFind.createdAt,
@@ -152,6 +154,8 @@ const auth =  new AppleAuth(
         username:  newUser.username,
 
       },
+      isClub: profileFind.isClub,
+
       messageDate: profileFind.createdAt,
 
       createdAt: profileFind.createdAt,

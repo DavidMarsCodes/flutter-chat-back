@@ -66,6 +66,8 @@ const createUser = async (req, res = response ) => {
            
             },
             messageDate: profileFind.createdAt,
+            isClub: profileFind.isClub,
+
 
             createdAt: profileFind.createdAt,
             updatedAt:profileFind.updatedAt
@@ -142,6 +144,8 @@ const login = async ( req, res = response ) => {
           username:  user.username,
        
         },
+        isClub: profileFind.isClub,
+
         messageDate: profileFind.createdAt,
         createdAt: profileFind.createdAt,
         updatedAt:profileFind.updatedAt
@@ -203,6 +207,8 @@ const renewToken = async( req, res = response) => {
      
       },
       message: "",
+      isClub: profileFind.isClub,
+
       messageDate: profileFind.createdAt,
 
       createdAt: profileFind.createdAt,

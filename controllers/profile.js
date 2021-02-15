@@ -78,6 +78,7 @@ const getProfilesLastUsers = async (req, res = response) => {
             imageAvatar: item.imageAvatar,
             about: item.about,
             id: item._id,
+            isClub: item.isClub,
             user: {
                 online: item.user.online,
                 uid: item.user._id,
@@ -169,6 +170,8 @@ const loginGetProfileUser = async (req, res = response) => {
             imageHeader: profileFind.imageHeader,
             imageAvatar: profileFind.imageAvatar,
             id: profileFind._id,
+            isClub: profileFind.isClub,
+
             rooms: profileFind.rooms,
             user: {
                 online: user.online,
@@ -304,6 +307,8 @@ const editUserProfile = async (req, res = response) => {
             imageHeader: profileFind.imageHeader,
             imageAvatar: profileFind.imageAvatar,
             id: profileFind._id,
+            isClub: profileFind.isClub,
+
             user: {
                 online: profileFind.user.online,
                 uid: uid,

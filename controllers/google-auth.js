@@ -72,6 +72,8 @@ console.log(email)
               username:  user.username,
            
             },
+            isClub: profileFind.isClub,
+
             messageDate: profileFind.createdAt,
 
             createdAt: profileFind.createdAt,
@@ -132,6 +134,8 @@ console.log(email)
           username:  newUser.username,
        
         },
+        isClub: profileFind.isClub,
+
         messageDate: profileFind.createdAt,
 
         createdAt: profileFind.createdAt,
