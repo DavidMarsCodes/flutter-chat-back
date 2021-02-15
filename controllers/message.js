@@ -56,7 +56,7 @@ const getProfilesChat = async(req, res) => {
         new Promise((resolve, reject) => {
 
             console.log('obj!!', obj);
-           Profile.findOne({ user: obj.by }
+           Profile.findOne({ user: obj.for }
             )
             .sort({ updateAt: 'asc' })
             .then(item => {
@@ -64,13 +64,13 @@ const getProfilesChat = async(req, res) => {
 
                 console.log('messagesUnique: ', messagesUnique);
 
-                User.findById(obj.by 
+                User.findById(obj.for 
                     )
 
                     .then(user => {
                     
                     Subscription.findOne({
-                         subscriptor: obj.by
+                         subscriptor: obj.for
                     })
                     .then((subscription) => {
 
