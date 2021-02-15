@@ -33,7 +33,7 @@ const getProfilesChat = async(req, res) => {
         console.log('uid', uid, )
     
         const messages = await Message.find({
-            $or: [{ by: uid  } ], for: uid
+            $or: [{ by: uid  } ], $or: [{ for: uid  } ]
         })
         .sort({ createdAt: 'asc' })
     
