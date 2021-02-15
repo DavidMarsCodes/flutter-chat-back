@@ -52,13 +52,13 @@ const getProfilesChat = async(req, res) => {
         new Promise((resolve, reject) => {
 
             console.log('obj!!', obj);
-           Profile.findOne({ user: obj.for }
+           Profile.findOne({ user: obj.by }
             )
             .then(item => {
 
                 console.log('messagesUnique: ', messagesUnique);
 
-                User.findById(obj.for 
+                User.findById(obj.by 
                     )
 
                     .then(user => {
