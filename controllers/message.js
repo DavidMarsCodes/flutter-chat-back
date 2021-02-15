@@ -34,7 +34,7 @@ const getProfilesChat = async(req, res) => {
         console.log('uid', uid, )
     
         const messages = await Message.find({
-            $or: [{ by: uid  } ], $or: [{ for: uid  } ]
+            $or: [{ by: uid  }, { for: uid } ]
         })
 
         
@@ -76,7 +76,7 @@ const getProfilesChat = async(req, res) => {
 
                         console.log('subscription :', subscription)
 
-                        const subscribeApproved =  (subscription)? subscription.subscribeApproved : false;
+                        const subscribeApproved = (subscription)? subscription.subscribeApproved : false;
                 
                         console.log('subscribeApproved :', subscribeApproved)
     
