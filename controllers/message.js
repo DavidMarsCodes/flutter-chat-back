@@ -59,7 +59,6 @@ const getProfilesChat = async(req, res) => {
 
             if(obj.for != uid){
 
-            console.log('obj!!', obj);
            Profile.findOne({ user: obj.for }
             )
             .sort({ updateAt: 'asc' })
@@ -120,7 +119,7 @@ const getProfilesChat = async(req, res) => {
         }
 
         else {
-
+            resolve();
             return;
         }
             ;
