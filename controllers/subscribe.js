@@ -8,8 +8,8 @@ const UpdateImageSubscription = async (req, res = response) => {
     const { subscriptor,
         id,
         imageRecipe,
-        club,
-        isUpload,
+       
+     
         
         } = req.body;
 
