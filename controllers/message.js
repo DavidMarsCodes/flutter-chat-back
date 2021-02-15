@@ -53,7 +53,11 @@ const getProfilesChat = async(req, res) => {
 
         const promises = messagesUnique.map((obj) => 
         
+        
         new Promise((resolve, reject) => {
+
+
+            if(obj.for != uid){
 
             console.log('obj!!', obj);
            Profile.findOne({ user: obj.for }
@@ -112,6 +116,13 @@ const getProfilesChat = async(req, res) => {
                 });
                 
             })
+
+        }
+
+        else {
+
+            return;
+        }
             ;
         }));
         Promise.all(promises)
