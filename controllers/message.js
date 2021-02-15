@@ -54,6 +54,7 @@ const getProfilesChat = async(req, res) => {
             console.log('obj!!', obj);
            Profile.findOne({ user: obj.by }
             )
+            .sort({ createdAt: 'asc' })
             .then(item => {
 
                 console.log('messagesUnique: ', messagesUnique);
