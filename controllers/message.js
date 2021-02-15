@@ -70,17 +70,14 @@ const getProfilesChat = async(req, res) => {
                     console.log('item**', item)
 
                     Subscription.findOne({
-                        $or: [{ subscriptor: uid  } ], $or: [{ club: uid  } ]
+                        $or: [{ subscriptor: obj.by  } ], $or: [{ club: obj.by  } ]
                     })
                     .then((subscription) => {
 
                         console.log('subscription :', subscription)
 
-
-
                         const subscribeApproved =  (subscription)? subscription.subscribeApproved : false;
-                    
-    
+                
                         console.log('subscribeApproved :', subscribeApproved)
     
     
