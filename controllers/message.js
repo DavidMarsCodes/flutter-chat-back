@@ -37,15 +37,10 @@ const getProfilesChat = async(req, res) => {
             $or: [{ by: uid  } ], $or: [{ for: uid  } ]
         })
 
-        const subscription = await Subscription.findOne({
-            $or: [{ subscriptor: uid  } ], $or: [{ club: uid  } ]
-        })
+        
         
 
-        console.log('subscription :', subscription)
-
-        const subscriptionApprove =  (subscription)? subscription.subscriptionApprove : false;
-    
+     
         console.log('messages : ',messages);
 
         messagesUnique = [];
@@ -73,31 +68,48 @@ const getProfilesChat = async(req, res) => {
 
                     .then(user => {
                     console.log('item**', item)
+
+                    const subscription = await Subscription.findOne({
+                        $or: [{ subscriptor: uid  } ], $or: [{ club: uid  } ]
+                    })
+                    .then(() => {
+
+
+                        console.log('subscription :', subscription)
+
+                        const subscriptionApprove =  (subscription)? subscription.subscriptionApprove : false;
+                    
     
-                    const profile = {
-                        name: item.name,
-                        lastName: item.lastName,
-                        imageHeader: item.imageHeader,
-                        imageAvatar: item.imageAvatar,
-                        about: item.about,
-                        id: item._id,
-                        user: {
-                            online: user.online,
-                            uid: user._id,
-                            email: user.email,
-                            username: user.username,
-            
-                        },
-                        subscriptionApprove: subscriptionApprove,
-                        message: obj.message,
-                        messageDate: obj.createdAt,
-                        createdAt: item.createdAt,
-                        updatedAt: item.updatedAt
-            
-                    }
+                        console.log('subscriptionApprove :', subscriptionApprove)
     
-                        profiles.push(profile);
-                        resolve();
+    
+                        const profile = {
+                            name: item.name,
+                            lastName: item.lastName,
+                            imageHeader: item.imageHeader,
+                            imageAvatar: item.imageAvatar,
+                            about: item.about,
+                            id: item._id,
+                            user: {
+                                online: user.online,
+                                uid: user._id,
+                                email: user.email,
+                                username: user.username,
+                
+                            },
+                            subscriptionApprove: subscriptionApprove,
+                            message: obj.message,
+                            messageDate: obj.createdAt,
+                            createdAt: item.createdAt,
+                            updatedAt: item.updatedAt
+                
+                        }
+        
+                            profiles.push(profile);
+                            resolve();
+                    })
+    
+
 
                 });
                 
