@@ -78,10 +78,10 @@ const getProfilesChat = async(req, res) => {
 
 
 
-                        const subscriptionApprove =  (subscription)? subscription.subscriptionApprove : false;
+                        const subscribeApproved =  (subscription)? subscription.subscribeApproved : false;
                     
     
-                        console.log('subscriptionApprove :', subscriptionApprove)
+                        console.log('subscribeApproved :', subscribeApproved)
     
     
                         const profile = {
@@ -98,7 +98,7 @@ const getProfilesChat = async(req, res) => {
                                 username: user.username,
                 
                             },
-                            subscriptionApprove: subscriptionApprove,
+                            subscribeApproved: subscribeApproved,
                             message: obj.message,
                             messageDate: obj.createdAt,
                             createdAt: item.createdAt,
