@@ -69,7 +69,7 @@ const getProfilesChat = async(req, res) => {
                     .then(user => {
                     console.log('item**', item)
 
-                    Subscription.findOne({
+                    Subscription.find({
                         $or: [{ subscriptor: obj.by  } ], $or: [{ club: obj.by  } ]
                     })
                     .then((subscription) => {
