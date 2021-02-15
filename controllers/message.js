@@ -35,14 +35,14 @@ const getProfilesChat = async(req, res) => {
         const messages = await Message.find({
             $or: [{ by: uid  } ], $or: [{ for: uid  } ]
         })
-        .sort({ createdAt: 'asc' })
+        .sort({ updateAt: 'asc' })
     
         console.log('messages : ',messages);
 
         messagesUnique = [];
         messagesUnique = Object.values(messages.reduce((acc,cur)=>Object.assign(acc,{[cur.by.toString()]:cur}),{}));
     
-    
+
         console.log('messagesUnique: ', messagesUnique);
 
         const profiles = [];
@@ -54,7 +54,7 @@ const getProfilesChat = async(req, res) => {
             console.log('obj!!', obj);
            Profile.findOne({ user: obj.by }
             )
-            .sort({ createdAt: 'asc' })
+            .sort({ updateAt: 'asc' })
             .then(item => {
 
                 console.log('messagesUnique: ', messagesUnique);
