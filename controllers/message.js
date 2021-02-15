@@ -60,6 +60,7 @@ const getProfilesChat = async(req, res) => {
             )
             .sort({ updateAt: 'asc' })
             .then(item => {
+                console.log('item**', item)
 
                 console.log('messagesUnique: ', messagesUnique);
 
@@ -67,10 +68,9 @@ const getProfilesChat = async(req, res) => {
                     )
 
                     .then(user => {
-                    console.log('item**', item)
-
-                    Subscription.find({
-                        $or: [{ subscriptor: obj.by  } ], $or: [{ club: obj.by  } ]
+                    
+                    Subscription.findOne({
+                         subscriptor: obj.by
                     })
                     .then((subscription) => {
 
