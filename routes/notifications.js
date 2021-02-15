@@ -12,7 +12,7 @@ const router = Router();
 
 router.get('/profiles/subscriptions/:uid', getProfilesSubscriptorsByClub, validateJWT );
 
-router.get('/profiles/subscriptions/:subId', getClubSubscriptionBySubid, validateJWT );
+router.get('/profiles/subscriptions/:subid', getClubSubscriptionBySubid, validateJWT );
 
 
 module.exports = router;
