@@ -136,7 +136,7 @@ const getSubscribeByClubIdAndSubId = async (req, res = response) => {
 
         const subId = req.params.id;
 
-      //  console.log('clubId:', clubId);
+      console.log('clubId:', clubId);
 
         console.log('subId:', subId);
 
