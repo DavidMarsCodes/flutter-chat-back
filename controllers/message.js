@@ -1,6 +1,7 @@
 
 const Message = require('../models/message');
 const Profile = require('../models/profile');
+const Subscription = require('../models/subscription');
 const User = require('../models/user');
 
 const getChat = async(req, res) => {
@@ -35,7 +36,15 @@ const getProfilesChat = async(req, res) => {
         const messages = await Message.find({
             $or: [{ by: uid  } ], $or: [{ for: uid  } ]
         })
-        .sort({ updateAt: 'asc' })
+
+        const subscription = await Subscription.findOne({
+            $or: [{ subscriptor: uid  } ], $or: [{ club: uid  } ]
+        })
+        
+
+        console.log('subscription :', subscription)
+
+        const subscriptionApprove =  (subscription)? subscription.subscriptionApprove : false;
     
         console.log('messages : ',messages);
 
@@ -79,6 +88,7 @@ const getProfilesChat = async(req, res) => {
                             username: user.username,
             
                         },
+                        subscriptionApprove: subscriptionApprove,
                         message: obj.message,
                         messageDate: obj.createdAt,
                         createdAt: item.createdAt,

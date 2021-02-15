@@ -16,8 +16,6 @@ const UpdateImageSubscription = async (req, res = response) => {
         console.log('req.body', req.body)
 
 
-
-
     try {
 
 
