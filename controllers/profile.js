@@ -81,7 +81,7 @@ const getProfilesLastUsers = async (req, res = response) => {
 
 
                 Subscription.findOne({
-                    club: item.user.uid
+                    club: item.user._id
                 })
                     .then((subscription) => {
 
