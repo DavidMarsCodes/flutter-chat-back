@@ -10,7 +10,7 @@ const router = Router();
 
 
 
-router.get('/profiles/subscriptions/:uid', getProfilesSubscriptorsByClub, validateJWT );
+router.get('/profiles/subscriptions/approve/:uid', getProfilesSubscriptorsByClub, validateJWT );
 
 router.get('/profiles/subscriptions/sub/:subid', getClubSubscriptionBySubid, validateJWT );
 
