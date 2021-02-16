@@ -31,6 +31,8 @@ const getProfilesSubscriptorsByClub = async(req, res) => {
             .then(item => {
 
 
+                if(item.user._id != uid){
+
                 User.findById(obj.subscriptor 
                     )
 
@@ -68,6 +70,13 @@ const getProfilesSubscriptorsByClub = async(req, res) => {
                         resolve();
 
                 });
+
+            }
+
+            else {
+               
+                resolve();
+            }
                 
             })
             ;
