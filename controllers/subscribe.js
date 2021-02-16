@@ -140,7 +140,7 @@ const getSubscribeByClubIdAndSubId = async (req, res = response) => {
 
 
         const subscription = await Subscription
-            .findOne({ subscriptor: subId })
+            .findOne({ subscriptor: subId, club: clubId })
            
 
         console.log('subscription by user: ', subscription)
