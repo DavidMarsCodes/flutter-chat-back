@@ -69,7 +69,7 @@ const getProfilesLastUsers = async (req, res = response) => {
 
 
 
-        profilesFind.map((item) =>
+        const promises = profilesFind.map((item) =>
 
 
 
@@ -116,13 +116,6 @@ const getProfilesLastUsers = async (req, res = response) => {
                         profiles.push(profile);
                         resolve();
                     })
-
-
-
-
-
-
-
 
 
 
