@@ -68,7 +68,7 @@ const getProfilesChat = async(req, res) => {
                     .then(user => {
                     
                     Subscription.findOne({
-                       subscriptor: obj.for , club: uid 
+                       club: obj.for , subscriptor: uid 
                     })
                     .then((subscription) => {
 
@@ -76,7 +76,7 @@ const getProfilesChat = async(req, res) => {
                         const subscribeApproved = (subscription)? subscription.subscribeApproved : false;
                         const subscribeActive = (subscription)? subscription.subscribeActive : false;
 
-                        
+                        console.log('subscription', subscription)
     
                         const profile = {
                             name: item.name,
