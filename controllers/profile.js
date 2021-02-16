@@ -79,7 +79,7 @@ const getProfilesLastUsers = async (req, res = response) => {
 
 
                 Subscription.findOne({
-                    club: req.uid, $or: [{ subscriptor: item.user._id  } ] 
+                    club: item.user._id,  subscriptor: req.uid
                 })
 
                
