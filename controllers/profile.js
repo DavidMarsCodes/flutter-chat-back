@@ -54,56 +54,95 @@ const getProfilesLastUsers = async (req, res = response) => {
     const from = Number(req.query.from) || 0;
 
     try {
-    const profilesFind = await Profile
-        .find({ user: { $ne: req.uid }, isClub : true })
+        const profilesFind = await Profile
+            .find({ user: { $ne: req.uid }, isClub: true })
 
-        .skip(from)
-        .limit(50)
-        .populate('user')
+            .skip(from)
+            .limit(50)
+            .populate('user')
 
-       // .sort('-online')
+        // .sort('-online')
 
-    const profiles = [];
+        const profiles = [];
 
-   // console.log('profilesFind', profilesFind);
+        // console.log('profilesFind', profilesFind);
 
-    profilesFind.forEach(function (item) {
 
-        if (item.user){
 
-        const profile = {
-            name: item.name,
-            lastName: item.lastName,
-            imageHeader: item.imageHeader,
-            imageAvatar: item.imageAvatar,
-            about: item.about,
-            id: item._id,
-            isClub: item.isClub,
-            user: {
-                online: item.user.online,
-                uid: item.user._id,
-                email: item.user.email,
-                username: item.user.username,
+        profilesFind.map((item) =>
 
-            },
-            messageDate: item.createdAt,
 
-            createdAt: item.createdAt,
-            updatedAt: item.updatedAt
 
-        }
 
-        profiles.push(profile);
+            new Promise((resolve, reject) => {
+
+
+
+
+                Subscription.findOne({
+                    club: item.user.uid
+                })
+                    .then((subscription) => {
+
+
+                        const subscribeApproved = (subscription) ? subscription.subscribeApproved : false;
+                        const subscribeActive = (subscription) ? subscription.subscribeActive : false;
+
+
+
+                        const profile = {
+                            name: item.name,
+                            lastName: item.lastName,
+                            imageHeader: item.imageHeader,
+                            imageAvatar: item.imageAvatar,
+                            about: item.about,
+                            id: item._id,
+                            user: {
+                                online: item.user.online,
+                                uid: item.user._id,
+                                email: item.user.email,
+                                username: item.user.username,
+
+                            },
+                            subscribeApproved: subscribeApproved,
+                            subscribeActive: subscribeActive,
+                           
+                            messageDate: item.createdAt,
+                            createdAt: item.createdAt,
+                            updatedAt: item.updatedAt
+
+                        }
+
+                        profiles.push(profile);
+                        resolve();
+                    })
+
+
+
+
+
+
+
+
+
+
+
+            }));
+
+
+        Promise.all(promises)
+            .then((resolve) => {
+
+
+                console.log('profiles!!', profiles)
+                return res.json({
+                    ok: true,
+                    profiles: profiles
+                })
+            })
+
 
     }
-    });
-    
-
-    res.json({
-        ok: true,
-        profiles
-    })
-}
 
     catch (error) {
         console.log(error);
@@ -155,11 +194,11 @@ const loginGetProfileUser = async (req, res = response) => {
 
 
         const profileFind = await Profile
-            .findOne({ user:  user.id } )
+            .findOne({ user: user.id })
             .populate('user')
 
 
-            console.log('profileFind', profileFind)
+        console.log('profileFind', profileFind)
 
         // Generar mi JWT
         const profile = {
@@ -213,7 +252,6 @@ const loginGetProfileUser = async (req, res = response) => {
 const editUserProfile = async (req, res = response) => {
     const { email, password, username, name, about } = req.body;
 
-    console.log('user/.body', req.body)
     const uid = req.body.uid
     try {
 
@@ -221,53 +259,52 @@ const editUserProfile = async (req, res = response) => {
         // Encriptar contraseña
         const salt = bcrypt.genSaltSync();
 
-        console.log('password', password);
-        const passEncript  = bcrypt.hashSync(password, salt);
+        const passEncript = bcrypt.hashSync(password, salt);
 
 
-        if(password === ''){
+        if (password === '') {
 
             await
 
-            User.updateOne(
-                {
-                    _id: uid
-                },
-                {
-                    $set: {
-                        email: email,
-                        username: username,
+                User.updateOne(
+                    {
+                        _id: uid
+                    },
+                    {
+                        $set: {
+                            email: email,
+                            username: username,
+                        }
                     }
-                }
-            );
+                );
 
         }
 
         else {
 
 
-        await
+            await
 
-        User.updateOne(
-            {
-                _id: uid
-            },
-            {
-                $set: {
-                    email: email,
-                    username: username,
-                    password: passEncript
-                }
-            }
-        );
+                User.updateOne(
+                    {
+                        _id: uid
+                    },
+                    {
+                        $set: {
+                            email: email,
+                            username: username,
+                            password: passEncript
+                        }
+                    }
+                );
 
         }
 
 
 
         // await user.save();
- 
-       // const token = await generateJWT(user.id);
+
+        // const token = await generateJWT(user.id);
 
         const profileUpdate = await
 
@@ -280,7 +317,7 @@ const editUserProfile = async (req, res = response) => {
                     $set: {
                         name: name,
                         about: about
-                        
+
 
                     }
                 }
@@ -288,14 +325,12 @@ const editUserProfile = async (req, res = response) => {
 
 
 
-        console.log('profileUpdate', profileUpdate)
 
         const profileFind = await
             Profile.findOne({ user: uid })
                 .populate('user')
 
 
-      console.log('profileFind!!', profileFind)
 
 
         // Generar mi JWT
@@ -323,12 +358,12 @@ const editUserProfile = async (req, res = response) => {
 
         }
 
-       // console.log(profile);
+        // console.log(profile);
 
         res.json({
             ok: true,
             profile,
-        
+
         });
 
 
