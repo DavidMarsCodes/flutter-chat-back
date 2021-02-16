@@ -4,6 +4,7 @@ const Room = require('../models/room');
 const User = require('../models/user');
 const bcrypt = require('bcryptjs');
 const { generateJWT } = require('../helpers/jwt');
+const Subscription = require('../models/subscription');
 
 
 const getProfilebyUser = async (req, res = response) => {
