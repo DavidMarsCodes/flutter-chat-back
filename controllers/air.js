@@ -11,19 +11,16 @@ const createAir = async (req, res = response) => {
         user,
         room} = req.body;
 
-        console.log('req.body', req.body)
 
         const uid = user;
         const roomid = room
 
-        console.log('uid', uid)
 
 
     try {
 
         const nameExist = await Air.findOne({ name: name, user: uid, room: roomid });
 
-        console.log('nameExist:', nameExist)
         if (nameExist) {
             return res.status(400).json({
                 ok: false,
@@ -43,7 +40,6 @@ const createAir = async (req, res = response) => {
             room: roomid,
             position: airsTotal.length
          });
-         console.log('after create: ', newAir);
 
        const air = await newAir.save();
 
@@ -53,7 +49,6 @@ const createAir = async (req, res = response) => {
         
        
 
-       console.log(' countAirs: ', countAirs);
        await Room.updateOne(
            {
                _id: roomid
@@ -67,7 +62,6 @@ const createAir = async (req, res = response) => {
        );
 
 
-        console.log('newAir create: ', air);
 
         res.json({
             ok: true,
@@ -92,7 +86,6 @@ const editAir = async (req, res = response) => {
         watts,
         id } = req.body;
 
-    console.log('req.body', req.body)
 
     try {
 
@@ -102,7 +95,6 @@ const editAir = async (req, res = response) => {
             watts: watts
          };
 
-         console.log('after update Air: ', updateAir);
 
 
        const  oupdateAir = await Air.updateOne(
@@ -116,7 +108,6 @@ const editAir = async (req, res = response) => {
 
             const air = await Air.findOne({ _id: id});
 
-            console.log(air);
          
 
         res.json({
@@ -140,13 +131,11 @@ const getAirsByRoom = async (req, res = response) => {
     try {
         const roomId = req.params.id;
 
-        console.log('es:', roomId);
 
         const airs = await Air
             .find({ room: roomId })
             .sort('-createdAt')
 
-        console.log('airs by user: ', airs)
 
 
         res.json({
@@ -171,11 +160,9 @@ const deleteAir = async (req, res = response) => {
 
     try {
 
-        console.log(req.params);
 
         const airId = req.params.id
 
-        console.log(airId);
 
         const air = await Air.findByIdAndDelete(airId);
 
@@ -183,7 +170,6 @@ const deleteAir = async (req, res = response) => {
 
         const countAirs = airsTotals.length;
         
-        console.log(' countAirs: ', countAirs);
 
         await Room.updateOne(
             {
@@ -197,7 +183,6 @@ const deleteAir = async (req, res = response) => {
             }
         );
 
-        console.log("delete", air);
         res.json({
             ok: true,
             msg: 'Eliminado con exito!'

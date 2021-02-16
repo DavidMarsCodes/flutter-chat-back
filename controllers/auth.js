@@ -11,7 +11,6 @@ const { generateJWT } = require('../helpers/jwt');
 const createUser = async (req, res = response ) => {
     const { email, password, username } = req.body;
   
-    console.log('user/.body', req.body)
     try {
 
         const existeEmail = await User.findOne({ email });
@@ -32,21 +31,17 @@ const createUser = async (req, res = response ) => {
         user.password = bcrypt.hashSync( password, salt );
 
         await user.save();
-        console.log('user', user)
         const token = await generateJWT( user.id );
 
-        console.log('user.id', user.id)
 
         const profileNew = new Profile( {user: user.id})
 
         await profileNew.save()
-        console.log('profileNew', profileNew)
 
         const profileFind = await 
         Profile.findOne({user: user.id})
         .populate('user')
 
-        console.log('profileFind!!', profileFind)
     
         // Generar mi JWT
         const profile = {
@@ -74,7 +69,6 @@ const createUser = async (req, res = response ) => {
            
           }
     
-        console.log(profile);
 
         res.json({
             ok: true,
@@ -125,7 +119,6 @@ const login = async ( req, res = response ) => {
     .populate('user')
 
 
-    console.log('profileFind!!', profileFind)
 
 
     const profile = {
@@ -179,7 +172,6 @@ const renewToken = async( req, res = response) => {
     // Obtener el usuario por el UID, Usuario.findById... 
     const user = await User.findById( uid );
 
-    console.log('uid', uid);
    
   //  const profile = await Profile.find({userId: uid})
 
@@ -188,7 +180,6 @@ const renewToken = async( req, res = response) => {
   .populate('user')
 
 
-  console.log('profileFind???!!', profileFind);
 
   
   const profile = {

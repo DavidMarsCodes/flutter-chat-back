@@ -13,7 +13,6 @@ const jwt = require("jsonwebtoken");
 
 const callbackAppleAuth = async (request, response) => {
 
-    console.log('entrooooo');
 
     const redirect = `intent://callback?${new URLSearchParams(
         request.body
@@ -30,7 +29,6 @@ const callbackAppleAuth = async (request, response) => {
 const SignInappleAuth = async (req, res = response )  => {
 try {
 
-console.log(req.body)
 const auth =  new AppleAuth(
     {
       client_id:
@@ -45,9 +43,6 @@ const auth =  new AppleAuth(
     fs.readFileSync('./keys/keysignin.p8').toString(),
     "text"
   );
-  console.log('auth*', auth);
-
-  console.log('code!!!',req.body.code);
 
 
   const accessToken = await auth.accessToken(req.body.code);
@@ -56,7 +51,6 @@ const auth =  new AppleAuth(
 
   const userID = idToken.sub;
 
-  console.log(idToken);
 
   const email = idToken.email;
   const userName = `${req.body.firstName} ${req.body.lastName}`;
@@ -137,7 +131,6 @@ const auth =  new AppleAuth(
   const profileFind = await
   Profile.findOne({user: newUser.id})
 
-  console.log('profileFind!!', profileFind)
 
   // Generar mi JWT
   const profile = {
@@ -163,7 +156,6 @@ const auth =  new AppleAuth(
 
     }
 
-    console.log('profile!!', profile)
 
 
 

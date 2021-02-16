@@ -31,7 +31,6 @@ const getProfilesChat = async(req, res) => {
 
         const uid = req.params.uid;
 
-        console.log('uid', uid, )
     
         const messages = await Message.find({
             $or: [{ by: uid  }, { for: uid } ]
@@ -41,13 +40,11 @@ const getProfilesChat = async(req, res) => {
         
 
      
-        console.log('messages : ',messages);
 
         messagesUnique = [];
         messagesUnique = Object.values(messages.reduce((acc,cur)=>Object.assign(acc,{[cur.by.toString()]:cur}),{}));
     
 
-        console.log('messagesUnique: ', messagesUnique);
 
         const profiles = [];
 
@@ -63,9 +60,7 @@ const getProfilesChat = async(req, res) => {
             )
             .sort({ updateAt: 'asc' })
             .then(item => {
-                console.log('item**', item)
 
-                console.log('messagesUnique: ', messagesUnique);
 
                 User.findById(obj.for 
                     )
@@ -77,12 +72,10 @@ const getProfilesChat = async(req, res) => {
                     })
                     .then((subscription) => {
 
-                        console.log('subscription :', subscription)
 
                         const subscribeApproved = (subscription)? subscription.subscribeApproved : false;
                         const subscribeActive = (subscription)? subscription.subscribeActive : false;
 
-                        console.log('subscribeApproved :', subscribeApproved)
                         
     
                         const profile = {
@@ -141,7 +134,6 @@ const getProfilesChat = async(req, res) => {
    
   
 
-  console.log('promises: ', promises)
 
 
    

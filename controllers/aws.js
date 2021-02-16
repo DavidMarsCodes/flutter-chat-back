@@ -16,10 +16,6 @@ var keys = JSON.parse(data);
 const uploadAvatar = async (req, res = response ) => {
 
 
-    
-   
-        console.log("req ##", req.headers.uid);  
-
     try {
 
 
@@ -31,7 +27,6 @@ const fileType = req.files.file.mimetype;
 const folder = 'avatar';
 const buffer = req.files.file.data;
 
-console.log(fileName,fileType )
 const s3Params = {
     Bucket: S3_BUCKET + '/' + folder,
     Key: fileName,
@@ -44,12 +39,10 @@ const s3Params = {
    
 
 
-    console.log('s3Params', s3Params)
 
     s3.upload(s3Params, async (err, data) => {
         
         if (err) {
-            console.log(err);
             res.json({ success: false, error: err })
         }
 
@@ -58,11 +51,9 @@ const s3Params = {
             url: `http://${S3_BUCKET}.s3.sa-east-1.amazonaws.com/${folder}/${fileName}`
         };
 
-        console.log(returnData)
 
         const uid = req.headers.uid;
 
-        console.log('UID: ', uid);
 
       const  profileUpdate = await Profile.updateOne(
             {
@@ -80,7 +71,6 @@ const s3Params = {
  
 
 
-        console.log('profileUpdate', profileUpdate)  
 
         res.json({ ok: true, url: returnData.url  });
 
@@ -96,7 +86,6 @@ const s3Params = {
 const uploadHeader = async (req, res = response ) => {
 
    
-    console.log("req ##", req.headers.uid);  
 
 try {
 
@@ -109,7 +98,6 @@ const fileType = req.files.file.mimetype;
 const folder = 'header';
 const buffer = req.files.file.data;
 
-console.log(fileName,fileType )
 const s3Params = {
     Bucket: S3_BUCKET + '/' + folder,
     Key: fileName,
@@ -121,7 +109,6 @@ const s3Params = {
 
 
 
-console.log('s3Params', s3Params)
 
 s3.upload(s3Params, async (err, data) => {
     
@@ -135,11 +122,9 @@ s3.upload(s3Params, async (err, data) => {
         url: `http://${S3_BUCKET}.s3.sa-east-1.amazonaws.com/${folder}/${fileName}`
     };
 
-    console.log(returnData)
 
     const uid = req.headers.uid;
 
-    console.log('UID: ', uid);
 
   const  profileUpdate = await Profile.updateOne(
         {
@@ -157,7 +142,6 @@ s3.upload(s3Params, async (err, data) => {
 
 
 
-    console.log('profileUpdate', profileUpdate)  
 
     res.json({ ok: true, url: returnData.url  });
 

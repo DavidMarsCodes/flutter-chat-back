@@ -20,20 +20,17 @@ const createPlant = async (req, res = response) => {
         user
     } = req.body;
 
-        console.log('req.body', req.body)
 
         const uid = user;
         const roomid = room;
 
-        console.log('uid', uid)
-        console.log('roomid', roomid)
+
 
 
     try {
 
         const nameExist = await Plant.findOne({ name: name, user: uid, room: roomid });
 
-        console.log('nameExist:', nameExist)
         if (nameExist) {
             return res.status(400).json({
                 ok: false,
@@ -117,7 +114,6 @@ const editPlant= async (req, res = response) => {
         thc,
         id} = req.body;
 
-    console.log('req.body', req.body)
 
    
 
@@ -273,15 +269,12 @@ const deletePlant = async (req, res = response) => {
 
     try {
 
-        console.log(req.params);
 
         const plantId = req.params.id
 
-        console.log(plantId);
 
         const plant = await Plant.findByIdAndDelete(plantId)
 
-        console.log("plant: ", plant);
 
         const plants = await Plant
         .find({ room: plant.room })

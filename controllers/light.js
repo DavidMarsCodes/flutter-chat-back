@@ -11,18 +11,15 @@ const createLight = async (req, res = response) => {
         user,
         room} = req.body;
 
-        console.log('req.body', req.body)
 
         const uid = user;
         const roomid = room
 
-        console.log('uid', uid)
 
     try {
 
         const nameExist = await Light.findOne({ name: name, user: uid, room: roomid });
 
-        console.log('nameExist:', nameExist)
         if (nameExist) {
             return res.status(400).json({
                 ok: false,
@@ -42,7 +39,6 @@ const createLight = async (req, res = response) => {
             position: lightTotal.length
          });
 
-        console.log('after create: ', newlight);
 
        const light = await newlight.save();
 
@@ -50,7 +46,6 @@ const createLight = async (req, res = response) => {
        
        const countLight = lightTotals.length;
                
-       console.log(' countLight: ', countLight);
 
        await Room.updateOne(
            {
@@ -91,7 +86,6 @@ const editLight = async (req, res = response) => {
         kelvin,
         id } = req.body;
 
-    console.log('req.body', req.body)
 
     try {
 
@@ -102,7 +96,6 @@ const editLight = async (req, res = response) => {
             kelvin: kelvin
          };
 
-        console.log('after update Light: ', updateLight);
 
         await Light.updateOne(
             {
@@ -115,7 +108,6 @@ const editLight = async (req, res = response) => {
 
             const light = await Light.findOne({ _id: id});
 
-            console.log(light);
          
 
         res.json({
@@ -139,7 +131,6 @@ const getlightstByRoom = async (req, res = response) => {
     try {
         const roomId = req.params.id;
 
-        console.log('es:', roomId);
 
         const lights = await Light
             .find({ room: roomId })
@@ -147,7 +138,6 @@ const getlightstByRoom = async (req, res = response) => {
 
 
 
-        console.log('light by user: ', lights)
 
 
         res.json({
@@ -172,11 +162,9 @@ const deleteLight = async (req, res = response) => {
 
     try {
 
-        console.log(req.params);
 
         const lightId = req.params.id
 
-        console.log(lightId);
 
         const light = await Light.findByIdAndDelete(lightId);
 
@@ -184,7 +172,6 @@ const deleteLight = async (req, res = response) => {
 
         const countLight = lightTotals.length;
              
-        console.log(' countLight: ', countLight);
         
         await Room.updateOne(
             {
