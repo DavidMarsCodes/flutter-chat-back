@@ -56,7 +56,7 @@ const getProfilesSubscriptorsByClub = async(req, res) => {
                             username: user.username,
             
                         },
-                        messageDate: obj.createdAt,
+                        messageDate: obj.updatedAt,
 
                         subscribeActive: obj.subscribeActive,
                         subscribeApproved: obj.subscribeApproved,
