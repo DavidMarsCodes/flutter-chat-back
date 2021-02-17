@@ -102,6 +102,8 @@ const getProfilesSubscriptorsByClub = async(req, res) => {
 
         else {
 
+            console.log('else!!!')
+
             const subscription = await Subscription
             .find({ subscriptor: uid, subscribeApproved: true, isUpload: true, subscribeActive: true })
         .sort({ createdAt: 'asc' })
@@ -202,6 +204,8 @@ const getProfilesSubscriptorsByClub = async(req, res) => {
 
 } 
 catch (error) {
+
+    console.log('wenas')
 
     res.status(500).json({
         ok: false,
