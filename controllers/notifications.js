@@ -283,18 +283,14 @@ const getProfilesSubscriptorsPendingByClub = async(req, res) => {
             .then((resolve) => {
                 
 
-                console.log('profiles!!', profiles)
+                console.log('profiles sub!!!!!', profiles)
                return  res.json({
                     ok: true,
                     profiles: profiles
                 })
             })
 
-    
-   
-  
 
-  console.log('promises: ', promises)
 
 
    
