@@ -108,7 +108,7 @@ const getProfilesSubscriptorsByClub = async(req, res) => {
             .find({ subscriptor: uid, subscribeApproved: true, isUpload: true, subscribeActive: true })
         .sort({ createdAt: 'asc' })
 
-        subscription = res;
+      
 
         const profiles = [];
 
