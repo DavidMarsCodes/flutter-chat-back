@@ -119,6 +119,7 @@ const getProfilesSubscriptorsByClub = async(req, res) => {
             .then(item => {
 
 
+
                 if(item.user._id != uid){
 
                 User.findById(obj.subscriptor 
@@ -153,7 +154,8 @@ const getProfilesSubscriptorsByClub = async(req, res) => {
                         updatedAt: item.updatedAt
             
                     }
-    
+                    console.log('toPush!!***!!', profile)
+
                         profiles.push(profile);
                         resolve();
 
@@ -173,7 +175,7 @@ const getProfilesSubscriptorsByClub = async(req, res) => {
             .then((resolve) => {
                 
 
-                console.log('profiles!!', profiles)
+                console.log('profiles***!!', profiles)
                return  res.json({
                     ok: true,
                     profiles: profiles
