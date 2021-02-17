@@ -15,7 +15,7 @@ const getProfilesSubscriptorsByClub = async(req, res) => {
 
         const isClub = myprofile.isClub;
 
-       
+       console.log('isclubbb', isClub)
 
 
         if(isClub){
