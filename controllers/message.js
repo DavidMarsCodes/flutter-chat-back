@@ -38,8 +38,7 @@ const getProfilesChat = async(req, res) => {
 
         
         
-        const myprofile = Profile.findOne({ user:  uid }
-            )
+        const myprofile = await Profile.findOne({ user:  uid })
           
            
      const isClub = myprofile.isClub;
