@@ -38,8 +38,11 @@ const getProfilesChat = async(req, res) => {
 
         
         
-
-     
+        const myprofile = Profile.findOne({ user:  uid }
+            )
+          
+           
+     const isClub = myprofile.isClub;
 
         messagesUnique = [];
         messagesUnique = Object.values(messages.reduce((acc,cur)=>Object.assign(acc,{[cur.by.toString()]:cur}),{}));
@@ -94,8 +97,8 @@ const getProfilesChat = async(req, res) => {
                                 username: user.username,
                 
                             },
-                            subscribeApproved: subscribeApproved,
-                            subscribeActive: subscribeActive,
+                            subscribeApproved: (isClub)? true: subscribeApproved,
+                            subscribeActive: (isClub)? true: subscribeActive,
                             message: obj.message,
                             messageDate: obj.createdAt,
                             createdAt: item.createdAt,
