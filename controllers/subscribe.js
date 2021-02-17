@@ -3,14 +3,12 @@ const Subscription = require('../models/subscription');
 const Profile = require('../models/profile');
 
 
-
 const UpdateImageSubscription = async (req, res = response) => {
     const { subscriptor,
         id,
         imageRecipe,
        
      
-        
         } = req.body;
 
         console.log('req.body', req.body)
@@ -37,7 +35,6 @@ const UpdateImageSubscription = async (req, res = response) => {
     );
 
 
-   
 
         const subscription = await Subscription
         .findOne({ _id: id })
@@ -198,8 +195,6 @@ const disapproveSubscription = async (req, res = response) => {
         } = req.body;
 
         console.log('req.body', req.body)
-
-
 
 
     try {

@@ -10,11 +10,33 @@ const getProfilesSubscriptorsByClub = async(req, res) => {
 
         const uid = req.params.uid;
 
-    
-        const subscription = await Subscription
+        const myprofile = await Profile.findOne({ user:  uid })
+
+
+        const isClub = myprofile.isClub;
+
+        const subscription;
+
+
+        if(isClub){
+        const res = await Subscription
             .find({ club: uid, subscribeApproved: true, isUpload: true, subscribeActive: true })
         .sort({ createdAt: 'asc' })
-    
+            
+        subscription = res;
+
+        
+        }
+
+        else {
+
+            const res = await Subscription
+            .find({ subscriptor: uid, subscribeApproved: true, isUpload: true, subscribeActive: true })
+        .sort({ createdAt: 'asc' })
+
+        subscription = res;
+
+        }
 
         /* messagesUnique = [];
         messagesUnique = Object.values(messages.reduce((acc,cur)=>Object.assign(acc,{[cur.for.toString()]:cur}),{}));
