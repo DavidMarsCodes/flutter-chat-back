@@ -15,7 +15,7 @@ const getProfilesSubscriptorsByClub = async(req, res) => {
 
         const isClub = myprofile.isClub;
 
-        const subscription;
+        const subscription = '';
 
 
         if(isClub){
