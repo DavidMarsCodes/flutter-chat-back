@@ -116,7 +116,7 @@ const getProfilesSubscriptorsByClub = async(req, res) => {
         
         new Promise((resolve, reject) => {
 
-           Profile.findOne({ user: obj.subscriptor }
+           Profile.findOne({ user: obj.club }
             )
             .then(item => {
 
@@ -124,7 +124,7 @@ const getProfilesSubscriptorsByClub = async(req, res) => {
 
                 if(item.user._id != uid){
 
-                User.findById(obj.subscriptor 
+                User.findById(obj.club 
                     )
 
                     .then(user => {
