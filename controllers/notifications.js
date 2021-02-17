@@ -15,15 +15,15 @@ const getProfilesSubscriptorsByClub = async(req, res) => {
 
         const isClub = myprofile.isClub;
 
-        const subscription = '';
+       
 
 
         if(isClub){
-        const res = await Subscription
+        const subscription = await Subscription
             .find({ club: uid, subscribeApproved: true, isUpload: true, subscribeActive: true })
         .sort({ createdAt: 'asc' })
             
-        subscription = res;
+        
 
         const profiles = [];
 
@@ -102,7 +102,7 @@ const getProfilesSubscriptorsByClub = async(req, res) => {
 
         else {
 
-            const res = await Subscription
+            const subscription = await Subscription
             .find({ subscriptor: uid, subscribeApproved: true, isUpload: true, subscribeActive: true })
         .sort({ createdAt: 'asc' })
 
