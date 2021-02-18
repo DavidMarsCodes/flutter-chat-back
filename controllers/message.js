@@ -124,10 +124,7 @@ const getProfilesChat = async(req, res) => {
 
         }
 
-        else {
-            resolve();
-            return;
-        }
+        
             ;
         }));
         Promise.all(promises)
