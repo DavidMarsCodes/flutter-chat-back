@@ -57,10 +57,11 @@ const getProfilesChat = async (req, res) => {
         console.log('messagesUnique', messagesUnique);
         const profiles = [];
 
-        const promises = messagesUnique.map((obj) =>
+        if(!isClub){
+            const promises = messagesUnique.map((obj) =>
 
 
-
+            
 
             new Promise((resolve, reject) => {
 
@@ -143,6 +144,101 @@ const getProfilesChat = async (req, res) => {
                 })
             })
 
+        }
+
+        else {
+
+
+
+            const promises = messagesUnique.map((obj) =>
+
+
+            
+
+            new Promise((resolve, reject) => {
+
+                console.log('item**!!! ', isClub);
+
+                if (obj.by != uid) {
+
+                    Profile.findOne({ user: obj.by }
+                    )
+                        .sort({ updateAt: 'asc' })
+                        .then(item => {
+
+
+
+
+                            User.findById(obj.by
+                            )
+
+                                .then(user => {
+
+
+
+                                    Subscription.findOne({
+                                        club: obj.by, subscriptor: uid
+                                    })
+                                        .then((subscription) => {
+
+
+                                            const subscribeApproved = (subscription) ? subscription.subscribeApproved : false;
+                                            const subscribeActive = (subscription) ? subscription.subscribeActive : false;
+
+                                            console.log('subscription', subscription)
+
+                                            const profile = {
+                                                name: item.name,
+                                                lastName: item.lastName,
+                                                imageHeader: item.imageHeader,
+                                                imageAvatar: item.imageAvatar,
+                                                about: item.about,
+                                                id: item._id,
+                                                user: {
+                                                    online: user.online,
+                                                    uid: user._id,
+                                                    email: user.email,
+                                                    username: user.username,
+
+                                                },
+                                                subscribeApproved: (isClub) ? true : subscribeApproved,
+                                                subscribeActive: (isClub) ? true : subscribeActive,
+                                                message: obj.message,
+                                                messageDate: obj.createdAt,
+                                                createdAt: item.createdAt,
+                                                updatedAt: item.updatedAt
+
+                                            }
+
+                                            profiles.push(profile);
+                                            resolve();
+                                        })
+
+
+
+                                });
+
+                        })
+
+                }
+
+
+                ;
+            }));
+        Promise.all(promises)
+            .then((resolve) => {
+
+
+                console.log('profiles!!', profiles)
+                return res.json({
+                    ok: true,
+                    profiles: profiles
+                })
+            })
+
+        }
+
+      
 
 
 
