@@ -169,15 +169,16 @@ const getProfilesChat = async (req, res) => {
                             console.log('item', item);
 
 
-                            User.findById(obj.by
+                            User.findById(item.user._id
                             )
 
                                 .then(user => {
 
+                                    console.log('user', user);
 
 
                                     Subscription.findOne({
-                                        club: obj.by, subscriptor: uid
+                                        club: uid, subscriptor: obj.by
                                     })
                                         .then((subscription) => {
 
