@@ -48,16 +48,18 @@ const getProfilesChat = async (req, res) => {
 
         const isClub = myprofile.isClub;
 
-        console.log('Club**!!! ', isClub);
 
         messagesUnique = [];
         messagesUnique = Object.values(messages.reduce((acc, cur) => Object.assign(acc, { [cur.by.toString()]: cur }), {}));
 
 
 
+        console.log('messagesUnique', messagesUnique);
         const profiles = [];
 
         const promises = messagesUnique.map((obj) =>
+
+
 
 
             new Promise((resolve, reject) => {
