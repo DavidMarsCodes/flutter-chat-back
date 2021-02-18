@@ -62,6 +62,7 @@ const getProfilesChat = async (req, res) => {
 
             new Promise((resolve, reject) => {
 
+                console.log('item**!!! ', isClub);
 
                 if (obj.for != uid) {
 
@@ -69,6 +70,8 @@ const getProfilesChat = async (req, res) => {
                     )
                         .sort({ updateAt: 'asc' })
                         .then(item => {
+
+
 
 
                             User.findById(obj.for
