@@ -130,6 +130,12 @@ const getProfilesChat = async (req, res) => {
 
                 }
 
+                else {
+               
+                    resolve();
+                }
+                  
+
 
                 ;
             }));
@@ -222,6 +228,12 @@ const getProfilesChat = async (req, res) => {
                         })
 
                 }
+
+                else {
+               
+                    resolve();
+                }
+                  
 
 
                 ;
