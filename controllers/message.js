@@ -31,10 +31,15 @@ const getProfilesChat = async(req, res) => {
 
         const uid = req.params.uid;
 
+        console.log('uid**', uid)
+
+
     
         const messages = await Message.find({
             $or: [{ by: uid  }, { for: uid } ]
         })
+
+        console.log('messages**', messages)
 
         
         
