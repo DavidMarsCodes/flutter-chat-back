@@ -157,7 +157,7 @@ const getProfilesChat = async (req, res) => {
 
             new Promise((resolve, reject) => {
 
-                console.log('item**!!! ', isClub);
+                console.log('else club **!!! ', isClub);
 
                 if (obj.by != uid) {
 
@@ -166,7 +166,7 @@ const getProfilesChat = async (req, res) => {
                         .sort({ updateAt: 'asc' })
                         .then(item => {
 
-
+                            console.log('item', item);
 
 
                             User.findById(obj.by
