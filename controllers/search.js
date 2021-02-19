@@ -56,9 +56,14 @@ const getSearchPrincipalByQuery = async (req, res = response) => {
 
         profiles.push(profile);
 
+        console.log('profiles push', profiles)
+
     }
     });
     
+
+    console.log('profiles!!!', profiles)
+
 
     res.json({
         ok: true,
