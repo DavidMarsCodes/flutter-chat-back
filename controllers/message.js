@@ -94,6 +94,7 @@ const getProfilesChat = async (req, res) => {
                                                     lastName: item.lastName,
                                                     imageHeader: item.imageHeader,
                                                     imageAvatar: item.imageAvatar,
+                                                    imageRecipe: item.imageRecipe,
                                                     about: item.about,
                                                     id: item._id,
                                                     user: {
@@ -185,6 +186,8 @@ const getProfilesChat = async (req, res) => {
                                                     lastName: item.lastName,
                                                     imageHeader: item.imageHeader,
                                                     imageAvatar: item.imageAvatar,
+                                                    imageRecipe: item.imageRecipe,
+
                                                     about: item.about,
                                                     id: item._id,
                                                     user: {
@@ -198,7 +201,6 @@ const getProfilesChat = async (req, res) => {
                                                     subscribeActive: (isClub) ? true : subscribeActive,
                                                     message: obj.message,
                                                     isClub: item.isClub,
-                                                    imageRecipe: item.imageRecipe,
                                                     messageDate: obj.createdAt,
                                                     createdAt: item.createdAt,
                                                     updatedAt: item.updatedAt

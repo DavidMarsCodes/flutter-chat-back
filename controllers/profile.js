@@ -96,6 +96,8 @@ const getProfilesLastUsers = async (req, res = response) => {
                             lastName: item.lastName,
                             imageHeader: item.imageHeader,
                             imageAvatar: item.imageAvatar,
+                            imageRecipe: item.imageRecipe,
+
                             about: item.about,
                             id: item._id,
                             user: {
