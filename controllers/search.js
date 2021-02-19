@@ -30,7 +30,7 @@ const getSearchPrincipalByQuery = async (req, res = response) => {
 
    resultFindArray.map((item) => {
 
-        if (item.user){
+       
 
        
             console.log('item!!', item)
@@ -59,7 +59,7 @@ const getSearchPrincipalByQuery = async (req, res = response) => {
         console.log('profiles push', profiles)
 
     }
-    });
+   );
     
 
     console.log('profiles!!!', profiles)
