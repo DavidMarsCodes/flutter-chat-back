@@ -49,6 +49,14 @@ const getSearchPrincipalByQuery = async (req, res = response) => {
                 username: item.user.username,
 
             },
+
+            messageDate: item.updatedAt,
+            isClub: item.isClub,
+            subscribeActive: item.subscribeActive,
+            subscribeApproved: item.subscribeApproved,
+            subId: item._id,
+            isUpload: item.isUpload,
+
             createdAt: item.createdAt,
             updatedAt: item.updatedAt
 
