@@ -107,7 +107,7 @@ const getProfilesLastUsers = async (req, res = response) => {
                             },
                             subscribeApproved: subscribeApproved,
                             subscribeActive: subscribeActive,
-                           
+                            isClub: item.isClub,
                             messageDate: item.createdAt,
                             createdAt: item.createdAt,
                             updatedAt: item.updatedAt
