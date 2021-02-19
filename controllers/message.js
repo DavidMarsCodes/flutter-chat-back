@@ -106,6 +106,7 @@ const getProfilesChat = async (req, res) => {
                                                     subscribeApproved: (isClub) ? true : subscribeApproved,
                                                     subscribeActive: (isClub) ? true : subscribeActive,
                                                     message: obj.message,
+                                                    isClub: item.isClub,
                                                     messageDate: obj.createdAt,
                                                     createdAt: item.createdAt,
                                                     updatedAt: item.updatedAt
