@@ -64,6 +64,7 @@ console.log(email)
             about: profileFind.about,
             imageHeader: profileFind.imageHeader,
             imageAvatar: profileFind.imageAvatar,
+            imageRecipe: profileFind.imageRecipe,
             id: profileFind._id,
             user: {
               online: user.online,
@@ -126,6 +127,7 @@ console.log(email)
         imageHeader: "",
         about: "",
         imageAvatar: profileFind.imageAvatar,
+        imageRecipe: profileFind.imageRecipe,
         id: profileFind._id,
         user: {
           online: newUser.online,

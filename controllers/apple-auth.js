@@ -77,6 +77,7 @@ const auth =  new AppleAuth(
           lastName: profileFind.lastName,
           imageHeader: profileFind.imageHeader,
           imageAvatar: profileFind.imageAvatar,
+          imageRecipe: profileFind.imageRecipe,
           id: profileFind._id,
           user: {
             online: user.online,
@@ -139,6 +140,7 @@ const auth =  new AppleAuth(
       lastName: profileFind.lastName,
       imageHeader: profileFind.imageHeader,
       imageAvatar: profileFind.imageAvatar,
+      imageRecipe: profileFind.imageRecipe,
       id: profileFind._id,
       user: {
         online: newUser.online,
