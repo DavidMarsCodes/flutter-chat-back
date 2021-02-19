@@ -61,7 +61,7 @@ const getProfilesSubscriptorsByClub = async(req, res) => {
             
                         },
                         messageDate: obj.updatedAt,
-
+                        isClub: item.isClub,
                         subscribeActive: obj.subscribeActive,
                         subscribeApproved: obj.subscribeApproved,
                         subId: obj._id,
@@ -147,7 +147,7 @@ const getProfilesSubscriptorsByClub = async(req, res) => {
             
                         },
                         messageDate: obj.updatedAt,
-
+                        isClub: item.isClub,
                         subscribeActive: obj.subscribeActive,
                         subscribeApproved: obj.subscribeApproved,
                         subId: obj._id,
@@ -271,6 +271,7 @@ const getProfilesSubscriptorsPendingByClub = async(req, res) => {
                         subscribeActive: obj.subscribeActive,
                         subscribeApproved: obj.subscribeApproved,
                         subId: obj._id,
+                        isClub: item.isClub,
                         isUpload: obj.isUpload,
                         createdAt: item.createdAt,
                         updatedAt: item.updatedAt
@@ -363,7 +364,7 @@ const getClubSubscriptionBySubid = async(req, res) => {
             
                         },
                         messageDate: obj.updatedAt,
-
+                        isClub: item.isClub,
                         subscribeActive: obj.subscribeActive,
                         subscribeApproved: obj.subscribeApproved,
                         subId: obj._id,
