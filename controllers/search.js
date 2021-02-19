@@ -28,7 +28,7 @@ const getSearchPrincipalByQuery = async (req, res = response) => {
 
    // console.log('profilesFind', profilesFind);
 
-   resultFindArray.map((item) {
+   resultFindArray.map((item) => {
 
         if (item.user){
 
