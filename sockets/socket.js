@@ -31,7 +31,7 @@ io.on('connect', (client) =>  {
         // TODO: Grabar mensaje
         console.log('payload!!');
         console.log('emit!!');
-        await saveMessage( payload );
+      
         io.to( payload.for ).emit('principal-message', payload );
     })
     
