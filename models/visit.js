@@ -47,6 +47,11 @@ const VisitSchema = Schema({
         required: true,
         default: false
     },
+    abono: {
+        type: Boolean,
+        required: true,
+        default: false
+    },
     electro: {
         type: String,
         required: false,

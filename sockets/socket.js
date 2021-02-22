@@ -26,6 +26,14 @@ io.on('connect', (client) =>  {
         await saveMessage( payload );
         io.to( payload.for ).emit('personal-message', payload );
     })
+
+    client.on('principal-message', async( payload ) => {
+        // TODO: Grabar mensaje
+        console.log('payload!!');
+        console.log('emit!!');
+        await saveMessage( payload );
+        io.to( payload.for ).emit('personal-message', payload );
+    })
     
 
     client.on('disconnect', () => {

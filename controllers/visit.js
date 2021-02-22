@@ -13,6 +13,7 @@ const createVisit = async (req, res = response) => {
             degrees,
             cut,
             water,
+            abono,
             electro,
             ph,
             ml
@@ -40,6 +41,7 @@ const createVisit = async (req, res = response) => {
                 cut,
                 water,
                 electro,
+                abono,
                 ph,
                 ml
             });
@@ -80,6 +82,7 @@ const editVisit = async (req, res = response) => {
         cut,
         water,
         electro,
+        abono,
         ph,
         ml,
         id
@@ -97,6 +100,7 @@ const editVisit = async (req, res = response) => {
             degrees: degrees,
             cut: cut,
             water: water,
+            abono: abono,
             electro: electro,
             ph: ph,
             ml: ml
