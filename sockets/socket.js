@@ -32,7 +32,7 @@ io.on('connect', (client) =>  {
         console.log('payload!!');
         console.log('emit!!');
         await saveMessage( payload );
-        io.to( payload.for ).emit('personal-message', payload );
+        io.to( payload.for ).emit('principal-message', payload );
     })
     
 
