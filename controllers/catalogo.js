@@ -229,21 +229,21 @@ const deleteRoom = async (req, res = response) => {
 
 
 
-const editPositionByRoom = async (req, res = response) => {
+const editPositionByCatalogo = async (req, res = response) => {
     try {
 
-        const onReorderRooms = []
+        const onReorderCatalogos = []
 
-        req.body.rooms.map((item, index) => {                                                          
+        req.body.catalogos.map((item, index) => {                                                          
             item.position = index;
-            onReorderRooms.push(item);
+            onReorderCatalogos.push(item);
 
         });
 
-        const promises = onReorderRooms.map((obj) => 
+        const promises = onReorderCatalogos.map((obj) => 
         
         new Promise((resolve, reject) => {
-            Room.updateOne({ _id: obj.id }, { $set: { position: obj.position } }, 
+            Catalogo.updateOne({ _id: obj.id }, { $set: { position: obj.position } }, 
             (err, data) => {
                 if (err) console.log(err);
                 else
@@ -254,7 +254,7 @@ const editPositionByRoom = async (req, res = response) => {
             .then(() => {
                 return res.json({
                     ok: true,
-                    msg: 'Eliminado con exito!'
+                    msg: 'posicion editada con exito!'
                 })
             })
 
@@ -277,6 +277,6 @@ module.exports = {
     getRoomById,
     getCatalogosByUser,
     deleteRoom,
-    editPositionByRoom
+    editPositionByCatalogo
 
 }
