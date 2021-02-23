@@ -160,25 +160,26 @@ const getRoomById = async (req, res = response) => {
 
 }
 
-const getRoomsByUser = async (req, res = response) => {
+
+const getCatalogosByUser = async (req, res = response) => {
 
     try {
         const userId = req.params.id;
 
         console.log('es:', userId);
 
-        const rooms = await Room
+        const catalogos = await Catalogo
             .find({ user: userId })
             .sort('position')
 
 
 
-        console.log('rooms** ', rooms)
+        console.log('catalogos** ', catalogos)
 
 
         res.json({
             ok: true,
-            rooms,
+            catalogos,
         })
 
     }
