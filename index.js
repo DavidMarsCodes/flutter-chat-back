@@ -61,6 +61,9 @@ app.use( '/api/aws', require('./routes/aws'));
 app.use( '/api/subscription', require('./routes/subscribe'));
 app.use( '/api/notification', require('./routes/notifications'));
 
+app.use( '/api/catalogo', require('./routes/catalogo'));
+
+
 
 
 
