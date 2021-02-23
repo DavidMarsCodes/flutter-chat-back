@@ -275,7 +275,7 @@ module.exports = {
     createCatalogo,
     editRoom,
     getRoomById,
-    getRoomsByUser,
+    getCatalogosByUser,
     deleteRoom,
     editPositionByRoom
 
