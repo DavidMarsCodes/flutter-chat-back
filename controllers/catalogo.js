@@ -268,6 +268,37 @@ const editPositionByCatalogo = async (req, res = response) => {
     }
 }
 
+const deleteCatalogo = async (req, res = response) => {
+
+
+    try {
+
+        console.log(req.params);
+
+        const catalogoId = req.params.id
+
+        console.log(catalogoId);
+
+        const catalogo = await Catalogo.findByIdAndDelete(catalogoId)
+
+        res.json({
+            ok: true,
+            msg: 'Eliminado con exito!'
+        })
+
+    }
+
+
+    catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: 'Hable con el administrador'
+        });
+    }
+
+}
+
 
 
 
@@ -276,7 +307,7 @@ module.exports = {
     editRoom,
     getRoomById,
     getCatalogosByUser,
-    deleteRoom,
+    deleteCatalogo,
     editPositionByCatalogo
 
 }
