@@ -31,7 +31,7 @@ console.log('req.body', req.body)
         const catalogosTotal = await Catalogo.find({ user: user });
 
 
-        const newCtalogo = new Room({ 
+        const newCtalogo = new Catalogo({ 
             name: name, 
             description: description, 
 
