@@ -183,6 +183,8 @@ const getCatalogosByUsers = async (req, res = response) => {
 
         const isClub = profileAuth.isClub;
 
+        console.log(isClub)
+
         if(isClub){
 
 
