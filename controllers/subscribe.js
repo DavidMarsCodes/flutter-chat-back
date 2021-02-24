@@ -87,7 +87,7 @@ const UnSubscription = async (req, res = response) => {
 
         const update = { 
             subscribeActive: false,
-            subscribeApproved =false
+            subscribeApproved: false
            
          };
          console.log('after create: ', update);
