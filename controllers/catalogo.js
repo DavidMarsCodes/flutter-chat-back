@@ -178,15 +178,22 @@ const getCatalogosByUsers = async (req, res = response) => {
 
         console.log( 'ids params: ', userId,userIAuthId ); 
 
-       
-        const subscription = await Subscription
-        .findOne({ subscriptor: userIAuthId, club: userId })
 
-        const isSubscribe = subscription.subscribeActive && subscription.subscribeApproved;
+        const profile = Profile.findOne({user: userIAuthId});
 
-        console.log('subscription', subscription);
+        const isClub = profileAuth.isClub;
 
-        console.log('!!isSubscribe!!', isSubscribe);
+        if(isClub){
+
+
+            const subscription = await Subscription
+            .findOne({ subscriptor: userIAuthId, club: userId })
+    
+            const isSubscribe = subscription.subscribeActive && subscription.subscribeApproved;
+    
+            console.log('subscription', subscription);
+    
+            console.log('!!isSubscribe!!', isSubscribe);
 
 
 
@@ -195,6 +202,7 @@ const getCatalogosByUsers = async (req, res = response) => {
         const catalogos1y2 = await Catalogo
             .find({ user: userId , privacity: {$in: ['1', '2']}  })
             .sort('position')
+
 
 
         
@@ -223,10 +231,75 @@ const getCatalogosByUsers = async (req, res = response) => {
         console.log('catalogos** ', catalogos)
 
 
+
+
         res.json({
             ok: true,
             catalogos,
         })
+
+
+        }
+
+        else {
+
+            const subscription = await Subscription
+            .findOne({ subscriptor: userId, club: userIAuthId  })
+    
+            const isSubscribe = subscription.subscribeActive && subscription.subscribeApproved;
+    
+            console.log('subscription', subscription);
+    
+            console.log('!!isSubscribe!!', isSubscribe);
+
+
+
+        const catalogos = [];
+
+        const catalogos1y2 = await Catalogo
+            .find({ user: userId , privacity: {$in: ['1', '2']}  })
+            .sort('position')
+
+
+
+        
+            catalogos1y2.map((item, index) => { 
+                
+                if(item.privacity == 2){
+
+                    if(isSubscribe){
+
+                        console.log('is 2 and subscribe item:', item)
+
+                        catalogos.push(item);
+                    }
+                }
+
+                else {
+
+                    console.log('is 1 item:', item)
+
+
+                    catalogos.push(item);
+                }
+               
+    
+            });
+        console.log('catalogos** ', catalogos)
+
+
+
+
+        res.json({
+            ok: true,
+            catalogos,
+        })
+
+        }
+       
+     
+
+
 
     }
 
