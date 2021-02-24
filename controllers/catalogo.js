@@ -173,16 +173,13 @@ const getCatalogosByUsers = async (req, res = response) => {
 
         console.log( 'ids params: ', userId,userIAuthId ); 
 
-        const myprofile = await Profile.findOne({ user: userId })
-
-
-        const isClub = myprofile.isClub;
+       
 
 
         console.log('es:', userId);
 
         const catalogos = await Catalogo
-            .find({ user: userId })
+            .find({ user: userId , privacity:  '1', privacity:  '2', })
             .sort('position')
 
 
