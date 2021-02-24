@@ -1,12 +1,15 @@
 const { response } = require('express');
 const Catalogo = require('../models/catalogo');
 
+const Profile = require('../models/profile');
+
+
 
 
 const createCatalogo = async (req, res = response) => {
     const { name,
         description,
-
+        privacity,
         user} = req.body;
 
 console.log('req.body', req.body)
@@ -34,7 +37,7 @@ console.log('req.body', req.body)
         const newCtalogo = new Catalogo({ 
             name: name, 
             description: description, 
-
+            privacity: privacity,
             user: user, 
             position: catalogosTotal.length
          });
@@ -165,6 +168,16 @@ const getCatalogosByUser = async (req, res = response) => {
 
     try {
         const userId = req.params.id;
+
+        const userIAuthId = req.params.authid;
+
+        console.log( 'ids params: ', userId,userIAuthId ); 
+
+        const myprofile = await Profile.findOne({ user: userId })
+
+
+        const isClub = myprofile.isClub;
+
 
         console.log('es:', userId);
 

@@ -22,7 +22,7 @@ router.post('/new', [
 ], createCatalogo, validateJWT );
 
 
-router.get('/catalogos/user/:id', validateJWT, getCatalogosByUser );
+router.get('/catalogos/user/:id/userAuth/:authid', validateJWT, getCatalogosByUser );
 
 router.post('/update/position', validateJWT, editPositionByCatalogo);
 

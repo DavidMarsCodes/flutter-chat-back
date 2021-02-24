@@ -23,7 +23,16 @@ const CatalogoSchema = Schema({
         type: Number,
         required: false,
         default: 0
-    }
+    },
+
+    privacity:
+
+    {
+        type: String,
+        required: true,
+        default: '1'
+    },
+
 
 },
 
