@@ -248,7 +248,7 @@ const getCatalogosByUsers = async (req, res = response) => {
             const subscription = await Subscription
             .findOne({ subscriptor:userIAuthId , club:  userId  })
     
-            const isSubscribe = subscription.subscribeActive && subscription.subscribeApproved;
+            const isSubscribe =(subscription )? subscription.subscribeActive && subscription.subscribeApproved: false;
     
             console.log('subscription', subscription);
     
