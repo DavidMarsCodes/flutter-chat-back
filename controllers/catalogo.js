@@ -182,16 +182,44 @@ const getCatalogosByUsers = async (req, res = response) => {
         const subscription = await Subscription
         .findOne({ subscriptor: userIAuthId, club: userId })
 
+        const isSubscribe = subscription.subscribeActive && subscription.subscribeApproved;
 
         console.log('subscription', subscription);
 
+        console.log('!!isSubscribe!!', isSubscribe);
 
-        const catalogos = await Catalogo
+
+
+        const catalogos = [];
+
+        const catalogos1y2 = await Catalogo
             .find({ user: userId , privacity: {$in: ['1', '2']}  })
             .sort('position')
 
 
+        
+            catalogos1y2.map((item, index) => { 
+                
+                if(item.privacity == 2){
 
+                    if(isSubscribe){
+
+                        console.log('is 2 and subscribe item:', item)
+
+                        catalogos.push(item);
+                    }
+                }
+
+                else {
+
+                    console.log('is 1 item:', item)
+
+
+                    catalogos.push(item);
+                }
+               
+    
+            });
         console.log('catalogos** ', catalogos)
 
 
