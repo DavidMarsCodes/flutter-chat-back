@@ -179,7 +179,7 @@ const getCatalogosByUsers = async (req, res = response) => {
         console.log( 'ids params: ', userId,userIAuthId ); 
 
 
-        const profile = Profile.findOne({user: userIAuthId});
+        const profileAuth = Profile.findOne({user: userIAuthId});
 
         const isClub = profileAuth.isClub;
 
@@ -187,7 +187,7 @@ const getCatalogosByUsers = async (req, res = response) => {
 
 
             const subscription = await Subscription
-            .findOne({ subscriptor: userIAuthId, club: userId })
+            .findOne({ subscriptor: userId, club: userIAuthId  })
     
             const isSubscribe = subscription.subscribeActive && subscription.subscribeApproved;
     
@@ -244,7 +244,7 @@ const getCatalogosByUsers = async (req, res = response) => {
         else {
 
             const subscription = await Subscription
-            .findOne({ subscriptor: userId, club: userIAuthId  })
+            .findOne({ subscriptor:userIAuthId , club:  userId  })
     
             const isSubscribe = subscription.subscribeActive && subscription.subscribeApproved;
     
