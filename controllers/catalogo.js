@@ -3,6 +3,11 @@ const Catalogo = require('../models/catalogo');
 
 const Profile = require('../models/profile');
 
+const Subscription = require('../models/subscription');
+
+
+
+
 
 
 
@@ -174,9 +179,12 @@ const getCatalogosByUsers = async (req, res = response) => {
         console.log( 'ids params: ', userId,userIAuthId ); 
 
        
+        const subscription = await Subscription
+        .findOne({ subscriptor: userIAuthId, club: userId })
 
 
-        console.log('es:', userId);
+        console.log('subscription', subscription);
+
 
         const catalogos = await Catalogo
             .find({ user: userId , privacity: {$in: ['1', '2']}  })
