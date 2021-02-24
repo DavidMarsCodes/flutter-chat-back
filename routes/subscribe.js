@@ -24,7 +24,10 @@ router.post('/unsubscribe', [
 
 
 
-router.get('/subscription/:id/:club', validateJWT, getSubscribeByClubIdAndSubId );
+router.get('/subscription/:userauth/:userid', validateJWT, getSubscribeByClubIdAndSubId );
+
+
+
 
 router.post('/disapprove', [
    

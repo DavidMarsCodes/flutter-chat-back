@@ -127,36 +127,42 @@ const getSubscribeByClubIdAndSubId = async (req, res = response) => {
     console.log('req.params##: ', req.params)
 
     try {
-        const clubId = req.params.club;
+        const userAuth = req.params.userauth;
 
-        const subId = req.params.id;
+        const userId = req.params.userid;
 
-      console.log('clubId:', clubId);
+      console.log('userAuth:', userAuth);
 
-        console.log('subId:', subId);
+      const profileAuth = await Profile.findOne({user: userAuth});
 
+      isClub = profileAuth.isClub;
 
-        const subscription = await Subscription
-            .findOne({ subscriptor: subId, club: clubId })
-           
+        console.log('userId:', userId);
 
-        console.log('subscription by user: ', subscription)
+        if(isClub){
+
+            const subscription = await Subscription
+            .findOne({ subscriptor: userId, club: userAuth })
+
+            console.log('subscription by user: ', subscription)
+
 
         const profile = await Profile
-        .findOne({ user: subId })
-
+        .findOne({ user: userId })
 
         const imageRecipe = (profile.imageRecipe == "")? "" : profile.imageRecipe;
 
-
         const isUploadImageRecipe = (profile.imageRecipe == "")? false : true;
+
+
+               
 
         if(!subscription){
 
             const newSubscription = new Subscription({ 
-                subscriptor: subId,
+                subscriptor: userId,
                 imageRecipe: imageRecipe,
-                club: clubId,
+                club: userAuth,
                 subscribeActive: false,
                 isUpload: isUploadImageRecipe,
              });
@@ -179,6 +185,70 @@ const getSubscribeByClubIdAndSubId = async (req, res = response) => {
             })
         }
         
+           
+        }
+
+        else if (!isClub) {
+
+            
+            const subscription = await Subscription
+            .findOne({ subscriptor: userAuth, club: userId  })
+
+            console.log('subscription by user: ', subscription)
+
+
+        const profile = await Profile
+        .findOne({ user: userAuth })
+
+        const imageRecipe = (profile.imageRecipe == "")? "" : profile.imageRecipe;
+
+        const isUploadImageRecipe = (profile.imageRecipe == "")? false : true;
+
+
+               
+
+        if(!subscription){
+
+            const newSubscription = new Subscription({ 
+                subscriptor: userAuth,
+                imageRecipe: imageRecipe,
+                club: userId,
+                subscribeActive: false,
+                isUpload: isUploadImageRecipe,
+             });
+             console.log('after create: ', newSubscription);
+    
+           const subscription = await newSubscription.save();
+
+
+        res.json({
+            ok: true,
+            subscription,
+        })
+        }
+
+        else {
+
+            res.json({
+                ok: true,
+                subscription,
+            })
+        }
+        }
+
+        
+
+
+     
+
+      
+
+
+
+        
+
+
+
 
 
 
