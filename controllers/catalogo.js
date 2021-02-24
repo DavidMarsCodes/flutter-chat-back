@@ -179,7 +179,7 @@ const getCatalogosByUsers = async (req, res = response) => {
         console.log('es:', userId);
 
         const catalogos = await Catalogo
-            .find({ user: userId , privacity:  '1', privacity:  '2', })
+            .find({ user: userId }, {privacity: {$in: ['1', '2']}})
             .sort('position')
 
 
