@@ -164,7 +164,7 @@ const getRoomById = async (req, res = response) => {
 }
 
 
-const getCatalogosByUser = async (req, res = response) => {
+const getCatalogosByUsers = async (req, res = response) => {
 
     try {
         const userId = req.params.id;
@@ -207,6 +207,48 @@ const getCatalogosByUser = async (req, res = response) => {
 
 }
 
+const getMyCatalogos = async (req, res = response) => {
+
+    try {
+        const userId = req.params.id;
+
+    
+
+     
+
+        const myprofile = await Profile.findOne({ user: userId })
+
+
+        const isClub = myprofile.isClub;
+
+
+        console.log('es:', userId);
+
+        const catalogos = await Catalogo
+            .find({ user: userId })
+            .sort('position')
+
+
+
+        console.log('catalogos** ', catalogos)
+
+
+        res.json({
+            ok: true,
+            catalogos,
+        })
+
+    }
+
+    catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: 'Hable con el administrador'
+        });
+    }
+
+}
 const deleteRoom = async (req, res = response) => {
 
 
@@ -319,7 +361,8 @@ module.exports = {
     createCatalogo,
     editRoom,
     getRoomById,
-    getCatalogosByUser,
+    getCatalogosByUsers,
+    getMyCatalogos,
     deleteCatalogo,
     editPositionByCatalogo
 
