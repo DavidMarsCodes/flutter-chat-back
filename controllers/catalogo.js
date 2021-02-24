@@ -179,7 +179,7 @@ const getCatalogosByUsers = async (req, res = response) => {
         console.log( 'ids params: ', userId,userIAuthId ); 
 
 
-        const profileAuth = Profile.findOne({user: userIAuthId});
+        const profileAuth = await Profile.findOne({user: userIAuthId});
 
         const isClub = profileAuth.isClub;
 
