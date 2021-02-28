@@ -70,16 +70,10 @@ console.log('req.body', req.body)
 }
 
 
-const editRoom = async (req, res = response) => {
+const editCatalogo = async (req, res = response) => {
     const { name,
         description,
-        wide,
-        long,
-        tall,
-        co2,
-        co2Control,
-        timeOn,
-        timeOff ,
+        privacity,
         id} = req.body;
 
     console.log('req.body', req.body)
@@ -89,40 +83,34 @@ const editRoom = async (req, res = response) => {
 
     try {
 
-        const updateRoom = { 
+        const updateCatalogo = { 
             name: name, 
             description: description, 
-            wide: wide,
-            long: long,
-            tall: tall,
-            co2: co2,
-            co2Control: co2Control,
-            timeOn: timeOn,
-            timeOff: timeOff,
+            privacity  : privacity
            
            
          };
 
-         console.log('after newRoom: ', updateRoom);
+         console.log('after updateCtalogo: ', updateCtalogo);
 
 
-       const  uodateRoom = await Room.updateOne(
+       const  update = await Catalogo.updateOne(
         {
             _id: id
         },
         {
-            $set: updateRoom
+            $set: updateCatalogo
         }
     );
 
-            const room = await Room.findOne({ _id: id});
+            const catalogo = await Catalogo.findOne({ _id: id});
 
             console.log(room);
          
 
         res.json({
             ok: true,
-            room,
+            catalogo,
 
         });
 
@@ -467,7 +455,7 @@ const deleteCatalogo = async (req, res = response) => {
 
 module.exports = {
     createCatalogo,
-    editRoom,
+    editCatalogo,
     getCatalogoById,
     getCatalogosByUsers,
     getMyCatalogos,
