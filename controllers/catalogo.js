@@ -105,7 +105,7 @@ const editCatalogo = async (req, res = response) => {
 
             const catalogo = await Catalogo.findOne({ _id: id});
 
-            console.log(room);
+            console.log(catalogo);
          
 
         res.json({
