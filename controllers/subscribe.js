@@ -142,6 +142,8 @@ const getSubscribeByClubIdAndSubId = async (req, res = response) => {
 
         if(isClub){
 
+            console.log('isclub')
+
             const subscription = await Subscription
             .findOne({ subscriptor: userId, club: userAuth })
 

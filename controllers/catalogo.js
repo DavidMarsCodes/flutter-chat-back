@@ -136,24 +136,24 @@ const editRoom = async (req, res = response) => {
     }
 }
 
-const getRoomById = async (req, res = response) => {
+const getCatalogoById = async (req, res = response) => {
 
     try {
-        const roomId = req.params.id;
+        const catalogoId = req.params.id;
 
-        console.log('es:', roomId);
+        console.log('es:', catalogoId);
 
-        const room = await Room
-            .findOne({ _id: roomId })
+        const catalogo = await Catalogo
+            .findOne({ _id: catalogoId })
            
 
 
-        console.log('room** ', room)
+        console.log('catalogo** ', catalogo)
 
 
         res.json({
             ok: true,
-            room,
+            catalogo,
         })
 
     }
@@ -468,7 +468,7 @@ const deleteCatalogo = async (req, res = response) => {
 module.exports = {
     createCatalogo,
     editRoom,
-    getRoomById,
+    getCatalogoById,
     getCatalogosByUsers,
     getMyCatalogos,
     deleteCatalogo,

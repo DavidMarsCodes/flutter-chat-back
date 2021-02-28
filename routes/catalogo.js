@@ -5,7 +5,7 @@
 const { Router } = require('express');
 const { check } = require('express-validator');
 
-const { createCatalogo, getCatalogosByUsers ,getMyCatalogos,  editPositionByCatalogo, deleteCatalogo} = require('../controllers/catalogo');
+const { createCatalogo, getCatalogosByUsers ,getMyCatalogos, getCatalogoById,  editPositionByCatalogo, deleteCatalogo} = require('../controllers/catalogo');
 const { validarCampos } = require('../middlewares/validar-campos');
 const { validateJWT } = require('../middlewares/validar-jwt');
 const { renewToken } = require('../controllers/auth');
@@ -21,6 +21,7 @@ router.post('/new', [
     validarCampos
 ], createCatalogo, validateJWT );
 
+router.get('/catalogo/:id', validateJWT, getCatalogoById );
 
 router.get('/catalogos/user/:id/userAuth/:authid', validateJWT, getCatalogosByUsers );
 
