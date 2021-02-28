@@ -91,7 +91,7 @@ const editCatalogo = async (req, res = response) => {
            
          };
 
-         console.log('after updateCtalogo: ', updateCtalogo);
+         console.log('after updateCatalogo: ', updateCatalogo);
 
 
        const  update = await Catalogo.updateOne(
