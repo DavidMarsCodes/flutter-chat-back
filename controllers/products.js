@@ -224,18 +224,18 @@ const getLastProducts= async (req, res = response) => {
     try {
 
 
-        const plants = await Product
+        const products = await Product
             .find()
             .sort('-createdAt')
 
 
 
-        console.log('plants** ', plants)
+        console.log('products** ', products)
 
 
         res.json({
             ok: true,
-            plants,
+            products,
         })
 
     }
