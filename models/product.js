@@ -37,9 +37,9 @@ const ProductSchema = Schema({
 
     ratingInit: {
 
-        type: Number,
+        type: String,
         require: false,
-        default: 0
+        default: '0'
     }
 
 
