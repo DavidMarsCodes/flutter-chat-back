@@ -219,7 +219,36 @@ const getProductsByCatalogo = async (req, res = response) => {
 
 }
 
+const getLastProducts= async (req, res = response) => {
 
+    try {
+
+
+        const plants = await Product
+            .find()
+            .sort('-createdAt')
+
+
+
+        console.log('plants** ', plants)
+
+
+        res.json({
+            ok: true,
+            plants,
+        })
+
+    }
+
+    catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: 'Hable con el administrador'
+        });
+    }
+
+}
 
 const getPlantsByUser = async (req, res = response) => {
 
