@@ -16,9 +16,9 @@ const ProductSchema = Schema({
         required: true
     },
 
-    room: {
+    catalogo: {
         type: Schema.Types.ObjectId,
-        ref: 'Room',
+        ref: 'Catalogo',
         required: true
     },
 
@@ -29,12 +29,7 @@ const ProductSchema = Schema({
         default: 0
     },
 
-    category: 
-    {
-        type: Number,
-        required: false,
-        default: 0
-    },
+
 
     
 

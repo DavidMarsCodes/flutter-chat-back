@@ -33,6 +33,13 @@ const CatalogoSchema = Schema({
         default: '1'
     },
 
+    totalProducts: 
+    {
+        type: Number,
+        required: false,
+        default: 0
+    },
+
 
 },
 
