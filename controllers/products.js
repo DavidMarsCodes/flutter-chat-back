@@ -184,25 +184,25 @@ const getPlantById = async (req, res = response) => {
 
 }
 
-const getPlantsByRoom = async (req, res = response) => {
+const getProductsByCatalogo = async (req, res = response) => {
 
     try {
-        const roomId = req.params.id;
+        const catalogoId = req.params.id;
 
-        console.log('roomId:', roomId);
+        console.log('catalogoId:', catalogoId);
 
-        const plants = await Plant
-            .find({ room: roomId })
+        const products = await Product
+            .find({ catalogo: catalogoId })
             .sort('-createdAt')
 
 
 
-        console.log('plants** ', plants)
+        console.log('products** ', products)
 
 
         res.json({
             ok: true,
-            plants,
+            products,
         })
 
     }
@@ -305,10 +305,8 @@ const deletePlant = async (req, res = response) => {
 
 module.exports = {
     createProduct,
-    editPlant,
-    getPlantById,
-    getPlantsByRoom,
-    getPlantsByUser,
-    deletePlant
+
+    getProductsByCatalogo,
+
 }
 
