@@ -16,6 +16,7 @@ const createProduct = async (req, res = response) => {
         catalogo,
         user,
         coverImage,
+        ratingInit
     } = req.body;
 
 
@@ -41,6 +42,7 @@ const createProduct = async (req, res = response) => {
             description,
             coverImage,
             catalogo,
+            ratingInit,
             user
          });
          console.log('after create: ', newProduct);

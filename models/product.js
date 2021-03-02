@@ -35,6 +35,13 @@ const ProductSchema = Schema({
         default: ''
     },
 
+    ratingInit: {
+
+        type: Number,
+        require: false,
+        default: 0
+    }
+
 
 
     
