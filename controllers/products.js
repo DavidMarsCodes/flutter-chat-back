@@ -338,6 +338,7 @@ module.exports = {
     createProduct,
 
     getProductsByCatalogo,
+    getLastProducts
 
 }
 
