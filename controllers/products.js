@@ -48,7 +48,7 @@ const createProduct = async (req, res = response) => {
         const products = await Product
         .find({ catalogo: catalogo })
 
-        const countProducts = plants.length;
+        const countProducts = products.length;
         
        
 
