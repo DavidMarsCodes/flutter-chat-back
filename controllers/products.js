@@ -14,7 +14,8 @@ const createProduct = async (req, res = response) => {
         name,
         description,
         catalogo,
-        user
+        user,
+        coverImage,
     } = req.body;
 
 
@@ -38,6 +39,7 @@ const createProduct = async (req, res = response) => {
         const newProduct = new Product({ 
             name,
             description,
+            coverImage,
             catalogo,
             user
          });

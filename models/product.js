@@ -29,6 +29,12 @@ const ProductSchema = Schema({
         default: 0
     },
 
+    coverImage: {
+        type: String,
+        required: false,
+        default: ''
+    },
+
 
 
     
