@@ -20,15 +20,6 @@ router.post('/new', [
 
 router.get('/products/catalogo/:id', validateJWT, getProductsByCatalogo );
 
-router.get('/plants/user/:id', validateJWT, getPlantsByUser );
-
-
-router.get('/plant/:id', validateJWT, getPlantById );
-
-
-router.delete('/delete/:id', validateJWT, deletePlant);
-
-router.post('/update/plant', validateJWT, editPlant );
 
 
 
