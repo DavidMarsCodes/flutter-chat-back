@@ -15,12 +15,12 @@ const PlantSchema = Schema({
         type: String,
         required: true
     },
-    sexo: 
+    /* sexo: 
     {
         type: String,
         required: false,
         default: ''
-    },
+    }, */
 
     cbd: {
         type: String,

@@ -9,7 +9,7 @@ const createPlant = async (req, res = response) => {
         name,
         description,
         quantity,
-        sexo,
+       
         room,
         coverImage,
         germinated,
@@ -46,7 +46,7 @@ const createPlant = async (req, res = response) => {
             description,
             quantity,
             coverImage,
-            sexo,
+          
             user,
             room,
             germinated,
@@ -105,7 +105,7 @@ const editPlant= async (req, res = response) => {
     const { name,
         description,
         quantity,
-        sexo,
+       
         coverImage,
         germinated,
         flowering,
@@ -124,7 +124,7 @@ const editPlant= async (req, res = response) => {
             name: name,
             description: description,
             quantity: quantity,
-            sexo: sexo,
+           
             coverImage: coverImage,
             germinated: germinated,
             flowering: flowering,

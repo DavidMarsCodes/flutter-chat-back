@@ -39,17 +39,17 @@ const VisitSchema = Schema({
     },
     cut: {
         type: Boolean,
-        required: true,
+        required: false,
         default: false
     },
     water: {
         type: Boolean,
-        required: true,
+        required: false,
         default: false
     },
     abono: {
         type: Boolean,
-        required: true,
+        required: false,
         default: false
     },
     electro: {
