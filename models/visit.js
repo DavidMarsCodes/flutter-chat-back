@@ -66,7 +66,20 @@ const VisitSchema = Schema({
         type: String,
         required: false,
         default: ''
+    },
+
+    mlAbono: {
+        type: String,
+        required: false,
+        default: ''
+    },
+
+    nameAbono: {
+        type: String,
+        required: false,
+        default: ''
     }
+
 
 },
 

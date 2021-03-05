@@ -16,7 +16,9 @@ const createVisit = async (req, res = response) => {
             abono,
             electro,
             ph,
-            ml
+            ml,
+            mlAbono,
+nameAbono
         } = req.body;
 
         console.log('req.body', req.body)
@@ -43,7 +45,9 @@ const createVisit = async (req, res = response) => {
                 electro,
                 abono,
                 ph,
-                ml
+                ml,
+                mlAbono,
+                nameAbono
             });
 
         console.log('after create: ', newVisit);
@@ -85,6 +89,8 @@ const editVisit = async (req, res = response) => {
         abono,
         ph,
         ml,
+        mlAbono,
+        nameAbono,
         id
     } = req.body;
 
@@ -102,6 +108,8 @@ const editVisit = async (req, res = response) => {
             water: water,
             abono: abono,
             electro: electro,
+            mlAbono: mlAbono,
+            nameAbono:nameAbono,
             ph: ph,
             ml: ml
          };
