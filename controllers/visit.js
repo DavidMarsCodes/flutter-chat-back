@@ -3,7 +3,38 @@ const Visit = require('../models/visit');
 const Plant = require('../models/plant');
 
 const createVisit = async (req, res = response) => {
-    const {         
+    const {
+        user,
+        plant,
+        description,
+        coverImage,
+        clean,
+        temperature,
+        degrees,
+        cut,
+        water,
+        abono,
+        electro,
+        ph,
+        ml,
+        mlAbono,
+
+        nameAbono, 
+        grams
+    } = req.body;
+
+    console.log('req.body', req.body)
+
+    const uid = user;
+    const plantid = plant;
+
+    console.log('uid', uid)
+    console.log('plantid', plantid)
+
+
+    try {
+
+        const newVisit = new Visit({
             user,
             plant,
             description,
@@ -13,48 +44,20 @@ const createVisit = async (req, res = response) => {
             degrees,
             cut,
             water,
-            abono,
             electro,
+            abono,
             ph,
             ml,
             mlAbono,
-nameAbono
-        } = req.body;
-
-        console.log('req.body', req.body)
-
-        const uid = user;
-        const plantid = plant;
-
-        console.log('uid', uid)
-        console.log('plantid', plantid)
-
-
-    try {
-
-        const newVisit = new Visit({ 
-                user,
-                plant,
-                description,
-                coverImage,
-                clean,
-                temperature,
-                degrees,
-                cut,
-                water,
-                electro,
-                abono,
-                ph,
-                ml,
-                mlAbono,
-                nameAbono
-            });
+            nameAbono,
+            grams
+        });
 
         console.log('after create: ', newVisit);
 
         const visit = await newVisit.save();
 
-       
+
 
         console.log('Visit create: ', visit);
 
@@ -77,7 +80,7 @@ nameAbono
 
 
 const editVisit = async (req, res = response) => {
-    const { 
+    const {
         description,
         coverImage,
         clean,
@@ -91,6 +94,7 @@ const editVisit = async (req, res = response) => {
         ml,
         mlAbono,
         nameAbono,
+        grams,
         id
     } = req.body;
 
@@ -98,26 +102,27 @@ const editVisit = async (req, res = response) => {
 
     try {
 
-        const updateVisit = { 
-            description : description,
+        const updateVisit = {
+            description: description,
             coverImage: coverImage,
             clean: clean,
-            temperature: temperature,        
+            temperature: temperature,
             degrees: degrees,
             cut: cut,
             water: water,
             abono: abono,
             electro: electro,
             mlAbono: mlAbono,
-            nameAbono:nameAbono,
+            nameAbono: nameAbono,
             ph: ph,
-            ml: ml
-         };
+            ml: ml,
+            grams: grams
+        };
 
-         console.log('after updateVisit: ', updateVisit);
+        console.log('after updateVisit: ', updateVisit);
 
 
-       const  oupdateVisit = await Visit.updateOne(
+        const oupdateVisit = await Visit.updateOne(
             {
                 _id: id
             },
@@ -126,10 +131,10 @@ const editVisit = async (req, res = response) => {
             }
         );
 
-            const visit = await Visit.findOne({ _id: id});
+        const visit = await Visit.findOne({ _id: id });
 
-            console.log(visit);
-         
+        console.log(visit);
+
 
         res.json({
             ok: true,
@@ -155,7 +160,7 @@ const getVisitsById = async (req, res = response) => {
 
         const visit = await Visit
             .findOne({ _id: visitId })
-           
+
         console.log('visit** ', visit)
 
         res.json({

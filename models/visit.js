@@ -78,6 +78,12 @@ const VisitSchema = Schema({
         type: String,
         required: false,
         default: ''
+    },
+
+    grams: {
+        type: String,
+        required: false,
+        default: '0'
     }
 
 
