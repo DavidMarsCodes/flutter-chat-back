@@ -101,7 +101,7 @@ const createPlant = async (req, res = response) => {
 }
 
 
-const editProduct = async (req, res = response) => {
+const editPlant = async (req, res = response) => {
     const { name,
         description,
 
@@ -313,7 +313,7 @@ const deletePlant = async (req, res = response) => {
 
 module.exports = {
     createPlant,
-    editProduct,
+    editPlant,
     getPlantById,
     getPlantsByRoom,
     getPlantsByUser,
