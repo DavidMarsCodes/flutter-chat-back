@@ -94,58 +94,54 @@ const createProduct = async (req, res = response) => {
 }
 
 
+
 const editProduct = async (req, res = response) => {
     const { name,
         description,
-        quantity,
-        sexo,
+
+
         coverImage,
-        germinated,
-        flowering,
-        pot,
+
         cbd,
         thc,
-        id} = req.body;
+        id } = req.body;
 
 
-   
+
 
 
     try {
 
-        const updatePlant = { 
+        const updateProduct = {
             name: name,
             description: description,
-            quantity: quantity,
-            sexo: sexo,
+
             coverImage: coverImage,
-            germinated: germinated,
-            flowering: flowering,
-            pot: pot,
+      
             cbd: cbd,
             thc: thc
-         };
+        };
 
-         console.log('after updatePlant: ', updatePlant);
+        console.log('after updateProduct: ', updateProduct);
 
 
-       const  oupdatePlant = await Plant.updateOne(
+        const update = await Product.updateOne(
             {
                 _id: id
             },
             {
-                $set: updatePlant
+                $set: updateProduct
             }
         );
 
-            const plant = await Plant.findOne({ _id: id});
+        const product = await Product.findOne({ _id: id });
 
-            console.log(plant);
-         
+        console.log(product);
+
 
         res.json({
             ok: true,
-            plant
+            product
         });
 
 
@@ -157,6 +153,7 @@ const editProduct = async (req, res = response) => {
         });
     }
 }
+
 
 const getPlantById = async (req, res = response) => {
 

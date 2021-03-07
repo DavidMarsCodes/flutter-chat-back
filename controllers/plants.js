@@ -5,11 +5,11 @@ const Room = require('../models/room');
 
 
 const createPlant = async (req, res = response) => {
-    const {
+    const { 
         name,
         description,
         quantity,
-
+       
         room,
         coverImage,
         germinated,
@@ -21,8 +21,8 @@ const createPlant = async (req, res = response) => {
     } = req.body;
 
 
-    const uid = user;
-    const roomid = room;
+        const uid = user;
+        const roomid = room;
 
 
 
@@ -41,12 +41,12 @@ const createPlant = async (req, res = response) => {
         //const plantsTotal = await Plant.find({ user: user, room: roomid });
 
 
-        const newPlant = new Plant({
+        const newPlant = new Plant({ 
             name,
             description,
             quantity,
             coverImage,
-
+          
             user,
             room,
             germinated,
@@ -55,17 +55,17 @@ const createPlant = async (req, res = response) => {
             cbd,
             thc,
             user
-        });
-        console.log('after create: ', newPlant);
+         });
+         console.log('after create: ', newPlant);
 
         const plant = await newPlant.save();
 
         const plants = await Plant
-            .find({ room: room })
+        .find({ room: room })
 
         const countPlants = plants.length;
-
-
+        
+       
 
         console.log(' countPlants: ', countPlants);
         await Room.updateOne(
@@ -101,53 +101,58 @@ const createPlant = async (req, res = response) => {
 }
 
 
-const editPlant = async (req, res = response) => {
+const editPlant= async (req, res = response) => {
     const { name,
         description,
-
-
+        quantity,
+       
         coverImage,
-
+        germinated,
+        flowering,
+        pot,
         cbd,
         thc,
-        id } = req.body;
+        id} = req.body;
 
 
-
+   
 
 
     try {
 
-        const updateProduct = {
+        const updatePlant = { 
             name: name,
             description: description,
-
+            quantity: quantity,
+           
             coverImage: coverImage,
-      
+            germinated: germinated,
+            flowering: flowering,
+            pot: pot,
             cbd: cbd,
             thc: thc
-        };
+         };
 
-        console.log('after updateProduct: ', updateProduct);
+         console.log('after updatePlant: ', updatePlant);
 
 
-        const update = await Product.updateOne(
+       const  oupdatePlant = await Plant.updateOne(
             {
                 _id: id
             },
             {
-                $set: updateProduct
+                $set: updatePlant
             }
         );
 
-        const product = await Product.findOne({ _id: id });
+            const plant = await Plant.findOne({ _id: id});
 
-        console.log(product);
-
+            console.log(plant);
+         
 
         res.json({
             ok: true,
-            product
+            plant
         });
 
 
@@ -169,7 +174,7 @@ const getPlantById = async (req, res = response) => {
 
         const plant = await Plant
             .findOne({ _id: plantId })
-
+           
 
 
         console.log('plant** ', plant)
@@ -272,11 +277,11 @@ const deletePlant = async (req, res = response) => {
 
 
         const plants = await Plant
-            .find({ room: plant.room })
+        .find({ room: plant.room })
 
         const countPlants = plants.length;
-
-
+        
+       
 
         console.log(' countPlants: ', countPlants);
         await Room.updateOne(
