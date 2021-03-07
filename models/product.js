@@ -40,7 +40,18 @@ const ProductSchema = Schema({
         type: String,
         require: false,
         default: '0'
-    }
+    },
+
+    cbd: {
+        type: String,
+        required: false,
+        default: ''
+    },
+    thc: {
+        type: String,
+        required: false,
+        default: ''
+    },
 
 
 

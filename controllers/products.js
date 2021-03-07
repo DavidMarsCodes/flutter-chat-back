@@ -16,7 +16,9 @@ const createProduct = async (req, res = response) => {
         catalogo,
         user,
         coverImage,
-        ratingInit
+        ratingInit,
+        cbd,
+        thc,
     } = req.body;
 
 
@@ -43,7 +45,9 @@ const createProduct = async (req, res = response) => {
             coverImage,
             catalogo,
             ratingInit,
-            user
+            user,
+            cbd,
+            thc,
          });
          console.log('after create: ', newProduct);
 
@@ -90,7 +94,7 @@ const createProduct = async (req, res = response) => {
 }
 
 
-const editPlant= async (req, res = response) => {
+const editProduct = async (req, res = response) => {
     const { name,
         description,
         quantity,
