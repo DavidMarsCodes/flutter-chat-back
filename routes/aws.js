@@ -2,7 +2,7 @@
 const { Router } = require('express');
 const { validateJWT } = require('../middlewares/validar-jwt');
 
-const {   uploadAvatar, uploadHeader , uploadCoverPlant, updateCoverPlant, uploadCoverVisit, updateCoverVisit} = require('../controllers/aws');
+const {   uploadAvatar, uploadHeader , uploadCoverPlant, updateCoverPlant, uploadCoverVisit, updateCoverVisit, updateCoverProduct} = require('../controllers/aws');
 
 
 
@@ -18,6 +18,9 @@ router.post("/upload/update-cover-plant", validateJWT, updateCoverPlant )
 router.post("/upload/cover-visit", validateJWT, uploadCoverVisit )
 
 router.post("/upload/update-cover-visit", validateJWT, updateCoverVisit )
+
+router.post("/upload/update-cover-product", validateJWT, updateCoverProduct )
+
 
 
 

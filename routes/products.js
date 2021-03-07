@@ -2,7 +2,7 @@
 const { Router } = require('express');
 const { check } = require('express-validator');
 
-const { createProduct, editProduct, getProductsByCatalogo, getLastProducts } = require('../controllers/products');
+const { createProduct, editProduct, getProductsByCatalogo, getLastProducts,  } = require('../controllers/products');
 const { validarCampos } = require('../middlewares/validar-campos');
 const { validateJWT } = require('../middlewares/validar-jwt');
 const { renewToken } = require('../controllers/auth');
