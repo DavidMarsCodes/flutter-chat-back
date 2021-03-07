@@ -99,7 +99,7 @@ const editProduct = async (req, res = response) => {
     const { name,
         description,
 
-
+        ratingInit,
         coverImage,
 
         cbd,
@@ -117,7 +117,7 @@ const editProduct = async (req, res = response) => {
             description: description,
 
             coverImage: coverImage,
-      
+            ratingInit: ratingInit,
             cbd: cbd,
             thc: thc
         };
