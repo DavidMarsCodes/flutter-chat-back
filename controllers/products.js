@@ -340,7 +340,7 @@ const deletePlant = async (req, res = response) => {
 
 module.exports = {
     createProduct,
-
+    editProduct,
     getProductsByCatalogo,
     getLastProducts
 
