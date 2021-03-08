@@ -243,10 +243,27 @@ const getLastProducts= async (req, res = response) => {
             .sort('-createdAt')
 
 
+
+
+
             if (!isClub) {
                 const promises = products.map((obj) =>
     
                     new Promise((resolve, reject) => {
+
+
+                
+
+                                Catalogo
+                            .findById(obj.catalogo)
+                            .then(catalogo => {
+                            
+                
+                            console.log('catalogos product:', catalogo);
+                
+                            if(catalogo == '1' || catalogo == '2'){
+        
+                       
     
                        
                         if (obj.user != uid) {
@@ -308,12 +325,29 @@ const getLastProducts= async (req, res = response) => {
                                 })
                             }
 
+                            
+
                             else {
 
                                 resolve();
                             };
+
+                        }
+
                         
-                    }));
+
+                        else {
+
+                            resolve();
+                        };
+
+                    });
+
+                        
+
+                    
+                        
+                    }))
                 Promise.all(promises)
                     .then((resolve) => {
     
