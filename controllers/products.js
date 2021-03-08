@@ -6,7 +6,12 @@ const Catalogo = require('../models/catalogo');
 
 const Product = require('../models/product');
 
+const Profile = require('../models/profile');
 
+const User = require('../models/user');
+
+
+const Subscription = require('../models/subscription');
 
 
 const createProduct = async (req, res = response) => {
@@ -92,7 +97,6 @@ const createProduct = async (req, res = response) => {
         });
     }
 }
-
 
 
 const editProduct = async (req, res = response) => {
@@ -224,20 +228,201 @@ const getLastProducts= async (req, res = response) => {
 
     try {
 
+        const uid = req.params.uid;
+
+
+
+        const myprofile = await Profile.findOne({ user: uid })
+
+
+        const isClub = myprofile.isClub;
+
 
         const products = await Product
             .find()
             .sort('-createdAt')
 
 
+            if (!isClub) {
+                const promises = products.map((obj) =>
+    
+                    new Promise((resolve, reject) => {
+    
+                       
+                        if (obj.user != uid) {
+    
+                            Profile.findOne({ user: obj.user }
+                            )
+                                .sort({ updateAt: 'asc' })
+                                .then(item => {
+    
+    
+                                    User.findById(obj.user
+                                    )
+    
+                                        .then(user => {
+    
+    
+                                            Subscription.findOne({
+                                                club: obj.user, subscriptor: uid
+                                            })
+                                                .then((subscription) => {
+    
+    
+                                                    const subscribeApproved = (subscription) ? subscription.subscribeApproved : false;
+                                                    const subscribeActive = (subscription) ? subscription.subscribeActive : false;
+    
+                                                    console.log('subscription!!!!', subscription)
+    
+                                                    const profile = {
+                                                        name: item.name,
+                                                        lastName: item.lastName,
+                                                        imageHeader: item.imageHeader,
+                                                        imageAvatar: item.imageAvatar,
+                                                        imageRecipe: item.imageRecipe,
+                                                        about: item.about,
+                                                        id: item._id,
+                                                        user: {
+                                                            online: user.online,
+                                                            uid: user._id,
+                                                            email: user.email,
+                                                            username: user.username,
+    
+                                                        },
+                                                        subscribeApproved: (isClub) ? true : subscribeApproved,
+                                                        subscribeActive: (isClub) ? true : subscribeActive,
+                                                        message: obj.message,
+                                                        isClub: item.isClub,
+                                                        messageDate: obj.createdAt,
+                                                        createdAt: item.createdAt,
+                                                        updatedAt: item.updatedAt
+    
+                                                    }
+    
+                                                    profiles.push(profile);
+                                                    resolve();
+                                                })
+    
+                                        });
+    
+                                })
+                            }
 
-        console.log('products** ', products)
+                            else {
+
+                                resolve();
+                            };
+                        
+                    }));
+                Promise.all(promises)
+                    .then((resolve) => {
+    
+    
+                        console.log('profiles!!', profiles)
+                        return res.json({
+                            ok: true,
+                            profiles: profiles
+                        })
+                    })
+    
+            }
 
 
-        res.json({
-            ok: true,
-            products,
-        })
+
+            else {
+
+
+                const promises = products.map((obj) =>
+    
+    
+                    new Promise((resolve, reject) => {
+    
+                        console.log('else club **!!! ', isClub);
+    
+                      
+    
+                            Profile.findOne({ user: obj.user }
+                            )
+                                .sort({ updateAt: 'asc' })
+                                .then(item => {
+    
+                                    console.log('item', item);
+    
+    
+                                    User.findById(item.user._id
+                                    )
+    
+                                        .then(user => {
+    
+                                            console.log('user', user);
+    
+    
+                                            Subscription.findOne({
+                                                club: uid, subscriptor: obj.user
+                                            })
+                                                .then((subscription) => {
+    
+    
+                                                    const subscribeApproved = (subscription) ? subscription.subscribeApproved : false;
+                                                    const subscribeActive = (subscription) ? subscription.subscribeActive : false;
+    
+                                                    console.log('subscription', subscription)
+    
+                                                    const profile = {
+                                                        name: item.name,
+                                                        lastName: item.lastName,
+                                                        imageHeader: item.imageHeader,
+                                                        imageAvatar: item.imageAvatar,
+                                                        imageRecipe: item.imageRecipe,
+    
+                                                        about: item.about,
+                                                        id: item._id,
+                                                        user: {
+                                                            online: user.online,
+                                                            uid: user._id,
+                                                            email: user.email,
+                                                            username: user.username,
+    
+                                                        },
+                                                        subscribeApproved: (isClub) ? true : subscribeApproved,
+                                                        subscribeActive: (isClub) ? true : subscribeActive,
+                                                        message: obj.message,
+                                                        isClub: item.isClub,
+                                                        messageDate: obj.createdAt,
+                                                        createdAt: item.createdAt,
+                                                        updatedAt: item.updatedAt
+    
+                                                    }
+    
+                                                    profiles.push(profile);
+                                                    resolve();
+                                                })
+    
+    
+    
+                                        });
+    
+                                })
+    
+                       
+    
+    
+    
+                        ;
+                    }));
+                Promise.all(promises)
+                    .then((resolve) => {
+    
+    
+                        console.log('profiles!!', profiles)
+                        return res.json({
+                            ok: true,
+                            profiles: profiles
+                        })
+                    })
+    
+            }
+    
 
     }
 
