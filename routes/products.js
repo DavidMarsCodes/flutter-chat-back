@@ -20,7 +20,7 @@ router.post('/new', [
 
 router.get('/products/catalogo/:id', validateJWT, getProductsByCatalogo );
 
-router.get('/principal/products/', validateJWT, getLastProducts );
+router.get('/principal/products/:uid', validateJWT, getLastProducts );
 
 router.post('/update/product', validateJWT, editProduct );
 
