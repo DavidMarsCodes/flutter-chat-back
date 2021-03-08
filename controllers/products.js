@@ -230,12 +230,14 @@ const getLastProducts= async (req, res = response) => {
 
         const uid = req.params.uid;
 
-
+        console.log('uid **');
 
         const myprofile = await Profile.findOne({ user: uid })
 
 
         const isClub = myprofile.isClub;
+
+        const profiles = [];
 
 
         const products = await Product
