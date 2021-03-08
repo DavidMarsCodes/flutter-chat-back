@@ -494,7 +494,7 @@ const getLastProducts = async (req, res = response) => {
                     resolve();
                 };
 
-            });
+    
 
 
 
