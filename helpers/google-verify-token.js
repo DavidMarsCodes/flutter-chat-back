@@ -20,7 +20,6 @@ const validGoogleToken = async (token) => {
         });
         const payload = ticket.getPayload();
 
-        console.log(payload);
 
         return {
 

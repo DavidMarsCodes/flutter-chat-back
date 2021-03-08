@@ -54,7 +54,6 @@ const createProduct = async (req, res = response) => {
             cbd,
             thc,
         });
-        console.log('after create: ', newProduct);
 
         const product = await newProduct.save();
 
@@ -65,7 +64,6 @@ const createProduct = async (req, res = response) => {
 
 
 
-        console.log(' countProducts: ', countProducts);
         await Catalogo.updateOne(
             {
                 _id: catalogo
@@ -79,7 +77,6 @@ const createProduct = async (req, res = response) => {
         );
 
 
-        console.log('Product create: ', product);
 
 
         res.json({
@@ -126,7 +123,6 @@ const editProduct = async (req, res = response) => {
             thc: thc
         };
 
-        console.log('after updateProduct: ', updateProduct);
 
 
         const update = await Product.updateOne(
@@ -164,14 +160,12 @@ const getPlantById = async (req, res = response) => {
     try {
         const plantId = req.params.id;
 
-        console.log('es:', plantId);
 
         const plant = await Plant
             .findOne({ _id: plantId })
 
 
 
-        console.log('plant** ', plant)
 
 
         res.json({
@@ -196,7 +190,6 @@ const getProductsByCatalogo = async (req, res = response) => {
     try {
         const catalogoId = req.params.id;
 
-        console.log('catalogoId:', catalogoId);
 
         const products = await Product
             .find({ catalogo: catalogoId })
@@ -204,7 +197,6 @@ const getProductsByCatalogo = async (req, res = response) => {
 
 
 
-        console.log('products** ', products)
 
 
         res.json({
@@ -230,7 +222,6 @@ const getLastProducts = async (req, res = response) => {
 
         const uid = req.params.uid;
 
-        console.log('uid **');
 
         const myprofile = await Profile.findOne({ user: uid })
 
@@ -261,7 +252,6 @@ const getLastProducts = async (req, res = response) => {
                         .then(catalogo => {
 
 
-                            console.log('catalogos product:', catalogo);
 
                             if (catalogo.privacity == '1' || catalogo.privacity == '2') {
 
@@ -293,7 +283,6 @@ const getLastProducts = async (req, res = response) => {
                                                             const subscribeApproved = (subscription) ? subscription.subscribeApproved : false;
                                                             const subscribeActive = (subscription) ? subscription.subscribeActive : false;
 
-                                                            console.log('subscription!!!!', subscription)
 
 
 
@@ -384,7 +373,6 @@ const getLastProducts = async (req, res = response) => {
                 .then((resolve) => {
 
 
-                    console.log('products!!', products)
                     return res.json({
                         ok: true,
                         products: products
@@ -410,14 +398,9 @@ const getLastProducts = async (req, res = response) => {
                     .then(catalogo => {
 
 
-                        console.log('catalogos product:', catalogo);
 
                         if (catalogo.privacity == '1' || catalogo.privacity == '2') {
 
-
-
-
-                           
 
                                 Profile.findOne({ user: obj.user }
                                 )
@@ -442,7 +425,6 @@ const getLastProducts = async (req, res = response) => {
                                                         const subscribeApproved = (subscription) ? subscription.subscribeApproved : false;
                                                         const subscribeActive = (subscription) ? subscription.subscribeActive : false;
 
-                                                        console.log('subscription!!!!', subscription)
 
 
 
@@ -526,7 +508,6 @@ const getLastProducts = async (req, res = response) => {
             .then((resolve) => {
 
 
-                console.log('products!!', products)
                 return res.json({
                     ok: true,
                     products: products
@@ -552,7 +533,6 @@ const getPlantsByUser = async (req, res = response) => {
     try {
         const userId = req.params.id;
 
-        console.log('userId:', userId);
 
         const plants = await Plant
             .find({ user: userId })
@@ -560,7 +540,6 @@ const getPlantsByUser = async (req, res = response) => {
 
 
 
-        console.log('plants** ', plants)
 
 
         res.json({
@@ -598,7 +577,6 @@ const deletePlant = async (req, res = response) => {
 
 
 
-        console.log(' countPlants: ', countPlants);
         await Room.updateOne(
             {
                 _id: plant.room

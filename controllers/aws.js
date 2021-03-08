@@ -172,7 +172,6 @@ const fileType = req.files.file.mimetype;
 const folder = 'coverPlant';
 const buffer = req.files.file.data;
 
-console.log(fileName,fileType )
 const s3Params = {
     Bucket: S3_BUCKET + '/' + folder,
     Key: fileName,
@@ -184,7 +183,6 @@ const s3Params = {
 
 
 
-console.log('s3Params', s3Params)
 
 s3.upload(s3Params, async (err, data) => {
     
@@ -198,11 +196,9 @@ s3.upload(s3Params, async (err, data) => {
         url: `http://${S3_BUCKET}.s3.sa-east-1.amazonaws.com/${folder}/${fileName}`
     };
 
-    console.log(returnData)
 
     const plantId = req.headers.id;
 
-    console.log('UID: ', plantId);
 
   const  plantUpdate = await Plant.updateOne(
         {
@@ -219,7 +215,6 @@ s3.upload(s3Params, async (err, data) => {
 
 
 
-    console.log('plantUpdate', plantUpdate)  
 
     res.json({ ok: true, url: returnData.url  });
 
@@ -236,7 +231,6 @@ s3.upload(s3Params, async (err, data) => {
 const updateCoverProduct = async (req, res = response ) => {
 
    
-    console.log("req ##", req.headers.id);  
 
 try {
 
@@ -249,7 +243,6 @@ const fileType = req.files.file.mimetype;
 const folder = 'coverProduct';
 const buffer = req.files.file.data;
 
-console.log(fileName,fileType )
 const s3Params = {
     Bucket: S3_BUCKET + '/' + folder,
     Key: fileName,
@@ -261,7 +254,6 @@ const s3Params = {
 
 
 
-console.log('s3Params', s3Params)
 
 s3.upload(s3Params, async (err, data) => {
     
@@ -275,11 +267,9 @@ s3.upload(s3Params, async (err, data) => {
         url: `http://${S3_BUCKET}.s3.sa-east-1.amazonaws.com/${folder}/${fileName}`
     };
 
-    console.log(returnData)
 
     const productId = req.headers.id;
 
-    console.log('UID: ', productId);
 
   const  productUpdate = await Product.updateOne(
         {
@@ -296,7 +286,6 @@ s3.upload(s3Params, async (err, data) => {
 
 
 
-    console.log('productUpdate', productUpdate)  
 
     res.json({ ok: true, url: returnData.url  });
 
@@ -312,7 +301,6 @@ s3.upload(s3Params, async (err, data) => {
 const uploadCoverPlant = async (req, res = response ) => {
 
    
-    console.log("req ##", req.headers);  
 
 try {
 
@@ -325,7 +313,6 @@ const fileType = req.files.file.mimetype;
 const folder = 'coverPlant';
 const buffer = req.files.file.data;
 
-console.log(fileName,fileType )
 const s3Params = {
     Bucket: S3_BUCKET + '/' + folder,
     Key: fileName,
@@ -337,7 +324,6 @@ const s3Params = {
 
 
 
-console.log('s3Params', s3Params)
 
 s3.upload(s3Params, async (err, data) => {
     
@@ -351,7 +337,6 @@ s3.upload(s3Params, async (err, data) => {
         url: `http://${S3_BUCKET}.s3.sa-east-1.amazonaws.com/${folder}/${fileName}`
     };
 
-    console.log(returnData)
 
 
     res.json({ ok: true, url: returnData.url  });
@@ -369,7 +354,6 @@ s3.upload(s3Params, async (err, data) => {
 const uploadCoverVisit = async (req, res = response ) => {
 
    
-    console.log("req ##", req.headers);  
 
 try {
 
@@ -382,7 +366,6 @@ const fileType = req.files.file.mimetype;
 const folder = 'visit';
 const buffer = req.files.file.data;
 
-console.log(fileName,fileType )
 const s3Params = {
     Bucket: S3_BUCKET + '/' + folder,
     Key: fileName,
@@ -394,7 +377,6 @@ const s3Params = {
 
 
 
-console.log('s3Params', s3Params)
 
 s3.upload(s3Params, async (err, data) => {
     
@@ -425,7 +407,6 @@ s3.upload(s3Params, async (err, data) => {
 const updateCoverVisit = async (req, res = response ) => {
 
    
-    console.log("req ##", req.headers.id);  
 
 try {
 
@@ -438,7 +419,6 @@ const fileType = req.files.file.mimetype;
 const folder = 'coverVisit';
 const buffer = req.files.file.data;
 
-console.log(fileName,fileType )
 const s3Params = {
     Bucket: S3_BUCKET + '/' + folder,
     Key: fileName,
@@ -450,7 +430,6 @@ const s3Params = {
 
 
 
-console.log('s3Params', s3Params)
 
 s3.upload(s3Params, async (err, data) => {
     
@@ -464,11 +443,9 @@ s3.upload(s3Params, async (err, data) => {
         url: `http://${S3_BUCKET}.s3.sa-east-1.amazonaws.com/${folder}/${fileName}`
     };
 
-    console.log(returnData)
 
     const visitId = req.headers.id;
 
-    console.log('UID: ', visitId);
 
   const  visitUpdate = await Visit.updateOne(
         {
@@ -487,7 +464,6 @@ s3.upload(s3Params, async (err, data) => {
 
 
 
-    console.log('visitUpdate', visitUpdate)  
 
     res.json({ ok: true, url: returnData.url  });
 

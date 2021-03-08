@@ -21,16 +21,14 @@ io.on('connect', (client) =>  {
     // Escuchar del cliente el mensaje-personal
     client.on('personal-message', async( payload ) => {
         // TODO: Grabar mensaje
-        console.log('payload!!');
-        console.log('emit!!');
+
         await saveMessage( payload );
         io.to( payload.for ).emit('personal-message', payload );
     })
 
     client.on('principal-message', async( payload ) => {
         // TODO: Grabar mensaje
-        console.log('payload!!');
-        console.log('emit!!');
+
       
         io.to( payload.for ).emit('principal-message', payload );
     })

@@ -25,7 +25,6 @@ console.log(req.body);
 
     const googleUser = await validGoogleToken(tokenGoogle);
 
-    console.log('googleUser', googleUser)
 
 
     const { email, id , name, lastName, imageAvatar } = googleUser;
@@ -37,7 +36,6 @@ console.log(req.body);
 
 console.log(email)
 
-    console.log('newUsername', newUsername)
 
     if(!googleUser) {
 
@@ -117,7 +115,6 @@ console.log(email)
     const profileFind = await 
     Profile.findOne({user: newUser.id})
 
-    console.log('profileFind!!', profileFind)
 
     // Generar mi JWT
     const profile = {
@@ -145,7 +142,6 @@ console.log(email)
        
       }
 
-      console.log('profile!!', profile)
 
  
     res.json({

@@ -11,7 +11,6 @@ const UpdateImageSubscription = async (req, res = response) => {
      
         } = req.body;
 
-        console.log('req.body', req.body)
 
 
     try {
@@ -22,7 +21,6 @@ const UpdateImageSubscription = async (req, res = response) => {
             isUpload: true,
             subscribeActive: true
          };
-         console.log('after create: ', update);
 
 
    await Subscription.updateOne(
@@ -77,8 +75,6 @@ const UnSubscription = async (req, res = response) => {
      
         } = req.body;
 
-        console.log('req.body', req.body)
-
 
 
 
@@ -90,7 +86,6 @@ const UnSubscription = async (req, res = response) => {
             subscribeApproved: false
            
          };
-         console.log('after create: ', update);
 
 
    await Subscription.updateOne(
@@ -105,7 +100,6 @@ const UnSubscription = async (req, res = response) => {
 
         const subscription = await Subscription
         .findOne({ _id: id })
-console.log(subscription);
         res.json({
             ok: true,
             subscription,
@@ -125,29 +119,24 @@ console.log(subscription);
 
 const getSubscribeByClubIdAndSubId = async (req, res = response) => {
 
-    console.log('req.params##: ', req.params)
 
     try {
         const userAuth = req.params.userauth;
 
         const userId = req.params.userid;
 
-      console.log('userAuth:', userAuth);
 
       const profileAuth = await Profile.findOne({user: userAuth});
 
       isClub = profileAuth.isClub;
 
-        console.log('userId:', userId);
 
         if(isClub){
 
-            console.log('isclub')
 
             const subscription = await Subscription
             .findOne({ subscriptor: userId, club: userAuth })
 
-            console.log('subscription by user: ', subscription)
 
 
         const profile = await Profile
@@ -169,7 +158,6 @@ const getSubscribeByClubIdAndSubId = async (req, res = response) => {
                 subscribeActive: false,
                 isUpload: isUploadImageRecipe,
              });
-             console.log('after create: ', newSubscription);
     
            const subscription = await newSubscription.save();
 
@@ -197,7 +185,6 @@ const getSubscribeByClubIdAndSubId = async (req, res = response) => {
             const subscription = await Subscription
             .findOne({ subscriptor: userAuth, club: userId  })
 
-            console.log('subscription by user: ', subscription)
 
 
         const profile = await Profile
@@ -219,7 +206,6 @@ const getSubscribeByClubIdAndSubId = async (req, res = response) => {
                 subscribeActive: false,
                 isUpload: isUploadImageRecipe,
              });
-             console.log('after create: ', newSubscription);
     
            const subscription = await newSubscription.save();
 
@@ -273,7 +259,6 @@ const disapproveSubscription = async (req, res = response) => {
      
         } = req.body;
 
-        console.log('req.body', req.body)
 
 
     try {
@@ -284,7 +269,6 @@ const disapproveSubscription = async (req, res = response) => {
             subscribeApproved :false
            
          };
-         console.log('after update sub: ', update);
 
 
    await Subscription.updateOne(
@@ -299,7 +283,6 @@ const disapproveSubscription = async (req, res = response) => {
 
         const subscription = await Subscription
         .findOne({ _id: id })
-console.log(subscription);
         res.json({
             ok: true,
             subscription,
@@ -322,7 +305,6 @@ const approveSubscription = async (req, res = response) => {
      
         } = req.body;
 
-        console.log('req.body', req.body)
 
 
 
@@ -334,7 +316,6 @@ const approveSubscription = async (req, res = response) => {
             subscribeApproved :true
            
          };
-         console.log('after update sub: ', update);
 
 
    await Subscription.updateOne(
@@ -349,7 +330,6 @@ const approveSubscription = async (req, res = response) => {
 
         const subscription = await Subscription
         .findOne({ _id: id })
-console.log(subscription);
         res.json({
             ok: true,
             subscription,

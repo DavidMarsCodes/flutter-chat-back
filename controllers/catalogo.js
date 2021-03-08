@@ -17,18 +17,15 @@ const createCatalogo = async (req, res = response) => {
         privacity,
         user} = req.body;
 
-console.log('req.body', req.body)
 
         const uid = user;
 
-        console.log('uid', uid)
 
 
     try {
 
         const nameExist = await Catalogo.findOne({ name: name, user: uid });
 
-        console.log('nameExist:', nameExist)
         if (nameExist) {
             return res.status(400).json({
                 ok: false,
@@ -46,11 +43,9 @@ console.log('req.body', req.body)
             user: user, 
             position: catalogosTotal.length
          });
-         console.log('after create: ', newCtalogo);
 
        const catalogo = await newCtalogo.save();
 
-        console.log('catalogo create: ', catalogo);
 
 
         res.json({
@@ -76,7 +71,6 @@ const editCatalogo = async (req, res = response) => {
         privacity,
         id} = req.body;
 
-    console.log('req.body', req.body)
 
    
 
@@ -91,7 +85,6 @@ const editCatalogo = async (req, res = response) => {
            
          };
 
-         console.log('after updateCatalogo: ', updateCatalogo);
 
 
        const  update = await Catalogo.updateOne(
@@ -105,7 +98,6 @@ const editCatalogo = async (req, res = response) => {
 
             const catalogo = await Catalogo.findOne({ _id: id});
 
-            console.log(catalogo);
          
 
         res.json({
@@ -129,14 +121,11 @@ const getCatalogoById = async (req, res = response) => {
     try {
         const catalogoId = req.params.id;
 
-        console.log('es:', catalogoId);
 
         const catalogo = await Catalogo
             .findOne({ _id: catalogoId })
            
 
-
-        console.log('catalogo** ', catalogo)
 
 
         res.json({
@@ -164,14 +153,11 @@ const getCatalogosByUsers = async (req, res = response) => {
 
         const userIAuthId = req.params.authid;
 
-        console.log( 'ids params: ', userId,userIAuthId ); 
-
 
         const profileAuth = await Profile.findOne({user: userIAuthId});
 
         const isClub = profileAuth.isClub;
 
-        console.log(isClub)
 
         if(isClub){
 
@@ -181,12 +167,6 @@ const getCatalogosByUsers = async (req, res = response) => {
     
             const isSubscribe =  (subscription)? subscription.subscribeActive && subscription.subscribeApproved: false;
     
-            console.log('subscription', subscription);
-    
-            console.log('!!isSubscribe!!', isSubscribe);
-
-
-
         const catalogos = [];
 
         const catalogos1y2 = await Catalogo
@@ -202,15 +182,12 @@ const getCatalogosByUsers = async (req, res = response) => {
 
                     if(isSubscribe){
 
-                        console.log('is 2 and subscribe item:', item)
-
-                        catalogos.push(item);
                     }
                 }
 
                 else {
 
-                    console.log('is 1 item:', item)
+                    
 
 
                     catalogos.push(item);
@@ -218,7 +195,6 @@ const getCatalogosByUsers = async (req, res = response) => {
                
     
             });
-        console.log('catalogos** ', catalogos)
 
 
 
@@ -238,9 +214,7 @@ const getCatalogosByUsers = async (req, res = response) => {
     
             const isSubscribe =(subscription )? subscription.subscribeActive && subscription.subscribeApproved: false;
     
-            console.log('subscription', subscription);
-    
-            console.log('!!isSubscribe!!', isSubscribe);
+          
 
 
 
@@ -259,15 +233,13 @@ const getCatalogosByUsers = async (req, res = response) => {
 
                     if(isSubscribe){
 
-                        console.log('is 2 and subscribe item:', item)
-
-                        catalogos.push(item);
+                       
                     }
                 }
 
                 else {
 
-                    console.log('is 1 item:', item)
+                   
 
 
                     catalogos.push(item);
@@ -275,7 +247,6 @@ const getCatalogosByUsers = async (req, res = response) => {
                
     
             });
-        console.log('catalogos** ', catalogos)
 
 
 
@@ -318,7 +289,6 @@ const getMyCatalogos = async (req, res = response) => {
         const isClub = myprofile.isClub;
 
 
-        console.log('es:', userId);
 
         const catalogos = await Catalogo
             .find({ user: userId })
@@ -326,7 +296,6 @@ const getMyCatalogos = async (req, res = response) => {
 
 
 
-        console.log('catalogos** ', catalogos)
 
 
         res.json({
@@ -350,11 +319,9 @@ const deleteRoom = async (req, res = response) => {
 
     try {
 
-        console.log(req.params);
 
         const roomId = req.params.id
 
-        console.log(roomId);
 
         const room = await Room.findByIdAndDelete(roomId)
 
@@ -424,11 +391,9 @@ const deleteCatalogo = async (req, res = response) => {
 
     try {
 
-        console.log(req.params);
 
         const catalogoId = req.params.id
 
-        console.log(catalogoId);
 
         const catalogo = await Catalogo.findByIdAndDelete(catalogoId)
 

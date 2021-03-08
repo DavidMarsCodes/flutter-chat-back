@@ -18,7 +18,6 @@ const getSearchPrincipalByQuery = async (req, res = response) => {
         .limit(50)
         .populate('user');
 
-        console.log('resultFindArray', resultFindArray);
 
        // .sort('-online')
 
@@ -33,7 +32,6 @@ const getSearchPrincipalByQuery = async (req, res = response) => {
        
 
        
-            console.log('item!!', item)
 
         const profile = {
             name: item.name,
@@ -64,13 +62,11 @@ const getSearchPrincipalByQuery = async (req, res = response) => {
 
         profiles.push(profile);
 
-        console.log('profiles push', profiles)
 
     }
    );
     
 
-    console.log('profiles!!!', profiles)
 
 
     res.json({

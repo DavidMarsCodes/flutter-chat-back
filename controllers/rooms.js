@@ -15,18 +15,15 @@ const createRoom = async (req, res = response) => {
         timeOff ,
         user} = req.body;
 
-console.log('req.body', req.body)
 
         const uid = user;
 
-        console.log('uid', uid)
 
 
     try {
 
         const nameExist = await Room.findOne({ name: name, user: uid });
 
-        console.log('nameExist:', nameExist)
         if (nameExist) {
             return res.status(400).json({
                 ok: false,
@@ -50,11 +47,9 @@ console.log('req.body', req.body)
             user: user, 
             position: roomsTotal.length
          });
-         console.log('after create: ', newRoom);
 
        const room = await newRoom.save();
 
-        console.log('room create: ', room);
 
 
         res.json({
@@ -86,8 +81,6 @@ const editRoom = async (req, res = response) => {
         timeOff ,
         id} = req.body;
 
-    console.log('req.body', req.body)
-
    
 
 
@@ -107,7 +100,6 @@ const editRoom = async (req, res = response) => {
            
          };
 
-         console.log('after newRoom: ', updateRoom);
 
 
        const  uodateRoom = await Room.updateOne(
@@ -145,14 +137,12 @@ const getRoomById = async (req, res = response) => {
     try {
         const roomId = req.params.id;
 
-        console.log('es:', roomId);
 
         const room = await Room
             .findOne({ _id: roomId })
            
 
 
-        console.log('room** ', room)
 
 
         res.json({
@@ -177,7 +167,6 @@ const getRoomsByUser = async (req, res = response) => {
     try {
         const userId = req.params.id;
 
-        console.log('es:', userId);
 
         const rooms = await Room
             .find({ user: userId })
@@ -185,7 +174,6 @@ const getRoomsByUser = async (req, res = response) => {
 
 
 
-        console.log('rooms** ', rooms)
 
 
         res.json({
@@ -210,11 +198,9 @@ const deleteRoom = async (req, res = response) => {
 
     try {
 
-        console.log(req.params);
 
         const roomId = req.params.id
 
-        console.log(roomId);
 
         const room = await Room.findByIdAndDelete(roomId)
 

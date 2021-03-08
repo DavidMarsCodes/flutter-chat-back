@@ -23,13 +23,8 @@ const createVisit = async (req, res = response) => {
         grams
     } = req.body;
 
-    console.log('req.body', req.body)
 
-    const uid = user;
-    const plantid = plant;
 
-    console.log('uid', uid)
-    console.log('plantid', plantid)
 
 
     try {
@@ -53,13 +48,11 @@ const createVisit = async (req, res = response) => {
             grams
         });
 
-        console.log('after create: ', newVisit);
 
         const visit = await newVisit.save();
 
 
 
-        console.log('Visit create: ', visit);
 
 
         res.json({
@@ -98,7 +91,6 @@ const editVisit = async (req, res = response) => {
         id
     } = req.body;
 
-    console.log('req.body', req.body)
 
     try {
 
@@ -119,7 +111,6 @@ const editVisit = async (req, res = response) => {
             grams: grams
         };
 
-        console.log('after updateVisit: ', updateVisit);
 
 
         const oupdateVisit = await Visit.updateOne(
@@ -133,7 +124,6 @@ const editVisit = async (req, res = response) => {
 
         const visit = await Visit.findOne({ _id: id });
 
-        console.log(visit);
 
 
         res.json({
@@ -156,12 +146,10 @@ const getVisitsById = async (req, res = response) => {
     try {
         const visitId = req.params.id;
 
-        console.log('visitId:', visitId);
 
         const visit = await Visit
             .findOne({ _id: visitId })
 
-        console.log('visit** ', visit)
 
         res.json({
             ok: true,
@@ -185,7 +173,6 @@ const getVisitsByPlant = async (req, res = response) => {
     try {
         const plantId = req.params.id;
 
-        console.log('plantId:', plantId);
 
         const visits = await Visit
             .find({ plant: plantId })
@@ -193,7 +180,6 @@ const getVisitsByPlant = async (req, res = response) => {
 
 
 
-        console.log('visits** ', visits)
 
 
         res.json({
@@ -219,15 +205,12 @@ const getVisitsByUser = async (req, res = response) => {
     try {
         const userId = req.params.id;
 
-        console.log('userId:', userId);
 
         const visits = await Visit
             .find({ user: userId })
             .sort('-createdAt')
 
 
-
-        console.log('visits** ', visits)
 
 
         res.json({
@@ -251,15 +234,12 @@ const deleteVisit = async (req, res = response) => {
 
     try {
 
-        console.log(req.params);
 
         const visitId = req.params.id
 
-        console.log(visitId);
 
         const visit = await Visit.findByIdAndDelete(visitId)
 
-        console.log("visit: ", visit);
 
         res.json({
             ok: true,

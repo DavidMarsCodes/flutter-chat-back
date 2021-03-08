@@ -59,8 +59,6 @@ const createLight = async (req, res = response) => {
            }
        );
 
-        console.log('newLight create: ', light);
-
 
         res.json({
             ok: true,

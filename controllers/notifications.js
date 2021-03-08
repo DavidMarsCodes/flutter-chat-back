@@ -15,7 +15,6 @@ const getProfilesSubscriptorsByClub = async(req, res) => {
 
         const isClub = myprofile.isClub;
 
-       console.log('isclubbb', isClub)
 
 
         if(isClub){
@@ -42,7 +41,6 @@ const getProfilesSubscriptorsByClub = async(req, res) => {
                     )
 
                     .then(user => {
-                    console.log('item**', item)
     
                     const profile = {
                         name: item.name,
@@ -90,7 +88,6 @@ const getProfilesSubscriptorsByClub = async(req, res) => {
             .then((resolve) => {
                 
 
-                console.log('profiles!!', profiles)
                return  res.json({
                     ok: true,
                     profiles: profiles
@@ -128,7 +125,6 @@ const getProfilesSubscriptorsByClub = async(req, res) => {
                     )
 
                     .then(user => {
-                    console.log('item**', item)
     
                     const profile = {
                         name: item.name,
@@ -156,7 +152,6 @@ const getProfilesSubscriptorsByClub = async(req, res) => {
                         updatedAt: item.updatedAt
             
                     }
-                    console.log('toPush!!***!!', profile)
 
                         profiles.push(profile);
                         resolve();
@@ -177,7 +172,6 @@ const getProfilesSubscriptorsByClub = async(req, res) => {
             .then((resolve) => {
                 
 
-                console.log('profiles***!!', profiles)
                return  res.json({
                     ok: true,
                     profiles: profiles
@@ -188,15 +182,6 @@ const getProfilesSubscriptorsByClub = async(req, res) => {
 
    
 
-        /* messagesUnique = [];
-        messagesUnique = Object.values(messages.reduce((acc,cur)=>Object.assign(acc,{[cur.for.toString()]:cur}),{}));
-        console.log('messagesUnique: ', messagesUnique);
- */
-       
-
-    
-   
-  
 
 
 
@@ -205,7 +190,6 @@ const getProfilesSubscriptorsByClub = async(req, res) => {
 } 
 catch (error) {
 
-    console.log('wenas')
 
     res.status(500).json({
         ok: false,
@@ -229,10 +213,6 @@ const getProfilesSubscriptorsPendingByClub = async(req, res) => {
         .sort({ createdAt: 'asc' })
     
 
-        /* messagesUnique = [];
-        messagesUnique = Object.values(messages.reduce((acc,cur)=>Object.assign(acc,{[cur.for.toString()]:cur}),{}));
-        console.log('messagesUnique: ', messagesUnique);
- */
         const profiles = [];
 
         const promises = subscription.map((obj) => 
@@ -248,7 +228,6 @@ const getProfilesSubscriptorsPendingByClub = async(req, res) => {
                     )
 
                     .then(user => {
-                    console.log('item**', item)
     
                     const profile = {
                         name: item.name,
@@ -290,7 +269,6 @@ const getProfilesSubscriptorsPendingByClub = async(req, res) => {
             .then((resolve) => {
                 
 
-                console.log('profiles sub!!!!!', profiles)
                return  res.json({
                     ok: true,
                     profiles: profiles
@@ -325,17 +303,13 @@ const getClubSubscriptionBySubid = async(req, res) => {
         .sort({ createdAt: 'asc' })
     
 
-        /* messagesUnique = [];
-        messagesUnique = Object.values(messages.reduce((acc,cur)=>Object.assign(acc,{[cur.for.toString()]:cur}),{}));
-        console.log('messagesUnique: ', messagesUnique);
- */
+
         const profiles = [];
 
         const promises = subscription.map((obj) => 
         
         new Promise((resolve, reject) => {
 
-            console.log('obj!!', obj);
            Profile.findOne({ user: obj.club }
             )
             .then(item => {
@@ -345,7 +319,6 @@ const getClubSubscriptionBySubid = async(req, res) => {
                     )
 
                     .then(user => {
-                    console.log('item**', item)
     
                     const profile = {
                         name: item.name,
@@ -386,7 +359,6 @@ const getClubSubscriptionBySubid = async(req, res) => {
             .then((resolve) => {
                 
 
-                console.log('profiles!!', profiles)
                return  res.json({
                     ok: true,
                     profiles: profiles
@@ -397,7 +369,6 @@ const getClubSubscriptionBySubid = async(req, res) => {
    
   
 
-  console.log('promises: ', promises)
 
 
    

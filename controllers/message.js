@@ -9,7 +9,6 @@ const getChat = async (req, res) => {
     const miId = req.uid;
     const messageBy = req.params.by;
 
-    console.log('miId', miId, 'messageBy', messageBy)
 
     const last30 = await Message.find({
         $or: [{ by: miId, for: messageBy }, { by: messageBy, for: miId }]
@@ -31,15 +30,12 @@ const getProfilesChat = async (req, res) => {
 
         const uid = req.params.uid;
 
-        console.log('uid**', uid)
-
 
 
         const messages = await Message.find({
             $or: [{ by: uid }, { for: uid }]
         })
 
-        console.log('messages**', messages)
 
 
 
@@ -54,7 +50,6 @@ const getProfilesChat = async (req, res) => {
 
 
 
-        console.log('messagesUnique', messagesUnique);
         const profiles = [];
 
         if (!isClub) {
@@ -62,7 +57,6 @@ const getProfilesChat = async (req, res) => {
 
                 new Promise((resolve, reject) => {
 
-                    console.log('item**!!! ', isClub);
 
                     if (obj.for != uid) {
 
@@ -87,7 +81,6 @@ const getProfilesChat = async (req, res) => {
                                                 const subscribeApproved = (subscription) ? subscription.subscribeApproved : false;
                                                 const subscribeActive = (subscription) ? subscription.subscribeActive : false;
 
-                                                console.log('subscription!!!!', subscription)
 
                                                 const profile = {
                                                     name: item.name,
@@ -133,7 +126,6 @@ const getProfilesChat = async (req, res) => {
                 .then((resolve) => {
 
 
-                    console.log('profiles!!', profiles)
                     return res.json({
                         ok: true,
                         profiles: profiles
@@ -150,7 +142,6 @@ const getProfilesChat = async (req, res) => {
 
                 new Promise((resolve, reject) => {
 
-                    console.log('else club **!!! ', isClub);
 
                     if (obj.by != uid) {
 
@@ -159,7 +150,6 @@ const getProfilesChat = async (req, res) => {
                             .sort({ updateAt: 'asc' })
                             .then(item => {
 
-                                console.log('item', item);
 
 
                                 User.findById(item.user._id
@@ -167,7 +157,6 @@ const getProfilesChat = async (req, res) => {
 
                                     .then(user => {
 
-                                        console.log('user', user);
 
 
                                         Subscription.findOne({
@@ -179,7 +168,6 @@ const getProfilesChat = async (req, res) => {
                                                 const subscribeApproved = (subscription) ? subscription.subscribeApproved : false;
                                                 const subscribeActive = (subscription) ? subscription.subscribeActive : false;
 
-                                                console.log('subscription', subscription)
 
                                                 const profile = {
                                                     name: item.name,
@@ -232,7 +220,6 @@ const getProfilesChat = async (req, res) => {
                 .then((resolve) => {
 
 
-                    console.log('profiles!!', profiles)
                     return res.json({
                         ok: true,
                         profiles: profiles

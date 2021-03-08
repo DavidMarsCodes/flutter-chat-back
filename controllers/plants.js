@@ -56,7 +56,6 @@ const createPlant = async (req, res = response) => {
             thc,
             user
          });
-         console.log('after create: ', newPlant);
 
         const plant = await newPlant.save();
 
@@ -66,8 +65,6 @@ const createPlant = async (req, res = response) => {
         const countPlants = plants.length;
         
        
-
-        console.log(' countPlants: ', countPlants);
         await Room.updateOne(
             {
                 _id: room
@@ -81,7 +78,6 @@ const createPlant = async (req, res = response) => {
         );
 
 
-        console.log('Plant create: ', plant);
 
 
         res.json({
@@ -133,8 +129,6 @@ const editPlant= async (req, res = response) => {
             thc: thc
          };
 
-         console.log('after updatePlant: ', updatePlant);
-
 
        const  oupdatePlant = await Plant.updateOne(
             {
@@ -147,7 +141,6 @@ const editPlant= async (req, res = response) => {
 
             const plant = await Plant.findOne({ _id: id});
 
-            console.log(plant);
          
 
         res.json({
@@ -170,14 +163,12 @@ const getPlantById = async (req, res = response) => {
     try {
         const plantId = req.params.id;
 
-        console.log('es:', plantId);
 
         const plant = await Plant
             .findOne({ _id: plantId })
            
 
 
-        console.log('plant** ', plant)
 
 
         res.json({
@@ -202,7 +193,6 @@ const getPlantsByRoom = async (req, res = response) => {
     try {
         const roomId = req.params.id;
 
-        console.log('roomId:', roomId);
 
         const plants = await Plant
             .find({ room: roomId })
@@ -210,7 +200,6 @@ const getPlantsByRoom = async (req, res = response) => {
 
 
 
-        console.log('plants** ', plants)
 
 
         res.json({
@@ -237,7 +226,6 @@ const getPlantsByUser = async (req, res = response) => {
     try {
         const userId = req.params.id;
 
-        console.log('userId:', userId);
 
         const plants = await Plant
             .find({ user: userId })
@@ -245,7 +233,6 @@ const getPlantsByUser = async (req, res = response) => {
 
 
 
-        console.log('plants** ', plants)
 
 
         res.json({
@@ -283,7 +270,6 @@ const deletePlant = async (req, res = response) => {
         
        
 
-        console.log(' countPlants: ', countPlants);
         await Room.updateOne(
             {
                 _id: plant.room
