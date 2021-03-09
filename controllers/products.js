@@ -56,7 +56,7 @@ const createProduct = async (req, res = response) => {
             thc,
         });
 
-        const productAdd = await newProduct.save();
+        const product = await newProduct.save();
 
         const products = await Product
             .find({ catalogo: catalogo })
