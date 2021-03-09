@@ -29,7 +29,7 @@ const CatalogoSchema = Schema({
 
     {
         type: String,
-        required: true,
+        required: false,
         default: '1'
     },
 
