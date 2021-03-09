@@ -290,7 +290,7 @@ const getLastProducts = async (req, res = response) => {
 
 
 
-                                                                product = {
+                                                                product: {
 
                                                                     id: obj._id,
                                                                     user: obj.user,
@@ -442,7 +442,7 @@ const getLastProducts = async (req, res = response) => {
 
 
 
-                                                            product = {
+                                                            product : {
 
                                                                 id: obj._id,
                                                                 user: obj.user,
