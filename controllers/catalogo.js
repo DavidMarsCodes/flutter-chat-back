@@ -334,7 +334,7 @@ const getMyCatalogos = async (req, res = response) => {
                                     privacity: catalogo.privacity,
                                     totalProducts: catalogo.totalProducts,
                                     products: {
-                                        id: product_id,
+                                        id: product._id,
                                         name: product.name,
                                         description: product.description,
                                         user: product.user,
@@ -353,7 +353,7 @@ const getMyCatalogos = async (req, res = response) => {
                             catalogosProducts.push(catalogoProducts);
                                 
                             });
-                            console.log('catalogosProducts', catalogosProducts)
+                          
 
 
                     })
@@ -363,7 +363,7 @@ const getMyCatalogos = async (req, res = response) => {
 
         Promise.all(promises)
             .then((resolve) => {
-
+                console.log('catalogosProducts', catalogosProducts)
 
                 return res.json({
                     ok: true,
