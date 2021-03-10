@@ -309,8 +309,9 @@ const getMyCatalogos = async (req, res = response) => {
                 console.log('catalogo', catalogo)
 
 
-                const products = Product
+                Product
                     .find({ catalogo: catalogo._id})
+                    .then(products => {
 
                     console.log('products', products)
                    
@@ -352,12 +353,12 @@ const getMyCatalogos = async (req, res = response) => {
                             catalogosProducts.push(catalogoProducts);
                                 
                             });
+                            console.log('catalogosProducts', catalogosProducts)
 
 
-
+                    })
             }))
 
-            console.log('catalogosProducts', catalogosProducts)
 
 
         Promise.all(promises)
