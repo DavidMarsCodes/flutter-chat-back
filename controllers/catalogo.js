@@ -309,8 +309,8 @@ const getMyCatalogos = async (req, res = response) => {
                 console.log('catalogo', catalogo)
 
 
-                const products = await Product
-                    .find(catalogo._id)
+                const products = Product
+                    .find({ catalogo: catalogo._id})
 
                     console.log('products', products)
                    
