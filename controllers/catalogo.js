@@ -329,9 +329,9 @@ const getMyCatalogos = async (req, res = response) => {
                                 position: catalogo.position,
                                 privacity: catalogo.privacity,
                                 totalProducts: catalogo.totalProducts,
-                                products: 
+                                
 
-                                    products
+                                products
                                 
 
                             }
