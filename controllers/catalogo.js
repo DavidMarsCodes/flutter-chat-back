@@ -296,82 +296,22 @@ const getMyCatalogos = async (req, res = response) => {
 
 
 
-        const catalogosProducts = [];
-
-        const promises = catalogos.map((catalogo) =>
-
-
-
-            new Promise((resolve, reject) => {
-
-                console.log('catalogo', catalogo)
+            console.log('catalogos', catalogos)
+        
+            const products = await Product
+            .find({ user: userId })
+            .sort('position')
 
 
-
-                Product
-                    .find({ catalogo: catalogo._id})
-                    .then(products => {
-
-                    console.log('products', products)
-
-                    if(products.length > 0){
-
-
-                        const catalogoProducts = {
-
-
-                            catalogo: {
-
-                                id: catalogo._id,
-                                name: catalogo.name,
-                                description: catalogo.description,
-                                user: catalogo.user,
-                                position: catalogo.position,
-                                privacity: catalogo.privacity,
-                                totalProducts: catalogo.totalProducts,
-                                
-
-                                products
-                                
-
-                            }
-
-                        };
-
-                        console.log('catalogoProducts', catalogoProducts)
-
-                        catalogosProducts.push(catalogoProducts)
-
-                        
-
-
-                    }
-                    else {{
-
-                        resolve();
-                    }}
-                   
-                    
-                           
-                          
-
-
-                    })
-            }))
+ 
+            console.log('products', products)
 
 
 
-        Promise.all(promises)
-            .then((resolve) => {
-                console.log('catalogosProducts', catalogosProducts)
-
-                return res.json({
-                    ok: true,
-                    catalogosProducts: catalogosProducts
-                })
+            return res.json({
+                ok: true,
+                catalogos: catalogos
             })
-
-            ;
 
 
 
