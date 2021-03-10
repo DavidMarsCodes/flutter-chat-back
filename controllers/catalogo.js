@@ -311,6 +311,8 @@ const getMyCatalogos = async (req, res = response) => {
 
                 const products = Product
                     .find(catalogo._id)
+
+                    console.log('products', products)
                    
                     
                             products.forEach(product => {
