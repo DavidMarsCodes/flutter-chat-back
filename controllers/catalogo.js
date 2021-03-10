@@ -1,5 +1,8 @@
 const { response } = require('express');
 const Catalogo = require('../models/catalogo');
+const product = require('../models/product');
+const Product = require('../models/product');
+
 
 const Profile = require('../models/profile');
 
@@ -15,10 +18,10 @@ const createCatalogo = async (req, res = response) => {
     const { name,
         description,
         privacity,
-        user} = req.body;
+        user } = req.body;
 
 
-        const uid = user;
+    const uid = user;
 
 
 
@@ -36,15 +39,15 @@ const createCatalogo = async (req, res = response) => {
         const catalogosTotal = await Catalogo.find({ user: user });
 
 
-        const newCtalogo = new Catalogo({ 
-            name: name, 
-            description: description, 
+        const newCtalogo = new Catalogo({
+            name: name,
+            description: description,
             privacity: privacity,
-            user: user, 
+            user: user,
             position: catalogosTotal.length
-         });
+        });
 
-       const catalogo = await newCtalogo.save();
+        const catalogo = await newCtalogo.save();
 
 
 
@@ -69,36 +72,36 @@ const editCatalogo = async (req, res = response) => {
     const { name,
         description,
         privacity,
-        id} = req.body;
+        id } = req.body;
 
 
-   
+
 
 
     try {
 
-        const updateCatalogo = { 
-            name: name, 
-            description: description, 
-            privacity  : privacity
-           
-           
-         };
+        const updateCatalogo = {
+            name: name,
+            description: description,
+            privacity: privacity
+
+
+        };
 
 
 
-       const  update = await Catalogo.updateOne(
-        {
-            _id: id
-        },
-        {
-            $set: updateCatalogo
-        }
-    );
+        const update = await Catalogo.updateOne(
+            {
+                _id: id
+            },
+            {
+                $set: updateCatalogo
+            }
+        );
 
-            const catalogo = await Catalogo.findOne({ _id: id});
+        const catalogo = await Catalogo.findOne({ _id: id });
 
-         
+
 
         res.json({
             ok: true,
@@ -124,7 +127,7 @@ const getCatalogoById = async (req, res = response) => {
 
         const catalogo = await Catalogo
             .findOne({ _id: catalogoId })
-           
+
 
 
 
@@ -154,55 +157,55 @@ const getCatalogosByUsers = async (req, res = response) => {
         const userIAuthId = req.params.authid;
 
 
-        const profileAuth = await Profile.findOne({user: userIAuthId});
+        const profileAuth = await Profile.findOne({ user: userIAuthId });
 
         const isClub = profileAuth.isClub;
 
 
-        if(isClub){
+        if (isClub) {
 
 
             const subscription = await Subscription
-            .findOne({ subscriptor: userId, club: userIAuthId  })
-    
-            const isSubscribe =  (subscription)? subscription.subscribeActive && subscription.subscribeApproved: false;
-    
-        const catalogos = [];
+                .findOne({ subscriptor: userId, club: userIAuthId })
 
-        const catalogos1y2 = await Catalogo
-            .find({ user: userId , privacity: {$in: ['1', '2']}  })
-            .sort('position')
+            const isSubscribe = (subscription) ? subscription.subscribeActive && subscription.subscribeApproved : false;
+
+            const catalogos = [];
+
+            const catalogos1y2 = await Catalogo
+                .find({ user: userId, privacity: { $in: ['1', '2'] } })
+                .sort('position')
 
 
 
-        
-            catalogos1y2.map((item, index) => { 
-                
-                if(item.privacity == 2){
 
-                    if(isSubscribe){
+            catalogos1y2.map((item, index) => {
+
+                if (item.privacity == 2) {
+
+                    if (isSubscribe) {
 
                     }
                 }
 
                 else {
 
-                    
+
 
 
                     catalogos.push(item);
                 }
-               
-    
+
+
             });
 
 
 
 
-        res.json({
-            ok: true,
-            catalogos,
-        })
+            res.json({
+                ok: true,
+                catalogos,
+            })
 
 
         }
@@ -210,55 +213,55 @@ const getCatalogosByUsers = async (req, res = response) => {
         else {
 
             const subscription = await Subscription
-            .findOne({ subscriptor:userIAuthId , club:  userId  })
-    
-            const isSubscribe =(subscription )? subscription.subscribeActive && subscription.subscribeApproved: false;
-    
-          
+                .findOne({ subscriptor: userIAuthId, club: userId })
+
+            const isSubscribe = (subscription) ? subscription.subscribeActive && subscription.subscribeApproved : false;
 
 
 
-        const catalogos = [];
-
-        const catalogos1y2 = await Catalogo
-            .find({ user: userId , privacity: {$in: ['1', '2']}  })
-            .sort('position')
 
 
+            const catalogos = [];
 
-        
-            catalogos1y2.map((item, index) => { 
-                
-                if(item.privacity == 2){
+            const catalogos1y2 = await Catalogo
+                .find({ user: userId, privacity: { $in: ['1', '2'] } })
+                .sort('position')
 
-                    if(isSubscribe){
 
-                       
+
+
+            catalogos1y2.map((item, index) => {
+
+                if (item.privacity == 2) {
+
+                    if (isSubscribe) {
+
+
                     }
                 }
 
                 else {
 
-                   
+
 
 
                     catalogos.push(item);
                 }
-               
-    
+
+
             });
 
 
 
 
-        res.json({
-            ok: true,
-            catalogos,
-        })
+            res.json({
+                ok: true,
+                catalogos,
+            })
 
         }
-       
-     
+
+
 
 
 
@@ -279,9 +282,9 @@ const getMyCatalogos = async (req, res = response) => {
     try {
         const userId = req.params.id;
 
-    
 
-     
+
+
 
         const myprofile = await Profile.findOne({ user: userId })
 
@@ -296,12 +299,95 @@ const getMyCatalogos = async (req, res = response) => {
 
 
 
+        const catalogosProducts = [];
+
+        const promises = catalogos.map((catalogo) =>
 
 
-        res.json({
-            ok: true,
-            catalogos,
-        })
+
+            new Promise((resolve, reject) => {
+
+                console.log('catalogo', catalogo)
+
+
+                const products = Product
+                    .find(catalogo._id)
+                    .then(products => {
+
+
+                        console.log('products', product)
+                        products.map((product) => {
+
+
+
+
+                            const catalogoProducts = {
+
+
+                                catalogo: {
+
+                                    id: catalogo._id,
+                                    name: catalogo.name,
+                                    description: catalogo.description,
+                                    user: catalogo.user,
+                                    position: catalogo.position,
+                                    privacity: catalogo.privacity,
+                                    totalProducts: catalogo.totalProducts,
+                                    products: {
+                                        id: product_id,
+                                        name: product.name,
+                                        description: product.description,
+                                        user: product.user,
+                                        catalogo: product.catalogo,
+                                        price: product.price,
+                                        coverImage: product.coverImage,
+                                        ratingInit: product.ratingInit,
+                                        cbd: product.cbd,
+                                        thc: product.thc,
+                                    }
+
+                                }
+
+                            };
+
+                            catalogosProducts.push(catalogoProducts);
+                        }
+
+
+
+                        );
+
+
+
+
+
+
+                    });
+
+
+
+
+            }))
+
+            console.log('catalogosProducts', catalogosProducts)
+
+
+        Promise.all(promises)
+            .then((resolve) => {
+
+
+                return res.json({
+                    ok: true,
+                    catalogosProducts: catalogosProducts
+                })
+            })
+
+            ;
+
+
+
+
+
 
     }
 
@@ -352,22 +438,22 @@ const editPositionByCatalogo = async (req, res = response) => {
 
         const onReorderCatalogos = []
 
-        req.body.catalogos.map((item, index) => {                                                          
+        req.body.catalogos.map((item, index) => {
             item.position = index;
             onReorderCatalogos.push(item);
 
         });
 
-        const promises = onReorderCatalogos.map((obj) => 
-        
-        new Promise((resolve, reject) => {
-            Catalogo.updateOne({ _id: obj.id }, { $set: { position: obj.position } }, 
-            (err, data) => {
-                if (err) console.log(err);
-                else
-                    resolve();
-            });
-        }));
+        const promises = onReorderCatalogos.map((obj) =>
+
+            new Promise((resolve, reject) => {
+                Catalogo.updateOne({ _id: obj.id }, { $set: { position: obj.position } },
+                    (err, data) => {
+                        if (err) console.log(err);
+                        else
+                            resolve();
+                    });
+            }));
         Promise.all(promises)
             .then(() => {
                 return res.json({
