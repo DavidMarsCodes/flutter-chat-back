@@ -309,50 +309,58 @@ const getMyCatalogos = async (req, res = response) => {
                 console.log('catalogo', catalogo)
 
 
+
                 Product
                     .find({ catalogo: catalogo._id})
                     .then(products => {
 
                     console.log('products', products)
-                   
-                    
-                            products.forEach(product => {
+
+                    if(producuts.length > 0){
 
 
-                                console.log('product')
-
-                            const catalogoProducts = {
+                        products.forEach(product => {
 
 
-                                catalogo: {
+                            console.log('product')
 
-                                    id: catalogo._id,
-                                    name: catalogo.name,
-                                    description: catalogo.description,
-                                    user: catalogo.user,
-                                    position: catalogo.position,
-                                    privacity: catalogo.privacity,
-                                    totalProducts: catalogo.totalProducts,
-                                    products: {
-                                        id: product._id,
-                                        name: product.name,
-                                        description: product.description,
-                                        user: product.user,
-                                        catalogo: product.catalogo,
-                                        price: product.price,
-                                        coverImage: product.coverImage,
-                                        ratingInit: product.ratingInit,
-                                        cbd: product.cbd,
-                                        thc: product.thc,
-                                    }
+                        const catalogoProducts = {
 
+
+                            catalogo: {
+
+                                id: catalogo._id,
+                                name: catalogo.name,
+                                description: catalogo.description,
+                                user: catalogo.user,
+                                position: catalogo.position,
+                                privacity: catalogo.privacity,
+                                totalProducts: catalogo.totalProducts,
+                                products: {
+                                    id: product._id,
+                                    name: product.name,
+                                    description: product.description,
+                                    user: product.user,
+                                    catalogo: product.catalogo,
+                                    price: product.price,
+                                    coverImage: product.coverImage,
+                                    ratingInit: product.ratingInit,
+                                    cbd: product.cbd,
+                                    thc: product.thc,
                                 }
 
-                            };
+                            }
 
-                            catalogosProducts.push(catalogoProducts);
-                                
-                            });
+                        };
+
+                        catalogosProducts.push(catalogoProducts);
+                            
+                        });
+
+                    };
+                   
+                    
+                           
                           
 
 
