@@ -290,7 +290,7 @@ const getMyCatalogos = async (req, res = response) => {
 
 
 
-        const products = await Product
+        const catalogos = await Catalogo
             .find({ user: userId })
             .sort('position')
 
@@ -298,7 +298,7 @@ const getMyCatalogos = async (req, res = response) => {
 
         const catalogosProducts = [];
 
-        const promises = products.map((product) =>
+        const promises = catalogos.map((catalogo) =>
 
 
 
