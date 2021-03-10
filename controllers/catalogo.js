@@ -316,7 +316,7 @@ const getMyCatalogos = async (req, res = response) => {
 
                     console.log('products', products)
 
-                    if(producuts.length > 0){
+                    if(products.length > 0){
 
 
                         products.forEach(product => {
@@ -357,7 +357,11 @@ const getMyCatalogos = async (req, res = response) => {
                             
                         });
 
-                    };
+                    }
+                    else {{
+
+                        resolve();
+                    }}
                    
                     
                            
