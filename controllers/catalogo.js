@@ -311,14 +311,12 @@ const getMyCatalogos = async (req, res = response) => {
 
                 const products = Product
                     .find(catalogo._id)
-                    .then(products => {
+                   
+                    
+                            products.forEach(product => {
 
 
-                        console.log('products', products)
-                        products.map((product) => {
-
-
-console.log('product**', product)
+                                console.log('product')
 
                             const catalogoProducts = {
 
@@ -350,19 +348,8 @@ console.log('product**', product)
                             };
 
                             catalogosProducts.push(catalogoProducts);
-                        }
-
-
-
-                        );
-
-
-
-
-
-
-                    });
-
+                                
+                            });
 
 
 
@@ -513,3 +500,4 @@ module.exports = {
     editPositionByCatalogo
 
 }
+
