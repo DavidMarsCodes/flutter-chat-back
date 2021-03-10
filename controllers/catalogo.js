@@ -283,8 +283,6 @@ const getMyCatalogos = async (req, res = response) => {
 
 
 
-
-
         const myprofile = await Profile.findOne({ user: userId })
 
 
@@ -319,7 +317,7 @@ const getMyCatalogos = async (req, res = response) => {
                     if(products.length > 0){
 
 
-                        products.forEach(product => {
+                        products.map((product) => {
 
 
                             console.log('product')
