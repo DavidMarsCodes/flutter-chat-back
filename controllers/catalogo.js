@@ -1,6 +1,5 @@
 const { response } = require('express');
 const Catalogo = require('../models/catalogo');
-const product = require('../models/product');
 const Product = require('../models/product');
 
 
@@ -315,11 +314,11 @@ const getMyCatalogos = async (req, res = response) => {
                     .then(products => {
 
 
-                        console.log('products', product)
+                        console.log('products', products)
                         products.map((product) => {
 
 
-
+console.log('product**', product)
 
                             const catalogoProducts = {
 
