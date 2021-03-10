@@ -290,7 +290,7 @@ const getMyCatalogos = async (req, res = response) => {
 
 
 
-        const catalogos = await Catalogo
+        const products = await Product
             .find({ user: userId })
             .sort('position')
 
@@ -298,7 +298,7 @@ const getMyCatalogos = async (req, res = response) => {
 
         const catalogosProducts = [];
 
-        const promises = catalogos.map((catalogo) =>
+        const promises = products.map((product) =>
 
 
 
@@ -317,11 +317,6 @@ const getMyCatalogos = async (req, res = response) => {
                     if(products.length > 0){
 
 
-                        products.map((product) => {
-
-
-                            console.log('product')
-
                         const catalogoProducts = {
 
 
@@ -334,26 +329,21 @@ const getMyCatalogos = async (req, res = response) => {
                                 position: catalogo.position,
                                 privacity: catalogo.privacity,
                                 totalProducts: catalogo.totalProducts,
-                                products: {
-                                    id: product._id,
-                                    name: product.name,
-                                    description: product.description,
-                                    user: product.user,
-                                    catalogo: product.catalogo,
-                                    price: product.price,
-                                    coverImage: product.coverImage,
-                                    ratingInit: product.ratingInit,
-                                    cbd: product.cbd,
-                                    thc: product.thc,
-                                }
+                                products: [
+
+                                    products
+                                ]
 
                             }
 
                         };
 
-                        catalogosProducts.push(catalogoProducts);
-                            
-                        });
+                        console.log('catalogoProducts', catalogoProducts)
+
+                        catalogosProducts.push(catalogoProducts)
+
+                        
+
 
                     }
                     else {{
