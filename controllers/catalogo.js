@@ -301,16 +301,14 @@ const getMyCatalogos = async (req, res = response) => {
         .find({ user: userId })
         .sort('position')
 
-        console.log('catalogos', catalogos)
+      
 
  
   
     
         const products = await Product
         .find({ user: userId })
-       
-        console.log('products', products)
-
+      
 
 
 
@@ -353,20 +351,11 @@ const getMyCatalogos = async (req, res = response) => {
 
 
   
-    
-  
-            console.log('promises', promises)
 
-            console.log('catalogosProducts', catalogosProducts);
-
-    
-
-    
 
 
             products.map((item, index) => {
     
-                console.log('item', item)
     
                  Catalogo
                 .findById(item.catalogo)
@@ -400,8 +389,8 @@ const getMyCatalogos = async (req, res = response) => {
      */
     
     
-    console.log('catalogosProducts', catalogosProducts)
-    
+  
+
     
             });
     
@@ -412,7 +401,7 @@ const getMyCatalogos = async (req, res = response) => {
 
 
 
-
+ console.log('catalogosProducts', catalogosProducts)
 
             return res.json({
                 ok: true,
