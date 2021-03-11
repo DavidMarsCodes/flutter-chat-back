@@ -325,27 +325,43 @@ const getMyCatalogos = async (req, res = response) => {
             .then(products => {
 
 
-                const catalogo = {
-                    id: item._id,
-                    name: item.name,
-                    description: item.description,
-                    user: item.user,
-                    position: item.position,
-                    privacity: item.privacity,
-                    totalProducts: item.totalProducts,
-                    products: products
-    
-                }
-    
+                const catalogoProducts = {
+
+
+
+                catalogo : {
+                        id: item._id,
+                        name: item.name,
+                        description: item.description,
+                        user: item.user,
+                        position: item.position,
+                        privacity: item.privacity,
+                        totalProducts: item.totalProducts,
+                        products: products
+        
+                    },
+        
+
+
+
+                        products: products
+
+                    
+
+                };
+
+
+
+
                
     
     
               
-      console.log('catalogo', catalogo)
+      console.log('catalogoProducts', catalogoProducts)
         
     
     
-            catalogosProducts.push(catalogo);
+            catalogosProducts.push(catalogoProducts);
 
             resolve();
 
