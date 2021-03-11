@@ -341,7 +341,8 @@ const getMyCatalogos = async (req, res = response) => {
 
       
 
-        console.log('catalogosProducts', catalogosProducts);
+
+        resolve();
 
 
         }))
@@ -355,6 +356,9 @@ const getMyCatalogos = async (req, res = response) => {
     
   
             console.log('promises', promises)
+
+            console.log('catalogosProducts', catalogosProducts);
+
     
 
             console.log('products promises', promises)
