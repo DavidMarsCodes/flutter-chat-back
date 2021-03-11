@@ -341,6 +341,10 @@ const getMyCatalogos = async (req, res = response) => {
                     },
         
 
+
+                        
+                        products: products
+
                     
 
                 };
