@@ -361,10 +361,7 @@ const getMyCatalogos = async (req, res = response) => {
     
     
             catalogosProducts.push(catalogoProducts);
-
-
-            resolve();
-   
+            
 
            
 
@@ -385,16 +382,49 @@ const getMyCatalogos = async (req, res = response) => {
   
     
            
+
+
+
+       /* 
+
+                   console.log('catalogo!!', catalogo)
+
+                   
+                  
+
+                       var catalogoFind = catalogosProducts.find(item => item.name === catalogo.name);
+
+
+
+                       console.log('catalogoFind!!', catalogoFind)
+
+                       catalogoFind.products.push(item)
+ */
+
+
+
+             
+   /* 
+               if (item.catalogo == catalogo.id) {
+   
+                   console.log('item', item);
+                   catalogosProducts.products.push(item);
+               }
+    */
+   
+   
+ 
     
 
 
 
 
- console.log('catalogosProducts final!!!', catalogosProducts)
+ console.log('catalogosProducts', catalogosProducts)
 
             return res.json({
                 ok: true,
                
+                catalogosProducts : catalogosProducts
             })
     
     
