@@ -385,11 +385,11 @@ const getMyCatalogosProducts = async (req, res = response) => {
             .then(products => {
 
 
-                const catalogoProducts = {
+            
 
 
 
-                catalogo : {
+                const catalogo =  {
                         id: item._id,
                         name: item.name,
                         description: item.description,
@@ -397,30 +397,19 @@ const getMyCatalogosProducts = async (req, res = response) => {
                         position: item.position,
                         privacity: item.privacity,
                         totalProducts: item.totalProducts,
-        
-                    },
-        
-
-
-                        
                         products: products
-
-                    
-
-                };
-
+        
+                    };
+        
 
 
-
-               
-    
     
               
-      console.log('catalogoProducts fimal!!', catalogoProducts)
+      console.log('catalogoProducts fimal!!', catalogo)
         
     
     
-            catalogosProducts.push(catalogoProducts);
+            catalogosProducts.push(catalogo);
             
             resolve();
 
