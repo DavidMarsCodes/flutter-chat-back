@@ -411,7 +411,7 @@ const getLastProducts = async (req, res = response) => {
                     .findById(obj.catalogo)
                     .then(catalogo => {
 
-consoel.log('catalogo',catalogo);
+console.log('catalogo',catalogo);
 
                         if (catalogo.privacity == '1' || catalogo.privacity == '2') {
 
