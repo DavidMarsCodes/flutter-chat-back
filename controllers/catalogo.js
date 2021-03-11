@@ -288,6 +288,8 @@ const getMyCatalogos = async (req, res = response) => {
 
         const isClub = myprofile.isClub;
 
+        catalogosProducts = [];
+
 
 
         const catalogos = await Catalogo
@@ -296,26 +298,72 @@ const getMyCatalogos = async (req, res = response) => {
 
 
 
-            console.log('catalogos', catalogos)
-        
-            const products = await Product
+
+
+        catalogos.map((item, index) => {
+
+            const catalogo = {
+                id: item._id,
+                name: item.name,
+                description: item.description,
+                user: item.user,
+                position: item.position,
+                privacity: item.privacity,
+                totalProducts: item.totalProducts,
+                products: []
+
+            }
+
+            catalogosProducts.push(catalogo);
+
+
+        });
+
+        console.log('catalogosProducts', catalogosProducts);
+
+
+
+        console.log('catalogos', catalogos)
+
+        const products = await Product
             .find({ user: userId })
             .sort('position')
 
 
- 
-            console.log('products', products)
+
+        console.log('products', products)
 
 
 
 
 
 
-            return res.json({
-                ok: true,
-                catalogos: catalogos,
-                products: products
-            })
+        products.map((item, index) => {
+
+            const catalogo = catalogosProducts.filter(x => x.id === item.catalogo);
+
+            if (item.catalogo == catalogo._id) {
+
+                console.log('item', item);
+                catalogosProducts.products.push(item);
+            }
+
+
+
+
+        });
+
+        console.log('catalogosProducts', catalogosProducts)
+
+
+
+
+
+        return res.json({
+            ok: true,
+            catalogos: catalogos,
+            products: products
+        })
 
 
 
