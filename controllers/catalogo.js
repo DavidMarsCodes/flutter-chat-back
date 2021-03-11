@@ -160,6 +160,8 @@ const getCatalogosByUsers = async (req, res = response) => {
 
         const isClub = profileAuth.isClub;
 
+        const catalogosProducts = [];
+
 
         if (isClub) {
 
@@ -197,6 +199,8 @@ const getCatalogosByUsers = async (req, res = response) => {
 
 
             });
+
+            console.log('catalogos user:');
 
 
             const promises = catalogos.map((item) =>
