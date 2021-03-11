@@ -304,7 +304,9 @@ const getMyCatalogos = async (req, res = response) => {
       
 
  
-      
+        const products = await Product
+        .find({ user: userId })
+        .sort('position')
 
 
 
@@ -408,7 +410,7 @@ const getMyCatalogos = async (req, res = response) => {
             return res.json({
                 ok: true,
                 catalogos: catalogos,
-                products: products.products,
+                products: products,
                 catalogosProducts : catalogosProducts
             })
     
