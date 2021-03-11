@@ -375,7 +375,12 @@ const getMyCatalogos = async (req, res = response) => {
 
 
                     console.log('catalogo!!', catalogo)
+
+                    const result = catalogosProducts.find( ({ id }) => id ===  item.catalogo );
     
+
+                    console.log('result!!', result)
+                    result
 
                 })
     
