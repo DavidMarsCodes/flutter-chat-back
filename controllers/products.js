@@ -256,7 +256,7 @@ const getLastProducts = async (req, res = response) => {
                         .findById(obj.catalogo)
                         .then(catalogo => {
 
-
+                                if(catalogo){
 
                             if (catalogo.privacity == '1' || catalogo.privacity == '2') {
 
@@ -369,12 +369,21 @@ const getLastProducts = async (req, res = response) => {
 
                             }
 
+                            
+
 
 
                             else {
 
                                 resolve();
                             };
+
+                        }
+
+                        else {
+                            resolve();
+
+                        }
 
                         });
 
