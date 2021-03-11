@@ -376,11 +376,12 @@ const getMyCatalogos = async (req, res = response) => {
 
                     console.log('catalogo!!', catalogo)
 
-                    const result = catalogosProducts.find( ({ id }) => id ===  item.catalogo );
-    
+                    
+                        const catalogoF = catalogosProducts.filter(function(obj) {
+                          return obj.id === item.catalogo;
+                        });
+                        console.log('catalogoF!!', catalogoF)
 
-                    console.log('result!!', result)
-                    result
 
                 })
     
