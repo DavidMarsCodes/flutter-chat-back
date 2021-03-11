@@ -395,7 +395,6 @@ const getMyCatalogos = async (req, res = response) => {
             return res.json({
                 ok: true,
                
-                catalogosProducts : catalogosProducts
             })
     
     
