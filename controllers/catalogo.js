@@ -403,14 +403,8 @@ const getMyCatalogosProducts = async (req, res = response) => {
 
 
                         
-                        products: [
+                        products: products
 
-                            {
-
-                                name: "hola"
-                            }
-                        ]
-                    
                     
 
                 };
