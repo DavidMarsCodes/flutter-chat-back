@@ -292,15 +292,35 @@ const getMyCatalogos = async (req, res = response) => {
 
 
 
+
+
+
+
+
         const catalogos = await Catalogo
+        .find({ user: userId })
+        .sort('position')
+
+        console.log('catalogos', catalogos)
+
+        const products = await Product
             .find({ user: userId })
             .sort('position')
 
 
 
+        console.log('products', products)
 
 
-        catalogos.map((item, index) => {
+
+        const promises = catalogos.map((obj) =>
+
+        new Promise((resolve, reject) => {
+
+
+
+
+      
 
             const catalogo = {
                 id: item._id,
@@ -317,61 +337,67 @@ const getMyCatalogos = async (req, res = response) => {
             catalogosProducts.push(catalogo);
 
 
-        });
+      
 
         console.log('catalogosProducts', catalogosProducts);
 
 
-
-        console.log('catalogos', catalogos)
-
-        const products = await Product
-            .find({ user: userId })
-            .sort('position')
+        }))
 
 
-
-        console.log('products', products)
-
-
+        Promise.all(promises)
+        .then((resolve) => {
 
 
-
-
-        products.map((item, index) => {
-
-            console.log('item', item)
-
-            const catalogo = catalogosProducts.findIndex(x => x.id === item.catalogo);
-
-            console.log('catalogo!!', catalogo)
-
-
-            if (item.catalogo == catalogo.id) {
-
-                console.log('item', item);
-                catalogosProducts.products.push(item);
-            }
-
-
-
-
-        });
-
-        console.log('catalogosProducts', catalogosProducts)
-
-
+  
+    
+    
+    
+    
+    
+    
+            products.map((item, index) => {
+    
+                console.log('item', item)
+    
+                const catalogo = catalogosProducts.findIndex(x => x.id == item.catalogo);
+    
+                console.log('catalogo!!', catalogo)
+    
+    
+                if (item.catalogo == catalogo.id) {
+    
+                    console.log('item', item);
+                    catalogosProducts.products.push(item);
+                }
+    
+    
+    
+    
+            });
+    
+            console.log('catalogosProducts', catalogosProducts)
+    
+    
 
 
 
-        return res.json({
-            ok: true,
-            catalogos: catalogos,
-            products: products
+
+
+
+            return res.json({
+                ok: true,
+                catalogos: catalogos,
+                products: products
+            })
+    
+    
+    
+    
         })
 
 
-
+        
 
 
 
