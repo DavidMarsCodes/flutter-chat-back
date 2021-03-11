@@ -106,7 +106,11 @@ const editProduct = async (req, res = response) => {
 
         cbd,
         thc,
-        id } = req.body;
+        id 
+    
+
+    
+    } = req.body;
 
 
 
@@ -135,7 +139,7 @@ const editProduct = async (req, res = response) => {
             }
         );
 
-        const product = await Product.findOne({ _id: id });
+        const product = await Product.findById(id);
 
         console.log(product);
 
