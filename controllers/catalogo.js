@@ -362,6 +362,10 @@ const getMyCatalogos = async (req, res = response) => {
     
             catalogosProducts.push(catalogoProducts);
 
+
+            resolve();
+   
+
            
 
             })
@@ -369,8 +373,6 @@ const getMyCatalogos = async (req, res = response) => {
     
 
 
-            resolve();
-   
 
 
         }))
@@ -420,7 +422,7 @@ const getMyCatalogos = async (req, res = response) => {
 
 
 
- console.log('catalogosProducts', catalogosProducts)
+ console.log('catalogosProducts final!!!', catalogosProducts)
 
             return res.json({
                 ok: true,
