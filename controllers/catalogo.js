@@ -341,10 +341,6 @@ const getMyCatalogos = async (req, res = response) => {
                     },
         
 
-
-                        
-                        products: products
-
                     
 
                 };
@@ -385,38 +381,6 @@ const getMyCatalogos = async (req, res = response) => {
   
     
            
-
-
-
-       /* 
-
-                   console.log('catalogo!!', catalogo)
-
-                   
-                  
-
-                       var catalogoFind = catalogosProducts.find(item => item.name === catalogo.name);
-
-
-
-                       console.log('catalogoFind!!', catalogoFind)
-
-                       catalogoFind.products.push(item)
- */
-
-
-
-             
-   /* 
-               if (item.catalogo == catalogo.id) {
-   
-                   console.log('item', item);
-                   catalogosProducts.products.push(item);
-               }
-    */
-   
-   
- 
     
 
 
