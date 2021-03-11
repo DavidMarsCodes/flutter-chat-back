@@ -385,7 +385,7 @@ const getMyCatalogos = async (req, res = response) => {
                         console.log('catalolgoF!!', catalogoF)
 
 
-                        var item2 = myArray.find(item => item.name === catalogo.name);
+                        var item2 = catalogosProducts.find(item => item.name === catalogo.name);
 
 
 
