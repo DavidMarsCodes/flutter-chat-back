@@ -361,14 +361,17 @@ const getMyCatalogos = async (req, res = response) => {
 
     
 
-            console.log('products promises', promises)
+    
 
 
             products.map((item, index) => {
     
                 console.log('item', item)
     
-                const catalogo = catalogosProducts.find(x => x.id === item.catalogo);
+                const catalogo = catalogosProducts.find(x => {
+                    
+                    console.log('x', x)
+                    x.id === item.catalogo});
     
                 console.log('catalogo!!', catalogo)
     
