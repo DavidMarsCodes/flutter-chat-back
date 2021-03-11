@@ -354,8 +354,12 @@ const getMyCatalogos = async (req, res = response) => {
   
     
   
-
+            console.log('promises', promises)
     
+
+            console.log('products promises', promises)
+
+
             products.map((item, index) => {
     
                 console.log('item', item)
