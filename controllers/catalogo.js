@@ -199,12 +199,87 @@ const getCatalogosByUsers = async (req, res = response) => {
             });
 
 
+            const promises = catalogos.map((item) =>
+
+            new Promise((resolve, reject) => {
+    
+    
+    
+    
+          
+              Product
+                .find({ catalogo: item._id })
+    
+                .then(products => {
+    
+    
+                
+    
+    
+    
+                    const catalogo =  {
+                            id: item._id,
+                            name: item.name,
+                            description: item.description,
+                            user: item.user,
+                            position: item.position,
+                            privacity: item.privacity,
+                            totalProducts: item.totalProducts,
+                            products: products
+            
+                        };
+            
+    
+    
+        
+                  
+          console.log('catalogoProducts fimal!!', catalogo)
+            
+        
+        
+                catalogosProducts.push(catalogo);
+                
+                resolve();
+    
+               
+    
+                })
+    
+        
+    
+    
+    
+    
+            }))
 
 
-            res.json({
-                ok: true,
-                catalogos,
+            Promise.all(promises)
+            .then((resolve) => {
+    
+    
+      
+    
+                console.log(resolve)
+        
+    
+    
+    
+    
+     console.log('catalogosProducts final', catalogosProducts)
+    
+                return res.json({
+                    ok: true,
+                   
+                    catalogosProducts : catalogosProducts
+                })
+        
+        
+        
+        
             })
+
+
+
 
 
         }
@@ -251,6 +326,8 @@ const getCatalogosByUsers = async (req, res = response) => {
 
 
             });
+
+            console.log('catalogos', catalogos)
 
 
             const promises = catalogos.map((item) =>
