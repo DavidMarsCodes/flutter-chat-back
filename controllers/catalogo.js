@@ -370,17 +370,17 @@ const getMyCatalogos = async (req, res = response) => {
     
                 const catalogo = catalogosProducts.find(x => {
                     
-                    console.log('x', x)
+                    console.log('x', x.name)
                     x.id === item.catalogo});
     
                 console.log('catalogo!!', catalogo)
     
     
-                if (item.catalogo == catalogo.id) {
+            /*     if (item.catalogo == catalogo.id) {
     
                     console.log('item', item);
                     catalogosProducts.products.push(item);
-                }
+                } */
     
     
     
