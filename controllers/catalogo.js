@@ -362,14 +362,14 @@ const getMyCatalogos = async (req, res = response) => {
     
             catalogosProducts.push(catalogoProducts);
 
-            resolve();
+           
 
             })
 
     
 
 
-
+            resolve();
    
 
 
