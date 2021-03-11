@@ -368,7 +368,7 @@ const getMyCatalogos = async (req, res = response) => {
     
                 console.log('item', item)
     
-                const catalogo = catalogosProducts.findIndex(x => x.id == item.catalogo);
+                const catalogo = catalogosProducts.find(x => x.id === item.catalogo);
     
                 console.log('catalogo!!', catalogo)
     
