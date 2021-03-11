@@ -342,7 +342,10 @@ const getMyCatalogos = async (req, res = response) => {
 
             const catalogo = catalogosProducts.filter(x => x.id === item.catalogo);
 
-            if (item.catalogo == catalogo._id) {
+            console.log('catalogo!!', catalogo)
+
+
+            if (item.catalogo == catalogo.id) {
 
                 console.log('item', item);
                 catalogosProducts.products.push(item);
