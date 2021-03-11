@@ -413,6 +413,11 @@ const getLastProducts = async (req, res = response) => {
 
 console.log('catalogo',catalogo);
 
+                        if(catalogo){
+
+
+                        
+
                         if (catalogo.privacity == '1' || catalogo.privacity == '2') {
 
 
@@ -519,6 +524,13 @@ console.log('catalogo',catalogo);
 
                             resolve();
                         };
+
+                    }
+
+                    else {
+
+                        resolve();
+                    }
 
                     });
 
