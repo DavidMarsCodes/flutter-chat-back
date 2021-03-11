@@ -377,6 +377,10 @@ const getMyCatalogos = async (req, res = response) => {
                         catalogoFind.products.push(item)
 
 
+
+
+
+
                 })
     
               
