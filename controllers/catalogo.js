@@ -288,6 +288,66 @@ const getMyCatalogos = async (req, res = response) => {
 
         const isClub = myprofile.isClub;
 
+
+
+        const catalogos = await Catalogo
+            .find({ user: userId })
+            .sort('position')
+
+
+
+            console.log('catalogos', catalogos)
+        
+            const products = await Product
+            .find({ user: userId })
+            .sort('position')
+
+
+ 
+            console.log('products', products)
+
+
+
+
+            
+
+
+
+            return res.json({
+                ok: true,
+                catalogos: catalogos,
+                products: products
+            })
+
+
+
+
+
+
+    }
+
+    catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: 'Hable con el administrador'
+        });
+    }
+
+}
+
+const getMyCatalogosProducts = async (req, res = response) => {
+
+    try {
+        const userId = req.params.id;
+
+
+
+        const myprofile = await Profile.findOne({ user: userId })
+
+
+        const isClub = myprofile.isClub;
+
         catalogosProducts = [];
 
 
@@ -417,6 +477,7 @@ const getMyCatalogos = async (req, res = response) => {
     }
 
 }
+
 const deleteRoom = async (req, res = response) => {
 
 
@@ -523,6 +584,7 @@ const deleteCatalogo = async (req, res = response) => {
 
 module.exports = {
     createCatalogo,
+    getMyCatalogosProducts,
     editCatalogo,
     getCatalogoById,
     getCatalogosByUsers,
