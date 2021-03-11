@@ -337,13 +337,12 @@ const getMyCatalogos = async (req, res = response) => {
                         position: item.position,
                         privacity: item.privacity,
                         totalProducts: item.totalProducts,
-                        products: products
         
                     },
         
 
 
-
+                        
                         products: products
 
                     
