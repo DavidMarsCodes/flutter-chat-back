@@ -317,7 +317,7 @@ const getCatalogosByUsers = async (req, res = response) => {
 
                     if (isSubscribe) {
 
-
+                        catalogos.push(item);
                     }
                 }
 
