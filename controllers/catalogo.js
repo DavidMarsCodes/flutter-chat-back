@@ -340,6 +340,54 @@ const getMyCatalogos = async (req, res = response) => {
       
 
 
+
+
+            products.map((item, index) => {
+    
+    
+                Catalogo
+               .findById(item.catalogo)
+               .sort('position')
+               .then((catalogo) => {
+
+
+                   console.log('catalogo!!', catalogo)
+
+                   
+                  
+
+                       var catalogoFind = catalogosProducts.find(item => item.name === catalogo.name);
+
+
+
+                       console.log('catalogoFind!!', catalogoFind)
+
+                       catalogoFind.products.push(item)
+
+
+
+
+
+
+               })
+   
+             
+   /* 
+               if (item.catalogo == catalogo.id) {
+   
+                   console.log('item', item);
+                   catalogosProducts.products.push(item);
+               }
+    */
+   
+   
+ 
+
+   
+           });
+           
+
+
         resolve();
 
 
@@ -351,52 +399,6 @@ const getMyCatalogos = async (req, res = response) => {
 
 
   
-
-
-
-            products.map((item, index) => {
-    
-    
-                 Catalogo
-                .findById(item.catalogo)
-                .sort('position')
-                .then((catalogo) => {
-
-
-                    console.log('catalogo!!', catalogo)
-
-                    
-                   
-
-                        var catalogoFind = catalogosProducts.find(item => item.name === catalogo.name);
-
-
-
-                        console.log('catalogoFind!!', catalogoFind)
-
-                        catalogoFind.products.push(item)
-
-
-
-
-
-
-                })
-    
-              
-    /* 
-                if (item.catalogo == catalogo.id) {
-    
-                    console.log('item', item);
-                    catalogosProducts.products.push(item);
-                }
-     */
-    
-    
-  
-
-    
-            });
     
            
     
