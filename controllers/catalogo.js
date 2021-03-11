@@ -368,19 +368,25 @@ const getMyCatalogos = async (req, res = response) => {
     
                 console.log('item', item)
     
-                const catalogo =  Catalogo
+                 Catalogo
                 .findById(item.catalogo)
                 .sort('position')
+                .then((catalogo) => {
+
+
+                    console.log('catalogo!!', catalogo)
     
-                console.log('catalogo!!', catalogo)
+
+                })
     
-    
+              
+    /* 
                 if (item.catalogo == catalogo.id) {
     
                     console.log('item', item);
                     catalogosProducts.products.push(item);
                 }
-    
+     */
     
     
     
