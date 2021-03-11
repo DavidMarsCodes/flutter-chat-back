@@ -317,30 +317,37 @@ const getMyCatalogos = async (req, res = response) => {
 
 
       
-            const products = Product
+          Product
             .find({ catalogo: item._id })
 
-            const catalogo = {
-                id: item._id,
-                name: item.name,
-                description: item.description,
-                user: item.user,
-                position: item.position,
-                privacity: item.privacity,
-                totalProducts: item.totalProducts,
-                products: products
-
-            }
-
-           
+            .then(products => {
 
 
-          
-  
+                const catalogo = {
+                    id: item._id,
+                    name: item.name,
+                    description: item.description,
+                    user: item.user,
+                    position: item.position,
+                    privacity: item.privacity,
+                    totalProducts: item.totalProducts,
+                    products: products
     
+                }
+    
+               
+    
+    
+              
+      console.log('catalogo', catalogo)
+        
+    
+    
+            catalogosProducts.push(catalogo);
 
+            })
 
-        catalogosProducts.push(catalogo);
+    
 
 
 
