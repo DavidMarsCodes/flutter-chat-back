@@ -340,7 +340,9 @@ const getMyCatalogos = async (req, res = response) => {
 
         products.map((item, index) => {
 
-            const catalogo = catalogosProducts.filter(x => x.id === item.catalogo);
+            console.log('item', item)
+
+            const catalogo = catalogosProducts.findIndex(x => x.id === item.catalogo);
 
             console.log('catalogo!!', catalogo)
 
