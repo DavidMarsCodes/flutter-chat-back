@@ -378,6 +378,8 @@ const getMyCatalogos = async (req, res = response) => {
 
                     
                         const catalogoF = catalogosProducts.filter(function(obj) {
+
+                            console.log(obj);
                           return obj.id === item.catalogo;
                         });
                         console.log('catalogoF!!', catalogoF)
