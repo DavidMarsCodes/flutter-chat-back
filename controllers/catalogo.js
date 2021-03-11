@@ -267,14 +267,15 @@ const getCatalogosByUsers = async (req, res = response) => {
         
     
     
+                const  catalogosProductsPosition = catalogosProducts.sort((a, b) => (a.position > b.position) ? 1 : -1)
+
     
-    
-     console.log('catalogosProducts final', catalogosProducts)
+     console.log('catalogosProducts final', catalogosProductsPosition)
     
                 return res.json({
                     ok: true,
                    
-                    catalogosProducts : catalogosProducts
+                    catalogosProducts : catalogosProductsPosition
                 })
         
         
@@ -394,18 +395,17 @@ const getCatalogosByUsers = async (req, res = response) => {
     
       
     
-                console.log(resolve)
-        
     
     
+                const  catalogosProductsPosition = catalogosProducts.sort((a, b) => (a.position > b.position) ? 1 : -1)
+
     
-    
-     console.log('catalogosProducts final', catalogosProducts)
+     console.log('catalogosProductsPosition final', catalogosProductsPosition)
     
                 return res.json({
                     ok: true,
                    
-                    catalogosProducts : catalogosProducts
+                    catalogosProducts : catalogosProductsPosition
                 })
         
         
@@ -584,15 +584,15 @@ const getMyCatalogosProducts = async (req, res = response) => {
             console.log(resolve)
     
 
-           const  catalogosProducts2 = catalogosProducts.sort((a, b) => (a.position > b.position) ? 1 : -1)
+           const  catalogosProductsPosition = catalogosProducts.sort((a, b) => (a.position > b.position) ? 1 : -1)
 
 
- console.log('catalogosProducts2 final', catalogosProducts2)
+ console.log('catalogosProductsPosition final', catalogosProductsPosition)
 
             return res.json({
                 ok: true,
                
-                catalogosProducts : catalogosProducts
+                catalogosProducts : catalogosProductsPosition
             })
     
     
