@@ -382,7 +382,14 @@ const getMyCatalogos = async (req, res = response) => {
                             console.log(obj);
                           return obj.id === item.catalogo;
                         });
-                        console.log('catalogoF!!', catalogoF)
+                        console.log('catalolgoF!!', catalogoF)
+
+
+                        var item2 = myArray.find(item => item.name === catalogo.name);
+
+
+
+                        console.log('item2!!', item2)
 
 
                 })
