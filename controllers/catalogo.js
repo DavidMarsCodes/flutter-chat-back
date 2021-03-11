@@ -345,13 +345,15 @@ const getMyCatalogos = async (req, res = response) => {
     
             catalogosProducts.push(catalogo);
 
+            resolve();
+
             })
 
     
 
 
 
-        resolve();
+   
 
 
         }))
