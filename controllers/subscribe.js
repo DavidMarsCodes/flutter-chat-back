@@ -19,7 +19,8 @@ const UpdateImageSubscription = async (req, res = response) => {
         const update = { 
             imageRecipe: imageRecipe,
             isUpload: true,
-            subscribeActive: true
+            subscribeActive: true,
+            isClubNotifi: true
          };
 
 
@@ -228,18 +229,6 @@ const getSubscribeByClubIdAndSubId = async (req, res = response) => {
         
 
 
-     
-
-      
-
-
-
-        
-
-
-
-
-
 
     }
 
@@ -313,7 +302,8 @@ const approveSubscription = async (req, res = response) => {
 
 
         const update = { 
-            subscribeApproved :true
+            subscribeApproved :true,
+            isUserNotifi: true
            
          };
 
@@ -346,12 +336,15 @@ const approveSubscription = async (req, res = response) => {
     }
 }
 
+
+
 module.exports = {
     UpdateImageSubscription,
     UnSubscription,
     getSubscribeByClubIdAndSubId,
     disapproveSubscription,
-    approveSubscription
+    approveSubscription,
+    
 
 }
 

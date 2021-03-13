@@ -385,10 +385,54 @@ catch (error) {
 
 
 
+const getNotifications = async (req, res = response) => {
 
+    const {
+
+        id
+    } = req.params ;
+
+    const profileAuth = await Profile.findOne({user: id});
+
+    isClub = profileAuth.isClub;
+
+
+      if(isClub){
+
+
+          const subscriptionsNotifi = await Subscription
+          .find({ isClubNotifi: true,  club: id })
+
+
+          res.json({
+            ok: true,
+            subscriptionsNotifi,
+
+        });
+
+
+      }
+
+      else {
+
+        const subscriptionsNotifi = await Subscription
+        .find({ isUserNotifi: true,  subscriptor: id })
+
+
+        res.json({
+          ok: true,
+          subscriptionsNotifi,
+
+      });
+
+
+      }
+
+}
 
 module.exports = {
     getProfilesSubscriptorsByClub,
     getProfilesSubscriptorsPendingByClub,
-    getClubSubscriptionBySubid
+    getClubSubscriptionBySubid,
+    getNotifications
 }

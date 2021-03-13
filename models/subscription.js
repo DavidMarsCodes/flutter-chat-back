@@ -42,6 +42,20 @@ const SubscriptionSchema = Schema({
         type: Boolean,
         required: false,
         default: false
+    },
+
+    isClubNotifi:
+    {
+        type: Boolean,
+        required: false,
+        default: false
+    },
+
+    isUserNotifi:
+    {
+        type: Boolean,
+        required: false,
+        default: false
     }
 
 },
