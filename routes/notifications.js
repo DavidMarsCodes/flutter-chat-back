@@ -4,13 +4,16 @@
 const { Router } = require('express');
 const { validateJWT } = require('../middlewares/validar-jwt');
 
-const { getProfilesSubscriptorsByUser, getClubSubscriptionBySubid, getProfilesSubscriptorsPendingByClub , getNotifications} = require('../controllers/notifications');
+const { getProfilesSubscriptorsByUser,getProfilesSubscriptorsApproveByUser, getClubSubscriptionBySubid, getProfilesSubscriptorsPendingByClub , getNotifications} = require('../controllers/notifications');
 
 const router = Router();
 
 
 
-router.get('/profiles/subscriptions/user/:uid', getProfilesSubscriptorsByUser, validateJWT );
+router.get('/profiles/subscriptions/notifi/user/:uid', getProfilesSubscriptorsByUser, validateJWT );
+
+router.get('/profiles/subscriptions/approve/user/:uid', getProfilesSubscriptorsApproveByUser, validateJWT );
+
 
 
 router.get('/profiles/subscriptions/pending/:uid', getProfilesSubscriptorsPendingByClub, validateJWT );
