@@ -660,7 +660,7 @@ catch (error) {
 
 
 
-const getNotificationsSubscriptions = async (req, res = response) => {
+const getNotifications = async (req, res = response) => {
 
     const {
 
@@ -670,6 +670,13 @@ const getNotificationsSubscriptions = async (req, res = response) => {
     const profileAuth = await Profile.findOne({user: id});
 
     isClub = profileAuth.isClub;
+
+
+
+    const messagesNotifi = await Message
+    .find({ isForNotifi: true,  for: id })
+
+
 
 
       if(isClub){
@@ -682,6 +689,7 @@ const getNotificationsSubscriptions = async (req, res = response) => {
           res.json({
             ok: true,
             subscriptionsNotifi,
+            messagesNotifi
 
         });
 
@@ -697,6 +705,7 @@ const getNotificationsSubscriptions = async (req, res = response) => {
         res.json({
           ok: true,
           subscriptionsNotifi,
+          messagesNotifi
 
       });
 
@@ -736,6 +745,6 @@ module.exports = {
     getProfilesSubscriptorsApproveByUser,
     getProfilesSubscriptorsPendingByClub,
     getClubSubscriptionBySubid,
-    getNotificationsSubscriptions,
+    getNotifications,
     getNotificationsMessages
 }
