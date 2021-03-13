@@ -207,6 +207,23 @@ const getProfilesSubscriptorsPendingByClub = async(req, res) => {
 
         const uid = req.params.uid;
 
+
+        const update = { 
+                   
+            isClubNotifi: false
+         };
+
+
+   await Subscription.updateMany(
+        {
+            club: uid
+        },
+        {
+            $set: update
+        }
+    );
+
+
     
         const subscription = await Subscription
             .find({ club: uid, subscribeApproved: false, isUpload: true, subscribeActive: true })
@@ -269,21 +286,7 @@ const getProfilesSubscriptorsPendingByClub = async(req, res) => {
             .then((resolve) => {
 
 
-                const update = { 
-                   
-                    isClubNotifi: false
-                 };
-        
-        
-           await Subscription.updateMany(
-                {
-                    club: uid
-                },
-                {
-                    $set: update
-                }
-            );
-        
+
                 
 
                return  res.json({
