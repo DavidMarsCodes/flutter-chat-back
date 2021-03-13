@@ -267,6 +267,23 @@ const getProfilesSubscriptorsPendingByClub = async(req, res) => {
         }));
         Promise.all(promises)
             .then((resolve) => {
+
+
+                const update = { 
+                   
+                    isClubNotifi: false
+                 };
+        
+        
+           await Subscription.updateMany(
+                {
+                    club: uid
+                },
+                {
+                    $set: update
+                }
+            );
+        
                 
 
                return  res.json({
