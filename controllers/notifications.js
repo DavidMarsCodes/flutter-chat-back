@@ -3,7 +3,7 @@ const Subscription = require('../models/subscription');
 const Profile = require('../models/profile');
 const User = require('../models/user');
 
-const getProfilesSubscriptorsByClub = async(req, res) => {
+const getProfilesSubscriptorsByUser = async(req, res) => {
 
 
     try {
@@ -18,11 +18,29 @@ const getProfilesSubscriptorsByClub = async(req, res) => {
 
 
         if(isClub){
-        const subscription = await Subscription
-            .find({ club: uid, subscribeApproved: true, isUpload: true, subscribeActive: true })
+
+
+            const update = { 
+                   
+                isClubNotifi: false
+             };
+    
+    
+       await Subscription.updateMany(
+            {
+                club: uid
+            },
+            {
+                $set: update
+            }
+        );
+    
+       
+
+            const subscription = await Subscription
+            .find({ club: uid, subscribeApproved: false, isUpload: true, subscribeActive: true })
         .sort({ createdAt: 'asc' })
-            
-        
+    
 
         const profiles = [];
 
@@ -34,8 +52,6 @@ const getProfilesSubscriptorsByClub = async(req, res) => {
             )
             .then(item => {
 
-
-                if(item.user._id != uid){
 
                 User.findById(obj.subscriptor 
                     )
@@ -59,10 +75,11 @@ const getProfilesSubscriptorsByClub = async(req, res) => {
             
                         },
                         messageDate: obj.updatedAt,
-                        isClub: item.isClub,
+
                         subscribeActive: obj.subscribeActive,
                         subscribeApproved: obj.subscribeApproved,
                         subId: obj._id,
+                        isClub: item.isClub,
                         isUpload: obj.isUpload,
                         createdAt: item.createdAt,
                         updatedAt: item.updatedAt
@@ -73,17 +90,11 @@ const getProfilesSubscriptorsByClub = async(req, res) => {
                         resolve();
 
                 });
-
-            }
-
-            else {
-               
-                resolve();
-            }
                 
             })
             ;
         }));
+
         Promise.all(promises)
             .then((resolve) => {
                 
@@ -98,6 +109,23 @@ const getProfilesSubscriptorsByClub = async(req, res) => {
         }
 
         else {
+
+            const update = { 
+                   
+                isUserNotifi: false
+             };
+    
+    
+       await Subscription.updateMany(
+            {
+                subscriptor: uid
+            },
+            {
+                $set: update
+            }
+        );
+    
+
 
             console.log('else!!!')
 
@@ -451,7 +479,7 @@ const getNotifications = async (req, res = response) => {
 }
 
 module.exports = {
-    getProfilesSubscriptorsByClub,
+    getProfilesSubscriptorsByUser,
     getProfilesSubscriptorsPendingByClub,
     getClubSubscriptionBySubid,
     getNotifications
