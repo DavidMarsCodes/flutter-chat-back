@@ -17,7 +17,7 @@ router.get('/profiles/subscriptions/pending/:uid', getProfilesSubscriptorsPendin
 
 router.get('/profiles/subscriptions/sub/:subid', getClubSubscriptionBySubid, validateJWT );
 
-router.get('/profiles/notifications/user/:id', getNotifications, validateJWT );
+router.get('/notifications/user/:id', getNotifications, validateJWT );
 
 
 
