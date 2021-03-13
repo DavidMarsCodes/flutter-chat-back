@@ -2,6 +2,8 @@
 const Subscription = require('../models/subscription');
 const Profile = require('../models/profile');
 const User = require('../models/user');
+const Message = require('../models/message');
+
 
 const getProfilesSubscriptorsByUser = async(req, res) => {
 
@@ -658,7 +660,7 @@ catch (error) {
 
 
 
-const getNotifications = async (req, res = response) => {
+const getNotificationsSubscriptions = async (req, res = response) => {
 
     const {
 
@@ -703,10 +705,37 @@ const getNotifications = async (req, res = response) => {
 
 }
 
+const getNotificationsMessages = async (req, res = response) => {
+
+    const {
+
+        id
+    } = req.params ;
+
+
+
+          const messagesNotifi = await Message
+          .find({ isForNotifi: true,  for: id })
+
+
+          res.json({
+            ok: true,
+            messagesNotifi,
+
+        });
+
+
+
+
+ 
+
+}
+
 module.exports = {
     getProfilesSubscriptorsByUser,
     getProfilesSubscriptorsApproveByUser,
     getProfilesSubscriptorsPendingByClub,
     getClubSubscriptionBySubid,
-    getNotifications
+    getNotificationsSubscriptions,
+    getNotificationsMessages
 }

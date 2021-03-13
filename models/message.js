@@ -15,7 +15,15 @@ const MessagesSchema = Schema({
     message: {
         type: String,
         required: true
-    }
+    },
+
+    isForNotifi: {
+        type: Boolean,
+        require:false,
+        default: true
+    },
+
+
 
 }, {
     timestamps: true

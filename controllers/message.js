@@ -28,8 +28,26 @@ const getProfilesChat = async (req, res) => {
 
     try {
 
+
+
+
         const uid = req.params.uid;
 
+
+        const update = { 
+                   
+            isForNotifi: false
+         };
+
+
+   await Message.updateMany(
+        {
+            for: uid
+        },
+        {
+            $set: update
+        }
+    );
 
 
         const messages = await Message.find({
