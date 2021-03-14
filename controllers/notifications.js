@@ -5,457 +5,462 @@ const User = require('../models/user');
 const Message = require('../models/message');
 
 
-const getProfilesSubscriptorsByUser = async(req, res) => {
+const getProfilesSubscriptorsByUser = async (req, res) => {
 
 
     try {
 
         const uid = req.params.uid;
 
-        const myprofile = await Profile.findOne({ user:  uid })
+        const myprofile = await Profile.findOne({ user: uid })
 
 
         const isClub = myprofile.isClub;
 
 
 
-        if(isClub){
+        if (isClub) {
 
 
-            const update = { 
-                   
+            const update = {
+
                 isClubNotifi: false
-             };
-    
-    
-       await Subscription.updateMany(
-            {
-                club: uid
-            },
-            {
-                $set: update
-            }
-        );
-    
-       
+            };
+
+
+            await Subscription.updateMany(
+                {
+                    club: uid
+                },
+                {
+                    $set: update
+                }
+            );
+
+
 
             const subscription = await Subscription
-            .find({ club: uid, subscribeApproved: false, isUpload: true, subscribeActive: true })
-        .sort({ createdAt: 'asc' })
-    
-
-        const profiles = [];
-
-        const promises = subscription.map((obj) => 
-        
-        new Promise((resolve, reject) => {
-
-           Profile.findOne({ user: obj.subscriptor }
-            )
-            .then(item => {
+                .find({ club: uid, subscribeApproved: false, isUpload: true, subscribeActive: true })
+                .sort({ createdAt: 'asc' })
 
 
-                User.findById(obj.subscriptor 
+            const profiles = [];
+
+            const promises = subscription.map((obj) =>
+
+                new Promise((resolve, reject) => {
+
+                    Profile.findOne({ user: obj.subscriptor }
                     )
+                        .then(item => {
 
-                    .then(user => {
-    
-                    const profile = {
-                        name: item.name,
-                        lastName: item.lastName,
-                        imageHeader: item.imageHeader,
-                        imageAvatar: item.imageAvatar,
-                        imageRecipe: item.imageRecipe,
-                        
-                        about: item.about,
-                        id: item._id,
-                        user: {
-                            online: user.online,
-                            uid: user._id,
-                            email: user.email,
-                            username: user.username,
-            
-                        },
-                        messageDate: obj.updatedAt,
+                            if (item) {
 
-                        subscribeActive: obj.subscribeActive,
-                        subscribeApproved: obj.subscribeApproved,
-                        subId: obj._id,
-                        isClub: item.isClub,
-                        isUpload: obj.isUpload,
-                        createdAt: item.createdAt,
-                        updatedAt: item.updatedAt
-            
-                    }
-    
-                        profiles.push(profile);
-                        resolve();
+                                User.findById(obj.subscriptor
+                                )
 
-                });
-                
-            })
-            ;
-        }));
+                                    .then(user => {
 
-        Promise.all(promises)
-            .then((resolve) => {
-                
+                                        const profile = {
+                                            name: item.name,
+                                            lastName: item.lastName,
+                                            imageHeader: item.imageHeader,
+                                            imageAvatar: item.imageAvatar,
+                                            imageRecipe: item.imageRecipe,
 
-               return  res.json({
-                    ok: true,
-                    profiles: profiles
+                                            about: item.about,
+                                            id: item._id,
+                                            user: {
+                                                online: user.online,
+                                                uid: user._id,
+                                                email: user.email,
+                                                username: user.username,
+
+                                            },
+                                            messageDate: obj.updatedAt,
+
+                                            subscribeActive: obj.subscribeActive,
+                                            subscribeApproved: obj.subscribeApproved,
+                                            subId: obj._id,
+                                            isClub: item.isClub,
+                                            isUpload: obj.isUpload,
+                                            createdAt: item.createdAt,
+                                            updatedAt: item.updatedAt
+
+                                        }
+
+                                        profiles.push(profile);
+                                        resolve();
+
+                                    });
+
+                            }
+
+                        })
+                        ;
+                }));
+
+            Promise.all(promises)
+                .then((resolve) => {
+
+
+                    return res.json({
+                        ok: true,
+                        profiles: profiles
+                    })
                 })
-            })
 
-        
+
         }
 
         else {
 
-            const update = { 
-                   
+            const update = {
+
                 isUserNotifi: false
-             };
-    
-    
-       await Subscription.updateMany(
-            {
-                subscriptor: uid
-            },
-            {
-                $set: update
-            }
-        );
-    
+            };
+
+
+            await Subscription.updateMany(
+                {
+                    subscriptor: uid
+                },
+                {
+                    $set: update
+                }
+            );
+
 
 
             console.log('else!!!')
 
             const subscription = await Subscription
-            .find({ subscriptor: uid, subscribeApproved: true, isUpload: true, subscribeActive: true })
-        .sort({ createdAt: 'asc' })
-
-      
-
-        const profiles = [];
-
-        const promises = subscription.map((obj) => 
-        
-        new Promise((resolve, reject) => {
-
-           Profile.findOne({ user: obj.club }
-            )
-            .then(item => {
+                .find({ subscriptor: uid, subscribeApproved: true, isUpload: true, subscribeActive: true })
+                .sort({ createdAt: 'asc' })
 
 
 
-                if(item.user._id != uid){
+            const profiles = [];
 
-                User.findById(obj.club 
+            const promises = subscription.map((obj) =>
+
+                new Promise((resolve, reject) => {
+
+                    Profile.findOne({ user: obj.club }
                     )
+                        .then(item => {
 
-                    .then(user => {
-    
-                    const profile = {
-                        name: item.name,
-                        lastName: item.lastName,
-                        imageHeader: item.imageHeader,
-                        imageAvatar: item.imageAvatar,
-                        imageRecipe: item.imageRecipe,
-                        
-                        about: item.about,
-                        id: item._id,
-                        user: {
-                            online: user.online,
-                            uid: user._id,
-                            email: user.email,
-                            username: user.username,
-            
-                        },
-                        messageDate: obj.updatedAt,
-                        isClub: item.isClub,
-                        subscribeActive: obj.subscribeActive,
-                        subscribeApproved: obj.subscribeApproved,
-                        subId: obj._id,
-                        isUpload: obj.isUpload,
-                        createdAt: item.createdAt,
-                        updatedAt: item.updatedAt
-            
-                    }
 
-                        profiles.push(profile);
-                        resolve();
 
-                });
+                            if (item.user._id != uid) {
 
-            }
+                                User.findById(obj.club
+                                )
 
-            else {
-               
-                resolve();
-            }
-                
-            })
-            ;
-        }));
-        Promise.all(promises)
-            .then((resolve) => {
-                
+                                    .then(user => {
 
-               return  res.json({
-                    ok: true,
-                    profiles: profiles
+                                        const profile = {
+                                            name: item.name,
+                                            lastName: item.lastName,
+                                            imageHeader: item.imageHeader,
+                                            imageAvatar: item.imageAvatar,
+                                            imageRecipe: item.imageRecipe,
+
+                                            about: item.about,
+                                            id: item._id,
+                                            user: {
+                                                online: user.online,
+                                                uid: user._id,
+                                                email: user.email,
+                                                username: user.username,
+
+                                            },
+                                            messageDate: obj.updatedAt,
+                                            isClub: item.isClub,
+                                            subscribeActive: obj.subscribeActive,
+                                            subscribeApproved: obj.subscribeApproved,
+                                            subId: obj._id,
+                                            isUpload: obj.isUpload,
+                                            createdAt: item.createdAt,
+                                            updatedAt: item.updatedAt
+
+                                        }
+
+                                        profiles.push(profile);
+                                        resolve();
+
+                                    });
+
+                            }
+
+                            else {
+
+                                resolve();
+                            }
+
+                        })
+                        ;
+                }));
+            Promise.all(promises)
+                .then((resolve) => {
+
+
+                    return res.json({
+                        ok: true,
+                        profiles: profiles
+                    })
                 })
-            })
 
         }
 
-   
 
 
 
 
-   
-
-} 
-catch (error) {
-
-
-    res.status(500).json({
-        ok: false,
-        msg: 'Hable con el administrador'
-    });
-
-}}
 
 
 
-const getProfilesSubscriptorsApproveByUser = async(req, res) => {
+    }
+    catch (error) {
+
+
+        res.status(500).json({
+            ok: false,
+            msg: 'Hable con el administrador'
+        });
+
+    }
+}
+
+
+
+const getProfilesSubscriptorsApproveByUser = async (req, res) => {
 
 
     try {
 
         const uid = req.params.uid;
 
-        const myprofile = await Profile.findOne({ user:  uid })
+        const myprofile = await Profile.findOne({ user: uid })
 
 
         const isClub = myprofile.isClub;
 
 
 
-        if(isClub){
+        if (isClub) {
 
-/* 
-            const update = { 
-                   
-                isClubNotifi: false
-             };
-    
-    
-       await Subscription.updateMany(
-            {
-                club: uid
-            },
-            {
-                $set: update
-            }
-        );
-     */
-       
+            /* 
+                        const update = { 
+                               
+                            isClubNotifi: false
+                         };
+                
+                
+                   await Subscription.updateMany(
+                        {
+                            club: uid
+                        },
+                        {
+                            $set: update
+                        }
+                    );
+                 */
+
 
             const subscription = await Subscription
-            .find({ club: uid, subscribeApproved: true, isUpload: true, subscribeActive: true })
-        .sort({ createdAt: 'asc' })
-    
-
-        const profiles = [];
-
-        const promises = subscription.map((obj) => 
-        
-        new Promise((resolve, reject) => {
-
-           Profile.findOne({ user: obj.subscriptor }
-            )
-            .then(item => {
+                .find({ club: uid, subscribeApproved: true, isUpload: true, subscribeActive: true })
+                .sort({ createdAt: 'asc' })
 
 
-                User.findById(obj.subscriptor 
+            const profiles = [];
+
+            const promises = subscription.map((obj) =>
+
+                new Promise((resolve, reject) => {
+
+                    Profile.findOne({ user: obj.subscriptor }
                     )
+                        .then(item => {
 
-                    .then(user => {
-    
-                    const profile = {
-                        name: item.name,
-                        lastName: item.lastName,
-                        imageHeader: item.imageHeader,
-                        imageAvatar: item.imageAvatar,
-                        imageRecipe: item.imageRecipe,
-                        
-                        about: item.about,
-                        id: item._id,
-                        user: {
-                            online: user.online,
-                            uid: user._id,
-                            email: user.email,
-                            username: user.username,
-            
-                        },
-                        messageDate: obj.updatedAt,
 
-                        subscribeActive: obj.subscribeActive,
-                        subscribeApproved: obj.subscribeApproved,
-                        subId: obj._id,
-                        isClub: item.isClub,
-                        isUpload: obj.isUpload,
-                        createdAt: item.createdAt,
-                        updatedAt: item.updatedAt
-            
-                    }
-    
-                        profiles.push(profile);
-                        resolve();
+                            User.findById(obj.subscriptor
+                            )
 
-                });
-                
-            })
-            ;
-        }));
+                                .then(user => {
 
-        Promise.all(promises)
-            .then((resolve) => {
-                
+                                    const profile = {
+                                        name: item.name,
+                                        lastName: item.lastName,
+                                        imageHeader: item.imageHeader,
+                                        imageAvatar: item.imageAvatar,
+                                        imageRecipe: item.imageRecipe,
 
-               return  res.json({
-                    ok: true,
-                    profiles: profiles
+                                        about: item.about,
+                                        id: item._id,
+                                        user: {
+                                            online: user.online,
+                                            uid: user._id,
+                                            email: user.email,
+                                            username: user.username,
+
+                                        },
+                                        messageDate: obj.updatedAt,
+
+                                        subscribeActive: obj.subscribeActive,
+                                        subscribeApproved: obj.subscribeApproved,
+                                        subId: obj._id,
+                                        isClub: item.isClub,
+                                        isUpload: obj.isUpload,
+                                        createdAt: item.createdAt,
+                                        updatedAt: item.updatedAt
+
+                                    }
+
+                                    profiles.push(profile);
+                                    resolve();
+
+                                });
+
+                        })
+                        ;
+                }));
+
+            Promise.all(promises)
+                .then((resolve) => {
+
+
+                    return res.json({
+                        ok: true,
+                        profiles: profiles
+                    })
                 })
-            })
 
-        
+
         }
 
         else {
-/* 
-            const update = { 
-                   
-                isUserNotifi: false
-             };
-    
-    
-       await Subscription.updateMany(
-            {
-                subscriptor: uid
-            },
-            {
-                $set: update
-            }
-        );
-     */
+            /* 
+                        const update = { 
+                               
+                            isUserNotifi: false
+                         };
+                
+                
+                   await Subscription.updateMany(
+                        {
+                            subscriptor: uid
+                        },
+                        {
+                            $set: update
+                        }
+                    );
+                 */
 
 
             console.log('else!!!')
 
             const subscription = await Subscription
-            .find({ subscriptor: uid, subscribeApproved: true, isUpload: true, subscribeActive: true })
-        .sort({ createdAt: 'asc' })
-
-      
-
-        const profiles = [];
-
-        const promises = subscription.map((obj) => 
-        
-        new Promise((resolve, reject) => {
-
-           Profile.findOne({ user: obj.club }
-            )
-            .then(item => {
+                .find({ subscriptor: uid, subscribeApproved: true, isUpload: true, subscribeActive: true })
+                .sort({ createdAt: 'asc' })
 
 
 
-                if(item.user._id != uid){
+            const profiles = [];
 
-                User.findById(obj.club 
+            const promises = subscription.map((obj) =>
+
+                new Promise((resolve, reject) => {
+
+                    Profile.findOne({ user: obj.club }
                     )
+                        .then(item => {
 
-                    .then(user => {
-    
-                    const profile = {
-                        name: item.name,
-                        lastName: item.lastName,
-                        imageHeader: item.imageHeader,
-                        imageAvatar: item.imageAvatar,
-                        imageRecipe: item.imageRecipe,
-                        
-                        about: item.about,
-                        id: item._id,
-                        user: {
-                            online: user.online,
-                            uid: user._id,
-                            email: user.email,
-                            username: user.username,
-            
-                        },
-                        messageDate: obj.updatedAt,
-                        isClub: item.isClub,
-                        subscribeActive: obj.subscribeActive,
-                        subscribeApproved: obj.subscribeApproved,
-                        subId: obj._id,
-                        isUpload: obj.isUpload,
-                        createdAt: item.createdAt,
-                        updatedAt: item.updatedAt
-            
-                    }
 
-                        profiles.push(profile);
-                        resolve();
 
-                });
+                            if (item.user._id != uid) {
 
-            }
+                                User.findById(obj.club
+                                )
 
-            else {
-               
-                resolve();
-            }
-                
-            })
-            ;
-        }));
-        Promise.all(promises)
-            .then((resolve) => {
-                
+                                    .then(user => {
 
-               return  res.json({
-                    ok: true,
-                    profiles: profiles
+                                        const profile = {
+                                            name: item.name,
+                                            lastName: item.lastName,
+                                            imageHeader: item.imageHeader,
+                                            imageAvatar: item.imageAvatar,
+                                            imageRecipe: item.imageRecipe,
+
+                                            about: item.about,
+                                            id: item._id,
+                                            user: {
+                                                online: user.online,
+                                                uid: user._id,
+                                                email: user.email,
+                                                username: user.username,
+
+                                            },
+                                            messageDate: obj.updatedAt,
+                                            isClub: item.isClub,
+                                            subscribeActive: obj.subscribeActive,
+                                            subscribeApproved: obj.subscribeApproved,
+                                            subId: obj._id,
+                                            isUpload: obj.isUpload,
+                                            createdAt: item.createdAt,
+                                            updatedAt: item.updatedAt
+
+                                        }
+
+                                        profiles.push(profile);
+                                        resolve();
+
+                                    });
+
+                            }
+
+                            else {
+
+                                resolve();
+                            }
+
+                        })
+                        ;
+                }));
+            Promise.all(promises)
+                .then((resolve) => {
+
+
+                    return res.json({
+                        ok: true,
+                        profiles: profiles
+                    })
                 })
-            })
 
         }
 
-   
 
 
 
 
-   
-
-} 
-catch (error) {
-
-
-    res.status(500).json({
-        ok: false,
-        msg: 'Hable con el administrador'
-    });
-
-}}
 
 
 
-const getProfilesSubscriptorsPendingByClub = async(req, res) => {
+    }
+    catch (error) {
+
+
+        res.status(500).json({
+            ok: false,
+            msg: 'Hable con el administrador'
+        });
+
+    }
+}
+
+
+
+const getProfilesSubscriptorsPendingByClub = async (req, res) => {
 
 
     try {
@@ -463,88 +468,88 @@ const getProfilesSubscriptorsPendingByClub = async(req, res) => {
         const uid = req.params.uid;
 
 
-        const update = { 
-                   
+        const update = {
+
             isClubNotifi: false
-         };
+        };
 
 
-   await Subscription.updateMany(
-        {
-            club: uid
-        },
-        {
-            $set: update
-        }
-    );
+        await Subscription.updateMany(
+            {
+                club: uid
+            },
+            {
+                $set: update
+            }
+        );
 
 
-    
+
         const subscription = await Subscription
             .find({ club: uid, subscribeApproved: false, isUpload: true, subscribeActive: true })
-        .sort({ createdAt: 'asc' })
-    
+            .sort({ createdAt: 'asc' })
+
 
         const profiles = [];
 
-        const promises = subscription.map((obj) => 
-        
-        new Promise((resolve, reject) => {
+        const promises = subscription.map((obj) =>
 
-           Profile.findOne({ user: obj.subscriptor }
-            )
-            .then(item => {
+            new Promise((resolve, reject) => {
+
+                Profile.findOne({ user: obj.subscriptor }
+                )
+                    .then(item => {
 
 
-                User.findById(obj.subscriptor 
-                    )
+                        User.findById(obj.subscriptor
+                        )
 
-                    .then(user => {
-    
-                    const profile = {
-                        name: item.name,
-                        lastName: item.lastName,
-                        imageHeader: item.imageHeader,
-                        imageAvatar: item.imageAvatar,
-                        imageRecipe: item.imageRecipe,
-                        
-                        about: item.about,
-                        id: item._id,
-                        user: {
-                            online: user.online,
-                            uid: user._id,
-                            email: user.email,
-                            username: user.username,
-            
-                        },
-                        messageDate: obj.updatedAt,
+                            .then(user => {
 
-                        subscribeActive: obj.subscribeActive,
-                        subscribeApproved: obj.subscribeApproved,
-                        subId: obj._id,
-                        isClub: item.isClub,
-                        isUpload: obj.isUpload,
-                        createdAt: item.createdAt,
-                        updatedAt: item.updatedAt
-            
-                    }
-    
-                        profiles.push(profile);
-                        resolve();
+                                const profile = {
+                                    name: item.name,
+                                    lastName: item.lastName,
+                                    imageHeader: item.imageHeader,
+                                    imageAvatar: item.imageAvatar,
+                                    imageRecipe: item.imageRecipe,
 
-                });
-                
-            })
-            ;
-        }));
+                                    about: item.about,
+                                    id: item._id,
+                                    user: {
+                                        online: user.online,
+                                        uid: user._id,
+                                        email: user.email,
+                                        username: user.username,
+
+                                    },
+                                    messageDate: obj.updatedAt,
+
+                                    subscribeActive: obj.subscribeActive,
+                                    subscribeApproved: obj.subscribeApproved,
+                                    subId: obj._id,
+                                    isClub: item.isClub,
+                                    isUpload: obj.isUpload,
+                                    createdAt: item.createdAt,
+                                    updatedAt: item.updatedAt
+
+                                }
+
+                                profiles.push(profile);
+                                resolve();
+
+                            });
+
+                    })
+                    ;
+            }));
         Promise.all(promises)
             .then((resolve) => {
 
 
 
-                
 
-               return  res.json({
+
+                return res.json({
                     ok: true,
                     profiles: profiles
                 })
@@ -553,110 +558,112 @@ const getProfilesSubscriptorsPendingByClub = async(req, res) => {
 
 
 
-   
 
-} 
-catch (error) {
 
-    res.status(500).json({
-        ok: false,
-        msg: 'Hable con el administrador'
-    });
+    }
+    catch (error) {
 
-}}
+        res.status(500).json({
+            ok: false,
+            msg: 'Hable con el administrador'
+        });
 
-const getClubSubscriptionBySubid = async(req, res) => {
+    }
+}
+
+const getClubSubscriptionBySubid = async (req, res) => {
 
 
     try {
 
         const subid = req.params.subid;
 
-    
+
         const subscription = await Subscription
             .find({ subscriptor: subid, subscribeApproved: true, isUpload: true, subscribeActive: true })
-        .sort({ createdAt: 'asc' })
-    
+            .sort({ createdAt: 'asc' })
+
 
 
         const profiles = [];
 
-        const promises = subscription.map((obj) => 
-        
-        new Promise((resolve, reject) => {
+        const promises = subscription.map((obj) =>
 
-           Profile.findOne({ user: obj.club }
-            )
-            .then(item => {
+            new Promise((resolve, reject) => {
+
+                Profile.findOne({ user: obj.club }
+                )
+                    .then(item => {
 
 
-                User.findById(obj.club 
-                    )
+                        User.findById(obj.club
+                        )
 
-                    .then(user => {
-    
-                    const profile = {
-                        name: item.name,
-                        lastName: item.lastName,
-                        imageHeader: item.imageHeader,
-                        imageAvatar: item.imageAvatar,
-                        imageRecipe: item.imageRecipe,
-                        
-                        about: item.about,
-                        id: item._id,
-                        user: {
-                            online: user.online,
-                            uid: user._id,
-                            email: user.email,
-                            username: user.username,
-            
-                        },
-                        messageDate: obj.updatedAt,
-                        isClub: item.isClub,
-                        subscribeActive: obj.subscribeActive,
-                        subscribeApproved: obj.subscribeApproved,
-                        subId: obj._id,
-                        isUpload: obj.isUpload,
-                        createdAt: item.createdAt,
-                        updatedAt: item.updatedAt
-            
-                    }
-    
-                        profiles.push(profile);
-                        resolve();
+                            .then(user => {
 
-                });
-                
-            })
-            ;
-        }));
+                                const profile = {
+                                    name: item.name,
+                                    lastName: item.lastName,
+                                    imageHeader: item.imageHeader,
+                                    imageAvatar: item.imageAvatar,
+                                    imageRecipe: item.imageRecipe,
+
+                                    about: item.about,
+                                    id: item._id,
+                                    user: {
+                                        online: user.online,
+                                        uid: user._id,
+                                        email: user.email,
+                                        username: user.username,
+
+                                    },
+                                    messageDate: obj.updatedAt,
+                                    isClub: item.isClub,
+                                    subscribeActive: obj.subscribeActive,
+                                    subscribeApproved: obj.subscribeApproved,
+                                    subId: obj._id,
+                                    isUpload: obj.isUpload,
+                                    createdAt: item.createdAt,
+                                    updatedAt: item.updatedAt
+
+                                }
+
+                                profiles.push(profile);
+                                resolve();
+
+                            });
+
+                    })
+                    ;
+            }));
         Promise.all(promises)
             .then((resolve) => {
-                
 
-               return  res.json({
+
+                return res.json({
                     ok: true,
                     profiles: profiles
                 })
             })
 
-    
-   
-  
 
 
 
-   
 
-} 
-catch (error) {
 
-    res.status(500).json({
-        ok: false,
-        msg: 'Hable con el administrador'
-    });
 
-}}
+
+
+    }
+    catch (error) {
+
+        res.status(500).json({
+            ok: false,
+            msg: 'Hable con el administrador'
+        });
+
+    }
+}
 
 
 
@@ -665,28 +672,28 @@ const getNotifications = async (req, res = response) => {
     const {
 
         id
-    } = req.params ;
+    } = req.params;
 
-    const profileAuth = await Profile.findOne({user: id});
+    const profileAuth = await Profile.findOne({ user: id });
 
     isClub = profileAuth.isClub;
 
 
 
     const messagesNotifi = await Message
-    .find({ isForNotifi: true,  for: id })
+        .find({ isForNotifi: true, for: id })
 
 
 
 
-      if(isClub){
+    if (isClub) {
 
 
-          const subscriptionsNotifi = await Subscription
-          .find({ isClubNotifi: true,  club: id })
+        const subscriptionsNotifi = await Subscription
+            .find({ isClubNotifi: true, club: id })
 
 
-          res.json({
+        res.json({
             ok: true,
             subscriptionsNotifi,
             messagesNotifi
@@ -694,23 +701,23 @@ const getNotifications = async (req, res = response) => {
         });
 
 
-      }
+    }
 
-      else {
+    else {
 
         const subscriptionsNotifi = await Subscription
-        .find({ isUserNotifi: true,  subscriptor: id })
+            .find({ isUserNotifi: true, subscriptor: id })
 
 
         res.json({
-          ok: true,
-          subscriptionsNotifi,
-          messagesNotifi
+            ok: true,
+            subscriptionsNotifi,
+            messagesNotifi
 
-      });
+        });
 
 
-      }
+    }
 
 }
 
@@ -719,24 +726,24 @@ const getNotificationsMessages = async (req, res = response) => {
     const {
 
         id
-    } = req.params ;
+    } = req.params;
 
 
 
-          const messagesNotifi = await Message
-          .find({ isForNotifi: true,  for: id })
+    const messagesNotifi = await Message
+        .find({ isForNotifi: true, for: id })
 
 
-          res.json({
-            ok: true,
-            messagesNotifi,
+    res.json({
+        ok: true,
+        messagesNotifi,
 
-        });
-
-
+    });
 
 
- 
+
+
+
 
 }
 
