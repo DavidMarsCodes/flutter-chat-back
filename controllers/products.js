@@ -106,10 +106,10 @@ const editProduct = async (req, res = response) => {
 
         cbd,
         thc,
-        id 
-    
+        id
 
-    
+
+
     } = req.body;
 
 
@@ -256,109 +256,120 @@ const getLastProducts = async (req, res = response) => {
                         .findById(obj.catalogo)
                         .then(catalogo => {
 
-                                if(catalogo){
+                            if (catalogo) {
 
-                            if (catalogo.privacity == '1' || catalogo.privacity == '2') {
-
-
-
-
-                                if (obj.user != uid) {
-
-                                    Profile.findOne({ user: obj.user }
-                                    )
-                                        .sort({ updateAt: 'asc' })
-                                        .then(item => {
-
-
-                                            if(item.isClub){
-
-                                            User.findById(obj.user
-                                            )
-
-                                                .then(user => {
-
-
-                                                    Subscription.findOne({
-                                                        club: obj.user, subscriptor: uid
-                                                    })
-                                                        .then((subscription) => {
-
-
-                                                            const subscribeApproved = (subscription) ? subscription.subscribeApproved : false;
-                                                            const subscribeActive = (subscription) ? subscription.subscribeActive : false;
+                                if (catalogo.privacity == '1' || catalogo.privacity == '2') {
 
 
 
-                                                            const productProfile = {
+
+                                    if (obj.user != uid) {
+
+                                        Profile.findOne({ user: obj.user }
+                                        )
+                                            .sort({ updateAt: 'asc' })
+                                            .then(item => {
+
+
+                                                if (item.isClub) {
+
+                                                    User.findById(obj.user
+                                                    )
+
+                                                        .then(user => {
+
+
+                                                            Subscription.findOne({
+                                                                club: obj.user, subscriptor: uid
+                                                            })
+                                                                .then((subscription) => {
+
+
+                                                                    const subscribeApproved = (subscription) ? subscription.subscribeApproved : false;
+                                                                    const subscribeActive = (subscription) ? subscription.subscribeActive : false;
 
 
 
-                                                                product: {
+                                                                    const productProfile = {
 
-                                                                    id: obj._id,
-                                                                    user: obj.user,
-                                                                    name: obj.name,
-                                                                    description: obj.description,
-                                                                    dateCreate: obj.createdAt,
-                                                                    dateUpdate: obj.updateAt,
-                                                                    totalProducts: obj.totalProducts,
-                                                                    coverImage: obj.coverImage,
-                                                                    catalogo: obj.catalogo,
-                                                                    ratingInit: obj.ratingInit,
-                                                                    cbd: obj.cbd,
-                                                                    thc: obj.thc,
 
-                                                                },
-    
-    
-    
-                                                                    profile: {
-                                                                        name: item.name,
-                                                                        lastName: item.lastName,
-                                                                        imageHeader: item.imageHeader,
-                                                                        imageAvatar: item.imageAvatar,
-                                                                        imageRecipe: item.imageRecipe,
-                                                                        about: item.about,
-                                                                        id: item._id,
-                                                                        user: {
-                                                                            online: user.online,
-                                                                            uid: user._id,
-                                                                            email: user.email,
-                                                                            username: user.username,
-    
+
+                                                                        product: {
+
+                                                                            id: obj._id,
+                                                                            user: obj.user,
+                                                                            name: obj.name,
+                                                                            description: obj.description,
+                                                                            dateCreate: obj.createdAt,
+                                                                            dateUpdate: obj.updateAt,
+                                                                            totalProducts: obj.totalProducts,
+                                                                            coverImage: obj.coverImage,
+                                                                            catalogo: obj.catalogo,
+                                                                            ratingInit: obj.ratingInit,
+                                                                            cbd: obj.cbd,
+                                                                            thc: obj.thc,
+
                                                                         },
-                                                                        subscribeApproved: (isClub) ? true : subscribeApproved,
-                                                                        subscribeActive: (isClub) ? true : subscribeActive,
-                                                                        message: obj.message,
-                                                                        isClub: item.isClub,
-                                                                        messageDate: obj.createdAt,
-                                                                        createdAt: item.createdAt,
-                                                                        updatedAt: item.updatedAt
-    
+
+
+
+                                                                        profile: {
+                                                                            name: item.name,
+                                                                            lastName: item.lastName,
+                                                                            imageHeader: item.imageHeader,
+                                                                            imageAvatar: item.imageAvatar,
+                                                                            imageRecipe: item.imageRecipe,
+                                                                            about: item.about,
+                                                                            id: item._id,
+                                                                            user: {
+                                                                                online: user.online,
+                                                                                uid: user._id,
+                                                                                email: user.email,
+                                                                                username: user.username,
+
+                                                                            },
+                                                                            subscribeApproved: (isClub) ? true : subscribeApproved,
+                                                                            subscribeActive: (isClub) ? true : subscribeActive,
+                                                                            message: obj.message,
+                                                                            isClub: item.isClub,
+                                                                            messageDate: obj.createdAt,
+                                                                            createdAt: item.createdAt,
+                                                                            updatedAt: item.updatedAt
+
+                                                                        }
+
+
+
                                                                     }
-    
-                                                                
 
-                                                            }
 
-                                                           
 
-                                                            productsProfiles.push(productProfile);
-                                                            resolve();
-                                                        })
+                                                                    productsProfiles.push(productProfile);
+                                                                    resolve();
+                                                                })
 
-                                                });
+                                                        });
 
-                                            }
+                                                }
 
-                                            else {
+                                                else {
 
-                                                resolve();
-                                            };
+                                                    resolve();
+                                                };
 
-                                        })
+                                            })
+                                    }
+
+
+
+                                    else {
+
+                                        resolve();
+                                    };
+
                                 }
+
+
 
 
 
@@ -369,21 +380,10 @@ const getLastProducts = async (req, res = response) => {
 
                             }
 
-                            
-
-
-
                             else {
-
                                 resolve();
-                            };
 
-                        }
-
-                        else {
-                            resolve();
-
-                        }
+                            }
 
                         });
 
@@ -411,152 +411,160 @@ const getLastProducts = async (req, res = response) => {
 
             const promises = allProducts.map((obj) =>
 
-            new Promise((resolve, reject) => {
+                new Promise((resolve, reject) => {
 
 
 
 
-                Catalogo
-                    .findById(obj.catalogo)
-                    .then(catalogo => {
+                    Catalogo
+                        .findById(obj.catalogo)
+                        .then(catalogo => {
 
-console.log('catalogo',catalogo);
+                            console.log('catalogo', catalogo);
 
-                        if(catalogo){
-
-
-                        
-
-                        if (catalogo.privacity == '1' || catalogo.privacity == '2') {
-
-
-                                Profile.findOne({ user: obj.user }
-                                )
-                                    .sort({ updateAt: 'asc' })
-                                    .then(item => {
-
-
-                                        if(item.isClub){
-
-                                        User.findById(obj.user
-                                        )
-
-                                            .then(user => {
-
-
-                                                Subscription.findOne({
-                                                    club: obj.user, subscriptor: uid
-                                                })
-                                                    .then((subscription) => {
-
-
-                                                        const subscribeApproved = (subscription) ? subscription.subscribeApproved : false;
-                                                        const subscribeActive = (subscription) ? subscription.subscribeActive : false;
+                            if (catalogo) {
 
 
 
 
-                                                        const productProfile = {
+                                if (catalogo.privacity == '1' || catalogo.privacity == '2') {
 
 
-
-                                                            product : {
-
-                                                                id: obj._id,
-                                                                user: obj.user,
-                                                                name: obj.name,
-                                                                description: obj.description,
-                                                                dateCreate: obj.createdAt,
-                                                                dateUpdate: obj.updateAt,
-                                                                totalProducts: obj.totalProducts,
-                                                                coverImage: obj.coverImage,
-                                                                catalogo: obj.catalogo,
-                                                                ratingInit: obj.ratingInit,
-                                                                cbd: obj.cbd,
-                                                                thc: obj.thc,
-
-                                                            },
+                                    Profile.findOne({ user: obj.user }
+                                    )
+                                        .sort({ updateAt: 'asc' })
+                                        .then(item => {
 
 
+                                            if (item) {
+                                                if (item.isClub) {
 
-                                                                profile: {
-                                                                    name: item.name,
-                                                                    lastName: item.lastName,
-                                                                    imageHeader: item.imageHeader,
-                                                                    imageAvatar: item.imageAvatar,
-                                                                    imageRecipe: item.imageRecipe,
-                                                                    about: item.about,
-                                                                    id: item._id,
-                                                                    user: {
-                                                                        online: user.online,
-                                                                        uid: user._id,
-                                                                        email: user.email,
-                                                                        username: user.username,
+                                                    User.findById(obj.user
+                                                    )
 
-                                                                    },
-                                                                    subscribeApproved: (isClub) ? true : subscribeApproved,
-                                                                    subscribeActive: (isClub) ? true : subscribeActive,
-                                                                    message: obj.message,
-                                                                    isClub: item.isClub,
-                                                                    messageDate: obj.createdAt,
-                                                                    createdAt: item.createdAt,
-                                                                    updatedAt: item.updatedAt
-
-                                                                }
-
-                                                            
-
-                                                        }
+                                                        .then(user => {
 
 
-                                                        productsProfiles.push(productProfile);
-                                                        resolve();
-                                                    })
-
-                                            });
-
-                                        }
-
-                                        else {
-
-                                            resolve();
-                                        };
-
-                                    })
-                           
-
-                        }
+                                                            Subscription.findOne({
+                                                                club: obj.user, subscriptor: uid
+                                                            })
+                                                                .then((subscription) => {
 
 
-
-                        else {
-
-                            resolve();
-                        };
-
-                    }
-
-                    else {
-
-                        resolve();
-                    }
-
-                    });
+                                                                    const subscribeApproved = (subscription) ? subscription.subscribeApproved : false;
+                                                                    const subscribeActive = (subscription) ? subscription.subscribeActive : false;
 
 
 
 
-
-            }))
-        Promise.all(promises)
-            .then((resolve) => {
+                                                                    const productProfile = {
 
 
-                return res.json({
-                    ok: true,
-                    productsProfiles: productsProfiles
+
+                                                                        product: {
+
+                                                                            id: obj._id,
+                                                                            user: obj.user,
+                                                                            name: obj.name,
+                                                                            description: obj.description,
+                                                                            dateCreate: obj.createdAt,
+                                                                            dateUpdate: obj.updateAt,
+                                                                            totalProducts: obj.totalProducts,
+                                                                            coverImage: obj.coverImage,
+                                                                            catalogo: obj.catalogo,
+                                                                            ratingInit: obj.ratingInit,
+                                                                            cbd: obj.cbd,
+                                                                            thc: obj.thc,
+
+                                                                        },
+
+
+
+                                                                        profile: {
+                                                                            name: item.name,
+                                                                            lastName: item.lastName,
+                                                                            imageHeader: item.imageHeader,
+                                                                            imageAvatar: item.imageAvatar,
+                                                                            imageRecipe: item.imageRecipe,
+                                                                            about: item.about,
+                                                                            id: item._id,
+                                                                            user: {
+                                                                                online: user.online,
+                                                                                uid: user._id,
+                                                                                email: user.email,
+                                                                                username: user.username,
+
+                                                                            },
+                                                                            subscribeApproved: (isClub) ? true : subscribeApproved,
+                                                                            subscribeActive: (isClub) ? true : subscribeActive,
+                                                                            message: obj.message,
+                                                                            isClub: item.isClub,
+                                                                            messageDate: obj.createdAt,
+                                                                            createdAt: item.createdAt,
+                                                                            updatedAt: item.updatedAt
+
+                                                                        }
+
+
+
+                                                                    }
+
+
+                                                                    productsProfiles.push(productProfile);
+                                                                    resolve();
+                                                                })
+
+                                                        });
+
+                                                }
+
+                                                else {
+
+                                                    resolve();
+                                                };
+
+                                            }
+
+                                            else {
+
+                                                resolve();
+                                            };
+
+                                        })
+
+
+                                }
+
+
+
+                                else {
+
+                                    resolve();
+                                };
+
+                            }
+
+                            else {
+
+                                resolve();
+                            }
+
+                        });
+
+
+
+
+
+                }))
+            Promise.all(promises)
+                .then((resolve) => {
+
+
+                    return res.json({
+                        ok: true,
+                        productsProfiles: productsProfiles
+                    })
                 })
-            })
         }
 
 
