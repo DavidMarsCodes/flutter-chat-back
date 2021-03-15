@@ -248,7 +248,7 @@ const getProfilesChat = async (req, res) => {
 
 
 
-                    console.log('profile**', profile);
+                    console.log('profile**', profiles);
 
 
                     profilesUnique = Object.values(profiles.reduce((acc, cur) => Object.assign(acc, { [cur.id.toString()]: cur }), {}));
