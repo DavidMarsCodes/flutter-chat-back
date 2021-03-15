@@ -191,7 +191,7 @@ const getProfilesChat = async (req, res) => {
 
 
                                     Subscription.findOne({
-                                        club: uid, subscriptor: (obj.by == uid) ? obj.for : obj.by
+                                        club: uid, subscriptor: item.user._id
                                     })
                                         .then((subscription) => {
 
@@ -248,7 +248,7 @@ const getProfilesChat = async (req, res) => {
 
 
 
-
+                    console.log('profile**', profile);
 
 
                     profilesUnique = Object.values(profiles.reduce((acc, cur) => Object.assign(acc, { [cur.id.toString()]: cur }), {}));
