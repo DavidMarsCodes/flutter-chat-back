@@ -257,7 +257,7 @@ const getProfilesChat = async (req, res) => {
 
                     return res.json({
                         ok: true,
-                        profiles: profilesUnique
+                        profiles: profilesOrder
                     })
                 })
 
