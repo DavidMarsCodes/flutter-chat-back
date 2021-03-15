@@ -79,10 +79,10 @@ const getProfilesLastUsers = async (req, res = response) => {
 
 
                 Subscription.findOne({
-                    club: item.user._id,  subscriptor: req.uid
+                    club: item.user._id, subscriptor: req.uid
                 })
 
-               
+
                     .then((subscription) => {
 
 
@@ -128,6 +128,8 @@ const getProfilesLastUsers = async (req, res = response) => {
 
         Promise.all(promises)
             .then((resolve) => {
+
+
 
 
                 console.log('profiles!!', profiles)

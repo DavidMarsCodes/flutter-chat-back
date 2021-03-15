@@ -34,20 +34,20 @@ const getProfilesChat = async (req, res) => {
         const uid = req.params.uid;
 
 
-        const update = { 
-                   
+        const update = {
+
             isForNotifi: false
-         };
+        };
 
 
-   await Message.updateMany(
-        {
-            for: uid
-        },
-        {
-            $set: update
-        }
-    );
+        await Message.updateMany(
+            {
+                for: uid
+            },
+            {
+                $set: update
+            }
+        );
 
 
         const messages = await Message.find({
@@ -144,9 +144,13 @@ const getProfilesChat = async (req, res) => {
                 .then((resolve) => {
 
 
+                    const profilesOrder = profiles.sort((a, b) => (a.messageDate > b.messageDate) ? 1 : -1)
+
+
+
                     return res.json({
                         ok: true,
-                        profiles: profiles
+                        profiles: profilesOrder
                     })
                 })
 
@@ -161,9 +165,9 @@ const getProfilesChat = async (req, res) => {
                 new Promise((resolve, reject) => {
 
 
-                    if (obj.by != uid) {
+                    if (obj.for != uid) {
 
-                        Profile.findOne({ user: obj.by }
+                        Profile.findOne({ user: obj.for }
                         )
                             .sort({ updateAt: 'asc' })
                             .then(item => {
@@ -237,10 +241,13 @@ const getProfilesChat = async (req, res) => {
             Promise.all(promises)
                 .then((resolve) => {
 
+                    const profilesOrder = profiles.sort((a, b) => (a.messageDate > b.messageDate) ? 1 : -1)
+
+
 
                     return res.json({
                         ok: true,
-                        profiles: profiles
+                        profiles: profilesOrder
                     })
                 })
 

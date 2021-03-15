@@ -104,9 +104,13 @@ const getProfilesSubscriptorsByUser = async (req, res) => {
                 .then((resolve) => {
 
 
+                    const profilesOrder = profiles.sort((a, b) => (a.messageDate > b.messageDate) ? 1 : -1)
+
+
+
                     return res.json({
                         ok: true,
-                        profiles: profiles
+                        profiles: profilesOrder
                     })
                 })
 
@@ -204,10 +208,13 @@ const getProfilesSubscriptorsByUser = async (req, res) => {
             Promise.all(promises)
                 .then((resolve) => {
 
+                    const profilesOrder = profiles.sort((a, b) => (a.messageDate > b.messageDate) ? 1 : -1)
+
+
 
                     return res.json({
                         ok: true,
-                        profiles: profiles
+                        profiles: profilesOrder
                     })
                 })
 
@@ -330,9 +337,13 @@ const getProfilesSubscriptorsApproveByUser = async (req, res) => {
                 .then((resolve) => {
 
 
+                    const profilesOrder = profiles.sort((a, b) => (a.messageDate > b.messageDate) ? 1 : -1)
+
+
+
                     return res.json({
                         ok: true,
-                        profiles: profiles
+                        profiles: profilesOrder
                     })
                 })
 
@@ -430,10 +441,13 @@ const getProfilesSubscriptorsApproveByUser = async (req, res) => {
             Promise.all(promises)
                 .then((resolve) => {
 
+                    const profilesOrder = profiles.sort((a, b) => (a.messageDate > b.messageDate) ? 1 : -1)
+
+
 
                     return res.json({
                         ok: true,
-                        profiles: profiles
+                        profiles: profilesOrder
                     })
                 })
 
@@ -547,11 +561,12 @@ const getProfilesSubscriptorsPendingByClub = async (req, res) => {
 
 
 
+                const profilesOrder = profiles.sort((a, b) => (a.messageDate > b.messageDate) ? 1 : -1)
 
 
                 return res.json({
                     ok: true,
-                    profiles: profiles
+                    profiles: profilesOrder
                 })
             })
 
@@ -640,9 +655,13 @@ const getClubSubscriptionBySubid = async (req, res) => {
             .then((resolve) => {
 
 
+                const profilesOrder = profiles.sort((a, b) => (a.messageDate > b.messageDate) ? 1 : -1)
+
+
+
                 return res.json({
                     ok: true,
-                    profiles: profiles
+                    profiles: profilesOrder
                 })
             })
 

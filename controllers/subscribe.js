@@ -7,52 +7,52 @@ const UpdateImageSubscription = async (req, res = response) => {
     const { subscriptor,
         id,
         imageRecipe,
-       
-     
-        } = req.body;
+
+
+    } = req.body;
 
 
 
     try {
 
 
-        const update = { 
+        const update = {
             imageRecipe: imageRecipe,
             isUpload: true,
             subscribeActive: true,
             isClubNotifi: true
-         };
+        };
 
 
-   await Subscription.updateOne(
-        {
-            _id: id
-        },
-        {
-            $set: update
-        }
-    );
+        await Subscription.updateOne(
+            {
+                _id: id
+            },
+            {
+                $set: update
+            }
+        );
 
 
 
         const subscription = await Subscription
-        .findOne({ _id: id })
+            .findOne({ _id: id })
 
         const profileUpdate = await
 
 
-        Profile.updateOne(
-            {
-                user: subscription.subscriptor
-            },
-            {
-                $set: {
-                    imageRecipe: imageRecipe,
-                    
-    
+            Profile.updateOne(
+                {
+                    user: subscription.subscriptor
+                },
+                {
+                    $set: {
+                        imageRecipe: imageRecipe,
+
+
+                    }
                 }
-            }
-        );
+            );
 
         res.json({
             ok: true,
@@ -71,10 +71,10 @@ const UpdateImageSubscription = async (req, res = response) => {
 }
 
 const UnSubscription = async (req, res = response) => {
-    const { 
+    const {
         id,
-     
-        } = req.body;
+
+    } = req.body;
 
 
 
@@ -82,25 +82,25 @@ const UnSubscription = async (req, res = response) => {
     try {
 
 
-        const update = { 
+        const update = {
             subscribeActive: false,
             subscribeApproved: false
-           
-         };
+
+        };
 
 
-   await Subscription.updateOne(
-        {
-            _id: id
-        },
-        {
-            $set: update
-        }
-    );
+        await Subscription.updateOne(
+            {
+                _id: id
+            },
+            {
+                $set: update
+            }
+        );
 
 
         const subscription = await Subscription
-        .findOne({ _id: id })
+            .findOne({ _id: id })
         res.json({
             ok: true,
             subscription,
@@ -127,106 +127,108 @@ const getSubscribeByClubIdAndSubId = async (req, res = response) => {
         const userId = req.params.userid;
 
 
-      const profileAuth = await Profile.findOne({user: userAuth});
+        const profileAuth = await Profile.findOne({ user: userAuth });
 
-      isClub = profileAuth.isClub;
+        isClub = profileAuth.isClub;
 
 
-        if(isClub){
+        if (isClub) {
 
 
             const subscription = await Subscription
-            .findOne({ subscriptor: userId, club: userAuth })
+                .findOne({ subscriptor: userId, club: userAuth })
 
 
 
-        const profile = await Profile
-        .findOne({ user: userId })
+            const profile = await Profile
+                .findOne({ user: userId })
 
-        const imageRecipe = (profile.imageRecipe == "")? "" : profile.imageRecipe;
+            const imageRecipe = (profile.imageRecipe == "") ? "" : profile.imageRecipe;
 
-        const isUploadImageRecipe = (profile.imageRecipe == "")? false : true;
-
-
-               
-
-        if(!subscription){
-
-            const newSubscription = new Subscription({ 
-                subscriptor: userId,
-                imageRecipe: imageRecipe,
-                club: userAuth,
-                subscribeActive: false,
-                isUpload: isUploadImageRecipe,
-             });
-    
-           const subscription = await newSubscription.save();
+            const isUploadImageRecipe = (profile.imageRecipe == "") ? false : true;
 
 
-        res.json({
-            ok: true,
-            subscription,
-        })
-        }
 
-        else {
 
-            res.json({
-                ok: true,
-                subscription,
-            })
-        }
-        
-           
+            if (!subscription) {
+
+                const newSubscription = new Subscription({
+                    subscriptor: userId,
+                    imageRecipe: imageRecipe,
+                    club: userAuth,
+                    subscribeActive: false,
+                    isUpload: isUploadImageRecipe,
+                });
+
+                const subscription = await newSubscription.save();
+
+
+                res.json({
+                    ok: true,
+                    subscription,
+                })
+            }
+
+            else {
+
+
+
+                res.json({
+                    ok: true,
+                    subscription,
+                })
+            }
+
+
         }
 
         else if (!isClub) {
 
-            
+
             const subscription = await Subscription
-            .findOne({ subscriptor: userAuth, club: userId  })
+                .findOne({ subscriptor: userAuth, club: userId })
 
 
 
-        const profile = await Profile
-        .findOne({ user: userAuth })
+            const profile = await Profile
+                .findOne({ user: userAuth })
 
-        const imageRecipe = (profile.imageRecipe == "")? "" : profile.imageRecipe;
+            const imageRecipe = (profile.imageRecipe == "") ? "" : profile.imageRecipe;
 
-        const isUploadImageRecipe = (profile.imageRecipe == "")? false : true;
-
-
-               
-
-        if(!subscription){
-
-            const newSubscription = new Subscription({ 
-                subscriptor: userAuth,
-                imageRecipe: imageRecipe,
-                club: userId,
-                subscribeActive: false,
-                isUpload: isUploadImageRecipe,
-             });
-    
-           const subscription = await newSubscription.save();
+            const isUploadImageRecipe = (profile.imageRecipe == "") ? false : true;
 
 
-        res.json({
-            ok: true,
-            subscription,
-        })
+
+
+            if (!subscription) {
+
+                const newSubscription = new Subscription({
+                    subscriptor: userAuth,
+                    imageRecipe: imageRecipe,
+                    club: userId,
+                    subscribeActive: false,
+                    isUpload: isUploadImageRecipe,
+                });
+
+                const subscription = await newSubscription.save();
+
+
+                res.json({
+                    ok: true,
+                    subscription,
+                })
+            }
+
+            else {
+
+                res.json({
+                    ok: true,
+                    subscription,
+                })
+            }
         }
 
-        else {
 
-            res.json({
-                ok: true,
-                subscription,
-            })
-        }
-        }
-
-        
 
 
 
@@ -243,35 +245,35 @@ const getSubscribeByClubIdAndSubId = async (req, res = response) => {
 }
 
 const disapproveSubscription = async (req, res = response) => {
-    const { 
+    const {
         id,
-     
-        } = req.body;
+
+    } = req.body;
 
 
 
     try {
 
 
-        const update = { 
+        const update = {
             subscribeActive: false,
-            subscribeApproved :false
-           
-         };
+            subscribeApproved: false
+
+        };
 
 
-   await Subscription.updateOne(
-        {
-            _id: id
-        },
-        {
-            $set: update
-        }
-    );
+        await Subscription.updateOne(
+            {
+                _id: id
+            },
+            {
+                $set: update
+            }
+        );
 
 
         const subscription = await Subscription
-        .findOne({ _id: id })
+            .findOne({ _id: id })
         res.json({
             ok: true,
             subscription,
@@ -289,10 +291,10 @@ const disapproveSubscription = async (req, res = response) => {
 }
 
 const approveSubscription = async (req, res = response) => {
-    const { 
+    const {
         id,
-     
-        } = req.body;
+
+    } = req.body;
 
 
 
@@ -301,25 +303,25 @@ const approveSubscription = async (req, res = response) => {
     try {
 
 
-        const update = { 
-            subscribeApproved :true,
+        const update = {
+            subscribeApproved: true,
             isUserNotifi: true
-           
-         };
+
+        };
 
 
-   await Subscription.updateOne(
-        {
-            _id: id
-        },
-        {
-            $set: update
-        }
-    );
+        await Subscription.updateOne(
+            {
+                _id: id
+            },
+            {
+                $set: update
+            }
+        );
 
 
         const subscription = await Subscription
-        .findOne({ _id: id })
+            .findOne({ _id: id })
         res.json({
             ok: true,
             subscription,
@@ -344,7 +346,7 @@ module.exports = {
     getSubscribeByClubIdAndSubId,
     disapproveSubscription,
     approveSubscription,
-    
+
 
 }
 
