@@ -700,9 +700,9 @@ const getNotifications = async (req, res = response) => {
 
 
     const messagesNotifi = await Message
-        .find({ isForNotifi: true, by: id })
+        .find({ isForNotifi: true, for: id })
 
-    console.log(messagesNotifi);
+    console.log('messages for,', id, messagesNotifi);
 
 
     if (isClub) {
