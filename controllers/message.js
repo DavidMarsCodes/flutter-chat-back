@@ -62,6 +62,8 @@ const getProfilesChat = async (req, res) => {
 
         const isClub = myprofile.isClub;
 
+        console.log('messages', messages)
+
 
         messagesUnique = [];
         messagesUnique = Object.values(messages.reduce((acc, cur) => Object.assign(acc, { [cur.by.toString()]: cur }), {}));
