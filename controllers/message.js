@@ -76,22 +76,22 @@ const getProfilesChat = async (req, res) => {
                 new Promise((resolve, reject) => {
 
 
-                    if (obj.for != uid) {
+                    if (obj.by != uid) {
 
-                        Profile.findOne({ user: obj.for }
+                        Profile.findOne({ user: obj.by }
                         )
                             .sort({ updateAt: 'asc' })
                             .then(item => {
 
 
-                                User.findById(obj.for
+                                User.findById(obj.by
                                 )
 
                                     .then(user => {
 
 
                                         Subscription.findOne({
-                                            club: obj.for, subscriptor: uid
+                                            club: obj.by, subscriptor: uid
                                         })
                                             .then((subscription) => {
 
@@ -162,8 +162,11 @@ const getProfilesChat = async (req, res) => {
             const promises = messagesUnique.map((obj) =>
 
 
+
+
                 new Promise((resolve, reject) => {
 
+                    console.log('messagesUnique', messagesUnique)
 
                     if (obj.for != uid) {
 
@@ -172,6 +175,8 @@ const getProfilesChat = async (req, res) => {
                             .sort({ updateAt: 'asc' })
                             .then(item => {
 
+
+                                console.log('Profile', item)
 
 
                                 User.findById(item.user._id
