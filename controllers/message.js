@@ -251,9 +251,9 @@ const getProfilesChat = async (req, res) => {
                     console.log('profile**', profiles);
 
 
-                    profilesUnique = Object.values(profiles.reduce((acc, cur) => Object.assign(acc, { [cur.id.toString()]: cur }), {}));
 
-                    const profilesOrder = profilesUnique.sort((a, b) => (a.messageDate > b.messageDate) ? 1 : 1)
+
+                    const profilesOrder = profiles.sort((a, b) => (a.messageDate > b.messageDate) ? 1 : 1)
 
                     return res.json({
                         ok: true,
