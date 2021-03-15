@@ -253,7 +253,7 @@ const getProfilesChat = async (req, res) => {
 
 
 
-                    const profilesOrder = profiles.sort((a, b) => (a.messageDate > b.messageDate) ? 1 : -1)
+                    const profilesOrder = profiles.sort((a, b) => (a.messageDate > b.messageDate) ? 1 : 1)
 
                     console.log('profilesOrder**', profilesOrder);
 
