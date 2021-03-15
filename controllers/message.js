@@ -159,7 +159,7 @@ const getProfilesChat = async (req, res) => {
         }
 
         else {
-
+            console.log('messagesUnique', messagesUnique)
 
             const promises = messagesUnique.map((obj) =>
 
@@ -168,82 +168,77 @@ const getProfilesChat = async (req, res) => {
 
                 new Promise((resolve, reject) => {
 
-                    console.log('messagesUnique', messagesUnique)
-
-                    if (obj.by != uid) {
-
-                        Profile.findOne({ user: obj.by }
-                        )
-                            .sort({ updateAt: 'asc' })
-                            .then(item => {
-
-
-                                console.log('Profile', item)
-
-
-                                User.findById(item.user._id
-                                )
-
-                                    .then(user => {
 
 
 
-                                        Subscription.findOne({
-                                            club: uid, subscriptor: obj.by
+
+                    Profile.findOne({ user: (obj.by == uid) ? obj.for : obj.by }
+                    )
+                        .sort({ updateAt: 'asc' })
+                        .then(item => {
+
+
+                            console.log('Profile', item)
+
+
+                            User.findById(item.user._id
+                            )
+
+                                .then(user => {
+
+
+
+                                    Subscription.findOne({
+                                        club: uid, subscriptor: obj.by
+                                    })
+                                        .then((subscription) => {
+
+
+                                            const subscribeApproved = (subscription) ? subscription.subscribeApproved : false;
+                                            const subscribeActive = (subscription) ? subscription.subscribeActive : false;
+
+
+                                            const profile = {
+                                                name: item.name,
+                                                lastName: item.lastName,
+                                                imageHeader: item.imageHeader,
+                                                imageAvatar: item.imageAvatar,
+                                                imageRecipe: item.imageRecipe,
+
+                                                about: item.about,
+                                                id: item._id,
+                                                user: {
+                                                    online: user.online,
+                                                    uid: user._id,
+                                                    email: user.email,
+                                                    username: user.username,
+
+                                                },
+                                                subscribeApproved: (isClub) ? true : subscribeApproved,
+                                                subscribeActive: (isClub) ? true : subscribeActive,
+                                                message: obj.message,
+                                                isClub: item.isClub,
+                                                messageDate: obj.createdAt,
+                                                createdAt: item.createdAt,
+                                                updatedAt: item.updatedAt
+
+                                            }
+
+                                            profiles.push(profile);
+                                            resolve();
                                         })
-                                            .then((subscription) => {
-
-
-                                                const subscribeApproved = (subscription) ? subscription.subscribeApproved : false;
-                                                const subscribeActive = (subscription) ? subscription.subscribeActive : false;
-
-
-                                                const profile = {
-                                                    name: item.name,
-                                                    lastName: item.lastName,
-                                                    imageHeader: item.imageHeader,
-                                                    imageAvatar: item.imageAvatar,
-                                                    imageRecipe: item.imageRecipe,
-
-                                                    about: item.about,
-                                                    id: item._id,
-                                                    user: {
-                                                        online: user.online,
-                                                        uid: user._id,
-                                                        email: user.email,
-                                                        username: user.username,
-
-                                                    },
-                                                    subscribeApproved: (isClub) ? true : subscribeApproved,
-                                                    subscribeActive: (isClub) ? true : subscribeActive,
-                                                    message: obj.message,
-                                                    isClub: item.isClub,
-                                                    messageDate: obj.createdAt,
-                                                    createdAt: item.createdAt,
-                                                    updatedAt: item.updatedAt
-
-                                                }
-
-                                                profiles.push(profile);
-                                                resolve();
-                                            })
 
 
 
-                                    });
+                                });
 
-                            })
-
-                    }
-
-                    else {
-
-                        resolve();
-                    }
+                        })
 
 
 
-                    ;
+
+
+                        ;
                 }));
             Promise.all(promises)
                 .then((resolve) => {
