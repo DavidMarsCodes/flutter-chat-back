@@ -121,7 +121,7 @@ const getProfilesChat = async (req, res) => {
                                                     subscribeActive: (isClub) ? true : subscribeActive,
                                                     message: obj.message,
                                                     isClub: item.isClub,
-                                                    messageDate: obj.createdAt,
+                                                    messageDate: obj.updatedAt,
                                                     createdAt: item.createdAt,
                                                     updatedAt: item.updatedAt
 
@@ -218,7 +218,7 @@ const getProfilesChat = async (req, res) => {
                                                 subscribeActive: (isClub) ? true : subscribeActive,
                                                 message: obj.message,
                                                 isClub: item.isClub,
-                                                messageDate: obj.createdAt,
+                                                messageDate: obj.updatedAt,
                                                 createdAt: item.createdAt,
                                                 updatedAt: item.updatedAt
 
