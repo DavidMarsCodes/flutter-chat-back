@@ -168,9 +168,9 @@ const getProfilesChat = async (req, res) => {
 
                     console.log('messagesUnique', messagesUnique)
 
-                    if (obj.for != uid) {
+                    if (obj.by != uid) {
 
-                        Profile.findOne({ user: obj.for }
+                        Profile.findOne({ user: obj.by }
                         )
                             .sort({ updateAt: 'asc' })
                             .then(item => {
