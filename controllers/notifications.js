@@ -700,7 +700,7 @@ const getNotifications = async (req, res = response) => {
 
 
     const messagesNotifi = await Message
-        .find({ isForNotifi: true, for: id })
+        .find({ isForNotifi: true, by: id })
 
     console.log(messagesNotifi);
 
