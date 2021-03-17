@@ -337,7 +337,7 @@ const getProfilesSubscriptorsApproveByUser = async (req, res) => {
                 .then((resolve) => {
 
 
-                    const profilesOrder = profiles.sort((a, b) => (a.messageDate > b.messageDate) ? 1 : -1)
+                    const profilesOrder = profiles.sort((a, b) => (a.messageDate > b.messageDate) ? 1 : 1)
 
 
 
@@ -441,7 +441,7 @@ const getProfilesSubscriptorsApproveByUser = async (req, res) => {
             Promise.all(promises)
                 .then((resolve) => {
 
-                    const profilesOrder = profiles.sort((a, b) => (a.messageDate > b.messageDate) ? 1 : -1)
+                    const profilesOrder = profiles.sort((a, b) => (a.messageDate > b.messageDate) ? 1 : 1)
 
 
 
