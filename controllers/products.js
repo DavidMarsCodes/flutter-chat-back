@@ -405,7 +405,7 @@ const getLastProducts = async (req, res = response) => {
                 .then((resolve) => {
 
 
-                    const productsProfilesPosition = productsProfiles.sort((a, b) => (a.ratingInit > b.ratingInit) ? 1 : 1)
+                    const productsProfilesPosition = productsProfiles.sort((a, b) => (a.ratingInit > b.ratingInit) ? 1 : -1)
 
 
 
@@ -572,7 +572,7 @@ const getLastProducts = async (req, res = response) => {
             Promise.all(promises)
                 .then((resolve) => {
 
-                    const productsProfilesPosition = productsProfiles.sort((a, b) => (a.ratingInit > b.ratingInit) ? 1 : 1)
+                    const productsProfilesPosition = productsProfiles.sort((a, b) => (a.ratingInit > b.ratingInit) ? 1 : -1)
 
 
 
