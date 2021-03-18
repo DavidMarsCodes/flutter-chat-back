@@ -405,7 +405,7 @@ const getLastProducts = async (req, res = response) => {
                 .then((resolve) => {
 
 
-                    const productsProfilesPosition = productsProfiles.sort((a, b) => (parseInt(a.ratingInit) > parseInt(b.ratingInit)) ? 1 : -1)
+                    const productsProfilesPosition = productsProfiles.sort((a, b) => parseFloat(b.product.ratingInit) - parseFloat(a.product.ratingInit));
 
 
 
@@ -572,22 +572,18 @@ const getLastProducts = async (req, res = response) => {
             Promise.all(promises)
                 .then((resolve) => {
 
-                    const productsProfilesPosition = productsProfiles.sort((a, b) => (a.product.ratingInit > b.product.ratingInit) ? 1 : 1)
 
 
-                    const productsProfilesPosition2 = productsProfiles.sort((a, b) => parseFloat(b.product.ratingInit) - parseFloat(a.product.ratingInit));
+                    const productsProfilesPosition = productsProfiles.sort((a, b) => parseFloat(b.product.ratingInit) - parseFloat(a.product.ratingInit));
 
 
 
 
-                    console.log('productsProfilesPosition', productsProfilesPosition);
 
-
-                    console.log('productsProfilesPosition2', productsProfilesPosition);
 
                     return res.json({
                         ok: true,
-                        productsProfiles: productsProfilesPosition2
+                        productsProfiles: productsProfilesPosition
                     })
                 })
         }
