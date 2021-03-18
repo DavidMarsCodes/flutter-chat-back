@@ -29,7 +29,7 @@ const addFavorite = async (req, res = response) => {
             };
 
 
-            const update = await Favorite.updateOne(
+            const updateok = await Favorite.updateOne(
                 {
                     for: uid
                 },
@@ -38,7 +38,7 @@ const addFavorite = async (req, res = response) => {
                 }
             );
 
-            if (update) {
+            if (updateok) {
 
 
                 const favorite = await Favorite.findOne({ product: product, user: uid });
