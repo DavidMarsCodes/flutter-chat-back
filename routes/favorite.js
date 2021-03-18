@@ -16,7 +16,7 @@ const router = Router();
 
 
 
-router.post('/new', [
+router.post('/update', [
 
 ], addFavorite, validateJWT);
 
