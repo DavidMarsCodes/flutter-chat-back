@@ -572,7 +572,7 @@ const getLastProducts = async (req, res = response) => {
             Promise.all(promises)
                 .then((resolve) => {
 
-                    const productsProfilesPosition = productsProfiles.sort((a, b) => (parseInt(a.ratingInit, 10) > parseInt(b.ratingInit, 10)) ? 1 : -1)
+                    const productsProfilesPosition = productsProfiles.sort((a, b) => (parseInt(a.product.ratingInit, 10) > parseInt(b.product.ratingInit, 10)) ? 1 : -1)
 
                     console.log('productsProfilesPosition', productsProfilesPosition);
 
