@@ -48,7 +48,7 @@ const addFavorite = async (req, res = response) => {
                 console.log('favorite', favorite)
 
 
-                res.json({
+                return res.json({
                     ok: true,
                     favorite,
 
