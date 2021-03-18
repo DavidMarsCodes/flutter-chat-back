@@ -23,9 +23,11 @@ const addFavorite = async (req, res = response) => {
 
             console.log('likeExist', likeExist)
 
+            const updateLike = (likeExist.isLike) ? false : true;
+
             const update = {
 
-                isLike: (likeExist.isLike) ? false : true
+                isLike: updateLike;
             };
 
 
