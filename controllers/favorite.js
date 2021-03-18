@@ -59,7 +59,7 @@ const addFavorite = async (req, res = response) => {
         const addFavorite = new Favorite({
             isLike: true,
             user: user,
-            pproduct: product
+            product: product
         });
 
         const favorite = await addFavorite.save();
