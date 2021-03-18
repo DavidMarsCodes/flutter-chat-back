@@ -29,7 +29,7 @@ const addFavorite = async (req, res = response) => {
             };
 
 
-            await Favorite.updateOne(
+            const update = await Favorite.updateOne(
                 {
                     for: uid
                 },
@@ -38,16 +38,23 @@ const addFavorite = async (req, res = response) => {
                 }
             );
 
-            const favorite = await Favorite.findOne({ product: product, user: uid });
-
-            console.log('favorite', favorite)
+            if (update) {
 
 
-            res.json({
-                ok: true,
-                favorite,
+                const favorite = await Favorite.findOne({ product: product, user: uid });
 
-            });
+                console.log('favorite', favorite)
+
+
+                res.json({
+                    ok: true,
+                    favorite,
+
+                });
+
+            }
+
+
 
 
 
