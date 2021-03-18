@@ -18,12 +18,14 @@ const addFavorite = async (req, res = response) => {
 
         const likeExist = await Favorite.findOne({ product: product, user: uid });
 
-        if (likeExist.isLike) {
+        if (likeExist) {
 
+
+            console.log('likeExist', likeExist)
 
             const update = {
 
-                isLike: false
+                isLike: (likeExist.isLike) ? false : true
             };
 
 
@@ -37,6 +39,9 @@ const addFavorite = async (req, res = response) => {
             );
 
             const favorite = await Favorite.findOne({ product: product, user: uid });
+
+            console.log('favorite', favorite)
+
 
             res.json({
                 ok: true,
@@ -59,6 +64,8 @@ const addFavorite = async (req, res = response) => {
 
         const favorite = await addFavorite.save();
 
+
+        console.log('favorite', favorite)
 
 
         res.json({
