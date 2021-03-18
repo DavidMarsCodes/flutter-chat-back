@@ -27,7 +27,7 @@ const addFavorite = async (req, res = response) => {
 
             const update = {
 
-                isLike: updateLike;
+                isLike: updateLike
             };
 
 
