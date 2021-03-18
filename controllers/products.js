@@ -574,11 +574,20 @@ const getLastProducts = async (req, res = response) => {
 
                     const productsProfilesPosition = productsProfiles.sort((a, b) => (a.product.ratingInit > b.product.ratingInit) ? 1 : 1)
 
+
+                    const productsProfilesPosition2 = productsProfiles.sort((a, b) => parseFloat(b.product.ratingInit) - parseFloat(a.product.ratingInit));
+
+
+
+
                     console.log('productsProfilesPosition', productsProfilesPosition);
+
+
+                    console.log('productsProfilesPosition2', productsProfilesPosition);
 
                     return res.json({
                         ok: true,
-                        productsProfiles: productsProfilesPosition
+                        productsProfiles: productsProfilesPosition2
                     })
                 })
         }
