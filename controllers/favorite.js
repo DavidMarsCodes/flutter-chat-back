@@ -33,7 +33,7 @@ const addFavorite = async (req, res = response) => {
 
             const updateok = await Favorite.updateOne(
                 {
-                    user: uid
+                    _id: likeExist._id
                 },
                 {
                     $set: update
