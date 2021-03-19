@@ -398,7 +398,7 @@ const editImageRecipe = async (req, res = response) => {
 
         await Profile.updateOne(
             {
-                _id: uid
+                user: uid
             },
             {
                 $set: update
