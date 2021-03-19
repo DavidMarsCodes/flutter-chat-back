@@ -405,7 +405,7 @@ const editImageRecipe = async (req, res = response) => {
             }
         );
 
-        const profile = await Profile.findById(uid);
+        const profile = await Profile.findOne({ user: uid });
 
         console.log(profile);
 
