@@ -405,9 +405,35 @@ const editImageRecipe = async (req, res = response) => {
             }
         );
 
-        const profile = await Profile.findOne({ user: uid });
+        const profileFind = await Profile.findOne({ user: uid });
 
-        console.log(profile);
+        console.log(proprofileFindfile);
+
+
+        const profile = {
+
+            name: profileFind.name,
+            lastName: profileFind.lastName,
+            about: profileFind.about,
+            imageHeader: profileFind.imageHeader,
+            imageAvatar: profileFind.imageAvatar,
+            imageRecipe: profileFind.imageRecipe,
+            id: profileFind._id,
+            isClub: profileFind.isClub,
+
+            user: {
+                online: profileFind.user.online,
+                uid: uid,
+                email: profileFind.user.email,
+                username: profileFind.user.username,
+
+            },
+            messageDate: profileFind.createdAt,
+
+            createdAt: profileFind.createdAt,
+            updatedAt: profileFind.updatedAt
+
+        }
 
 
         res.json({
