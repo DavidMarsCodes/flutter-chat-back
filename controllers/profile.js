@@ -375,12 +375,64 @@ const editUserProfile = async (req, res = response) => {
 }
 
 
+const editImageRecipe = async (req, res = response) => {
+    const { uid,
+        imageRecipe
+
+
+
+    } = req.body;
+
+
+
+
+
+    try {
+
+        const update = {
+            imageRecipe: imageRecipe
+
+        };
+
+
+
+        const update = await Profile.updateOne(
+            {
+                _id: uid
+            },
+            {
+                $set: update
+            }
+        );
+
+        const profile = await Profile.findById(uid);
+
+        console.log(profile);
+
+
+        res.json({
+            ok: true,
+            profile
+        });
+
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: 'Hable con el administrador'
+        });
+    }
+}
+
+
 
 module.exports = {
     getProfilebyUser,
     getProfilesLastUsers,
     loginGetProfileUser,
-    editUserProfile
+    editUserProfile,
+    editImageRecipe
 
 }
 
