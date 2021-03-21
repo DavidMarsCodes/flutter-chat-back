@@ -297,7 +297,11 @@ const getLastProducts = async (req, res = response) => {
                                                                         })
                                                                             .then((favorite) => {
 
-                                                                                const isLike = (favorite) ? favorite.isLikE : false;
+
+                                                                                console.log('favorite', favorite)
+
+
+                                                                                const isLike = (favorite) ? favorite.isLike : false;
 
 
                                                                                 const productProfile = {
@@ -484,8 +488,9 @@ const getLastProducts = async (req, res = response) => {
                                                                         product: obj._id, user: uid
                                                                     })
                                                                         .then((favorite) => {
+                                                                            console.log('favorite', favorite)
 
-                                                                            const isLike = (favorite) ? favorite.isLikE : false;
+                                                                            const isLike = (favorite) ? favorite.isLike : false;
 
 
                                                                             const productProfile = {
