@@ -646,6 +646,9 @@ const getMyCatalogosProducts = async (req, res = response) => {
                                             array.push(productLike);
                                             console.log('productLike', productLike)
 
+
+                                            resolve();
+
                                         });
 
 
@@ -658,11 +661,11 @@ const getMyCatalogosProducts = async (req, res = response) => {
 
                         });
 
-                        console.log('array 1', array);
-
-                        resolve();
 
                     }));
+
+
+
 
 
                 Promise.all(promisesFavorite)
