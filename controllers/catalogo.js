@@ -694,7 +694,7 @@ const getMyCatalogosProducts = async (req, res = response) => {
                             }))
 
 
-                        Promise.all(promisesFavorite)
+                        Promise.all(promiseFinal)
                             .then((resolve) => {
 
 
