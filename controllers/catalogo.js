@@ -620,8 +620,7 @@ const getMyCatalogosProducts = async (req, res = response) => {
                                             const countLikes = (favorites) ? favorites.length : 0;
 
 
-                                            product.isLike = isLike
-                                            product.countLikes = countLikes;
+
 
                                             const product = {
 
