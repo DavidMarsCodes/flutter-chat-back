@@ -667,11 +667,11 @@ const getMyCatalogosProducts = async (req, res = response) => {
                 Promise.all(promisesFavorite)
                     .then((resolve) => {
 
-
+                        console.log('array', array);
                         const catalogosProductsPosition = catalogosProducts.sort((a, b) => (a.position > b.position) ? 1 : -1)
 
 
-                        console.log('catalogosProductsPosition final final!', catalogosProductsPosition)
+                        console.log('catalogosProductsPosition final final!', array)
 
                         return res.json({
                             ok: true,
