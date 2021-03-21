@@ -642,7 +642,11 @@ const getMyCatalogosProducts = async (req, res = response) => {
 
                                                     };
 
-                                                    catalogosProducts[0].products.push(productLike)
+
+                                                    index = catalogosProducts.findIndex(x => x.id === productLike.catalogo);
+
+                                                    print(index);
+                                                    catalogosProducts[index].products.push(productLike)
 
 
                                                     resolve();
