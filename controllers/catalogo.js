@@ -622,7 +622,7 @@ const getMyCatalogosProducts = async (req, res = response) => {
 
 
 
-                                            const Product = {
+                                            const productLike = {
 
                                                 id: product._id,
                                                 user: product.user,
@@ -641,14 +641,17 @@ const getMyCatalogosProducts = async (req, res = response) => {
 
                                             };
 
+
+
+                                            array.push(productLike);
+                                            console.log('productLike', productLike)
+
                                         });
 
 
 
-                                    array.push(Product);
 
 
-                                    console.log('Product', Product)
                                 });
 
 
