@@ -581,6 +581,7 @@ const getMyCatalogosProducts = async (req, res = response) => {
 
 
 
+                const array = [];
 
                 console.log(resolve)
 
@@ -621,15 +622,39 @@ const getMyCatalogosProducts = async (req, res = response) => {
 
                                             product.isLike = isLike
                                             product.countLikes = countLikes;
+
+                                            const product = {
+
+                                                id: product._id,
+                                                user: product.user,
+                                                name: product.name,
+                                                description: product.description,
+                                                dateCreate: product.createdAt,
+                                                dateUpdate: product.updateAt,
+                                                totalProducts: product.totalProducts,
+                                                coverImage: product.coverImage,
+                                                catalogo: product.catalogo,
+                                                ratingInit: product.ratingInit,
+                                                cbd: product.cbd,
+                                                thc: product.thc,
+                                                isLike: isLike,
+                                                countLikes: countLikes
+
+                                            };
+
                                         });
+
+
 
 
                                 });
 
-
+                            array.push(product);
 
 
                             console.log('product', product)
+
+
                         });
 
                         resolve();
