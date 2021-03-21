@@ -644,7 +644,7 @@ const getMyCatalogosProducts = async (req, res = response) => {
                         const catalogosProductsPosition = catalogosProducts.sort((a, b) => (a.position > b.position) ? 1 : -1)
 
 
-                        console.log('catalogosProductsPosition final', catalogosProductsPosition)
+                        console.log('catalogosProductsPosition final final!', catalogosProductsPosition)
 
                         return res.json({
                             ok: true,
