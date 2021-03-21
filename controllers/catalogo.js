@@ -683,7 +683,7 @@ const getMyCatalogosProducts = async (req, res = response) => {
 
 
                             var new_obj_array = array.filter(function (obj) {
-                                if (retained.indexOf(obj.catalogo) === catalogo._id) {
+                                if (array.indexOf(obj.catalogo) === catalogo._id) {
                                     return false;
                                 }
 
