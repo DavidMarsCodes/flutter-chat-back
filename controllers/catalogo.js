@@ -620,31 +620,32 @@ const getMyCatalogosProducts = async (req, res = response) => {
                                             const countLikes = (favorites) ? favorites.length : 0;
 
 
+                                            product.isLike = isLike;
+                                            product.countLikes = countLikes;
 
-
-                                            const productLike = {
-
-                                                id: product._id,
-                                                user: product.user,
-                                                name: product.name,
-                                                description: product.description,
-                                                dateCreate: product.createdAt,
-                                                dateUpdate: product.updateAt,
-                                                totalProducts: product.totalProducts,
-                                                coverImage: product.coverImage,
-                                                catalogo: product.catalogo,
-                                                ratingInit: product.ratingInit,
-                                                cbd: product.cbd,
-                                                thc: product.thc,
-                                                isLike: isLike,
-                                                countLikes: countLikes
-
-                                            };
-
-
-
-                                            array.push(productLike);
-                                            console.log('productLike', productLike)
+                                            /*  const productLike = {
+ 
+                                                 id: product._id,
+                                                 user: product.user,
+                                                 name: product.name,
+                                                 description: product.description,
+                                                 dateCreate: product.createdAt,
+                                                 dateUpdate: product.updateAt,
+                                                 totalProducts: product.totalProducts,
+                                                 coverImage: product.coverImage,
+                                                 catalogo: product.catalogo,
+                                                 ratingInit: product.ratingInit,
+                                                 cbd: product.cbd,
+                                                 thc: product.thc,
+                                                 isLike: isLike,
+                                                 countLikes: countLikes
+ 
+                                             };
+ 
+ 
+ 
+                                             array.push(productLike); */
+                                            // console.log('productLike', productLike)
 
 
                                             resolve();
@@ -671,7 +672,7 @@ const getMyCatalogosProducts = async (req, res = response) => {
                 Promise.all(promisesFavorite)
                     .then((resolve) => {
 
-                        console.log('array', array);
+                        //console.log('array', array);
                         const catalogosProductsPosition = catalogosProducts.sort((a, b) => (a.position > b.position) ? 1 : -1)
 
 
