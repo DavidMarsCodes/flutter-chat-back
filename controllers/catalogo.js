@@ -584,12 +584,18 @@ const getMyCatalogosProducts = async (req, res = response) => {
                 console.log(resolve)
 
 
-                const promises = catalogosProducts.products.map((obj) =>
+                const promises = catalogosProducts.map((obj) =>
 
                     new Promise((resolve, reject) => {
 
 
                         console.log('obj!!!', obj)
+
+                        obj.products.forEach(product => {
+
+
+                            console.log('product', product)
+                        });
 
                     }));
 
