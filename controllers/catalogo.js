@@ -641,10 +641,13 @@ const getMyCatalogosProducts = async (req, res = response) => {
 
                                             };
 
-
-
-                                            array.push(productLike);
                                             console.log('productLike', productLike)
+
+                                            if (productLike.catalogo === obj.id) {
+
+                                                obj.products.push(productLike)
+                                            }
+
 
 
                                             resolve();
@@ -668,56 +671,29 @@ const getMyCatalogosProducts = async (req, res = response) => {
 
 
 
-                Promise.all(promisesFavorite)
+                Promise.all(promiseFinal)
                     .then((resolve) => {
 
 
-                        const promiseFinal = catalogosProducts.map((catalogo) =>
-
-                            new Promise((resolve, reject) => {
 
 
+                        const catalogosProductsPosition = catalogosProducts.sort((a, b) => (a.position > b.position) ? 1 : -1)
+                        console.log('catalogosProductsPosition', catalogosProductsPosition);
 
-                                console.log('catalogo', catalogo);
+                        return res.json({
+                            ok: true,
 
-                                const catalogoId = catalogo.id;
-
-                                console.log(catalogoId);
-
-                                catalogo.products = array;
+                            catalogosProducts: catalogosProductsPosition
+                        })
 
 
 
-                                resolve();
-
-                            }))
-
-
-                        Promise.all(promiseFinal)
-                            .then((resolve) => {
-
-
-
-                                const catalogosProductsPosition = catalogosProducts.sort((a, b) => (a.position > b.position) ? 1 : -1)
-                                console.log('catalogosProductsPosition', catalogosProductsPosition);
-
-                                return res.json({
-                                    ok: true,
-
-                                    catalogosProducts: catalogosProductsPosition
-                                })
-
-
-
-                            });
+                    });
 
 
 
 
 
-
-
-                    })
 
 
 
