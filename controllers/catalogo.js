@@ -675,35 +675,49 @@ const getMyCatalogosProducts = async (req, res = response) => {
                         const catalogosProductsPosition = catalogosProducts.sort((a, b) => (a.position > b.position) ? 1 : -1)
 
 
-                        catalogosProducts.map((catalogo => {
+                        const promiseFinal = catalogosProducts.map((obj) =>
+
+                            new Promise((resolve, reject) => {
 
 
-                            console.log('catalogo', catalogo);
+
+                                console.log('catalogo', catalogo);
 
 
 
-                            var new_obj_array = array.filter(function (obj) {
-                                if (array.indexOf(obj.catalogo) === catalogo._id) {
-                                    return false;
-                                }
+                                var new_obj_array = array.filter(function (obj) {
+                                    if (array.indexOf(obj.catalogo) === catalogo._id) {
+                                        return false;
+                                    }
 
-                                return true;
+                                    return true;
+                                });
+
+                                console.log('new_obj_array', new_obj_array);
+
+                                catalogo.products = new_obj_array;
+
+                                resolve();
+
+                            }))
+
+
+                        Promise.all(promisesFavorite)
+                            .then((resolve) => {
+
+
+                                console.log('catalogosProductsPosition final final!', catalogosProducts)
+
+                                return res.json({
+                                    ok: true,
+
+                                    catalogosProducts: catalogosProductsPosition
+                                })
+
+
+
                             });
 
-                            console.log('new_obj_array', new_obj_array);
-
-                            catalogo.products = new_obj_array;
-
-
-                        }))
-
-                        console.log('catalogosProductsPosition final final!', catalogosProducts)
-
-                        return res.json({
-                            ok: true,
-
-                            catalogosProducts: catalogosProductsPosition
-                        })
 
 
 
