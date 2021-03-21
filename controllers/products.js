@@ -314,64 +314,72 @@ const getLastProducts = async (req, res = response) => {
                                                                                         const countLikes = (favorites) ? favorites.length : 0;
 
 
-                                                                                        const productProfile = {
+                                                                                        if (subscribeApproved) {
+                                                                                            const productProfile = {
 
 
 
-                                                                                            product: {
+                                                                                                product: {
 
-                                                                                                id: obj._id,
-                                                                                                user: obj.user,
-                                                                                                name: obj.name,
-                                                                                                description: obj.description,
-                                                                                                dateCreate: obj.createdAt,
-                                                                                                dateUpdate: obj.updateAt,
-                                                                                                totalProducts: obj.totalProducts,
-                                                                                                coverImage: obj.coverImage,
-                                                                                                catalogo: obj.catalogo,
-                                                                                                ratingInit: obj.ratingInit,
-                                                                                                cbd: obj.cbd,
-                                                                                                thc: obj.thc,
-                                                                                                isLike: isLike,
-                                                                                                countLikes: countLikes
-
-                                                                                            },
-
-
-
-                                                                                            profile: {
-                                                                                                name: item.name,
-                                                                                                lastName: item.lastName,
-                                                                                                imageHeader: item.imageHeader,
-                                                                                                imageAvatar: item.imageAvatar,
-                                                                                                imageRecipe: item.imageRecipe,
-                                                                                                about: item.about,
-                                                                                                id: item._id,
-                                                                                                user: {
-                                                                                                    online: user.online,
-                                                                                                    uid: user._id,
-                                                                                                    email: user.email,
-                                                                                                    username: user.username,
+                                                                                                    id: obj._id,
+                                                                                                    user: obj.user,
+                                                                                                    name: obj.name,
+                                                                                                    description: obj.description,
+                                                                                                    dateCreate: obj.createdAt,
+                                                                                                    dateUpdate: obj.updateAt,
+                                                                                                    totalProducts: obj.totalProducts,
+                                                                                                    coverImage: obj.coverImage,
+                                                                                                    catalogo: obj.catalogo,
+                                                                                                    ratingInit: obj.ratingInit,
+                                                                                                    cbd: obj.cbd,
+                                                                                                    thc: obj.thc,
+                                                                                                    isLike: isLike,
+                                                                                                    countLikes: countLikes
 
                                                                                                 },
-                                                                                                subscribeApproved: (isClub) ? true : subscribeApproved,
-                                                                                                subscribeActive: (isClub) ? true : subscribeActive,
-                                                                                                message: obj.message,
-                                                                                                isClub: item.isClub,
-                                                                                                messageDate: obj.createdAt,
-                                                                                                createdAt: item.createdAt,
-                                                                                                updatedAt: item.updatedAt
+
+
+
+                                                                                                profile: {
+                                                                                                    name: item.name,
+                                                                                                    lastName: item.lastName,
+                                                                                                    imageHeader: item.imageHeader,
+                                                                                                    imageAvatar: item.imageAvatar,
+                                                                                                    imageRecipe: item.imageRecipe,
+                                                                                                    about: item.about,
+                                                                                                    id: item._id,
+                                                                                                    user: {
+                                                                                                        online: user.online,
+                                                                                                        uid: user._id,
+                                                                                                        email: user.email,
+                                                                                                        username: user.username,
+
+                                                                                                    },
+                                                                                                    subscribeApproved: subscribeApproved,
+                                                                                                    subscribeActive: subscribeActive,
+                                                                                                    message: obj.message,
+                                                                                                    isClub: item.isClub,
+                                                                                                    messageDate: obj.createdAt,
+                                                                                                    createdAt: item.createdAt,
+                                                                                                    updatedAt: item.updatedAt
+
+                                                                                                }
+
+
 
                                                                                             }
 
 
 
+                                                                                            productsProfiles.push(productProfile);
+                                                                                            resolve();
+
                                                                                         }
 
+                                                                                        else {
 
-
-                                                                                        productsProfiles.push(productProfile);
-                                                                                        resolve();
+                                                                                            resolve();
+                                                                                        }
                                                                                     })
                                                                             });
                                                                     });
