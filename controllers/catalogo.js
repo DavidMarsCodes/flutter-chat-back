@@ -530,43 +530,34 @@ const getMyCatalogosProducts = async (req, res = response) => {
 
 
 
-                Product
-                    .find({ catalogo: item._id })
-
-                    .then(products => {
 
 
 
+                const catalogo = {
+                    id: item._id,
+                    name: item.name,
+                    description: item.description,
+                    user: item.user,
+                    position: item.position,
+                    privacity: item.privacity,
+                    totalProducts: item.totalProducts,
+                    products: []
 
-
-
-                        const catalogo = {
-                            id: item._id,
-                            name: item.name,
-                            description: item.description,
-                            user: item.user,
-                            position: item.position,
-                            privacity: item.privacity,
-                            totalProducts: item.totalProducts,
-                            products: products
-
-                        };
+                };
 
 
 
 
 
-                        console.log('catalogoProducts fimal!!', catalogo)
+                console.log('catalogoProducts fimal!!', catalogo)
 
 
 
-                        catalogosProducts.push(catalogo);
+                catalogosProducts.push(catalogo);
 
-                        resolve();
+                resolve();
 
 
-
-                    })
 
 
 
@@ -586,6 +577,10 @@ const getMyCatalogosProducts = async (req, res = response) => {
                 console.log(resolve)
 
 
+
+
+
+
                 const promisesFavorite = catalogosProducts.map((obj) =>
 
                     new Promise((resolve, reject) => {
@@ -593,76 +588,85 @@ const getMyCatalogosProducts = async (req, res = response) => {
 
                         console.log('obj!!!', obj)
 
-                        obj.products.forEach(product => {
+                        Product
+                            .find({ catalogo: obj.id })
+
+                            .then(products => {
 
 
 
-
-                            Favorite.findOne({
-                                product: product._id, user: userId
-                            })
-                                .then((favorite) => {
+                                products.map((product) => {
 
 
-                                    console.log('favorite', favorite)
 
-
-                                    const isLike = (favorite) ? favorite.isLike : false;
-
-
-                                    Favorite.find({
-                                        product: product._id, isLike: true
+                                    Favorite.findOne({
+                                        product: product._id, user: userId
                                     })
-                                        .then((favorites) => {
-
-                                            console.log('favorites', favorites)
-
-                                            const countLikes = (favorites) ? favorites.length : 0;
+                                        .then((favorite) => {
 
 
+                                            console.log('favorite', favorite)
 
 
-                                            const productLike = {
+                                            const isLike = (favorite) ? favorite.isLike : false;
 
-                                                id: product._id,
-                                                user: product.user,
-                                                name: product.name,
-                                                description: product.description,
-                                                dateCreate: product.createdAt,
-                                                dateUpdate: product.updateAt,
-                                                totalProducts: product.totalProducts,
-                                                coverImage: product.coverImage,
-                                                catalogo: product.catalogo,
-                                                ratingInit: product.ratingInit,
-                                                cbd: product.cbd,
-                                                thc: product.thc,
-                                                isLike: isLike,
-                                                countLikes: countLikes
 
-                                            };
+                                            Favorite.find({
+                                                product: product._id, isLike: true
+                                            })
+                                                .then((favorites) => {
 
-                                            console.log('productLike', productLike)
+                                                    console.log('favorites', favorites)
 
-                                            if (productLike.catalogo === obj.id) {
-
-                                                obj.products.push(productLike)
-                                            }
+                                                    const countLikes = (favorites) ? favorites.length : 0;
 
 
 
-                                            resolve();
+
+                                                    const productLike = {
+
+                                                        id: product._id,
+                                                        user: product.user,
+                                                        name: product.name,
+                                                        description: product.description,
+                                                        dateCreate: product.createdAt,
+                                                        dateUpdate: product.updateAt,
+                                                        totalProducts: product.totalProducts,
+                                                        coverImage: product.coverImage,
+                                                        catalogo: product.catalogo,
+                                                        ratingInit: product.ratingInit,
+                                                        cbd: product.cbd,
+                                                        thc: product.thc,
+                                                        isLike: isLike,
+                                                        countLikes: countLikes
+
+                                                    };
+
+                                                    catalogosProducts[0].products.push(productLike)
+
+
+                                                    resolve();
+
+                                                });
+
+
+
+
 
                                         });
 
+                                })
 
 
 
 
-                                });
 
 
 
-                        });
+
+
+
+                            });
 
 
                     }));
