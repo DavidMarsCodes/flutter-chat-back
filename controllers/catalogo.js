@@ -584,7 +584,7 @@ const getMyCatalogosProducts = async (req, res = response) => {
                 console.log(resolve)
 
 
-                const promises = catalogosProducts.map((obj) =>
+                const promises = catalogosProducts.products.map((obj) =>
 
                     new Promise((resolve, reject) => {
 
