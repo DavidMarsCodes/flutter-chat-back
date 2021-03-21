@@ -679,6 +679,20 @@ const getMyCatalogosProducts = async (req, res = response) => {
 
 
                             console.log('catalogo', catalogo);
+
+
+
+                            var new_obj_array = array.filter(function (obj) {
+                                if (retained.indexOf(obj.catalogo) === catalogo._id) {
+                                    return false;
+                                }
+
+                                return true;
+                            });
+
+                            console.log('new_obj_array', new_obj_array);
+
+
                         }))
 
                         console.log('catalogosProductsPosition final final!', array)
