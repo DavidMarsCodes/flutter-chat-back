@@ -691,7 +691,7 @@ const getMyCatalogosProducts = async (req, res = response) => {
 
                                         {
                                             console.log('yes product', product)
-                                            catalogo.push(product)
+                                            catalogo.products.push(product)
                                         }
                                     }
 
