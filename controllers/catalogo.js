@@ -205,83 +205,83 @@ const getCatalogosByUsers = async (req, res = response) => {
 
             const promises = catalogos.map((item) =>
 
-            new Promise((resolve, reject) => {
-    
-    
-    
-    
-          
-              Product
-                .find({ catalogo: item._id })
-    
-                .then(products => {
-    
-    
-                
-    
-    
-    
-                    const catalogo =  {
-                            id: item._id,
-                            name: item.name,
-                            description: item.description,
-                            user: item.user,
-                            position: item.position,
-                            privacity: item.privacity,
-                            totalProducts: item.totalProducts,
-                            products: products
-            
-                        };
-            
-    
-    
-        
-                  
-          console.log('catalogoProducts fimal!!', catalogo)
-            
-        
-        
-                catalogosProducts.push(catalogo);
-                
-                resolve();
-    
-               
-    
-                })
-    
-        
-    
-    
-    
-    
-            }))
+                new Promise((resolve, reject) => {
+
+
+
+
+
+                    Product
+                        .find({ catalogo: item._id })
+
+                        .then(products => {
+
+
+
+
+
+
+                            const catalogo = {
+                                id: item._id,
+                                name: item.name,
+                                description: item.description,
+                                user: item.user,
+                                position: item.position,
+                                privacity: item.privacity,
+                                totalProducts: item.totalProducts,
+                                products: products
+
+                            };
+
+
+
+
+
+                            console.log('catalogoProducts fimal!!', catalogo)
+
+
+
+                            catalogosProducts.push(catalogo);
+
+                            resolve();
+
+
+
+                        })
+
+
+
+
+
+
+                }))
 
 
             Promise.all(promises)
-            .then((resolve) => {
-    
-    
-      
-    
-                console.log(resolve)
-        
-    
-    
-                const  catalogosProductsPosition = catalogosProducts.sort((a, b) => (a.position > b.position) ? 1 : -1)
+                .then((resolve) => {
 
-    
-     console.log('catalogosProducts final', catalogosProductsPosition)
-    
-                return res.json({
-                    ok: true,
-                   
-                    catalogosProducts : catalogosProductsPosition
+
+
+
+                    console.log(resolve)
+
+
+
+                    const catalogosProductsPosition = catalogosProducts.sort((a, b) => (a.position > b.position) ? 1 : -1)
+
+
+                    console.log('catalogosProducts final', catalogosProductsPosition)
+
+                    return res.json({
+                        ok: true,
+
+                        catalogosProducts: catalogosProductsPosition
+                    })
+
+
+
+
                 })
-        
-        
-        
-        
-            })
 
 
 
@@ -337,81 +337,81 @@ const getCatalogosByUsers = async (req, res = response) => {
 
             const promises = catalogos.map((item) =>
 
-            new Promise((resolve, reject) => {
-    
-    
-    
-    
-          
-              Product
-                .find({ catalogo: item._id })
-    
-                .then(products => {
-    
-    
-                
-    
-    
-    
-                    const catalogo =  {
-                            id: item._id,
-                            name: item.name,
-                            description: item.description,
-                            user: item.user,
-                            position: item.position,
-                            privacity: item.privacity,
-                            totalProducts: item.totalProducts,
-                            products: products
-            
-                        };
-            
-    
-    
-        
-                  
-          console.log('catalogoProducts fimal!!', catalogo)
-            
-        
-        
-                catalogosProducts.push(catalogo);
-                
-                resolve();
-    
-               
-    
-                })
-    
-        
-    
-    
-    
-    
-            }))
+                new Promise((resolve, reject) => {
+
+
+
+
+
+                    Product
+                        .find({ catalogo: item._id })
+
+                        .then(products => {
+
+
+
+
+
+
+                            const catalogo = {
+                                id: item._id,
+                                name: item.name,
+                                description: item.description,
+                                user: item.user,
+                                position: item.position,
+                                privacity: item.privacity,
+                                totalProducts: item.totalProducts,
+                                products: products
+
+                            };
+
+
+
+
+
+                            console.log('catalogoProducts fimal!!', catalogo)
+
+
+
+                            catalogosProducts.push(catalogo);
+
+                            resolve();
+
+
+
+                        })
+
+
+
+
+
+
+                }))
 
 
             Promise.all(promises)
-            .then((resolve) => {
-    
-    
-      
-    
-    
-    
-                const  catalogosProductsPosition = catalogosProducts.sort((a, b) => (a.position > b.position) ? 1 : -1)
+                .then((resolve) => {
 
-    
-     console.log('catalogosProductsPosition final', catalogosProductsPosition)
-    
-                return res.json({
-                    ok: true,
-                   
-                    catalogosProducts : catalogosProductsPosition
+
+
+
+
+
+                    const catalogosProductsPosition = catalogosProducts.sort((a, b) => (a.position > b.position) ? 1 : -1)
+
+
+                    console.log('catalogosProductsPosition final', catalogosProductsPosition)
+
+                    return res.json({
+                        ok: true,
+
+                        catalogosProducts: catalogosProductsPosition
+                    })
+
+
+
+
                 })
-        
-        
-        
-        
-            })
 
         }
 
@@ -451,28 +451,28 @@ const getMyCatalogos = async (req, res = response) => {
 
 
 
-            console.log('catalogos', catalogos)
-        
-            const products = await Product
+        console.log('catalogos', catalogos)
+
+        const products = await Product
             .find({ user: userId })
             .sort('position')
 
 
- 
-            console.log('products', products)
+
+        console.log('products', products)
 
 
 
 
-            
 
 
 
-            return res.json({
-                ok: true,
-                catalogos: catalogos,
-                products: products
-            })
+
+        return res.json({
+            ok: true,
+            catalogos: catalogos,
+            products: products
+        })
 
 
 
@@ -513,95 +513,120 @@ const getMyCatalogosProducts = async (req, res = response) => {
 
 
         const catalogos = await Catalogo
-        .find({ user: userId })
-        .sort('position')
+            .find({ user: userId })
+            .sort('position')
 
-      
+
 
 
 
 
         const promises = catalogos.map((item) =>
 
-        new Promise((resolve, reject) => {
+            new Promise((resolve, reject) => {
 
 
 
 
-      
-          Product
-            .find({ catalogo: item._id })
 
-            .then(products => {
+                Product
+                    .find({ catalogo: item._id })
 
-
-            
-
-
-
-                const catalogo =  {
-                        id: item._id,
-                        name: item.name,
-                        description: item.description,
-                        user: item.user,
-                        position: item.position,
-                        privacity: item.privacity,
-                        totalProducts: item.totalProducts,
-                        products: products
-        
-                    };
-        
-
-
-    
-              
-      console.log('catalogoProducts fimal!!', catalogo)
-        
-    
-    
-            catalogosProducts.push(catalogo);
-            
-            resolve();
-
-           
-
-            })
-
-    
+                    .then(products => {
 
 
 
 
-        }))
+
+
+                        const catalogo = {
+                            id: item._id,
+                            name: item.name,
+                            description: item.description,
+                            user: item.user,
+                            position: item.position,
+                            privacity: item.privacity,
+                            totalProducts: item.totalProducts,
+                            products: products
+
+                        };
+
+
+
+
+
+                        console.log('catalogoProducts fimal!!', catalogo)
+
+
+
+                        catalogosProducts.push(catalogo);
+
+                        resolve();
+
+
+
+                    })
+
+
+
+
+
+
+            }))
 
 
         Promise.all(promises)
-        .then((resolve) => {
+            .then((resolve) => {
 
 
-  
-
-            console.log(resolve)
-    
-
-           const  catalogosProductsPosition = catalogosProducts.sort((a, b) => (a.position > b.position) ? 1 : -1)
 
 
- console.log('catalogosProductsPosition final', catalogosProductsPosition)
+                console.log(resolve)
 
-            return res.json({
-                ok: true,
-               
-                catalogosProducts : catalogosProductsPosition
+
+                const promises = catalogosProducts.map((obj) =>
+
+                    new Promise((resolve, reject) => {
+
+
+                        console.log('obj!!!', obj)
+
+                    }));
+
+
+                Promise.all(promises)
+                    .then((resolve) => {
+
+
+                        const catalogosProductsPosition = catalogosProducts.sort((a, b) => (a.position > b.position) ? 1 : -1)
+
+
+                        console.log('catalogosProductsPosition final', catalogosProductsPosition)
+
+                        return res.json({
+                            ok: true,
+
+                            catalogosProducts: catalogosProductsPosition
+                        })
+
+
+
+
+
+
+                    })
+
+
+
+
+
+
+
+
             })
-    
-    
-    
-    
-        })
 
 
-        
+
 
 
 
