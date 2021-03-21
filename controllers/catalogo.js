@@ -675,7 +675,7 @@ const getMyCatalogosProducts = async (req, res = response) => {
                         const catalogosProductsPosition = catalogosProducts.sort((a, b) => (a.position > b.position) ? 1 : -1)
 
 
-                        const promiseFinal = catalogosProducts.map((obj) =>
+                        const promiseFinal = catalogosProducts.map((catalogo) =>
 
                             new Promise((resolve, reject) => {
 
