@@ -622,7 +622,7 @@ const getMyCatalogosProducts = async (req, res = response) => {
 
 
 
-                                            const product = {
+                                            const Product = {
 
                                                 id: product._id,
                                                 user: product.user,
@@ -645,10 +645,10 @@ const getMyCatalogosProducts = async (req, res = response) => {
 
 
 
-                                    array.push(product);
+                                    array.push(Product);
 
 
-                                    console.log('product', product)
+                                    console.log('Product', Product)
                                 });
 
 
