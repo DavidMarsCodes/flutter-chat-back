@@ -332,7 +332,7 @@ const getLastProducts = async (req, res = response) => {
                                                                                                 ratingInit: obj.ratingInit,
                                                                                                 cbd: obj.cbd,
                                                                                                 thc: obj.thc,
-                                                                                                islike: isLike,
+                                                                                                isLike: isLike,
                                                                                                 countLikes: countLikes
 
                                                                                             },
