@@ -681,18 +681,44 @@ const getMyCatalogosProducts = async (req, res = response) => {
                                 console.log('catalogo', catalogo);
 
 
+                                catalogo.products.forEach(product => {
 
-                                let filter = array.filter(product => {
 
-                                    if (product.catalogo == catalogo.id) {
-                                        {
+                                    Favorite.findOne({
+                                        product: product._id, user: userId
+                                    })
+                                        .then((favorite) => {
 
-                                            catalogo.products.push(product);
-                                        }
-                                    }
+
+                                            console.log('favorite', favorite)
+
+
+                                            const isLike = (favorite) ? favorite.isLike : false;
+
+
+                                            Favorite.find({
+                                                product: product._id, isLike: true
+                                            })
+                                                .then((favorites) => {
+
+                                                    console.log('favorites', favorites)
+
+                                                    const countLikes = (favorites) ? favorites.length : 0;
+
+                                                    product.isLike = isLike;
+                                                    product.countLikes = countLikes;
+
+
+                                                })
+
+                                        })
 
                                 });
-                                console.log('filter', filter);
+
+
+
+
+
 
                                 // catalogo.products = filter;
 
