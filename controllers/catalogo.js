@@ -8,6 +8,7 @@ const Profile = require('../models/profile');
 const Subscription = require('../models/subscription');
 
 
+const Favorite = require('../models/favorite');
 
 
 
@@ -592,6 +593,40 @@ const getMyCatalogosProducts = async (req, res = response) => {
                         console.log('obj!!!', obj)
 
                         obj.products.forEach(product => {
+
+
+
+
+                            Favorite.findOne({
+                                product: product._id, user: userId
+                            })
+                                .then((favorite) => {
+
+
+                                    console.log('favorite', favorite)
+
+
+                                    const isLike = (favorite) ? favorite.isLike : false;
+
+
+                                    Favorite.find({
+                                        product: product._id, isLike: true
+                                    })
+                                        .then((favorites) => {
+
+                                            console.log('favorites', favorites)
+
+                                            const countLikes = (favorites) ? favorites.length : 0;
+
+
+                                            product.isLike = isLike
+                                            product.countLikes = countLikes;
+                                        });
+
+
+                                });
+
+
 
 
                             console.log('product', product)
