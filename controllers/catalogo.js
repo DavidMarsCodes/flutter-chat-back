@@ -687,7 +687,7 @@ const getMyCatalogosProducts = async (req, res = response) => {
                                     if (product.catalogo == catalogo.id) {
                                         {
 
-                                            catalogo.push(product);
+                                            catalogo.products.push(product);
                                         }
                                     }
 
