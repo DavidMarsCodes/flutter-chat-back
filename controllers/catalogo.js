@@ -681,48 +681,22 @@ const getMyCatalogosProducts = async (req, res = response) => {
                                 console.log('catalogo', catalogo);
 
 
-                                catalogo.products.forEach(product => {
 
+                                let filter = array.map(product => {
 
-                                    Favorite.findOne({
-                                        product: product._id, user: userId
-                                    })
-                                        .then((favorite) => {
+                                    if (product.catalogo == catalogo.id) {
+                                        {
 
-
-                                            console.log('favorite', favorite)
-
-
-                                            const isLike = (favorite) ? favorite.isLike : false;
-
-
-                                            Favorite.find({
-                                                product: product._id, isLike: true
-                                            })
-                                                .then((favorites) => {
-
-                                                    console.log('favorites', favorites)
-
-                                                    const countLikes = (favorites) ? favorites.length : 0;
-
-                                                    product.isLike = isLike;
-                                                    product.countLikes = countLikes;
-
-                                                    resolve();
-                                                })
-
-                                        })
+                                            catalogo.push(product)
+                                        }
+                                    }
 
                                 });
+                                console.log('filter', filter);
 
+                                catalogo.products = filter;
 
-
-
-
-
-                                // catalogo.products = filter;
-
-
+                                resolve();
 
                             }))
 
