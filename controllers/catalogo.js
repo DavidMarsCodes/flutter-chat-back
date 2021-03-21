@@ -646,13 +646,13 @@ const getMyCatalogosProducts = async (req, res = response) => {
 
 
 
+                                    array.push(product);
 
+
+                                    console.log('product', product)
                                 });
 
-                            array.push(product);
 
-
-                            console.log('product', product)
 
 
                         });
