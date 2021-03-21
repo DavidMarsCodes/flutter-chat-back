@@ -684,7 +684,7 @@ const getMyCatalogosProducts = async (req, res = response) => {
 
                                 array.forEach(product => {
 
-                                    console.log(product.catalog, catalogo.id)
+                                    console.log(product.catalogo, catalogo.id)
 
                                     if (product.catalogo === catalogo.id) {
 
