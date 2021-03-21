@@ -654,12 +654,12 @@ const getMyCatalogosProducts = async (req, res = response) => {
 
                                 });
 
-
+                            resolve();
 
 
                         });
 
-                        resolve();
+
 
                     }));
 
