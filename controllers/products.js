@@ -490,7 +490,7 @@ const getLastProducts = async (req, res = response) => {
                                                                         .then((favorite) => {
                                                                             console.log('favorite', favorite)
 
-                                                                            const isLike = (favorite != null) ? favorite.isLike : false;
+                                                                            const isLike = (favorite) ? favorite.isLike : false;
 
 
                                                                             const productProfile = {
@@ -605,7 +605,6 @@ const getLastProducts = async (req, res = response) => {
 
 
 
-                    console.log('productsProfilesPosition', productsProfilesPosition)
 
 
                     return res.json({
