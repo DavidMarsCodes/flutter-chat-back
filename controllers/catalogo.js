@@ -692,10 +692,12 @@ const getMyCatalogosProducts = async (req, res = response) => {
 
                             console.log('new_obj_array', new_obj_array);
 
+                            catalogo.products = new_obj_array;
+
 
                         }))
 
-                        console.log('catalogosProductsPosition final final!', array)
+                        console.log('catalogosProductsPosition final final!', catalogosProducts)
 
                         return res.json({
                             ok: true,
