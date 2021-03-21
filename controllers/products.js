@@ -605,7 +605,7 @@ const getLastProducts = async (req, res = response) => {
 
 
 
-
+                    console.log('productsProfilesPosition', productsProfilesPosition)
 
 
                     return res.json({
