@@ -682,9 +682,13 @@ const getMyCatalogosProducts = async (req, res = response) => {
 
 
 
-                                let filter = array.forEach(product => {
+                                array.forEach(product => {
 
-                                    if (product.catalogo == catalogo.id) {
+                                    console.log(product.catalog, catalogo.id)
+
+                                    if (product.catalogo === catalogo.id) {
+
+
                                         {
                                             console.log('yes product', product)
                                             catalogo.push(product)
