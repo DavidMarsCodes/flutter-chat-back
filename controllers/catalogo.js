@@ -682,17 +682,12 @@ const getMyCatalogosProducts = async (req, res = response) => {
 
 
 
-                                var new_obj_array = array.filter(function (obj) {
-                                    if (array.indexOf(obj.catalogo) === catalogo._id) {
-                                        return false;
-                                    }
-
-                                    return true;
+                                var filter = array.filter(function (obj) {
+                                    return (obj.catalogo === catalogo._id);
                                 });
+                                console.log('filter', filter);
 
-                                console.log('new_obj_array', new_obj_array);
-
-                                catalogo.products = new_obj_array;
+                                catalogo.products = filter;
 
                                 resolve();
 
