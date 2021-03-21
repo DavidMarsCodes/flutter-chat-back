@@ -708,7 +708,7 @@ const getMyCatalogosProducts = async (req, res = response) => {
                                                     product.isLike = isLike;
                                                     product.countLikes = countLikes;
 
-
+                                                    resolve();
                                                 })
 
                                         })
@@ -722,7 +722,7 @@ const getMyCatalogosProducts = async (req, res = response) => {
 
                                 // catalogo.products = filter;
 
-                                resolve();
+
 
                             }))
 
