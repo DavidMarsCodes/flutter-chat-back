@@ -682,7 +682,7 @@ const getMyCatalogosProducts = async (req, res = response) => {
 
 
 
-                                let filter = array.map(product => {
+                                let filter = array.forEach(product => {
 
                                     if (product.catalogo == catalogo.id) {
                                         {
