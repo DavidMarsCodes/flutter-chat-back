@@ -423,7 +423,7 @@ const getCatalogosByUsers = async (req, res = response) => {
 
 
                                         Favorite.findOne({
-                                            product: product._id, user: userId
+                                            product: product._id, user: userIAuthId
                                         })
                                             .then((favorite) => {
 
