@@ -712,7 +712,7 @@ const getMyCatalogosProducts = async (req, res = response) => {
 
 
 
-                const promisesFavorite = catalogosProducts.map((obj) =>
+                const promisesFavorite = catalogosProducts.forEach((obj) =>
 
                     new Promise((resolve, reject) => {
 
@@ -726,7 +726,7 @@ const getMyCatalogosProducts = async (req, res = response) => {
 
                                 if (products.length > 0) {
 
-                                    products.map((product) => {
+                                    products.forEach((product) => {
 
 
 
