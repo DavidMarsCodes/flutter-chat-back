@@ -826,14 +826,18 @@ const getMyCatalogosProducts = async (req, res = response) => {
 
 
 
-                                    const catalogosProductsPosition = catalogosProducts.sort((a, b) => (a.position > b.position) ? 1 : - 1 && (a.products.createdAt > b.products.createdAt) ? 1 : 1)
-                                    console.log('catalogosProductsPosition', catalogosProductsPosition);
+                                    const catalogosProductsPosition = catalogosProducts.sort((a, b) => (a.position > b.position) ? 1 : - 1)
+
+                                    const catalogosProductsPosition2 = catalogosProductsPosition.sort((a, b) => (a.products.createdAt > b.products.createdAt) ? 1 : - 1)
+
+
+                                    console.log('catalogosProductsPosition2', catalogosProductsPosition2);
 
 
                                     return res.json({
                                         ok: true,
 
-                                        catalogosProducts: catalogosProductsPosition
+                                        catalogosProducts: catalogosProductsPosition2
                                     })
 
 
