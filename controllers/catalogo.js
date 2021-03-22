@@ -796,12 +796,7 @@ const getMyCatalogosProducts = async (req, res = response) => {
                                                         resolve();
                                                     }
 
-                                                    else {
 
-                                                        console.log('elseeeee')
-
-                                                        resolve();
-                                                    }
 
                                                     //catalogosProducts[index].products.push(productLike)
 
