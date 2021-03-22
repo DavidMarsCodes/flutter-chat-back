@@ -723,6 +723,8 @@ const getMyCatalogosProducts = async (req, res = response) => {
 
                     .then((products) => {
 
+                        productsSort = [];
+
 
 
                         if (products.length > 0) {
@@ -734,6 +736,7 @@ const getMyCatalogosProducts = async (req, res = response) => {
                                 new Promise((resolve, reject) => {
 
                                     console.log("**product!!", product)
+
 
                                     Favorite.findOne({
                                         product: product._id, user: userId
@@ -806,6 +809,7 @@ const getMyCatalogosProducts = async (req, res = response) => {
                                                     //catalogosProducts[index].products.push(productLike)
 
 
+                                                    productsSort = catalogosProductsPosition.sort((a, b) => (a.products.createdAt > b.products.createdAt) ? 1 : - 1)
 
 
                                                 });
@@ -826,18 +830,18 @@ const getMyCatalogosProducts = async (req, res = response) => {
 
 
 
-                                    const catalogosProductsPosition = catalogosProducts.sort((a, b) => (a.position > b.position) ? 1 : - 1)
+                                    print('productsSort', productsSort);
 
-                                    const catalogosProductsPosition2 = catalogosProductsPosition.sort((a, b) => (a.products.createdAt > b.products.createdAt) ? 1 : - 1)
+                                    const catalogosProductsPosition = productsSort.sort((a, b) => (a.position > b.position) ? 1 : - 1)
 
 
-                                    console.log('catalogosProductsPosition2', catalogosProductsPosition2);
 
+                                    print('catalogosProductsPosition', catalogosProductsPosition)
 
                                     return res.json({
                                         ok: true,
 
-                                        catalogosProducts: catalogosProductsPosition2
+                                        catalogosProducts: catalogosProductsPosition
                                     })
 
 
