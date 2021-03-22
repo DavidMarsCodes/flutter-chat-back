@@ -787,13 +787,13 @@ const getMyCatalogosProducts = async (req, res = response) => {
                                                         //catalogosProducts[index].products.push(productLike)
 
 
-                                                        resolve();
+
 
                                                     });
 
 
 
-
+                                                resolve();
 
                                             });
 
