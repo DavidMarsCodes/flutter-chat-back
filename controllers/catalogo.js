@@ -782,13 +782,27 @@ const getMyCatalogosProducts = async (req, res = response) => {
                                                         });
 
 
+                                                        if (find) {
 
-                                                        console.log('FIN!', find);
 
-                                                        find.products.push(productLike)
+
+                                                            console.log('FIN!', find);
+
+                                                            find.products.push(productLike);
+
+                                                            resolve();
+                                                        }
+
+                                                        else {
+
+                                                            console.log('elseeeee')
+
+                                                            resolve();
+                                                        }
+
                                                         //catalogosProducts[index].products.push(productLike)
 
-                                                        resolve();
+
 
 
                                                     });
