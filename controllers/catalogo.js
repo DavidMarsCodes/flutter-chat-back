@@ -712,7 +712,7 @@ const getMyCatalogosProducts = async (req, res = response) => {
 
 
 
-                const promisesFavorite = catalogosProducts.map((obj) =>
+                const promisesFavorite = catalogosProducts.forEach((obj) =>
 
                     new Promise((resolve, reject) => {
 
@@ -824,24 +824,6 @@ const getMyCatalogosProducts = async (req, res = response) => {
 
 
 
-                Promise.all(promisesFavorite)
-                    .then((resolve) => {
-
-
-
-
-                        const catalogosProductsPosition = catalogosProducts.sort((a, b) => (a.position > b.position) ? 1 : -1)
-                        console.log('catalogosProductsPosition', catalogosProductsPosition);
-
-                        return res.json({
-                            ok: true,
-
-                            catalogosProducts: catalogosProductsPosition
-                        })
-
-
-
-                    });
 
 
 
