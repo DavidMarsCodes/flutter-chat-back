@@ -644,11 +644,14 @@ const getMyCatalogosProducts = async (req, res = response) => {
 
                                                     var catalogoId = product.catalogo;
 
-                                                    var matchIndex = catalogosProducts.map(function (obj) { return obj.id; }).indexOf(catalogoId);
+                                                    const find = catalogosProducts.find(function (item) {
+                                                        return item.id == catalogoId
+                                                    });
 
 
-                                                    console.log(matchIndex);
-                                                    catalogosProducts[index].products.push(productLike)
+
+                                                    console.log(find);
+                                                    //catalogosProducts[index].products.push(productLike)
 
 
                                                     resolve();
