@@ -724,80 +724,87 @@ const getMyCatalogosProducts = async (req, res = response) => {
 
                             .then(products => {
 
+                                if (products.length > 0) {
 
-
-                                products.map((product) => {
-
-
-
-                                    Favorite.findOne({
-                                        product: product._id, user: userId
-                                    })
-                                        .then((favorite) => {
-
-
-                                            console.log('favorite', favorite)
-
-
-                                            const isLike = (favorite) ? favorite.isLike : false;
-
-
-                                            Favorite.find({
-                                                product: product._id, isLike: true
-                                            })
-                                                .then((favorites) => {
-
-                                                    console.log('favorites', favorites)
-
-                                                    const countLikes = (favorites) ? favorites.length : 0;
+                                    products.map((product) => {
 
 
 
+                                        Favorite.findOne({
+                                            product: product._id, user: userId
+                                        })
+                                            .then((favorite) => {
 
-                                                    const productLike = {
 
-                                                        id: product._id,
-                                                        user: product.user,
-                                                        name: product.name,
-                                                        description: product.description,
-                                                        dateCreate: product.createdAt,
-                                                        dateUpdate: product.updateAt,
-                                                        totalProducts: product.totalProducts,
-                                                        coverImage: product.coverImage,
-                                                        catalogo: product.catalogo,
-                                                        ratingInit: product.ratingInit,
-                                                        cbd: product.cbd,
-                                                        thc: product.thc,
-                                                        isLike: isLike,
-                                                        countLikes: countLikes
+                                                console.log('favorite', favorite)
 
-                                                    };
 
-                                                    var catalogoId = String(product.catalogo);
+                                                const isLike = (favorite) ? favorite.isLike : false;
 
-                                                    const find = catalogosProducts.find(function (item) {
-                                                        return String(item.id) == catalogoId
+
+                                                Favorite.find({
+                                                    product: product._id, isLike: true
+                                                })
+                                                    .then((favorites) => {
+
+                                                        console.log('favorites', favorites)
+
+                                                        const countLikes = (favorites) ? favorites.length : 0;
+
+
+
+
+                                                        const productLike = {
+
+                                                            id: product._id,
+                                                            user: product.user,
+                                                            name: product.name,
+                                                            description: product.description,
+                                                            dateCreate: product.createdAt,
+                                                            dateUpdate: product.updateAt,
+                                                            totalProducts: product.totalProducts,
+                                                            coverImage: product.coverImage,
+                                                            catalogo: product.catalogo,
+                                                            ratingInit: product.ratingInit,
+                                                            cbd: product.cbd,
+                                                            thc: product.thc,
+                                                            isLike: isLike,
+                                                            countLikes: countLikes
+
+                                                        };
+
+                                                        var catalogoId = String(product.catalogo);
+
+                                                        const find = catalogosProducts.find(function (item) {
+                                                            return String(item.id) == catalogoId
+                                                        });
+
+
+
+                                                        console.log(find);
+
+                                                        find.products.push(productLike)
+                                                        //catalogosProducts[index].products.push(productLike)
+
+
+                                                        resolve();
+
                                                     });
 
 
 
-                                                    console.log(find);
-
-                                                    find.products.push(productLike)
-                                                    //catalogosProducts[index].products.push(productLike)
 
 
-                                                    resolve();
+                                            });
 
-                                                });
+                                    })
 
+                                }
 
+                                else {
 
-
-
-                                        });
-
-                                })
+                                    resolve();
+                                }
 
 
 
