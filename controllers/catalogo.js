@@ -651,6 +651,8 @@ const getMyCatalogosProducts = async (req, res = response) => {
 
 
                                                     console.log(find);
+
+                                                    find.products.push(productLike)
                                                     //catalogosProducts[index].products.push(productLike)
 
 
