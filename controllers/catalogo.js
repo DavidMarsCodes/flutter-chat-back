@@ -733,7 +733,7 @@ const getMyCatalogosProducts = async (req, res = response) => {
 
                                 new Promise((resolve, reject) => {
 
-                                    console.log("**product!!")
+                                    console.log("**product!!", product)
 
                                     Favorite.findOne({
                                         product: product._id, user: userId
@@ -794,6 +794,11 @@ const getMyCatalogosProducts = async (req, res = response) => {
                                                         find.products.push(productLike);
                                                         resolve();
 
+                                                    }
+
+                                                    else {
+
+                                                        resolve();
                                                     }
 
 
