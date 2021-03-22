@@ -642,10 +642,10 @@ const getMyCatalogosProducts = async (req, res = response) => {
 
                                                     };
 
-                                                    var catalogoId = product.catalogo;
+                                                    var catalogoId = String(product.catalogo);
 
                                                     const find = catalogosProducts.find(function (item) {
-                                                        return item.id == catalogoId
+                                                        return String(item.id) == catalogoId
                                                     });
 
 
