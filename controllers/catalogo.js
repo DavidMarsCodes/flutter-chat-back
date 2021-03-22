@@ -712,7 +712,7 @@ const getMyCatalogosProducts = async (req, res = response) => {
 
 
 
-                const promisesFavorite = catalogosProducts.map((obj) =>
+                const promisesFavorite =
 
                     new Promise((resolve, reject) => {
 
@@ -720,7 +720,7 @@ const getMyCatalogosProducts = async (req, res = response) => {
                         console.log('obj!!!', obj)
 
                         Product
-                            .find({ catalogo: obj.id })
+                            .find({ user: userId })
 
                             .then((products) => {
 
@@ -824,7 +824,7 @@ const getMyCatalogosProducts = async (req, res = response) => {
                             });
 
 
-                    }));
+                    });
 
 
 
