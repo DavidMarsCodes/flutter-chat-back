@@ -724,7 +724,7 @@ const getMyCatalogosProducts = async (req, res = response) => {
 
                             .then((products) => {
 
-                                console.log('products', products)
+                                console.log('products ***', products)
 
                                 if (products.length > 0) {
 
