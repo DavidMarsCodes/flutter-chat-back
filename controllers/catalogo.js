@@ -730,7 +730,7 @@ const getMyCatalogosProducts = async (req, res = response) => {
 
                                     products.map((product) => {
 
-
+                                        console.log("**product!!")
 
                                         Favorite.findOne({
                                             product: product._id, user: userId
