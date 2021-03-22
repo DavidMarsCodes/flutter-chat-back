@@ -830,13 +830,13 @@ const getMyCatalogosProducts = async (req, res = response) => {
 
 
 
-                                    print('productsSort', productsSort);
+                                    console.log('productsSort', productsSort);
 
                                     const catalogosProductsPosition = productsSort.sort((a, b) => (a.position > b.position) ? 1 : - 1)
 
 
 
-                                    print('catalogosProductsPosition', catalogosProductsPosition)
+                                    console.log('catalogosProductsPosition', catalogosProductsPosition)
 
                                     return res.json({
                                         ok: true,
