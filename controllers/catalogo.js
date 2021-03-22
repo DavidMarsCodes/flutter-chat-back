@@ -642,14 +642,12 @@ const getMyCatalogosProducts = async (req, res = response) => {
 
                                                     };
 
+                                                    var catalogoId = product.catalogo;
 
-                                                    index = catalogosProducts.findIndex(x => {
-                                                        console.log(x.id, product.catalogo)
-                                                        x.id === product.catalogo
+                                                    var matchIndex = catalogosProducts.map(function (obj) { return obj.id; }).indexOf(catalogoId);
 
-                                                    });
 
-                                                    console.log(index);
+                                                    console.log(matchIndex);
                                                     catalogosProducts[index].products.push(productLike)
 
 
