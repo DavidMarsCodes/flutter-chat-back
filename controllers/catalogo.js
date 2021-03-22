@@ -645,7 +645,7 @@ const getMyCatalogosProducts = async (req, res = response) => {
 
                                                     index = catalogosProducts.findIndex(x => x.id === productLike.catalogo);
 
-                                                    print(index);
+                                                    console.log(index);
                                                     catalogosProducts[index].products.push(productLike)
 
 
