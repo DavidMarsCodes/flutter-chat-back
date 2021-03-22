@@ -712,155 +712,170 @@ const getMyCatalogosProducts = async (req, res = response) => {
 
 
 
-                const promisesFavorite =
-
-                    new Promise((resolve, reject) => {
 
 
 
 
-                        Product
-                            .find({ user: userId })
-
-                            .then((products) => {
-
-                                console.log('products ***', products)
-
-                                if (products.length > 0) {
-
-                                    products.map((product) => {
-
-                                        console.log("**product!!")
-
-                                        Favorite.findOne({
-                                            product: product._id, user: userId
-                                        })
-                                            .then((favorite) => {
 
 
-                                                console.log('favorite', favorite)
+                Product
+                    .find({ user: userId })
+
+                    .then((products) => {
+
+                        console.log('products ***', products)
+
+                        if (products.length > 0) {
 
 
-                                                const isLike = (favorite) ? favorite.isLike : false;
+                            const promisesFavorite = products.map((product) => {
 
 
-                                                Favorite.find({
-                                                    product: product._id, isLike: true
-                                                })
-                                                    .then((favorites) => {
+                                new Promise((resolve, reject) => {
 
-                                                        console.log('favorites', favorites)
+                                    console.log("**product!!")
 
-                                                        const countLikes = (favorites) ? favorites.length : 0;
-
-
+                                    Favorite.findOne({
+                                        product: product._id, user: userId
+                                    })
+                                        .then((favorite) => {
 
 
-                                                        const productLike = {
-
-                                                            id: product._id,
-                                                            user: product.user,
-                                                            name: product.name,
-                                                            description: product.description,
-                                                            dateCreate: product.createdAt,
-                                                            dateUpdate: product.updateAt,
-                                                            totalProducts: product.totalProducts,
-                                                            coverImage: product.coverImage,
-                                                            catalogo: product.catalogo,
-                                                            ratingInit: product.ratingInit,
-                                                            cbd: product.cbd,
-                                                            thc: product.thc,
-                                                            isLike: isLike,
-                                                            countLikes: countLikes
-
-                                                        };
-
-                                                        var catalogoId = String(product.catalogo);
-
-                                                        const find = catalogosProducts.find(function (item) {
-                                                            return String(item.id) == catalogoId
-                                                        });
+                                            console.log('favorite', favorite)
 
 
-                                                        if (find) {
+                                            const isLike = (favorite) ? favorite.isLike : false;
 
 
+                                            Favorite.find({
+                                                product: product._id, isLike: true
+                                            })
+                                                .then((favorites) => {
 
-                                                            console.log('FIN!', find);
+                                                    console.log('favorites', favorites)
 
-                                                            find.products.push(productLike);
-
-                                                            resolve();
-                                                        }
-
-                                                        else {
-
-                                                            console.log('elseeeee')
-
-                                                            resolve();
-                                                        }
-
-                                                        //catalogosProducts[index].products.push(productLike)
+                                                    const countLikes = (favorites) ? favorites.length : 0;
 
 
 
 
+                                                    const productLike = {
+
+                                                        id: product._id,
+                                                        user: product.user,
+                                                        name: product.name,
+                                                        description: product.description,
+                                                        dateCreate: product.createdAt,
+                                                        dateUpdate: product.updateAt,
+                                                        totalProducts: product.totalProducts,
+                                                        coverImage: product.coverImage,
+                                                        catalogo: product.catalogo,
+                                                        ratingInit: product.ratingInit,
+                                                        cbd: product.cbd,
+                                                        thc: product.thc,
+                                                        isLike: isLike,
+                                                        countLikes: countLikes
+
+                                                    };
+
+                                                    var catalogoId = String(product.catalogo);
+
+                                                    const find = catalogosProducts.find(function (item) {
+                                                        return String(item.id) == catalogoId
                                                     });
 
 
+                                                    if (find) {
 
 
 
-                                            });
+                                                        console.log('FIN!', find);
 
+                                                        find.products.push(productLike);
 
+                                                        resolve();
+                                                    }
 
-                                    })
+                                                    else {
 
+                                                        console.log('elseeeee')
 
+                                                        resolve();
+                                                    }
 
-                                }
-
-                                else {
-
-                                    resolve();
-                                }
-
-
-
-
+                                                    //catalogosProducts[index].products.push(productLike)
 
 
 
 
+                                                });
 
+
+
+
+
+                                        });
+
+
+
+                                })
 
                             });
 
 
+                            Promise.all(promisesFavorite)
+                                .then((resolve) => {
+
+
+
+
+                                    const catalogosProductsPosition = catalogosProducts.sort((a, b) => (a.position > b.position) ? 1 : -1)
+                                    console.log('catalogosProductsPosition', catalogosProductsPosition);
+
+                                    return res.json({
+                                        ok: true,
+
+                                        catalogosProducts: catalogosProductsPosition
+                                    })
+
+
+
+                                });
+
+
+                        }
+
+
+
+
+
+                        else {
+
+
+                            return res.json({
+                                ok: true,
+
+                                catalogosProducts: catalogosProductsPosition
+                            })
+                        }
+
+
+
+
+
+
+
+
+
+
+
+
+
                     });
 
 
 
 
-                Promise.all(promisesFavorite)
-                    .then((resolve) => {
-
-
-
-
-                        const catalogosProductsPosition = catalogosProducts.sort((a, b) => (a.position > b.position) ? 1 : -1)
-                        console.log('catalogosProductsPosition', catalogosProductsPosition);
-
-                        return res.json({
-                            ok: true,
-
-                            catalogosProducts: catalogosProductsPosition
-                        })
-
-
-
-                    });
 
 
 
