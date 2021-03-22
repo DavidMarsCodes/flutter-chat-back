@@ -823,7 +823,6 @@ const getMyCatalogosProducts = async (req, res = response) => {
 
 
 
-
                 Promise.all(promisesFavorite)
                     .then((resolve) => {
 
