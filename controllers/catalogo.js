@@ -809,7 +809,7 @@ const getMyCatalogosProducts = async (req, res = response) => {
                                                     //catalogosProducts[index].products.push(productLike)
 
 
-                                                    productsSort = catalogosProductsPosition.sort((a, b) => (a.products.createdAt > b.products.createdAt) ? 1 : - 1)
+                                                    productsSort = catalogosProducts.sort((a, b) => (a.products.createdAt > b.products.createdAt) ? 1 : - 1)
 
 
                                                 });
