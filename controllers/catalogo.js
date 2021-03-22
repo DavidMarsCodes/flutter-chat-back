@@ -705,7 +705,7 @@ const getMyCatalogosProducts = async (req, res = response) => {
 
                 const array = [];
 
-                console.log(resolve)
+
 
 
 
@@ -728,7 +728,7 @@ const getMyCatalogosProducts = async (req, res = response) => {
                         if (products.length > 0) {
 
                             console.log('products ***', products)
-                            const promisesFavorite = products.map((product) => {
+                            const promisesFavorite = products.map((product) =>
 
 
                                 new Promise((resolve, reject) => {
@@ -792,8 +792,8 @@ const getMyCatalogosProducts = async (req, res = response) => {
                                                         console.log('FIN!', find);
 
                                                         find.products.push(productLike);
-
                                                         resolve();
+
                                                     }
 
 
@@ -813,10 +813,7 @@ const getMyCatalogosProducts = async (req, res = response) => {
 
 
 
-                                })
-
-                            });
-
+                                }))
 
                             Promise.all(promisesFavorite)
                                 .then((resolve) => {
@@ -836,6 +833,7 @@ const getMyCatalogosProducts = async (req, res = response) => {
 
 
                                 });
+
 
 
                         }
