@@ -362,7 +362,7 @@ const getCatalogosByUsers = async (req, res = response) => {
                                 position: item.position,
                                 privacity: item.privacity,
                                 totalProducts: item.totalProducts,
-                                products: products
+                                products: []
 
                             };
 
@@ -395,24 +395,155 @@ const getCatalogosByUsers = async (req, res = response) => {
 
 
 
+                    const array = [];
+
+                    console.log(resolve)
 
 
 
-                    const catalogosProductsPosition = catalogosProducts.sort((a, b) => (a.position > b.position) ? 1 : -1)
 
 
-                    console.log('catalogosProductsPosition final', catalogosProductsPosition)
 
-                    return res.json({
-                        ok: true,
+                    const promisesFavorite = catalogosProducts.map((obj) =>
 
-                        catalogosProducts: catalogosProductsPosition
-                    })
+                        new Promise((resolve, reject) => {
+
+
+                            console.log('obj!!!', obj)
+
+                            Product
+                                .find({ catalogo: obj.id })
+
+                                .then(products => {
+
+
+
+                                    products.map((product) => {
+
+
+
+                                        Favorite.findOne({
+                                            product: product._id, user: userId
+                                        })
+                                            .then((favorite) => {
+
+
+                                                console.log('favorite', favorite)
+
+
+                                                const isLike = (favorite) ? favorite.isLike : false;
+
+
+                                                Favorite.find({
+                                                    product: product._id, isLike: true
+                                                })
+                                                    .then((favorites) => {
+
+                                                        console.log('favorites', favorites)
+
+                                                        const countLikes = (favorites) ? favorites.length : 0;
+
+
+
+
+                                                        const productLike = {
+
+                                                            id: product._id,
+                                                            user: product.user,
+                                                            name: product.name,
+                                                            description: product.description,
+                                                            dateCreate: product.createdAt,
+                                                            dateUpdate: product.updateAt,
+                                                            totalProducts: product.totalProducts,
+                                                            coverImage: product.coverImage,
+                                                            catalogo: product.catalogo,
+                                                            ratingInit: product.ratingInit,
+                                                            cbd: product.cbd,
+                                                            thc: product.thc,
+                                                            isLike: isLike,
+                                                            countLikes: countLikes
+
+                                                        };
+
+                                                        var catalogoId = String(product.catalogo);
+
+                                                        const find = catalogosProducts.find(function (item) {
+                                                            return String(item.id) == catalogoId
+                                                        });
+
+
+
+                                                        console.log(find);
+
+                                                        find.products.push(productLike)
+                                                        //catalogosProducts[index].products.push(productLike)
+
+
+                                                        resolve();
+
+                                                    });
+
+
+
+
+
+                                            });
+
+                                    })
+
+
+
+
+
+
+
+
+
+
+                                });
+
+
+                        }));
+
+
+
+
+
+                    Promise.all(promisesFavorite)
+                        .then((resolve) => {
+
+
+
+
+                            const catalogosProductsPosition = catalogosProducts.sort((a, b) => (a.position > b.position) ? 1 : -1)
+                            console.log('catalogosProductsPosition', catalogosProductsPosition);
+
+                            return res.json({
+                                ok: true,
+
+                                catalogosProducts: catalogosProductsPosition
+                            })
+
+
+
+                        });
+
+
+
+
+
+
+
+
+
 
 
 
 
                 })
+
+
+
 
         }
 
