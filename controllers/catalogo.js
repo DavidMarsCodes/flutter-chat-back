@@ -717,7 +717,7 @@ const getMyCatalogosProducts = async (req, res = response) => {
                     new Promise((resolve, reject) => {
 
 
-                        console.log('obj!!!', obj)
+
 
                         Product
                             .find({ user: userId })
