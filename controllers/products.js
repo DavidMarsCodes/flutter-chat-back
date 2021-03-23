@@ -376,29 +376,18 @@ const getLastProducts = async (req, res = response) => {
 
 
 
-                                                                else {
 
-                                                                    console.log('no sus');
-                                                                    resolve();
-
-                                                                }
                                                             });
 
                                                     });
 
                                             }
 
-                                            else {
 
-                                                resolve();
-                                            };
 
                                         }
 
-                                        else {
 
-                                            resolve();
-                                        };
 
                                     })
 
@@ -519,27 +508,17 @@ const getLastProducts = async (req, res = response) => {
 
                                             }
 
-                                            else {
-
-                                                resolve();
-                                            };
 
                                         }
 
-                                        else {
 
-                                            resolve();
-                                        };
 
                                     })
                             };
 
                         }
 
-                        else {
 
-                            resolve();
-                        }
 
                     });
 
