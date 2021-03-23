@@ -290,6 +290,8 @@ const getLastProducts = async (req, res = response) => {
                                                                 const subscribeApproved = (subscription) ? subscription.subscribeApproved : false;
                                                                 const subscribeActive = (subscription) ? subscription.subscribeActive : false;
 
+
+                                                                console.log(subscribeApproved, subscribeActive)
                                                                 if (subscribeApproved && subscribeActive) {
                                                                     Favorite.findOne({
                                                                         product: obj._id, user: uid
@@ -371,7 +373,12 @@ const getLastProducts = async (req, res = response) => {
 
                                                                 }
 
+
+
+
                                                                 else {
+
+                                                                    console.log('no sus');
                                                                     resolve();
 
                                                                 }
@@ -549,7 +556,7 @@ const getLastProducts = async (req, res = response) => {
                 const productsProfilesPosition = productsProfiles.sort((a, b) => parseFloat(b.product.ratingInit) - parseFloat(a.product.ratingInit));
 
 
-
+                console.log('productsProfilesPosition final', productsProfilesPosition);
 
 
                 return res.json({
