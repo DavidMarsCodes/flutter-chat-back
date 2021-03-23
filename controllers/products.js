@@ -197,18 +197,89 @@ const getProductsByCatalogo = async (req, res = response) => {
         const catalogoId = req.params.id;
 
 
-        const products = await Product
+        const productsCatalogo = await Product
             .find({ catalogo: catalogoId })
             .sort('-createdAt')
 
+        const products = []
+
+        const promises = productsCatalogo.map((product) =>
+
+            new Promise((resolve, reject) => {
+
+
+
+                Favorite.findOne({
+                    product: product._id, user: product.user
+                })
+                    .then((favorite) => {
+                        console.log('favorite', favorite)
+
+                        const isLike = (favorite) ? favorite.isLike : false;
+
+                        Favorite.find({
+                            product: product._id, isLike: true
+                        })
+                            .then((favorites) => {
+
+                                console.log('favorites', favorites)
+
+                                const countLikes = (favorites) ? favorites.length : 0;
 
 
 
 
-        res.json({
-            ok: true,
-            products,
-        })
+
+                                const productObj = {
+
+                                    id: product._id,
+                                    user: product.user,
+                                    name: product.name,
+                                    description: product.description,
+                                    dateCreate: product.createdAt,
+                                    dateUpdate: product.updateAt,
+                                    totalProducts: product.totalProducts,
+                                    coverImage: product.coverImage,
+                                    catalogo: product.catalogo,
+                                    ratingInit: product.ratingInit,
+                                    cbd: product.cbd,
+                                    thc: product.thc,
+                                    isLike: isLike,
+                                    countLikes: countLikes
+
+                                };
+
+                                products.push(productObj)
+
+
+
+                            })
+
+                    })
+
+
+
+            }))
+
+        Promise.all(promises)
+            .then((resolve) => {
+
+
+
+                const productsCreateAtSort = productsProfiles.sort((a, b) => b.createdAt - a.createdAt);
+
+
+
+
+
+                res.json({
+                    ok: true,
+                    products: productsCreateAtSort,
+                })
+            })
+
+
+
 
     }
 
