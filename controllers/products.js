@@ -553,6 +553,8 @@ const getLastProducts = async (req, res = response) => {
 
 
 
+                console.log('productsProfiles', productsProfiles)
+
                 const productsProfilesPosition = productsProfiles.sort((a, b) => parseFloat(b.product.ratingInit) - parseFloat(a.product.ratingInit));
 
 
