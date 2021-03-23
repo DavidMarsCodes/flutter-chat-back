@@ -157,7 +157,7 @@ const getCatalogosByUsers = async (req, res = response) => {
         const userAuthId = req.params.authid;
 
 
-        const profileAuth = await Profile.findOne({ user: userIAuthId });
+        const profileAuth = await Profile.findOne({ user: userAuthId });
 
         const isClub = profileAuth.isClub;
 
@@ -168,7 +168,7 @@ const getCatalogosByUsers = async (req, res = response) => {
 
 
             const subscription = await Subscription
-                .findOne({ subscriptor: userId, club: userIAuthId })
+                .findOne({ subscriptor: userId, club: userAuthId })
 
             const isSubscribe = (subscription) ? subscription.subscribeActive && subscription.subscribeApproved : false;
 
