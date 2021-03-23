@@ -435,7 +435,7 @@ const getCatalogosByUsers = async (req, res = response) => {
         else {
 
             const subscription = await Subscription
-                .findOne({ subscriptor: userIAuthId, club: userId })
+                .findOne({ subscriptor: userAuthId, club: userId })
 
             const isSubscribe = (subscription) ? subscription.subscribeActive && subscription.subscribeApproved : false;
 
@@ -486,43 +486,35 @@ const getCatalogosByUsers = async (req, res = response) => {
 
 
 
-                    Product
-                        .find({ catalogo: item._id })
-
-                        .then(products => {
 
 
+                    const catalogo = {
+                        id: item._id,
+                        name: item.name,
+                        description: item.description,
+                        user: item.user,
+                        position: item.position,
+                        privacity: item.privacity,
+                        totalProducts: item.totalProducts,
+                        products: []
 
-
-
-
-                            const catalogo = {
-                                id: item._id,
-                                name: item.name,
-                                description: item.description,
-                                user: item.user,
-                                position: item.position,
-                                privacity: item.privacity,
-                                totalProducts: item.totalProducts,
-                                products: []
-
-                            };
+                    };
 
 
 
 
 
-                            console.log('catalogoProducts fimal!!', catalogo)
+                    console.log('catalogoProducts fimal!!', catalogo)
 
 
 
-                            catalogosProducts.push(catalogo);
+                    catalogosProducts.push(catalogo);
 
-                            resolve();
+                    resolve();
 
 
 
-                        })
+
 
 
 
@@ -537,35 +529,28 @@ const getCatalogosByUsers = async (req, res = response) => {
 
 
 
-                    const array = [];
+                    Product
+                        .find({ user: userId })
 
-                    console.log(resolve)
-
-
-
+                        .then((products) => {
 
 
 
-                    const promisesFavorite = catalogosProducts.map((obj) =>
-
-                        new Promise((resolve, reject) => {
 
 
-                            console.log('obj!!!', obj)
+                            if (products.length > 0) {
 
-                            Product
-                                .find({ catalogo: obj.id })
-
-                                .then(products => {
+                                console.log('products ***', products)
+                                const promisesFavorite = products.map((product) =>
 
 
+                                    new Promise((resolve, reject) => {
 
-                                    products.map((product) => {
-
+                                        console.log("**product!!", product)
 
 
                                         Favorite.findOne({
-                                            product: product._id, user: userIAuthId
+                                            product: product._id, user: userAuthId
                                         })
                                             .then((favorite) => {
 
@@ -614,14 +599,28 @@ const getCatalogosByUsers = async (req, res = response) => {
                                                         });
 
 
+                                                        if (find) {
 
-                                                        console.log(find);
 
-                                                        find.products.push(productLike)
+
+                                                            console.log('FIN!', find);
+
+                                                            find.products.push(productLike);
+                                                            resolve();
+
+                                                        }
+
+                                                        else {
+
+                                                            resolve();
+                                                        }
+
+
+
                                                         //catalogosProducts[index].products.push(productLike)
 
 
-                                                        resolve();
+
 
                                                     });
 
@@ -631,7 +630,54 @@ const getCatalogosByUsers = async (req, res = response) => {
 
                                             });
 
-                                    })
+
+
+                                    }))
+
+                                Promise.all(promisesFavorite)
+                                    .then((resolve) => {
+
+
+
+
+                                        console.log('catalogosProducts', catalogosProducts);
+
+                                        const catalogosProductsPosition = catalogosProducts.sort((a, b) => (a.position > b.position) ? 1 : - 1)
+
+
+
+                                        console.log('catalogosProductsPosition', catalogosProductsPosition)
+
+                                        return res.json({
+                                            ok: true,
+
+                                            catalogosProducts: catalogosProductsPosition
+                                        })
+
+
+
+                                    });
+
+
+
+                            }
+
+
+
+
+
+                            else {
+
+                                const catalogosProductsPosition = catalogosProducts.sort((a, b) => (a.position > b.position) ? 1 : - 1)
+
+                                return res.json({
+
+
+                                    ok: true,
+
+                                    catalogosProducts: catalogosProductsPosition
+                                })
+                            }
 
 
 
@@ -642,29 +688,6 @@ const getCatalogosByUsers = async (req, res = response) => {
 
 
 
-                                });
-
-
-                        }));
-
-
-
-
-
-                    Promise.all(promisesFavorite)
-                        .then((resolve) => {
-
-
-
-
-                            const catalogosProductsPosition = catalogosProducts.sort((a, b) => (a.position > b.position) ? 1 : -1)
-                            console.log('catalogosProductsPosition', catalogosProductsPosition);
-
-                            return res.json({
-                                ok: true,
-
-                                catalogosProducts: catalogosProductsPosition
-                            })
 
 
 
@@ -680,9 +703,36 @@ const getCatalogosByUsers = async (req, res = response) => {
 
 
 
+                });
 
 
-                })
+
+
+
+            Promise.all(promisesFavorite)
+                .then((resolve) => {
+
+
+
+
+                    const catalogosProductsPosition = catalogosProducts.sort((a, b) => (a.position > b.position) ? 1 : -1)
+                    console.log('catalogosProductsPosition', catalogosProductsPosition);
+
+                    return res.json({
+                        ok: true,
+
+                        catalogosProducts: catalogosProductsPosition
+                    })
+
+
+
+                });
+
+
+
+
+
+
 
 
 
