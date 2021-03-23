@@ -373,26 +373,32 @@ const getLastProducts = async (req, res = response) => {
 
                                                                 }
 
+
+
+
                                                                 else {
 
+                                                                    console.log('no sus');
                                                                     resolve();
+
                                                                 }
-
-
-
-
-
                                                             });
 
                                                     });
 
                                             }
 
+                                            else {
 
+                                                resolve();
+                                            };
 
                                         }
 
+                                        else {
 
+                                            resolve();
+                                        };
 
                                     })
 
@@ -513,17 +519,27 @@ const getLastProducts = async (req, res = response) => {
 
                                             }
 
+                                            else {
+
+                                                resolve();
+                                            };
 
                                         }
 
+                                        else {
 
+                                            resolve();
+                                        };
 
                                     })
                             };
 
                         }
 
+                        else {
 
+                            resolve();
+                        }
 
                     });
 
@@ -537,7 +553,7 @@ const getLastProducts = async (req, res = response) => {
 
 
 
-                console.log('productsProfiles', productsProfiles)
+                console.log('productsProfiles')
 
                 const productsProfilesPosition = productsProfiles.sort((a, b) => parseFloat(b.product.ratingInit) - parseFloat(a.product.ratingInit));
 
