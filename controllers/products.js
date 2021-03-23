@@ -249,7 +249,8 @@ const getProductsByCatalogo = async (req, res = response) => {
 
                                 };
 
-                                products.push(productObj)
+                                products.push(productObj);
+                                resolve();
 
 
 
