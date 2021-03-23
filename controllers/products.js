@@ -447,7 +447,7 @@ const getLastProducts = async (req, res = response) => {
                                                                         })
                                                                             .then((favorites) => {
 
-                                                                                console.log('favorites', favorites)
+                                                                                console.log('favorites prov 1', favorites)
 
                                                                                 const countLikes = (favorites) ? favorites.length : 0;
 
