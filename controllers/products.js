@@ -362,6 +362,8 @@ const getLastProducts = async (req, res = response) => {
 
                                                                             }
 
+                                                                            console.log('productProfile', productProfile)
+
 
 
 
