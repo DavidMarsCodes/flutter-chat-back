@@ -371,10 +371,10 @@ const getLastProducts = async (req, res = response) => {
 
                                                                                 else if (catalogo.privacity == '2') {
 
-                                                                                    const isSubsOrClub = (isClub) ? false : subscribeApproved && subscribeActive;
+                                                                                    const isSub = subscribeApproved && subscribeActive;
                                                                                     console.log('isSubsOrClub', isSubsOrClub)
 
-                                                                                    if (isSubsOrClub) {
+                                                                                    if (isSub) {
 
                                                                                         productsProfiles.push(productProfile);
                                                                                         resolve();
