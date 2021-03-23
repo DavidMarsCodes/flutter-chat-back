@@ -289,7 +289,7 @@ const getLastProducts = async (req, res = response) => {
                                                             const subscribeActive = (subscription) ? subscription.subscribeActive : false;
 
 
-                                                            console.log(subscribeApproved, subscribeActive)
+
 
                                                             Favorite.findOne({
                                                                 product: obj._id, user: uid
@@ -364,7 +364,7 @@ const getLastProducts = async (req, res = response) => {
 
                                                                             console.log('productProfile', productProfile)
 
-
+                                                                            console.log(subscribeApproved, subscribeActive)
 
 
                                                                             if (catalogo.privacity == '2') {
