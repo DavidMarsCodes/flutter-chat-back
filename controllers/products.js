@@ -373,6 +373,11 @@ const getLastProducts = async (req, res = response) => {
 
                                                                 }
 
+                                                                else {
+
+                                                                    resolve();
+                                                                }
+
 
 
 
