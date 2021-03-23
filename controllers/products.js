@@ -408,7 +408,7 @@ const getLastProducts = async (req, res = response) => {
                             else {
 
 
-                                resilve()
+                                resolve()
                             }
 
 
