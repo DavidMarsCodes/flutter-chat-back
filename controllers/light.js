@@ -9,11 +9,11 @@ const createLight = async (req, res = response) => {
         watts,
         kelvin,
         user,
-        room} = req.body;
+        room } = req.body;
 
 
-        const uid = user;
-        const roomid = room
+    const uid = user;
+    const roomid = room
 
 
     try {
@@ -23,41 +23,41 @@ const createLight = async (req, res = response) => {
         if (nameExist) {
             return res.status(400).json({
                 ok: false,
-                msg: 'Ya tienes un aire con ese nombre'
+                msg: 'Ya tienes una Luz con ese nombre'
             });
         }
 
-        const lightTotal = await Light.find({ room: roomid  });
+        const lightTotal = await Light.find({ room: roomid });
 
         const newlight = new Light({
-            name: name, 
-            description: description, 
+            name: name,
+            description: description,
             watts: watts,
             kelvin: kelvin,
-            user: user, 
+            user: user,
             room: roomid,
             position: lightTotal.length
-         });
+        });
 
 
-       const light = await newlight.save();
+        const light = await newlight.save();
 
-       const lightTotals = await Light.find({ room: roomid  });
-       
-       const countLight = lightTotals.length;
-               
+        const lightTotals = await Light.find({ room: roomid });
 
-       await Room.updateOne(
-           {
-               _id: roomid
-           },
-           {
-               $set: {
+        const countLight = lightTotals.length;
 
-                   totalLights: countLight
-               }
-           }
-       );
+
+        await Room.updateOne(
+            {
+                _id: roomid
+            },
+            {
+                $set: {
+
+                    totalLights: countLight
+                }
+            }
+        );
 
 
         res.json({
@@ -88,11 +88,11 @@ const editLight = async (req, res = response) => {
     try {
 
         const updateLight = {
-            name: name, 
-            description: description, 
+            name: name,
+            description: description,
             watts: watts,
             kelvin: kelvin
-         };
+        };
 
 
         await Light.updateOne(
@@ -104,9 +104,9 @@ const editLight = async (req, res = response) => {
             }
         );
 
-            const light = await Light.findOne({ _id: id});
+        const light = await Light.findOne({ _id: id });
 
-         
+
 
         res.json({
             ok: true,
@@ -169,8 +169,8 @@ const deleteLight = async (req, res = response) => {
         const lightTotals = await Light.find({ room: light.room });
 
         const countLight = lightTotals.length;
-             
-        
+
+
         await Room.updateOne(
             {
                 _id: light.room

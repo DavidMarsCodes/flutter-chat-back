@@ -9,11 +9,11 @@ const createAir = async (req, res = response) => {
         description,
         watts,
         user,
-        room} = req.body;
+        room } = req.body;
 
 
-        const uid = user;
-        const roomid = room
+    const uid = user;
+    const roomid = room
 
 
 
@@ -32,34 +32,34 @@ const createAir = async (req, res = response) => {
 
 
 
-        const newAir = new Air({ 
-            name: name, 
-            description: description, 
+        const newAir = new Air({
+            name: name,
+            description: description,
             watts: watts,
-            user: user, 
+            user: user,
             room: roomid,
             position: airsTotal.length
-         });
+        });
 
-       const air = await newAir.save();
+        const air = await newAir.save();
 
-       const airsTotals = await Air.find({ room: roomid });
+        const airsTotals = await Air.find({ room: roomid });
 
-       const countAirs = airsTotals.length;
-        
-       
+        const countAirs = airsTotals.length;
 
-       await Room.updateOne(
-           {
-               _id: roomid
-           },
-           {
-               $set: {
 
-                   totalAirs: countAirs
-               }
-           }
-       );
+
+        await Room.updateOne(
+            {
+                _id: roomid
+            },
+            {
+                $set: {
+
+                    totalAirs: countAirs
+                }
+            }
+        );
 
 
 
@@ -89,26 +89,26 @@ const editAir = async (req, res = response) => {
 
     try {
 
-        const updateAir = { 
-            name: name, 
-            description: description, 
+        const updateAir = {
+            name: name,
+            description: description,
             watts: watts
-         };
+        };
 
 
 
-       const  oupdateAir = await Air.updateOne(
-        {
-            _id: id
-        },
-        {
-            $set: updateAir
-        }
-    );
+        const oupdateAir = await Air.updateOne(
+            {
+                _id: id
+            },
+            {
+                $set: updateAir
+            }
+        );
 
-            const air = await Air.findOne({ _id: id});
+        const air = await Air.findOne({ _id: id });
 
-         
+
 
         res.json({
             ok: true,
@@ -169,7 +169,7 @@ const deleteAir = async (req, res = response) => {
         const airsTotals = await Air.find({ room: air.room });
 
         const countAirs = airsTotals.length;
-        
+
 
         await Room.updateOne(
             {
