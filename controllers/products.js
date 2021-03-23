@@ -364,7 +364,11 @@ const getLastProducts = async (req, res = response) => {
 
                                                                             console.log('productProfile', productProfile)
 
+                                                                            console.log('provacity', catalogo.privacity);
+
                                                                             console.log(subscribeApproved, subscribeActive)
+
+
 
 
                                                                             if (catalogo.privacity == '2') {
