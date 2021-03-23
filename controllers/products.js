@@ -374,10 +374,21 @@ const getLastProducts = async (req, res = response) => {
                                                                                     resolve();
                                                                                 }
 
+                                                                                else {
+
+                                                                                    resolve();
+
+                                                                                }
+
                                                                             }
 
                                                                             if (catalogo.privacity == '1') {
                                                                                 productsProfiles.push(productProfile);
+                                                                                resolve();
+                                                                            }
+
+                                                                            else {
+
                                                                                 resolve();
                                                                             }
                                                                         })
