@@ -266,7 +266,7 @@ const getProductsByCatalogo = async (req, res = response) => {
 
 
 
-                const productsCreateAtSort = productsProfiles.sort((a, b) => b.createdAt - a.createdAt);
+                const productsCreateAtSort = products.sort((a, b) => b.createdAt - a.createdAt);
 
 
 
