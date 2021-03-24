@@ -509,7 +509,7 @@ const getLastProducts = async (req, res = response) => {
 
 
 
-                    const productsProfilesPosition = productsProfiles.sort((a, b) => parseFloat(b.product.ratingInit) - parseFloat(a.product.ratingInit));
+                    const productsProfilesPosition = productsProfiles.sort((a, b) => parseFloat(b.product.createdAt) - parseFloat(a.product.createdAt));
 
 
 
@@ -700,7 +700,7 @@ const getLastProducts = async (req, res = response) => {
 
 
 
-                    const productsProfilesPosition = productsProfiles.sort((a, b) => parseFloat(b.product.ratingInit) - parseFloat(a.product.ratingInit));
+                    const productsProfilesPosition = productsProfiles.sort((a, b) => parseFloat(b.product.createdAt) - parseFloat(a.product.createdAt));
 
 
 
