@@ -511,8 +511,8 @@ const getLastProducts = async (req, res = response) => {
 
 
                     function sortFunction(a, b) {
-                        var dateA = new Date(a.date).getTime();
-                        var dateB = new Date(b.date).getTime();
+                        var dateA = new Date(a.product.dateCreate).getTime();
+                        var dateB = new Date(b.product.dateCreate).getTime();
                         return dateA > dateB ? 1 : 1;
                     };
 
@@ -708,8 +708,8 @@ const getLastProducts = async (req, res = response) => {
 
 
                     function sortFunction(a, b) {
-                        var dateA = new Date(a.date).getTime();
-                        var dateB = new Date(b.date).getTime();
+                        var dateA = new Date(a.product.dateCreate).getTime();
+                        var dateB = new Date(b.product.dateCreate).getTime();
                         return dateA > dateB ? 1 : 1;
                     };
 
