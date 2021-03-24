@@ -513,7 +513,7 @@ const getLastProducts = async (req, res = response) => {
                     function sortFunction(a, b) {
                         var dateA = new Date(a.date).getTime();
                         var dateB = new Date(b.date).getTime();
-                        return dateA > dateB ? 1 : -1;
+                        return dateA > dateB ? 1 : 1;
                     };
 
                     const productsProfilesPosition = productsProfiles.sort(sortFunction);
@@ -710,7 +710,7 @@ const getLastProducts = async (req, res = response) => {
                     function sortFunction(a, b) {
                         var dateA = new Date(a.date).getTime();
                         var dateB = new Date(b.date).getTime();
-                        return dateA > dateB ? 1 : -1;
+                        return dateA > dateB ? 1 : 1;
                     };
 
                     const productsProfilesPosition = productsProfiles.sort(sortFunction);
