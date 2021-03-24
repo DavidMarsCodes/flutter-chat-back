@@ -509,9 +509,15 @@ const getLastProducts = async (req, res = response) => {
 
 
 
-                    const productsProfilesPosition = productsProfiles.sort((a, b) => b.product.createdAt - a.product.createdAt);
+
+                    const productsProfilesPosition = productsProfiles.sort(function (a, b) {
+                        var c = new Date(a.product.createdAt);
+                        var d = new Date(b.product.createdAt);
+                        return c - d;
+                    });
 
 
+                    console.log('productsProfilesPosition', productsProfilesPosition)
 
 
 
@@ -700,10 +706,14 @@ const getLastProducts = async (req, res = response) => {
 
 
 
-                    const productsProfilesPosition = productsProfiles.sort((a, b) => b.product.createdAt - a.product.createdAt);
+                    const productsProfilesPosition = productsProfiles.sort(function (a, b) {
+                        var c = new Date(a.product.createdAt);
+                        var d = new Date(b.product.createdAt);
+                        return c - d;
+                    });
 
 
-
+                    console.log('productsProfilesPosition', productsProfilesPosition)
 
 
                     return res.json({
