@@ -511,7 +511,7 @@ const getLastProducts = async (req, res = response) => {
 
                     const productsProfilesPosition = productsProfiles.sort((a, b) => {
 
-                        return (new Date(a.product.dateCreate) > new Date(b.product.dateCreate)) ? 1 : 1;
+                        return new Date(a.product.dateCreate) - new Date(b.product.dateCreate);
                     });
 
 
@@ -706,7 +706,7 @@ const getLastProducts = async (req, res = response) => {
 
                     const productsProfilesPosition = productsProfiles.sort((a, b) => {
 
-                        return (new Date(a.product.dateCreate) > new Date(b.product.dateCreate)) ? 1 : 1;
+                        return new Date(a.product.dateCreate) - new Date(b.product.dateCreate);
                     });
 
 
