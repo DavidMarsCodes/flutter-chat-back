@@ -250,7 +250,7 @@ const getProductsByCatalogo = async (req, res = response) => {
                                 };
 
                                 products.push(productObj);
-                                resolve();
+                                resolve()
 
 
 
@@ -509,7 +509,7 @@ const getLastProducts = async (req, res = response) => {
 
 
 
-                    const productsProfilesPosition = productsProfiles.sort((a, b) => parseFloat(b.product.createdAt) - parseFloat(a.product.createdAt));
+                    const productsProfilesPosition = productsProfiles.sort((a, b) => b.product.createdAt - a.product.createdAt);
 
 
 
@@ -700,7 +700,7 @@ const getLastProducts = async (req, res = response) => {
 
 
 
-                    const productsProfilesPosition = productsProfiles.sort((a, b) => parseFloat(b.product.createdAt) - parseFloat(a.product.createdAt));
+                    const productsProfilesPosition = productsProfiles.sort((a, b) => b.product.createdAt - a.product.createdAt);
 
 
 
