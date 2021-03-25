@@ -776,7 +776,7 @@ const deleteProduct = async (req, res = response) => {
         const product = await Plant.findByIdAndDelete(productId)
 
 
-        const products = await Plant
+        const products = await Product
             .find({ catalogo: product.catalogo })
 
         const countProducts = products.length;
