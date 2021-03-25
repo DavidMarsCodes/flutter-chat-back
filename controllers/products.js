@@ -764,33 +764,33 @@ const getPlantsByUser = async (req, res = response) => {
     }
 
 }
-const deletePlant = async (req, res = response) => {
+const deleteProduct = async (req, res = response) => {
 
 
     try {
 
 
-        const plantId = req.params.id
+        const productId = req.params.id
 
 
-        const plant = await Plant.findByIdAndDelete(plantId)
+        const product = await Plant.findByIdAndDelete(productId)
 
 
-        const plants = await Plant
-            .find({ room: plant.room })
+        const products = await Plant
+            .find({ catalogo: product.catalogo })
 
-        const countPlants = plants.length;
+        const countProducts = products.length;
 
 
 
-        await Room.updateOne(
+        await Catalogo.updateOne(
             {
-                _id: plant.room
+                _id: product.catalogo
             },
             {
                 $set: {
 
-                    totalPlants: countPlants
+                    totalProducts: countProducts
                 }
             }
         );
@@ -819,7 +819,8 @@ module.exports = {
     createProduct,
     editProduct,
     getProductsByCatalogo,
-    getLastProducts
+    getLastProducts,
+    deleteProduct
 
 }
 
