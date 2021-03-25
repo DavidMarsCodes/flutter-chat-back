@@ -773,7 +773,7 @@ const deleteProduct = async (req, res = response) => {
         const productId = req.params.id
 
 
-        const product = await Plant.findByIdAndDelete(productId)
+        const product = await Product.findByIdAndDelete(productId)
 
 
         const products = await Product
