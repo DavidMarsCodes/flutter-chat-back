@@ -36,7 +36,7 @@ io.on('connect', (client) => {
     client.on('principal-notification', async (payload) => {
         // TODO: Grabar mensaje
 
-        conosle.log('payload', payload)
+        console.log('payload', payload)
         io.to(payload.for).emit('principal-notification', payload);
     })
 
