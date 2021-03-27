@@ -312,7 +312,7 @@ const getProfilesSubscriptorsApproveByUser = async (req, res) => {
                                             username: user.username,
 
                                         },
-                                        messageDate: obj.updatedAt,
+                                        messageDate: obj.createdAt,
 
                                         subscribeActive: obj.subscribeActive,
                                         subscribeApproved: obj.subscribeApproved,
@@ -337,13 +337,16 @@ const getProfilesSubscriptorsApproveByUser = async (req, res) => {
                 .then((resolve) => {
 
 
-                    const profilesOrder = profiles.sort((a, b) => (a.messageDate > b.messageDate) ? 1 : 1)
 
+                    const subscriptionProfilesDate = profiles.sort((a, b) => {
+
+                        return new Date(b.messageDate) - new Date(a.messageDate);
+                    });
 
 
                     return res.json({
                         ok: true,
-                        profiles: profilesOrder
+                        profiles: subscriptionProfilesDate
                     })
                 })
 
@@ -441,13 +444,17 @@ const getProfilesSubscriptorsApproveByUser = async (req, res) => {
             Promise.all(promises)
                 .then((resolve) => {
 
-                    const profilesOrder = profiles.sort((a, b) => (a.messageDate > b.messageDate) ? 1 : 1)
+
+                    const subscriptionProfilesDate = profiles.sort((a, b) => {
+
+                        return new Date(b.messageDate) - new Date(a.messageDate);
+                    });
 
 
 
                     return res.json({
                         ok: true,
-                        profiles: profilesOrder
+                        profiles: subscriptionProfilesDate
                     })
                 })
 

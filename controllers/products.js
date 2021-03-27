@@ -267,15 +267,18 @@ const getProductsByCatalogo = async (req, res = response) => {
 
 
 
-                const productsCreateAtSort = products.sort((a, b) => b.createdAt - a.createdAt);
 
+                const productsProfilesDate = products.sort((a, b) => {
+
+                    return new Date(b.dateCreate) - new Date(a.dateCreate);
+                });
 
 
 
 
                 res.json({
                     ok: true,
-                    products: productsCreateAtSort,
+                    products: productsProfilesDate,
                 })
             })
 
