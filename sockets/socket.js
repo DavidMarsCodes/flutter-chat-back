@@ -36,28 +36,27 @@ io.on('connect', (client) => {
     client.on('principal-notification', async (payload) => {
         // TODO: Grabar mensaje
 
-        client.on('principal-notification', async (payload) => {
-            conosle.log('payload', payload)
-            io.to(payload.for).emit('principal-notification', payload);
-        })
+        conosle.log('payload', payload)
+        io.to(payload.for).emit('principal-notification', payload);
+    })
 
 
-        client.on('disconnect', () => {
+    client.on('disconnect', () => {
 
-            console.log('disconnect', uid)
-            userDisconnect(uid);
-        });
-
-
-
-
-
-        // client.on('mensaje', ( payload ) => {
-        //     console.log('Mensaje', payload);
-        //     io.emit( 'mensaje', { admin: 'Nuevo mensaje' } );
-        // });
-
-
+        console.log('disconnect', uid)
+        userDisconnect(uid);
     });
+
+
+
+
+
+    // client.on('mensaje', ( payload ) => {
+    //     console.log('Mensaje', payload);
+    //     io.emit( 'mensaje', { admin: 'Nuevo mensaje' } );
+    // });
+
+
+});
 
 
