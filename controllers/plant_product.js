@@ -43,10 +43,6 @@ const addPlantsInProduct = async (req, res = response) => {
                 });
 
 
-                const plantProduct = await newPlantofProduct.save();
-
-                const plantsProducts = await PlantProduct.find({ product: product, user: user });
-
 
             }));
         Promise.all(promises)
@@ -68,9 +64,81 @@ const addPlantsInProduct = async (req, res = response) => {
 }
 
 
+const getPlantsByProduct = async (req, res = response) => {
+
+    try {
+        const productId = req.params.id;
+
+
+        const plantsProduct = await PlantProduc
+            .find({ product: productId })
+            .sort('position')
+
+        const plants = []
+
+        const promises = plantsProduct.map((plantProduct) =>
+
+            new Promise((resolve, reject) => {
+
+
+
+                Plant.findById(plantProduct.product)
+                    .then((plant) => {
+                        console.log('plant', plant);
+
+
+                        plants.push(plant);
+                        resolve()
+
+
+
+
+
+                    })
+
+
+
+            }))
+
+        Promise.all(promises)
+            .then((resolve) => {
+
+
+
+
+                const plantsPosition = plants.sort((a, b) => {
+
+                    return (b.position) - (a.position);
+                });
+
+
+
+
+                res.json({
+                    ok: true,
+                    plants: plantsPosition,
+                })
+            })
+
+
+
+
+    }
+
+    catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: 'Hable con el administrador'
+        });
+    }
+
+}
+
 
 module.exports = {
-    addPlantsInProduct
+
+    getPlantsByProduct
 }
 
 

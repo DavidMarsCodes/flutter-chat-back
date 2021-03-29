@@ -66,6 +66,7 @@ app.use('/api/product', require('./routes/products'));
 
 app.use('/api/favorite', require('./routes/favorite'));
 
+app.use('/api/plant_product', require('./routes/plant_product'));
 
 
 
