@@ -83,7 +83,7 @@ const getPlantsByProduct = async (req, res = response) => {
 
 
 
-                Plant.findById(plantProduct.product)
+                Plant.findById(plantProduct.plant)
                     .then((plant) => {
                         console.log('plant', plant);
 
