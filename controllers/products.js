@@ -90,6 +90,8 @@ const createProduct = async (req, res = response) => {
 
         });
 
+        const plantProduct = new PlantProduct();
+
         const promises = reorderPlants.map((obj) =>
 
             new Promise((resolve, reject) => {
@@ -109,7 +111,7 @@ const createProduct = async (req, res = response) => {
                 });
 
 
-                const plantProduct = newPlantsProduct.save();
+                plantProduct = newPlantsProduct.save();
 
 
 
@@ -121,6 +123,9 @@ const createProduct = async (req, res = response) => {
             }));
         Promise.all(promises)
             .then(() => {
+
+                console.log('new plantProducts', plantProduct)
+
 
                 PlantProduct.find({ product: product, user: user })
                     .then((plantsProducts) => {
