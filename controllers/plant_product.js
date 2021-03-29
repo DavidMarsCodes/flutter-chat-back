@@ -1,7 +1,7 @@
 
 const { response } = require('express');
 const PlantProduct = require('../models/plants_product');
-
+const Plant = require('../model/plant');
 
 
 
