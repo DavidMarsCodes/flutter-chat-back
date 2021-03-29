@@ -90,7 +90,7 @@ const getPlantsByProduct = async (req, res = response) => {
 
                         const plantPosition = {
 
-                            id: plant.id,
+                            id: plant._id,
                             user: plant.user,
                             room: plant.room,
                             name: plant.name,
