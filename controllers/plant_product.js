@@ -72,7 +72,8 @@ const getPlantsByProduct = async (req, res = response) => {
 
         const plantsProduct = await PlantProduct
             .find({ product: productId })
-            .sort('position')
+
+        console.log('plantsProduct', plantsProduct)
 
         const plants = []
 
