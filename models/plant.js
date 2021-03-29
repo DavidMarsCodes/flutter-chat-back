@@ -62,19 +62,27 @@ const PlantSchema = Schema({
         default: ''
     },
 
+    position:
+    {
+        type: Number,
+        required: false,
+        default: 0
+    },
+
+
 },
 
-    
 
-{
-    timestamps: true
-});
 
-PlantSchema.method('toJSON', function() {
+    {
+        timestamps: true
+    });
+
+PlantSchema.method('toJSON', function () {
     const { __v, _id, ...object } = this.toObject();
     object.id = _id;
     return object;
 })
 
 
-module.exports = model('Plant', PlantSchema );
+module.exports = model('Plant', PlantSchema);

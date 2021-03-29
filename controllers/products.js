@@ -31,7 +31,7 @@ const createProduct = async (req, res = response) => {
     } = req.body;
 
 
-
+    console.log('req.body**', req.body)
 
 
     try {
@@ -90,6 +90,8 @@ const createProduct = async (req, res = response) => {
 
         });
 
+        console.log('reorderPlants', reorderPlants)
+
         const plantProduct = new PlantProduct();
 
         const promises = reorderPlants.map((obj) =>
@@ -106,7 +108,7 @@ const createProduct = async (req, res = response) => {
                 const newPlantsProduct = new PlantProduct({
                     product: product,
                     user: user,
-                    plant: obj,
+                    plant: obj.id,
 
                 });
 
