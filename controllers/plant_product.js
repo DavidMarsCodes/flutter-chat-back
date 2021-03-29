@@ -94,6 +94,8 @@ const getPlantsByProduct = async (req, res = response) => {
                             user: plant.user,
                             room: plant.room,
                             name: plant.name,
+                            createdAt: plant.createdAt,
+                            updatedAt: plant.updatedAt,
                             description: plant.description,
                             quantity: plant.quantity,
                             germinated: plant.germinated,
