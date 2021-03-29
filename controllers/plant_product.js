@@ -70,7 +70,7 @@ const getPlantsByProduct = async (req, res = response) => {
         const productId = req.params.id;
 
 
-        const plantsProduct = await PlantProduc
+        const plantsProduct = await PlantProduct
             .find({ product: productId })
             .sort('position')
 
