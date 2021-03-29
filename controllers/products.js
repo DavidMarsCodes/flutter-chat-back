@@ -24,6 +24,7 @@ const createProduct = async (req, res = response) => {
     } = req.body;
 
 
+    console.log('creaste produt**', product, plants)
 
     const name = product.name;
     const description = product.description;
