@@ -103,6 +103,7 @@ const createProduct = async (req, res = response) => {
                     product: product,
                     user: user,
                     plant: obj.id,
+                    position: obj.position
 
                 });
 

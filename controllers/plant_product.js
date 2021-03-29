@@ -88,7 +88,24 @@ const getPlantsByProduct = async (req, res = response) => {
                         console.log('plant', plant);
 
 
-                        plants.push(plant);
+                        const plantPosition = {
+
+                            id: plant.id,
+                            user: plant.user,
+                            room: plant.room,
+                            name: plant.name,
+                            description: plant.description,
+                            quantity: plant.quantity,
+                            germinated: plant.germinated,
+                            flowering: plant.flowering,
+                            pot: plant.pot,
+                            cbd: plant.cbd,
+                            thc: plant.thc,
+                            coverImage: plant.coverImage,
+                            position: plantProduct.position,
+
+                        }
+                        plants.push(plantPosition);
                         resolve()
 
 

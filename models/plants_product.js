@@ -23,6 +23,14 @@ const PlantProductSchema = Schema({
     },
 
 
+    position:
+    {
+        type: Number,
+        required: false,
+        default: 0
+    },
+
+
 
 
 },
