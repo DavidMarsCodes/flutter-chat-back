@@ -129,7 +129,7 @@ const getPlantsByProduct = async (req, res = response) => {
                     return (b.position) - (a.position);
                 });
 
-
+                console.log('plantsPosition', plantsPosition)
 
 
                 res.json({
