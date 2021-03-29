@@ -14,6 +14,7 @@ const User = require('../models/user');
 const Subscription = require('../models/subscription');
 
 const Favorite = require('../models/favorite');
+const PlantProduct = require('../models/plants_product');
 
 
 const createProduct = async (req, res = response) => {
@@ -26,6 +27,7 @@ const createProduct = async (req, res = response) => {
         ratingInit,
         cbd,
         thc,
+        products
     } = req.body;
 
 
@@ -80,12 +82,67 @@ const createProduct = async (req, res = response) => {
 
 
 
+        const reorderPlants = []
 
-        res.json({
-            ok: true,
-            product,
+        plants.map((item, index) => {
+            item.position = index;
+            reorderPlants.push(item);
 
         });
+
+        const promises = reorderPlants.map((obj) =>
+
+            new Promise((resolve, reject) => {
+
+
+                // const plantExists = await PlantProduct.findOne({ product: product, user: user, plant: obj });
+
+
+
+
+
+                const newPlantsProduct = new PlantProduct({
+                    product: product,
+                    user: user,
+                    plant: obj,
+
+                });
+
+
+                const plantProduct = newPlantsProduct.save();
+
+
+
+                console.log('NEW plantProduct', plantProduct)
+
+                resolve();
+
+
+            }));
+        Promise.all(promises)
+            .then(() => {
+
+                PlantProduct.find({ product: product, user: user })
+                    .then((plantsProducts) => {
+
+
+
+                        console.log('plantsProducts', plantsProducts)
+
+
+                        return res.json({
+                            ok: true,
+                            product,
+
+                        });
+
+                    })
+
+
+
+            })
+
+
 
 
     } catch (error) {
