@@ -96,14 +96,8 @@ const createProduct = async (req, res = response) => {
 
         const promises = reorderPlants.map((obj) =>
 
+
             new Promise((resolve, reject) => {
-
-
-                // const plantExists = await PlantProduct.findOne({ product: product, user: user, plant: obj });
-
-
-
-
 
                 const newPlantsProduct = new PlantProduct({
                     product: product,
@@ -113,16 +107,14 @@ const createProduct = async (req, res = response) => {
                 });
 
 
-                plantProduct = newPlantsProduct.save();
-
-
-
-                console.log('NEW plantProduct', plantProduct)
-
-                resolve();
-
-
+                PlantProduct.create(newPlantsProduct,
+                    (err, data) => {
+                        if (err) console.log(err);
+                        else
+                            resolve();
+                    });
             }));
+
         Promise.all(promises)
             .then(() => {
 
