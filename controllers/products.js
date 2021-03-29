@@ -19,21 +19,19 @@ const PlantProduct = require('../models/plants_product');
 
 const createProduct = async (req, res = response) => {
     const {
-        product,
+        name,
+        description,
+        catalogo,
+        user,
+        coverImage,
+        ratingInit,
+        cbd,
+        thc,
         plants
     } = req.body;
 
 
-    console.log('creaste produt**', product, plants)
 
-    const name = product.name;
-    const description = product.description;
-    const coverImage = product.coverImage;
-    const catalogo = product.catalogo;
-    const ratingInit = product.ratingInit;
-    const user = product.user;
-    const cbd = product.cbd;
-    const thc = product.thc;;
 
 
     try {
