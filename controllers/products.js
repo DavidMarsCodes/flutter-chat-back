@@ -317,14 +317,6 @@ const editProduct = async (req, res = response) => {
 
             })
 
-
-
-        res.json({
-            ok: true,
-            product
-        });
-
-
     } catch (error) {
         console.log(error);
         res.status(500).json({
