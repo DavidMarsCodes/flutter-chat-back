@@ -203,7 +203,7 @@ const editProduct = async (req, res = response) => {
         const product = await Product.findById(id);
 
 
-        const productFinal = new Product();
+        const productFinal = new Object();
 
 
         console.log(product);
@@ -211,6 +211,8 @@ const editProduct = async (req, res = response) => {
 
 
         const reorderPlants = []
+
+
 
         plants.map((item, index) => {
             item.position = index;
@@ -287,6 +289,8 @@ const editProduct = async (req, res = response) => {
 
                                 productFinal = productLikes;
 
+                                console.log('productFinal antes', productFinal)
+
                                 resolve();
 
                             })
@@ -316,6 +320,8 @@ const editProduct = async (req, res = response) => {
 
 
             })
+
+
 
     } catch (error) {
         console.log(error);
