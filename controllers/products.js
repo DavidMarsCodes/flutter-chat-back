@@ -258,78 +258,65 @@ const editProduct = async (req, res = response) => {
                 const productFinal = new Object();
 
 
-                const promisesProduct = new Promise((resolve, reject) => {
-
-                    Favorite.findOne({
-                        product: product._id, user: product.user
-                    })
-                        .then((favorite) => {
 
 
-                            const isLike = (favorite) ? favorite.isLike : false;
+                Favorite.findOne({
+                    product: product._id, user: product.user
+                })
+                    .then((favorite) => {
 
 
-                            Favorite.find({
-                                product: product._id, isLike: true
-                            })
-                                .then((favorites) => {
+                        const isLike = (favorite) ? favorite.isLike : false;
 
 
-                                    const countLikes = (favorites) ? favorites.length : 0;
+                        Favorite.find({
+                            product: product._id, isLike: true
+                        })
+                            .then((favorites) => {
+
+
+                                const countLikes = (favorites) ? favorites.length : 0;
 
 
 
 
-                                    const productLikes = {
+                                const productLikes = {
 
-                                        id: product._id,
-                                        user: product.user,
-                                        name: product.name,
-                                        description: product.description,
-                                        dateCreate: product.createdAt,
-                                        dateUpdate: product.updateAt,
-                                        totalProducts: product.totalProducts,
-                                        coverImage: product.coverImage,
-                                        catalogo: product.catalogo,
-                                        ratingInit: product.ratingInit,
-                                        cbd: product.cbd,
-                                        thc: product.thc,
-                                        isLike: isLike,
-                                        countLikes: countLikes
+                                    id: product._id,
+                                    user: product.user,
+                                    name: product.name,
+                                    description: product.description,
+                                    dateCreate: product.createdAt,
+                                    dateUpdate: product.updateAt,
+                                    totalProducts: product.totalProducts,
+                                    coverImage: product.coverImage,
+                                    catalogo: product.catalogo,
+                                    ratingInit: product.ratingInit,
+                                    cbd: product.cbd,
+                                    thc: product.thc,
+                                    isLike: isLike,
+                                    countLikes: countLikes
 
 
-                                    };
+                                };
 
-                                    productFinal = productLikes;
 
-                                    console.log('productFinal antes', productFinal)
 
-                                    resolve();
+                                console.log('productFinal antes', productLikes)
 
+                                return res.json({
+                                    ok: true,
+                                    product: productLikes
                                 })
 
-                        })
-                })
-
-
-
-                Promise.all(promisesProduct)
-                    .then(() => {
-
-                        console.log('productFinal', productFinal)
-
-
-                        return res.json({
-                            ok: true,
-                            product: productFinal,
-
-                        });
-
+                            })
 
                     })
-
-
             })
+
+
+
+
 
 
 
