@@ -228,21 +228,35 @@ const editProduct = async (req, res = response) => {
 
             new Promise((resolve, reject) => {
 
-                const newPlantsProduct = new PlantProduct({
-                    product: product,
-                    user: product.user,
-                    plant: obj.id,
-                    position: obj.position
-
-                });
 
 
-                PlantProduct.create(newPlantsProduct,
-                    (err, data) => {
-                        if (err) console.log(err);
-                        else
-                            resolve();
+                const plantProductExist = await PlantProduct.findOne({ plant: obj.id, product: product._id });
+
+                if (!plantProductExist) {
+                    const newPlantsProduct = new PlantProduct({
+                        product: product._id,
+                        user: product.user,
+                        plant: obj.id,
+                        position: obj.position
+
                     });
+
+
+                    PlantProduct.create(newPlantsProduct,
+                        (err, data) => {
+                            if (err) console.log(err);
+                            else
+                                resolve();
+                        });
+
+                }
+
+                else {
+
+                    resolve();
+                }
+
+
 
 
 
