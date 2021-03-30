@@ -156,7 +156,9 @@ const createProduct = async (req, res = response) => {
 
 
 const editProduct = async (req, res = response) => {
-    const { name,
+    const {
+
+        name,
         description,
 
         ratingInit,
@@ -164,7 +166,8 @@ const editProduct = async (req, res = response) => {
 
         cbd,
         thc,
-        id
+        id,
+        plants
 
 
 
@@ -199,7 +202,121 @@ const editProduct = async (req, res = response) => {
 
         const product = await Product.findById(id);
 
+
+        const productFinal = new Product();
+
+
         console.log(product);
+
+
+
+        const reorderPlants = []
+
+        plants.map((item, index) => {
+            item.position = index;
+            reorderPlants.push(item);
+
+        });
+
+        console.log('reorderPlants', reorderPlants)
+
+        const plantProduct = new PlantProduct();
+
+        const promises = reorderPlants.map((obj) =>
+
+
+            new Promise((resolve, reject) => {
+
+                const newPlantsProduct = new PlantProduct({
+                    product: product,
+                    user: user,
+                    plant: obj.id,
+                    position: obj.position
+
+                });
+
+
+                PlantProduct.create(newPlantsProduct,
+                    (err, data) => {
+                        if (err) console.log(err);
+                        else
+                            true;
+                    });
+
+
+
+                Favorite.findOne({
+                    product: product._id, user: product.user
+                })
+                    .then((favorite) => {
+
+
+                        const isLike = (favorite) ? favorite.isLike : false;
+
+
+                        Favorite.find({
+                            product: product._id, isLike: true
+                        })
+                            .then((favorites) => {
+
+
+                                const countLikes = (favorites) ? favorites.length : 0;
+
+
+
+
+                                const productLikes = {
+
+                                    id: product._id,
+                                    user: product.user,
+                                    name: product.name,
+                                    description: product.description,
+                                    dateCreate: product.createdAt,
+                                    dateUpdate: product.updateAt,
+                                    totalProducts: product.totalProducts,
+                                    coverImage: product.coverImage,
+                                    catalogo: product.catalogo,
+                                    ratingInit: product.ratingInit,
+                                    cbd: product.cbd,
+                                    thc: product.thc,
+                                    isLike: isLike,
+                                    countLikes: countLikes
+
+
+                                };
+
+                                productFinal = productLikes;
+
+                                resolve();
+
+                            })
+
+                    })
+            }));
+
+        Promise.all(promises)
+            .then(() => {
+
+                console.log('new plantProducts', plantProduct)
+
+
+
+
+                console.log('productFinal', productFinal)
+
+
+                return res.json({
+                    ok: true,
+                    product: productFinal,
+
+                });
+
+
+
+
+
+            })
+
 
 
         res.json({
