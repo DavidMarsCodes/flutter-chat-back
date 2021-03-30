@@ -203,7 +203,6 @@ const editProduct = async (req, res = response) => {
         const product = await Product.findById(id);
 
 
-        const productFinal = new Object();
 
 
         console.log(product);
@@ -242,60 +241,12 @@ const editProduct = async (req, res = response) => {
                     (err, data) => {
                         if (err) console.log(err);
                         else
-                            true;
+                            resolve();
                     });
 
 
 
-                Favorite.findOne({
-                    product: product._id, user: product.user
-                })
-                    .then((favorite) => {
 
-
-                        const isLike = (favorite) ? favorite.isLike : false;
-
-
-                        Favorite.find({
-                            product: product._id, isLike: true
-                        })
-                            .then((favorites) => {
-
-
-                                const countLikes = (favorites) ? favorites.length : 0;
-
-
-
-
-                                const productLikes = {
-
-                                    id: product._id,
-                                    user: product.user,
-                                    name: product.name,
-                                    description: product.description,
-                                    dateCreate: product.createdAt,
-                                    dateUpdate: product.updateAt,
-                                    totalProducts: product.totalProducts,
-                                    coverImage: product.coverImage,
-                                    catalogo: product.catalogo,
-                                    ratingInit: product.ratingInit,
-                                    cbd: product.cbd,
-                                    thc: product.thc,
-                                    isLike: isLike,
-                                    countLikes: countLikes
-
-
-                                };
-
-                                productFinal = productLikes;
-
-                                console.log('productFinal antes', productFinal)
-
-                                resolve();
-
-                            })
-
-                    })
             }));
 
         Promise.all(promises)
@@ -304,19 +255,78 @@ const editProduct = async (req, res = response) => {
                 console.log('new plantProducts', plantProduct)
 
 
+                const productFinal = new Object();
 
 
-                console.log('productFinal', productFinal)
+                const promisesProduct = new Promise((resolve, reject) => {
+
+                    Favorite.findOne({
+                        product: product._id, user: product.user
+                    })
+                        .then((favorite) => {
 
 
-                return res.json({
-                    ok: true,
-                    product: productFinal,
-
-                });
+                            const isLike = (favorite) ? favorite.isLike : false;
 
 
+                            Favorite.find({
+                                product: product._id, isLike: true
+                            })
+                                .then((favorites) => {
 
+
+                                    const countLikes = (favorites) ? favorites.length : 0;
+
+
+
+
+                                    const productLikes = {
+
+                                        id: product._id,
+                                        user: product.user,
+                                        name: product.name,
+                                        description: product.description,
+                                        dateCreate: product.createdAt,
+                                        dateUpdate: product.updateAt,
+                                        totalProducts: product.totalProducts,
+                                        coverImage: product.coverImage,
+                                        catalogo: product.catalogo,
+                                        ratingInit: product.ratingInit,
+                                        cbd: product.cbd,
+                                        thc: product.thc,
+                                        isLike: isLike,
+                                        countLikes: countLikes
+
+
+                                    };
+
+                                    productFinal = productLikes;
+
+                                    console.log('productFinal antes', productFinal)
+
+                                    resolve();
+
+                                })
+
+                        })
+                })
+
+
+
+                Promise.all(promisesProduct)
+                    .then(() => {
+
+                        console.log('productFinal', productFinal)
+
+
+                        return res.json({
+                            ok: true,
+                            product: productFinal,
+
+                        });
+
+
+                    })
 
 
             })
