@@ -128,7 +128,7 @@ const getPlantsByProduct = async (req, res = response) => {
 
                 const plantsPosition = plants.sort((a, b) => {
 
-                    return (b.position) - (a.position);
+                    return (a.position) - (b.position);
                 });
 
                 console.log('plantsPosition', plantsPosition)

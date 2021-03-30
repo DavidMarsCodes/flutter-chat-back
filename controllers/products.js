@@ -232,6 +232,7 @@ const editProduct = async (req, res = response) => {
 
                 PlantProduct.findOne({ plant: obj.id, product: product._id })
                     .then((plantProductExist) => {
+
                         if (!plantProductExist) {
                             const newPlantsProduct = new PlantProduct({
                                 product: product._id,
