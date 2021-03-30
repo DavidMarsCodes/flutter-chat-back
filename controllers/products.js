@@ -230,7 +230,7 @@ const editProduct = async (req, res = response) => {
 
                 const newPlantsProduct = new PlantProduct({
                     product: product,
-                    user: user,
+                    user: product.user,
                     plant: obj.id,
                     position: obj.position
 
