@@ -230,33 +230,33 @@ const editProduct = async (req, res = response) => {
 
 
 
-                const plantProductExist = await PlantProduct.findOne({ plant: obj.id, product: product._id });
+                PlantProduct.findOne({ plant: obj.id, product: product._id })
+                    .then((plantProductExist) => {
+                        if (!plantProductExist) {
+                            const newPlantsProduct = new PlantProduct({
+                                product: product._id,
+                                user: product.user,
+                                plant: obj.id,
+                                position: obj.position
 
-                if (!plantProductExist) {
-                    const newPlantsProduct = new PlantProduct({
-                        product: product._id,
-                        user: product.user,
-                        plant: obj.id,
-                        position: obj.position
+                            });
+
+
+                            PlantProduct.create(newPlantsProduct,
+                                (err, data) => {
+                                    if (err) console.log(err);
+                                    else
+                                        resolve();
+                                });
+
+                        }
+
+                        else {
+
+                            resolve();
+                        }
 
                     });
-
-
-                    PlantProduct.create(newPlantsProduct,
-                        (err, data) => {
-                            if (err) console.log(err);
-                            else
-                                resolve();
-                        });
-
-                }
-
-                else {
-
-                    resolve();
-                }
-
-
 
 
 
