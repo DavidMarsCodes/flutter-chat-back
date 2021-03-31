@@ -94,7 +94,7 @@ const createProduct = async (req, res = response) => {
 
         });
 
-        console.log('reorderPlants', reorderPlants)
+        console.log('reorderPlants!', reorderPlants)
 
         const plantProduct = new PlantProduct();
 
