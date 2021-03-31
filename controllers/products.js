@@ -218,10 +218,15 @@ const editProduct = async (req, res = response) => {
 
 
         plants.map((item, index) => {
-            item.position = index;
+
+            const position = index + 1;
+
+            console.log('POSITION **', position)
+            item.position = position;
             reorderPlants.push(item);
 
         });
+
 
         console.log('reorderPlants', reorderPlants)
 
