@@ -85,7 +85,7 @@ const getPlantsByProduct = async (req, res = response) => {
 
             new Promise((resolve, reject) => {
 
-
+                print('plantProduct!!', plantProduct)
 
                 Plant.findById(plantProduct.plant)
                     .then((plant) => {
