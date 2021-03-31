@@ -239,12 +239,12 @@ const getPlantsByRoomSelectionOnProduct = async (req, res = response) => {
 
             new Promise((resolve, reject) => {
 
-
+                console.log('plant', plant);
 
                 PlantProduct.find({ plant: plant._id, product: productId })
                     .then((plantProduct) => {
-                        console.log('plant', plant);
 
+                        console.log('plantProduct', plantProduct);
                         const isPlantSelectOnProduct = (plantProduct) ? true : false;
 
 
@@ -301,11 +301,6 @@ const getPlantsByRoomSelectionOnProduct = async (req, res = response) => {
             })
 
 
-
-        res.json({
-            ok: true,
-            plants,
-        })
 
     }
 
