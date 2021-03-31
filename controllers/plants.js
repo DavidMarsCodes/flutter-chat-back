@@ -1,7 +1,7 @@
 const { response } = require('express');
 const Plant = require('../models/plant');
 const Room = require('../models/room');
-
+const PlantProduct = require('../models/plants_product');
 
 
 const createPlant = async (req, res = response) => {
