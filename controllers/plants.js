@@ -193,77 +193,19 @@ const getPlantsByRoom = async (req, res = response) => {
     try {
         const roomId = req.params.id;
 
-        const plants = []
-        const plantsRoom = await Plant
+
+        const plants = await Plant
             .find({ room: roomId })
             .sort('-createdAt')
 
 
-        const promises = plantsRoom.map((plant) =>
-
-            new Promise((resolve, reject) => {
 
 
 
-                PlantProduct.find({ plant: plant._id })
-                    .then((plant) => {
-                        console.log('plant', plant);
-
-
-                        const plantPosition = {
-
-                            id: plant._id,
-                            user: plant.user,
-                            room: plant.room,
-                            name: plant.name,
-                            createdAt: plant.createdAt,
-                            updatedAt: plant.updatedAt,
-                            description: plant.description,
-                            quantity: plant.quantity,
-                            germinated: plant.germinated,
-                            flowering: plant.flowering,
-                            pot: plant.pot,
-                            cbd: plant.cbd,
-                            thc: plant.thc,
-                            coverImage: plant.coverImage,
-                            position: plantProduct.position,
-
-                        }
-                        plants.push(plantPosition);
-                        resolve()
-
-
-
-
-
-                    })
-
-
-
-            }))
-
-
-
-        Promise.all(promises)
-            .then((resolve) => {
-
-
-
-
-                const plantsPosition = plants.sort((a, b) => {
-
-                    return (a.position) - (b.position);
-                });
-
-                console.log('plantsPosition', plantsPosition)
-
-
-                res.json({
-                    ok: true,
-                    plants: plantsPosition,
-                })
-            })
-
+        res.json({
+            ok: true,
+            plants,
+        })
 
     }
 
