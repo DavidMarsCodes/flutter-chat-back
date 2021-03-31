@@ -241,7 +241,7 @@ const getPlantsByRoomSelectionOnProduct = async (req, res = response) => {
 
                 console.log('plant', plant);
 
-                PlantProduct.find({ plant: plant._id, product: productId })
+                PlantProduct.findOne({ plant: plant._id, product: productId })
                     .then((plantProduct) => {
 
                         console.log('plantProduct', plantProduct);
