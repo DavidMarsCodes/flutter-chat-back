@@ -220,6 +220,106 @@ const getPlantsByRoom = async (req, res = response) => {
 }
 
 
+const getPlantsByRoomSelectionOnProduct = async (req, res = response) => {
+
+    try {
+        const roomId = req.params.id;
+
+        const productId = req.params.productId;
+
+
+        const plantsByRoom = await Plant
+            .find({ room: roomId })
+            .sort('-createdAt')
+
+        const plants = []
+
+
+        const promises = plantsByRoom.map((plant) =>
+
+            new Promise((resolve, reject) => {
+
+
+
+                PlantProduct.find({ plant: plant._id, product: productId })
+                    .then((plantProduct) => {
+                        console.log('plant', plant);
+
+                        const isPlantSelectOnProduct = (plantProduct) ? true : false;
+
+
+                        const plantPosition = {
+
+                            id: plant._id,
+                            user: plant.user,
+                            room: plant.room,
+                            name: plant.name,
+                            createdAt: plant.createdAt,
+                            updatedAt: plant.updatedAt,
+                            description: plant.description,
+                            quantity: plant.quantity,
+                            germinated: plant.germinated,
+                            flowering: plant.flowering,
+                            pot: plant.pot,
+                            cbd: plant.cbd,
+                            thc: plant.thc,
+                            coverImage: plant.coverImage,
+                            position: (isPlantSelectOnProduct) ? plantProduct.position : 0,
+
+                        }
+                        plants.push(plantPosition);
+                        resolve()
+
+
+
+
+
+                    })
+
+
+
+            }))
+
+        Promise.all(promises)
+            .then((resolve) => {
+
+
+
+
+                const plantsPosition = plants.sort((a, b) => {
+
+                    return (a.position) - (b.position);
+                });
+
+                console.log('plantsPosition', plantsPosition)
+
+
+                res.json({
+                    ok: true,
+                    plants: plantsPosition,
+                })
+            })
+
+
+
+        res.json({
+            ok: true,
+            plants,
+        })
+
+    }
+
+    catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: 'Hable con el administrador'
+        });
+    }
+
+}
+
+
 
 const getPlantsByUser = async (req, res = response) => {
 
@@ -307,6 +407,7 @@ module.exports = {
     editPlant,
     getPlantById,
     getPlantsByRoom,
+    getPlantsByRoomSelectionOnProduct,
     getPlantsByUser,
     deletePlant
 }
