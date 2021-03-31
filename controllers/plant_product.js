@@ -19,7 +19,11 @@ const addPlantsInProduct = async (req, res = response) => {
         const reorderPlants = []
 
         plants.map((item, index) => {
-            item.position = index + 1;
+
+            const position = index + 1;
+
+            console.log('POSITION', position)
+            item.position = position;
             reorderPlants.push(item);
 
         });
