@@ -8,7 +8,7 @@ var fs = require('fs');
 var data = fs.readFileSync('./aws/keys.json', 'utf8');
 var keys = JSON.parse(data);
 
-
+import Compressor from 'compressorjs';
 
 
 
@@ -39,7 +39,21 @@ const uploadAvatar = async (req, res = response) => {
 
 
 
+        new Compressor(buffer, {
+            quality: 0.6,
+            success(result) {
+                const formData = new FormData();
 
+                // The third parameter is required for server
+                formData.append('file', result, result.name);
+
+                // Send the compressed image file to server with XMLHttpRequest.
+                console.log('formdata compress')
+            },
+            error(err) {
+                console.log(err.message);
+            },
+        });
 
         s3.upload(s3Params, async (err, data) => {
 

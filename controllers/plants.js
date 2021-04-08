@@ -241,7 +241,7 @@ const getPlantsByRoomSelectionOnProduct = async (req, res = response) => {
 
                 console.log('plant', plant);
 
-                PlantProduct.findOne({ plant: plant._id, product: productId })
+                PlantProduct.find({ plant: plant._id, product: productId })
                     .then((plantProduct) => {
 
                         console.log('plantProduct', plantProduct);
@@ -286,17 +286,17 @@ const getPlantsByRoomSelectionOnProduct = async (req, res = response) => {
 
 
 
-                const plantsPosition = plants.sort((a, b) => {
+                const plantsDate = plants.sort((a, b) => {
 
-                    return (a.position) - (b.position);
+                    return new Date(b.createdAt) - new Date(a.createdAt);
                 });
 
-                console.log('plantsPosition', plantsPosition)
+                console.log('plantsPosition', plantsDate)
 
 
                 res.json({
                     ok: true,
-                    plants: plantsPosition,
+                    plants: plantsDate,
                 })
             })
 
