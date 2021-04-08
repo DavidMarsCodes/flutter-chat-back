@@ -26,6 +26,7 @@ const uploadAvatar = async (req, res = response) => {
         const fileType = req.files.file.mimetype;
         //const fileName = String(Date.now()) + '.' + fileType;
         const folder = 'avatar';
+        const file = req.files.file;
         const buffer = req.files.file.data;
 
         const s3Params = {
@@ -40,7 +41,7 @@ const uploadAvatar = async (req, res = response) => {
         console.log('uplad avatar compress')
 
 
-        new Compressor(buffer, {
+        new Compressor(file, {
             quality: 0.6,
             success(result) {
                 const formData = new FormData();
