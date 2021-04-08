@@ -6,7 +6,7 @@ const SubscriptionSchema = Schema({
     subscriptor:
     {
         type: Schema.Types.ObjectId,
-        ref: 'Profile',
+        ref: 'User',
         required: true
     },
     imageRecipe:
@@ -18,7 +18,7 @@ const SubscriptionSchema = Schema({
 
     club: {
         type: Schema.Types.ObjectId,
-        ref: 'Profile',
+        ref: 'User',
         required: true
     },
 
@@ -64,7 +64,7 @@ const SubscriptionSchema = Schema({
         timestamps: true
     });
 
-    SubscriptionSchema.method('toJSON', function () {
+SubscriptionSchema.method('toJSON', function () {
     const { __v, _id, ...object } = this.toObject();
     object.id = _id;
     return object;
