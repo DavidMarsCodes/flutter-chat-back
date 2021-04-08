@@ -37,6 +37,7 @@ const uploadAvatar = async (req, res = response) => {
             ACL: 'public-read'
         }
 
+        console.log('uplad avatar compress')
 
 
         new Compressor(buffer, {
