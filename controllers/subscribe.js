@@ -16,8 +16,13 @@ const UpdateImageSubscription = async (req, res = response) => {
     try {
 
 
+
+        const suscriptor = await Profile
+            .findOne({ user: subscriptor })
+
+
         const update = {
-            imageRecipe: imageRecipe,
+            imageRecipe: suscriptor.imageRecipe,
             isUpload: true,
             subscribeActive: true,
             isClubNotifi: true
@@ -38,21 +43,7 @@ const UpdateImageSubscription = async (req, res = response) => {
         const subscription = await Subscription
             .findOne({ _id: id })
 
-        const profileUpdate = await
 
-
-            Profile.updateOne(
-                {
-                    user: subscription.subscriptor
-                },
-                {
-                    $set: {
-                        imageRecipe: imageRecipe,
-
-
-                    }
-                }
-            );
 
         res.json({
             ok: true,
