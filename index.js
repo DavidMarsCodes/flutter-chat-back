@@ -9,7 +9,7 @@ var keys = JSON.parse(data);
 
 // DB Config
 require('./database/config').dbConnection();
-
+process.env.TZ = 'America/Santiago';
 
 // App de Express
 const app = express();
