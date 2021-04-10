@@ -89,6 +89,7 @@ const getProfilesLastUsers = async (req, res = response) => {
                         const subscribeApproved = (subscription) ? subscription.subscribeApproved : false;
                         const subscribeActive = (subscription) ? subscription.subscribeActive : false;
 
+                        const dateFilter = (subscribeActive) ? subscription.updatedAt : item.upd,
 
 
                         const profile = {
@@ -110,7 +111,7 @@ const getProfilesLastUsers = async (req, res = response) => {
                             subscribeApproved: subscribeApproved,
                             subscribeActive: subscribeActive,
                             isClub: item.isClub,
-                            messageDate: item.createdAt,
+                            messageDate: dateFilter,
                             createdAt: item.createdAt,
                             updatedAt: item.updatedAt
 
@@ -130,12 +131,15 @@ const getProfilesLastUsers = async (req, res = response) => {
             .then((resolve) => {
 
 
+                const clubOrderDateUpdate = profiles.sort((a, b) => {
 
+                    return new Date(b.messageDate) - new Date(a.messageDate);
+                });
 
-                console.log('profiles!!', profiles)
+                console.log('profiles!!', clubOrderDateUpdate)
                 return res.json({
                     ok: true,
-                    profiles: profiles
+                    profiles: clubOrderDateUpdate
                 })
             })
 
