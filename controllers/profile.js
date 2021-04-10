@@ -89,7 +89,6 @@ const getProfilesLastUsers = async (req, res = response) => {
                         const subscribeApproved = (subscription) ? subscription.subscribeApproved : false;
                         const subscribeActive = (subscription) ? subscription.subscribeActive : false;
 
-                        const dateFilter = (subscription && subscribeActive) ? subscription.updatedAt : item.createdAt;
 
 
                         const profile = {
@@ -111,7 +110,7 @@ const getProfilesLastUsers = async (req, res = response) => {
                             subscribeApproved: subscribeApproved,
                             subscribeActive: subscribeActive,
                             isClub: item.isClub,
-                            messageDate: dateFilter,
+                            messageDate: item.updatedAt,
                             createdAt: item.createdAt,
                             updatedAt: item.updatedAt
 
