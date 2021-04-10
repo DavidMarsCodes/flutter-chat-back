@@ -136,7 +136,7 @@ const getProfilesLastUsers = async (req, res = response) => {
                     return new Date(b.messageDate) - new Date(a.messageDate);
                 });
 
-                console.log('profiles!!', clubOrderDateUpdate)
+                console.log('profiles!!', clubsOrderDateUpdate)
                 return res.json({
                     ok: true,
                     profiles: clubsOrderDateUpdate
