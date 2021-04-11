@@ -573,9 +573,14 @@ const getLastProducts = async (req, res = response) => {
                                                                         })
                                                                             .then((favorites) => {
 
-                                                                                console.log('favorites', favorites)
+                                                                                console.log('favorites!!!!', favorites)
 
                                                                                 const countLikes = (favorites) ? favorites.length : 0;
+
+
+                                                                                console.log('product obj', obj)
+
+                                                                                console.log('product obj', obj)
 
                                                                                 const productProfile = {
 
@@ -617,8 +622,8 @@ const getLastProducts = async (req, res = response) => {
                                                                                             username: user.username,
 
                                                                                         },
-                                                                                        subscribeApproved: (isClub) ? true : subscribeApproved,
-                                                                                        subscribeActive: (isClub) ? true : subscribeActive,
+                                                                                        subscribeApproved: subscribeApproved,
+                                                                                        subscribeActive: subscribeActive,
                                                                                         message: obj.message,
                                                                                         isClub: item.isClub,
                                                                                         messageDate: obj.createdAt,
@@ -630,6 +635,8 @@ const getLastProducts = async (req, res = response) => {
 
 
                                                                                 }
+
+                                                                                console.log('productProfile antes de condition:', productProfile)
                                                                                 if (catalogo.privacity == '1') {
 
                                                                                     productsProfiles.push(productProfile);
