@@ -630,6 +630,8 @@ const getLastProducts = async (req, res = response) => {
 
 
                                                                                 }
+
+                                                                                console.log('productProfile antes de condition:', productProfile)
                                                                                 if (catalogo.privacity == '1') {
 
                                                                                     productsProfiles.push(productProfile);
