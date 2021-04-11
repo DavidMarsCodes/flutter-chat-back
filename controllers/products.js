@@ -639,17 +639,20 @@ const getLastProducts = async (req, res = response) => {
                                                                                 console.log('productProfile antes de condition:', productProfile)
                                                                                 if (catalogo.privacity == '1') {
 
+                                                                                    console.log('prova 1 ', catalogo.privacity)
                                                                                     productsProfiles.push(productProfile);
                                                                                     resolve();
 
                                                                                 }
 
                                                                                 else if (catalogo.privacity == '2') {
+                                                                                    console.log('prova 2 ', catalogo.privacity)
 
                                                                                     const isSub = subscribeApproved && subscribeActive;
                                                                                     console.log('isSub', isSub)
 
                                                                                     if (isSub) {
+                                                                                        console.log('is sub!!')
 
                                                                                         productsProfiles.push(productProfile);
                                                                                         resolve();
@@ -661,6 +664,9 @@ const getLastProducts = async (req, res = response) => {
                                                                                         resolve();
                                                                                     }
 
+                                                                                }
+                                                                                else {
+                                                                                    resolve();
                                                                                 }
                                                                             })
 
