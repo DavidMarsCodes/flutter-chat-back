@@ -62,7 +62,10 @@ const createPlant = async (req, res = response) => {
         const plants = await Plant
             .find({ room: room })
 
-        const countPlants = plants.length;
+        let totalPlants = 0;
+        plants.forEach(function(pl){
+            totalPlants +=  parseInt(pl.quantity);
+        });
 
 
         await Room.updateOne(
@@ -72,7 +75,7 @@ const createPlant = async (req, res = response) => {
             {
                 $set: {
 
-                    totalPlants: countPlants
+                    totalPlants: totalPlants
                 }
             }
         );
@@ -327,9 +330,6 @@ const getPlantsByUser = async (req, res = response) => {
             .sort('-createdAt')
 
 
-
-
-
         res.json({
             ok: true,
             plants,
@@ -348,21 +348,18 @@ const getPlantsByUser = async (req, res = response) => {
 }
 const deletePlant = async (req, res = response) => {
 
-
     try {
 
-
         const plantId = req.params.id
-
-
-        const plant = await Plant.findByIdAndDelete(plantId)
-
+        const plant = await Plant.findByIdAndDelete(plantId)        
 
         const plants = await Plant
             .find({ room: plant.room })
 
-        const countPlants = plants.length;
-
+        let totalPlants = 0;
+        plants.forEach(function(pl){
+            totalPlants +=  parseInt(pl.quantity);
+        });
 
 
         await Room.updateOne(
@@ -372,7 +369,7 @@ const deletePlant = async (req, res = response) => {
             {
                 $set: {
 
-                    totalPlants: countPlants
+                    totalPlants: totalPlants
                 }
             }
         );
