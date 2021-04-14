@@ -6,35 +6,35 @@ const ProfileSchema = Schema({
     name: {
         type: String,
         default: ''
-    
+
     },
     lastName: {
         type: String,
         default: '',
-        
-      
+
+
     },
     imageHeader: {
         type: String,
         default: '',
-        
+
     },
     imageAvatar: {
         type: String,
         default: '',
-        
+
     },
 
     imageRecipe: {
         type: String,
         default: '',
-        
+
     },
 
     about: {
         type: String,
         default: '',
-        
+
     },
 
     user: {
@@ -47,22 +47,26 @@ const ProfileSchema = Schema({
     isClub: {
         type: Boolean,
         default: false,
-        
+
     },
-  
+    rutClub: {
+        type: String,
+        default: '',
+    }
+
 
 },
 
-{
-    timestamps: true
-}
+    {
+        timestamps: true
+    }
 );
 
-ProfileSchema.method('toJSON', function() {
+ProfileSchema.method('toJSON', function () {
     const { __v, _id, ...object } = this.toObject();
     object.id = _id;
     return object;
 })
 
 
-module.exports = model('Profile', ProfileSchema );
+module.exports = model('Profile', ProfileSchema);
