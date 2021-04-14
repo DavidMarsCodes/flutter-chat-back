@@ -8,44 +8,44 @@ const { generateJWT } = require('../helpers/jwt');
 
 
 
-const createUser = async (req, res = response ) => {
+const createUser = async (req, res = response) => {
     const { email, password, username } = req.body;
-  
+
     try {
 
         const existeEmail = await User.findOne({ email });
-        if( existeEmail ) {
+        if (existeEmail) {
             return res.status(400).json({
                 ok: false,
                 msg: 'El correo ya está registrado'
             });
         }
 
-        const user = new User( {email: email, password: password, username: username , isAuthNormal: true});
+        const user = new User({ email: email, password: password, username: username, isAuthNormal: true });
 
-    
-    
-       
+
+
+
         // Encriptar contraseña
         const salt = bcrypt.genSaltSync();
-        user.password = bcrypt.hashSync( password, salt );
+        user.password = bcrypt.hashSync(password, salt);
 
         await user.save();
-        const token = await generateJWT( user.id );
+        const token = await generateJWT(user.id);
 
 
-        const profileNew = new Profile( {user: user.id})
+        const profileNew = new Profile({ user: user.id })
 
         await profileNew.save()
 
-        const profileFind = await 
-        Profile.findOne({user: user.id})
-        .populate('user')
+        const profileFind = await
+            Profile.findOne({ user: user.id })
+                .populate('user')
 
-    
+
         // Generar mi JWT
         const profile = {
-            
+
             name: profileFind.name,
             lastName: profileFind.lastName,
             imageHeader: "",
@@ -56,21 +56,23 @@ const createUser = async (req, res = response ) => {
             id: profileFind._id,
             rooms: profileFind.rooms,
             user: {
-              online: user.online,
-              uid: user.id,
-              email: user.email,
-              username:  user.username,
-           
+                online: user.online,
+                uid: user.id,
+                email: user.email,
+                username: user.username,
+
             },
             messageDate: profileFind.createdAt,
             isClub: profileFind.isClub,
+            rutClub: profileFind.rutClub,
+
 
 
             createdAt: profileFind.createdAt,
-            updatedAt:profileFind.updatedAt
-           
-          }
-    
+            updatedAt: profileFind.updatedAt
+
+        }
+
 
         res.json({
             ok: true,
@@ -88,14 +90,14 @@ const createUser = async (req, res = response ) => {
     }
 }
 
-const login = async ( req, res = response ) => {
+const login = async (req, res = response) => {
 
     const { email, password } = req.body;
 
     try {
-        
+
         const user = await User.findOne({ email });
-        if ( !user ) {
+        if (!user) {
             return res.status(404).json({
                 ok: false,
                 msg: 'Email no encontrado'
@@ -103,8 +105,8 @@ const login = async ( req, res = response ) => {
         }
 
         // Validar el password
-        const validPassword = bcrypt.compareSync( password, user.password );
-        if ( !validPassword ) {
+        const validPassword = bcrypt.compareSync(password, user.password);
+        if (!validPassword) {
             return res.status(400).json({
                 ok: false,
                 msg: 'La contraseña no es valida'
@@ -113,41 +115,43 @@ const login = async ( req, res = response ) => {
 
 
         // Generar el JWT
-        const token = await generateJWT( user.id );
-    //    const profile = await getProfilebyUser(userDB.id);
+        const token = await generateJWT(user.id);
+        //    const profile = await getProfilebyUser(userDB.id);
 
-    const profileFind = await 
-    Profile.findOne({user: user.id})
-    .populate('user')
-
-
+        const profileFind = await
+            Profile.findOne({ user: user.id })
+                .populate('user')
 
 
-    const profile = {
-            
-        name: profileFind.name,
-        lastName: profileFind.lastName,
-        imageHeader: profileFind.imageHeader,
-        imageRecipe: profileFind.imageRecipe,
 
-        about: profileFind.about,
-        imageAvatar: profileFind.imageAvatar,
-        id: profileFind._id,
-        rooms: profileFind.rooms,
-        user: {
-          online: user.online,
-          uid: user.id,
-          email: user.email,
-          username:  user.username,
-       
-        },
-        isClub: profileFind.isClub,
 
-        messageDate: profileFind.createdAt,
-        createdAt: profileFind.createdAt,
-        updatedAt:profileFind.updatedAt
-       
-      }
+        const profile = {
+
+            name: profileFind.name,
+            lastName: profileFind.lastName,
+            imageHeader: profileFind.imageHeader,
+            imageRecipe: profileFind.imageRecipe,
+
+            about: profileFind.about,
+            imageAvatar: profileFind.imageAvatar,
+            id: profileFind._id,
+            rooms: profileFind.rooms,
+            user: {
+                online: user.online,
+                uid: user.id,
+                email: user.email,
+                username: user.username,
+
+            },
+            isClub: profileFind.isClub,
+            rutClub: profileFind.rutClub,
+
+
+            messageDate: profileFind.createdAt,
+            createdAt: profileFind.createdAt,
+            updatedAt: profileFind.updatedAt
+
+        }
         res.json({
             ok: true,
             profile,
@@ -166,51 +170,52 @@ const login = async ( req, res = response ) => {
 }
 
 
-const renewToken = async( req, res = response) => {
+const renewToken = async (req, res = response) => {
 
     const uid = req.uid;
 
     // generar un nuevo JWT, generarJWT... uid...
-    const token = await generateJWT( uid );
+    const token = await generateJWT(uid);
 
     // Obtener el usuario por el UID, Usuario.findById... 
-    const user = await User.findById( uid );
-
-   
-  //  const profile = await Profile.find({userId: uid})
-
-  const profileFind = await 
-  Profile.findOne({user: user.id})
-  .populate('user')
+    const user = await User.findById(uid);
 
 
+    //  const profile = await Profile.find({userId: uid})
 
-  
-  const profile = {
-          
-      name: profileFind.name,
-      lastName: profileFind.lastName,
-      about: profileFind.about,
-      imageHeader: profileFind.imageHeader,
-      imageAvatar: profileFind.imageAvatar,
-      imageRecipe: profileFind.imageRecipe,
+    const profileFind = await
+        Profile.findOne({ user: user.id })
+            .populate('user')
 
-      id: profileFind._id,
-      user: {
-        online: user.online,
-        uid: user.id,
-        email: user.email,
-        username:  user.username,
-     
-      },
-      message: "",
-      isClub: profileFind.isClub,
 
-      messageDate: profileFind.createdAt,
 
-      createdAt: profileFind.createdAt,
-      updatedAt:profileFind.updatedAt
-     
+
+    const profile = {
+
+        name: profileFind.name,
+        lastName: profileFind.lastName,
+        about: profileFind.about,
+        imageHeader: profileFind.imageHeader,
+        imageAvatar: profileFind.imageAvatar,
+        imageRecipe: profileFind.imageRecipe,
+
+        id: profileFind._id,
+        user: {
+            online: user.online,
+            uid: user.id,
+            email: user.email,
+            username: user.username,
+
+        },
+        message: "",
+        isClub: profileFind.isClub,
+        rutClub: profileFind.rutClub,
+
+        messageDate: profileFind.createdAt,
+
+        createdAt: profileFind.createdAt,
+        updatedAt: profileFind.updatedAt
+
     }
 
     console.log(profile);
@@ -219,7 +224,7 @@ const renewToken = async( req, res = response) => {
         ok: true,
         profile,
         token,
-       
+
     });
 
 }
