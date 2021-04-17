@@ -49,7 +49,7 @@ const uploadAvatar = async (req, res = response) => {
 
             const returnData = {
                 signedRequest: data,
-                url: `https://${S3_BUCKET}.us-east-2.amazonaws.com/${folder}/${fileName}`
+                url: `https://${S3_BUCKET}.s3.us-east-2.amazonaws.com/${folder}/${fileName}`
             };
 
 
@@ -193,7 +193,7 @@ const updateCoverPlant = async (req, res = response) => {
 
             const returnData = {
                 signedRequest: data,
-                url: `https://${S3_BUCKET}.s3.sa-east-1.amazonaws.com/${folder}/${fileName}`
+                url: `https://${S3_BUCKET}.s3.us-east-2.amazonaws.com/${folder}/${fileName}`
             };
 
 
@@ -264,7 +264,7 @@ const updateCoverProduct = async (req, res = response) => {
 
             const returnData = {
                 signedRequest: data,
-                url: `https://${S3_BUCKET}.s3.sa-east-1.amazonaws.com/${folder}/${fileName}`
+                url: `https://${S3_BUCKET}.s3.us-east-2.amazonaws.com/${folder}/${fileName}`
             };
 
 
@@ -334,7 +334,7 @@ const uploadCoverPlant = async (req, res = response) => {
 
             const returnData = {
                 signedRequest: data,
-                url: `https://${S3_BUCKET}.s3.sa-east-1.amazonaws.com/${folder}/${fileName}`
+                url: `https://${S3_BUCKET}.s3.us-east-2.amazonaws.com/${folder}/${fileName}`
             };
 
 
@@ -387,7 +387,7 @@ const uploadCoverVisit = async (req, res = response) => {
 
             const returnData = {
                 signedRequest: data,
-                url: `https://${S3_BUCKET}.s3.sa-east-1.amazonaws.com/${folder}/${fileName}`
+                url: `https://${S3_BUCKET}.s3.us-east-2.amazonaws.com/${folder}/${fileName}`
             };
 
             console.log(returnData)
@@ -440,7 +440,7 @@ const updateCoverVisit = async (req, res = response) => {
 
             const returnData = {
                 signedRequest: data,
-                url: `https://${S3_BUCKET}.s3.sa-east-1.amazonaws.com/${folder}/${fileName}`
+                url: `https://${S3_BUCKET}.s3.us-east-2.amazonaws.com/${folder}/${fileName}`
             };
 
 
