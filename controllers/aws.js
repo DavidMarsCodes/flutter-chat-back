@@ -49,7 +49,7 @@ const uploadAvatar = async (req, res = response) => {
 
             const returnData = {
                 signedRequest: data,
-                url: `https://${S3_BUCKET}.s3.sa-east-1.amazonaws.com/${folder}/${fileName}`
+                url: `https://${S3_BUCKET}.us-east-2.amazonaws.com/${folder}/${fileName}`
             };
 
 
@@ -120,7 +120,7 @@ const uploadHeader = async (req, res = response) => {
 
             const returnData = {
                 signedRequest: data,
-                url: `https://${S3_BUCKET}.s3.sa-east-1.amazonaws.com/${folder}/${fileName}`
+                url: `https://${S3_BUCKET}.s3.us-east-2.amazonaws.com/${folder}/${fileName}`
             };
 
 
