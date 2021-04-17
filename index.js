@@ -25,7 +25,7 @@ app.use(express.json());
 var aws = require('aws-sdk');
 
 aws.config.update({
-    region: 'sa-east-1',
+    region: 'us-east-2',
     accessKeyId: keys.AWSAccessKeyId,
     secretAccessKey: keys.AWSSecretKey
 })
