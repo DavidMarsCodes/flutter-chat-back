@@ -387,7 +387,10 @@ const uploadCoverVisit = async (req, res = response) => {
 
             const returnData = {
                 signedRequest: data,
+
                 url: `https://${S3_BUCKET}.s3.us-east-2.amazonaws.com/${folder}/${fileName}`
+
+
             };
 
             console.log(returnData)

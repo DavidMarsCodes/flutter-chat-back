@@ -2,7 +2,7 @@
 const { Router } = require('express');
 const { check } = require('express-validator');
 
-const { createProduct, editProduct, getProductsByCatalogo, getLastProducts, deleteProduct } = require('../controllers/products');
+const { createProduct, editProduct, getProductsByCatalogo, getProductsLikedDispensary, getLastProducts, deleteProduct } = require('../controllers/products');
 const { validarCampos } = require('../middlewares/validar-campos');
 const { validateJWT } = require('../middlewares/validar-jwt');
 const { renewToken } = require('../controllers/auth');
@@ -19,6 +19,9 @@ router.post('/new', [
 ], createProduct, validateJWT);
 
 router.get('/products/catalogo/:id', validateJWT, getProductsByCatalogo);
+
+router.get('/dispensary/products/club/:clubId/user/:userId', validateJWT, getProductsLikedDispensary);
+
 
 router.get('/principal/products/:uid', validateJWT, getLastProducts);
 

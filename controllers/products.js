@@ -490,6 +490,115 @@ const getProductsByCatalogo = async (req, res = response) => {
 
 }
 
+const getProductsLikedDispensary = async (req, res = response) => {
+
+    try {
+        const clubId = req.params.clubId;
+
+        const userId = req.params.userId;
+
+
+
+        const productsClub = await Product
+            .find({ user: clubId })
+            .sort('-createdAt')
+
+        const products = []
+
+        const promises = productsClub.map((product) =>
+
+            new Promise((resolve, reject) => {
+
+
+
+                Favorite.findOne({
+                    product: product._id, user: userId
+                })
+                    .then((favorite) => {
+                        console.log('favorite', favorite)
+
+                        const isLike = (favorite) ? favorite.isLike : false;
+
+                        Favorite.find({
+                            product: product._id, isLike: true
+                        })
+                            .then((favorites) => {
+
+                                console.log('favorites', favorites)
+
+                                const countLikes = (favorites) ? favorites.length : 0;
+
+
+
+
+
+                                const productObj = {
+
+                                    id: product._id,
+                                    user: product.user,
+                                    name: product.name,
+                                    description: product.description,
+                                    dateCreate: product.createdAt,
+                                    dateUpdate: product.updateAt,
+                                    totalProducts: product.totalProducts,
+                                    coverImage: product.coverImage,
+                                    catalogo: product.catalogo,
+                                    ratingInit: product.ratingInit,
+                                    cbd: product.cbd,
+                                    thc: product.thc,
+                                    isLike: isLike,
+                                    countLikes: countLikes
+
+                                };
+
+                                products.push(productObj);
+                                resolve()
+
+
+
+                            })
+
+                    })
+
+
+
+            }))
+
+        Promise.all(promises)
+            .then((resolve) => {
+
+
+
+
+
+
+                const productsLike = products.sort((a, b) => {
+
+                    return (a.isLike) - (b.isLike);
+                });
+
+
+                res.json({
+                    ok: true,
+                    products: productsLike,
+                })
+            })
+
+
+
+
+    }
+
+    catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: 'Hable con el administrador'
+        });
+    }
+
+}
+
 const getLastProducts = async (req, res = response) => {
 
     try {
@@ -1027,6 +1136,7 @@ const deleteProduct = async (req, res = response) => {
 module.exports = {
     createProduct,
     editProduct,
+    getProductsLikedDispensary,
     getProductsByCatalogo,
     getLastProducts,
     deleteProduct
