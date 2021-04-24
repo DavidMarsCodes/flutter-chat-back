@@ -17,6 +17,7 @@ const Favorite = require('../models/favorite');
 const PlantProduct = require('../models/plants_product');
 
 const ProductDispensary = require('../models/product_dispensary');
+const Dispensary = require('../models/dispensary');
 
 const createProduct = async (req, res = response) => {
     const {
