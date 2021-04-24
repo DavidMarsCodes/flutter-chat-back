@@ -27,7 +27,7 @@ const createDispensary = async (req, res = response) => {
             dateDelivery: dateDelivery
         })
 
-        const dispensary = await newDispensary.save();
+        const dispensaryCreate = await newDispensary.save();
 
 
         const promises = products.map((obj) =>
@@ -36,7 +36,7 @@ const createDispensary = async (req, res = response) => {
 
                 const newPlantsProduct = new ProductDispensary({
                     product: obj.id,
-                    dispensary: dispensary._id,
+                    dispensary: dispensaryCreate._id,
                     quantity: obj.quantityDispensary,
 
                 });
@@ -53,13 +53,17 @@ const createDispensary = async (req, res = response) => {
             .then(() => {
 
 
-                const productsDispensary = await ProductDispensary.find()
-                return res.json({
-                    ok: true,
-                    dispensary,
-                    productsDispensary
+                ProductDispensary.find({ dispensary: dispensaryCreate._id })
+                    .then((productsDispensary) => {
 
-                });
+                        return res.json({
+                            ok: true,
+                            dispensaryCreate,
+                            productsDispensary
+
+                        });
+                    })
+
             })
 
 
