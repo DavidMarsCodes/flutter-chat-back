@@ -1,7 +1,7 @@
 const { response } = require('express');
 const Dispensary = require('../models/dispensary');
 const Profile = require('../models/profile');
-
+const ProductDispensary = require('../models/product_dispensary');
 const createDispensary = async (req, res = response) => {
 
     const {
@@ -9,12 +9,15 @@ const createDispensary = async (req, res = response) => {
         gramsRecipe,
         club,
         dateDelivery,
+        products
     } = req.body;
 
 
 
 
     try {
+
+
 
         const newDispensary = new Dispensary({
             subscriptor: subscriptor,
@@ -25,11 +28,40 @@ const createDispensary = async (req, res = response) => {
 
         const dispensary = await newDispensary.save();
 
-        res.json({
-            ok: true,
-            dispensary,
 
-        });
+        const promises = products.map((obj) =>
+
+            new Promise((resolve, reject) => {
+
+                const newPlantsProduct = new ProductDispensary({
+                    product: obj.id,
+                    dispensary: dispensary._id,
+                    quantity: obj.quantityDispensary,
+
+                });
+
+                ProductDispensary.create(newPlantsProduct,
+                    (err, data) => {
+                        if (err) console.log(err);
+                        else
+
+                            resolve();
+                    });
+            }));
+        Promise.all(promises)
+            .then(() => {
+
+
+                const productsDispensary = await ProductDispensary.find()
+                return res.json({
+                    ok: true,
+                    dispensary,
+                    productsDispensary
+
+                });
+            })
+
+
 
     } catch (error) {
 
