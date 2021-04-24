@@ -34,9 +34,6 @@ const getDispensaryActive = async (req, res = response) => {
 
 
 
-
-
-
                                 const productDispensary = {
 
                                     id: product._id,
@@ -73,16 +70,12 @@ const getDispensaryActive = async (req, res = response) => {
                     .then(() => {
 
 
-                        ProductDispensary.find({ dispensary: dispensaryCreate._id })
-                            .then((productsDispensary) => {
+                        return res.json({
+                            ok: true,
+                            dispensary: dispensary,
+                            productsDispensary
 
-                                return res.json({
-                                    ok: true,
-                                    dispensary: dispensary,
-                                    productsDispensary
-
-                                });
-                            })
+                        });
 
                     })
 
