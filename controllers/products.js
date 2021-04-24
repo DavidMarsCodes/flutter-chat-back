@@ -16,6 +16,7 @@ const Subscription = require('../models/subscription');
 const Favorite = require('../models/favorite');
 const PlantProduct = require('../models/plants_product');
 
+const ProductDispensary = require('../models/product_dispensary');
 
 const createProduct = async (req, res = response) => {
     const {
