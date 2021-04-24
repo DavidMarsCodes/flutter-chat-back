@@ -20,7 +20,7 @@ router.post('/new', [
 ], createDispensary, validateJWT);
 
 
-router.get('/active/products', [
+router.get('/active/products/user/:uid', [
 
 ], getDispensaryActive, validateJWT);
 

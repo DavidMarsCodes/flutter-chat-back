@@ -9,11 +9,13 @@ const { find } = require('../models/profile');
 
 const getDispensaryActive = async (req, res = response) => {
 
+
+    const uid = req.params.uid;
     try {
 
         const productsDispensary = [];
 
-        const dispensary = await Dispensary.findOne({ isClubActive: false });
+        const dispensary = await Dispensary.findOne({ isActive: true, subscriptor: uid });
 
         if (dispensary) {
 
