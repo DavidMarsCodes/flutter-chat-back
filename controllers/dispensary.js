@@ -17,11 +17,9 @@ const getDispensaryActive = async (req, res = response) => {
 
         const dispensary = await Dispensary.findOne({ isActive: true, subscriptor: uid });
 
-
-        console.log(dispensary);
         if (dispensary) {
 
-            const products = await ProductDispensary.find({ dispensary: dispensary._id })
+            const products = await ProductDispensary.find({ _id: dispensary._id })
 
             if (products.length > 0) {
                 const promises = products.map((obj) =>
@@ -31,6 +29,9 @@ const getDispensaryActive = async (req, res = response) => {
 
                         Product.findById(obj._id)
                             .then((product) => {
+
+
+
 
 
 
@@ -70,14 +71,16 @@ const getDispensaryActive = async (req, res = response) => {
                     .then(() => {
 
 
+                        ProductDispensary.find({ dispensary: dispensaryCreate._id })
+                            .then((productsDispensary) => {
 
-                        return res.json({
-                            ok: true,
-                            dispensary: dispensary,
-                            productsDispensary
+                                return res.json({
+                                    ok: true,
+                                    dispensary: dispensary,
+                                    productsDispensary
 
-                        });
-
+                                });
+                            })
 
                     })
 
@@ -96,24 +99,8 @@ const getDispensaryActive = async (req, res = response) => {
             }
         }
 
-        else {
-
-
-            return res.json({
-                ok: false,
-                dispensary: dispensary,
-
-
-            });
-        }
-
 
     } catch (error) {
-
-        res.status(500).json({
-            ok: false,
-            msg: 'Hable con el administrador'
-        });
 
     }
 
