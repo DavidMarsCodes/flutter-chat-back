@@ -2,6 +2,108 @@ const { response } = require('express');
 const Dispensary = require('../models/dispensary');
 const Profile = require('../models/profile');
 const ProductDispensary = require('../models/product_dispensary');
+const Product = require('../models/product');
+
+const { find } = require('../models/profile');
+
+
+const getDispensaryActive = async (req, res = response) => {
+
+    try {
+
+        const productsDispensary = [];
+
+        const dispensary = await Dispensary.findOne({ isClubActive: false });
+
+        if (dispensary) {
+
+            const products = await ProductDispensary.find({ _id: dispensary._id })
+
+            if (products.length > 0) {
+                const promises = products.map((obj) =>
+
+                    new Promise((resolve, reject) => {
+
+
+                        Product.findById(obj._id)
+                            .then((product) => {
+
+
+
+
+
+
+                                const productDispensary = {
+
+                                    id: product._id,
+                                    user: product.user,
+                                    name: product.name,
+                                    description: product.description,
+                                    dateCreate: product.createdAt,
+                                    dateUpdate: product.updateAt,
+                                    coverImage: product.coverImage,
+                                    catalogo: product.catalogo,
+                                    ratingInit: product.ratingInit,
+                                    cbd: product.cbd,
+                                    thc: product.thc,
+                                    isLike: true,
+                                    quantityDispensary: obj.quantityDispensary,
+                                    countLikes: 0
+
+
+                                };
+
+                                productsDispensary.push(productDispensary);
+                                resolve();
+
+
+
+
+
+
+
+
+                            })
+                    }));
+                Promise.all(promises)
+                    .then(() => {
+
+
+                        ProductDispensary.find({ dispensary: dispensaryCreate._id })
+                            .then((productsDispensary) => {
+
+                                return res.json({
+                                    ok: true,
+                                    dispensary: dispensary,
+                                    productsDispensary
+
+                                });
+                            })
+
+                    })
+
+            }
+
+            else {
+
+                return res.json({
+                    ok: true,
+                    dispensary: dispensary,
+                    productsDispensary
+
+                });
+
+
+            }
+        }
+
+
+    } catch (error) {
+
+    }
+
+}
+
 const createDispensary = async (req, res = response) => {
 
     const {
@@ -58,8 +160,8 @@ const createDispensary = async (req, res = response) => {
 
                         return res.json({
                             ok: true,
-                            dispensaryCreate,
-                            productsDispensary
+                            dispensary: dispensaryCreate,
+                            //productsDispensary
 
                         });
                     })
