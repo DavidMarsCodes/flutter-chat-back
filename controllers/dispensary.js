@@ -117,8 +117,25 @@ const getDispensaryActive = async (req, res = response) => {
             }
         }
 
+        else {
+
+            return res.json({
+                ok: false,
+                dispensary: null
+
+            });
+
+
+        }
+
 
     } catch (error) {
+
+
+        res.status(500).json({
+            ok: false,
+            msg: 'Hable con el administrador'
+        });
 
     }
 
