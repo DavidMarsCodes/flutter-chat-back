@@ -33,34 +33,56 @@ const getDispensaryActive = async (req, res = response) => {
                             .then((product) => {
 
 
-
-                                const productDispensary = {
-
-                                    id: product._id,
-                                    user: product.user,
-                                    name: product.name,
-                                    description: product.description,
-                                    dateCreate: product.createdAt,
-                                    dateUpdate: product.updateAt,
-                                    coverImage: product.coverImage,
-                                    catalogo: product.catalogo,
-                                    ratingInit: product.ratingInit,
-                                    cbd: product.cbd,
-                                    thc: product.thc,
-                                    isLike: true,
-                                    quantityDispensary: obj.quantityDispensary,
-                                    countLikes: 0
+                                Favorite.findOne({
+                                    product: product._id, user: product.user
+                                })
+                                    .then((favorite) => {
 
 
-                                };
+                                        const isLike = (favorite) ? favorite.isLike : false;
 
-                                productsDispensary.push(productDispensary);
-                                resolve();
+
+                                        Favorite.find({
+                                            product: product._id, isLike: true
+                                        })
+                                            .then((favorites) => {
+
+
+                                                const countLikes = (favorites) ? favorites.length : 0;
 
 
 
 
 
+                                                const productDispensary = {
+
+                                                    id: product._id,
+                                                    user: product.user,
+                                                    name: product.name,
+                                                    description: product.description,
+                                                    dateCreate: product.createdAt,
+                                                    dateUpdate: product.updateAt,
+                                                    coverImage: product.coverImage,
+                                                    catalogo: product.catalogo,
+                                                    ratingInit: product.ratingInit,
+                                                    cbd: product.cbd,
+                                                    thc: product.thc,
+                                                    isLike: isLike,
+                                                    quantityDispensary: obj.quantity,
+                                                    countLikes: countLikes
+
+
+                                                };
+
+                                                productsDispensary.push(productDispensary);
+                                                resolve();
+
+
+
+
+                                            })
+
+                                    })
 
 
 
