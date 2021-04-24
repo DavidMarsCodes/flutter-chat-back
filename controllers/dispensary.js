@@ -19,7 +19,7 @@ const getDispensaryActive = async (req, res = response) => {
 
         if (dispensary) {
 
-            const products = await ProductDispensary.find({ _id: dispensary._id })
+            const products = await ProductDispensary.find({ dispensary: dispensary._id })
 
             if (products.length > 0) {
                 const promises = products.map((obj) =>
