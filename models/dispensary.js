@@ -25,7 +25,7 @@ const DispensarySchema = Schema({
     },
 
     dateDelivery: {
-        type: Date,
+        type: String,
         require: false,
 
     },
