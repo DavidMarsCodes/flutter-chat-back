@@ -106,7 +106,7 @@ const getDispensaryActive = async (req, res = response) => {
 
             else {
 
-                return res.json({
+                return res(404).json({
                     ok: true,
                     dispensary: dispensary,
                     productsDispensary
@@ -119,9 +119,10 @@ const getDispensaryActive = async (req, res = response) => {
 
         else {
 
-            return res.json({
+            return res.status(404).json({
                 ok: false,
-                dispensary: null
+                dispensary: dispensary,
+                productsDispensary
 
             });
 
