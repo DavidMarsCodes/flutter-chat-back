@@ -3,6 +3,7 @@ const Dispensary = require('../models/dispensary');
 const Profile = require('../models/profile');
 const ProductDispensary = require('../models/product_dispensary');
 const Product = require('../models/product');
+const Favorite = require('../models/favorite');
 
 const { find } = require('../models/profile');
 
