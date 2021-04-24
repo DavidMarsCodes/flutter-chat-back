@@ -5,16 +5,17 @@ const ProductDispensary = require('../models/product_dispensary');
 const createDispensary = async (req, res = response) => {
 
     const {
-        subscriptor,
-        gramsRecipe,
-        club,
-        dateDelivery,
+        dispensary,
         products
     } = req.body;
 
 
 
 
+    const subscriptor = dispensary.subscriptor;
+    const gramsRecipe = dispensary.gramsRecipe;
+    const dateDelivery = dispensary.dateDelivery;
+    const club = dispensary.club;
     try {
 
 
