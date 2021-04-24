@@ -505,7 +505,8 @@ const approveSubscription = async (req, res = response) => {
 
 
 module.exports = {
-    createDispensary
+    createDispensary,
+    getDispensaryActive
 
 
 }
