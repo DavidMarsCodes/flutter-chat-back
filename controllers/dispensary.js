@@ -26,46 +26,46 @@ const getDispensaryActive = async (req, res = response) => {
 
                     new Promise((resolve, reject) => {
 
-                        const id =
-                            Product.findById(obj.product)
-                                .then((product) => {
+                        const id = obj.product;
+                        Product.findById(id)
+                            .then((product) => {
 
 
 
 
 
 
-                                    const productDispensary = {
+                                const productDispensary = {
 
-                                        id: product._id,
-                                        user: product.user,
-                                        name: product.name,
-                                        description: product.description,
-                                        dateCreate: product.createdAt,
-                                        dateUpdate: product.updateAt,
-                                        coverImage: product.coverImage,
-                                        catalogo: product.catalogo,
-                                        ratingInit: product.ratingInit,
-                                        cbd: product.cbd,
-                                        thc: product.thc,
-                                        isLike: true,
-                                        quantityDispensary: obj.quantityDispensary,
-                                        countLikes: 0
-
-
-                                    };
-
-                                    productsDispensary.push(productDispensary);
-                                    resolve();
+                                    id: product._id,
+                                    user: product.user,
+                                    name: product.name,
+                                    description: product.description,
+                                    dateCreate: product.createdAt,
+                                    dateUpdate: product.updateAt,
+                                    coverImage: product.coverImage,
+                                    catalogo: product.catalogo,
+                                    ratingInit: product.ratingInit,
+                                    cbd: product.cbd,
+                                    thc: product.thc,
+                                    isLike: true,
+                                    quantityDispensary: obj.quantityDispensary,
+                                    countLikes: 0
 
 
+                                };
+
+                                productsDispensary.push(productDispensary);
+                                resolve();
 
 
 
 
 
 
-                                })
+
+
+                            })
                     }));
                 Promise.all(promises)
                     .then(() => {
