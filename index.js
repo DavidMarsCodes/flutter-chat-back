@@ -22,7 +22,7 @@ app.use(fileupload());
 
 var bodyParser = require('body-parser');
 app.use(bodyParser.json({ limit: "50mb" }));
-app.use(bodyParser.urlencoded({ limit: "50mb", extended: true, parameterLimit: 50000 }));
+app.use(bodyParser.urlencoded({ limit: "70mb", extended: true, parameterLimit: 70000 }));
 
 var aws = require('aws-sdk');
 
@@ -72,6 +72,7 @@ app.use('/api/plant_product', require('./routes/plant_product'));
 
 
 
+app.use('/api/dispensary', require('./routes/dispensary'));
 
 
 
