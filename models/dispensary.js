@@ -24,6 +24,12 @@ const DispensarySchema = Schema({
         required: true
     },
 
+    dateDelivery: {
+        type: Date,
+        require: false,
+
+    },
+
 
     isActive:
     {
