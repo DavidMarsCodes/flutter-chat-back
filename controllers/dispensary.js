@@ -7,7 +7,8 @@ const createDispensary = async (req, res = response) => {
     const {
         subscriptor,
         gramsRecipe,
-        club
+        club,
+        dateDelivery,
     } = req.body;
 
 
@@ -18,7 +19,8 @@ const createDispensary = async (req, res = response) => {
         const newDispensary = new Dispensary({
             subscriptor: subscriptor,
             gramsRecipe: gramsRecipe,
-            club: club
+            club: club,
+            dateDelivery: dateDelivery
         })
 
         const dispensary = await newDispensary.save();
