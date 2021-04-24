@@ -8,7 +8,7 @@ const createDispensary = async (req, res = response) => {
         subscriptor,
         gramsRecipe,
         club
-    }
+    } = req.body;
 
 
 
