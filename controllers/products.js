@@ -519,7 +519,7 @@ const getProductsLikedDispensary = async (req, res = response) => {
 
 
 
-                        const quantityDispensary = (productDispesary) ? productDispesary.quantityDispensary : 0;
+                        const quantityDispensary = (productDispesary) ? productDispesary.quantity : 0;
                         Favorite.findOne({
                             product: product._id, user: userId
                         })
