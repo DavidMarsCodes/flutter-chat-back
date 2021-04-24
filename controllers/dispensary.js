@@ -17,6 +17,8 @@ const getDispensaryActive = async (req, res = response) => {
 
         const dispensary = await Dispensary.findOne({ isActive: true, subscriptor: uid });
 
+
+        console.log(dispensary);
         if (dispensary) {
 
             const products = await ProductDispensary.find({ dispensary: dispensary._id })
@@ -29,9 +31,6 @@ const getDispensaryActive = async (req, res = response) => {
 
                         Product.findById(obj._id)
                             .then((product) => {
-
-
-
 
 
 
@@ -95,6 +94,17 @@ const getDispensaryActive = async (req, res = response) => {
 
 
             }
+        }
+
+        else {
+
+
+            return res.json({
+                ok: false,
+                dispensary: dispensary,
+
+
+            });
         }
 
 
