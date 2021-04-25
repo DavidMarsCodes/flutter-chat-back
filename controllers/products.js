@@ -499,7 +499,7 @@ const getProductsLikedDispensary = async (req, res = response) => {
 
         const userId = req.params.userId;
 
-        const dispensary = await Dispensary.findOne({ isActive: true, subscriptor: userId });
+        const dispensary = await Dispensary.findOne({ isActive: true, subscriptor: userId, club: clubId });
 
 
         const productsClub = await Product
@@ -519,7 +519,7 @@ const getProductsLikedDispensary = async (req, res = response) => {
 
 
 
-                        const quantityDispensary = (productDispesary) ? productDispesary.quantity : 0;
+                        const quantityDispensary = (productDispesary && dispensary) ? productDispesary.quantity : 0;
                         Favorite.findOne({
                             product: product._id, user: userId
                         })
@@ -557,7 +557,7 @@ const getProductsLikedDispensary = async (req, res = response) => {
                                             thc: product.thc,
                                             isLike: isLike,
                                             countLikes: countLikes,
-                                            quantityDispensary: (dispensary) ? quantityDispensary : 0,
+                                            quantityDispensary: quantityDispensary,
 
 
                                         };
