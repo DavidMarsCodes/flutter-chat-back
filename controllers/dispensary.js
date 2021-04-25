@@ -5,7 +5,6 @@ const ProductDispensary = require('../models/product_dispensary');
 const Product = require('../models/product');
 const Favorite = require('../models/favorite');
 
-const { find } = require('../models/profile');
 
 
 const getDispensaryActive = async (req, res = response) => {
@@ -93,10 +92,16 @@ const getDispensaryActive = async (req, res = response) => {
                     .then(() => {
 
 
+                        const productsDispensaryDate = productsDispensary.sort((a, b) => {
+
+                            return new Date(b.dateCreate) - new Date(a.dateCreate);
+                        });
+
+
                         return res.json({
                             ok: true,
                             dispensary: dispensary,
-                            productsDispensary
+                            productsDispensaryDate
 
                         });
 
