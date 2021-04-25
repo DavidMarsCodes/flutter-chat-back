@@ -92,16 +92,10 @@ const getDispensaryActive = async (req, res = response) => {
                     .then(() => {
 
 
-                        const productsDispensaryDate = productsDispensary.sort((a, b) => {
-
-                            return new Date(b.dateCreate) - new Date(a.dateCreate);
-                        });
-
-
                         return res.json({
                             ok: true,
                             dispensary: dispensary,
-                            productsDispensary: productsDispensaryDate
+                            productsDispensary
 
                         });
 
