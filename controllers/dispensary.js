@@ -101,7 +101,7 @@ const getDispensaryActive = async (req, res = response) => {
                         return res.json({
                             ok: true,
                             dispensary: dispensary,
-                            productsDispensaryDate
+                            productsDispensary: productsDispensaryDate
 
                         });
 
