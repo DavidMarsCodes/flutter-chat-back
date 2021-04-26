@@ -26,7 +26,7 @@ router.post('/update-dispensary', [
 ], UpdateDispensary, validateJWT);
 
 
-router.get('/update-delivered-dispensary', [
+router.get('/update-delivered-dispensary/:id', [
 
 ], UpdateDeliveredDispensary, validateJWT);
 

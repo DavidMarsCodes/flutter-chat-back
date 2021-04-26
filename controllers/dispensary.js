@@ -341,10 +341,9 @@ const UpdateDispensary = async (req, res = response) => {
 
 
 const UpdateDeliveredDispensary = async (req, res = response) => {
-    const {
-        dispensary,
 
-    } = req.body;
+
+    const id = req.params.id;
 
 
 
@@ -361,7 +360,7 @@ const UpdateDeliveredDispensary = async (req, res = response) => {
 
         await Dispensary.updateOne(
             {
-                _id: dispensary.id
+                _id: id
             },
             {
                 $set: update
