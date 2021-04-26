@@ -369,7 +369,7 @@ const UpdateDeliveredDispensary = async (req, res = response) => {
 
 
 
-        const dispensaryUpdate = await Dispensary.findById(dispensary.id);
+        const dispensaryUpdate = await Dispensary.findById(id);
 
 
 
