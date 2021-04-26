@@ -71,6 +71,13 @@ const DispensarySchema = Schema({
         type: Boolean,
         required: false,
         default: false
+    },
+
+    isEdit:
+    {
+        type: Boolean,
+        required: false,
+        default: false
     }
 
 },
