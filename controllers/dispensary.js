@@ -279,10 +279,14 @@ const UpdateDispensary = async (req, res = response) => {
                                 },
                                 {
                                     $set: updateProductDispensary
-                                }
-                            )
+                                }, (err, data) => {
+                                    if (err) console.log(err);
+                                    else
 
-                            resolve();
+                                        resolve();
+                                });
+
+
 
                         }
 
