@@ -281,6 +281,8 @@ const UpdateDispensary = async (req, res = response) => {
                                 }
                             )
 
+                            resolve();
+
                         }
 
                         else {
