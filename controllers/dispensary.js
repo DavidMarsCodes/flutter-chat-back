@@ -230,9 +230,9 @@ const UpdateDispensary = async (req, res = response) => {
 
         const update = {
 
-            gramsRecipe: gramsRecipe,
+            gramsRecipe: dispensary.gramsRecipe,
 
-            dateDelivery: dateDelivery
+            dateDelivery: dispensary.dateDelivery
 
         };
 
