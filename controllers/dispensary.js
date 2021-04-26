@@ -248,6 +248,7 @@ const UpdateDispensary = async (req, res = response) => {
 
 
 
+        const dispensaryUpdate = await Dispensary.findById(dispensary.id);
 
         const promises = products.map((obj) =>
 
@@ -311,7 +312,7 @@ const UpdateDispensary = async (req, res = response) => {
 
                 return res.json({
                     ok: true,
-                    dispensary: dispensary,
+                    dispensary: dispensaryUpdate,
                     //productsDispensary
 
 
