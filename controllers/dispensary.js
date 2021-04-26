@@ -232,7 +232,10 @@ const UpdateDispensary = async (req, res = response) => {
 
             gramsRecipe: dispensary.gramsRecipe,
 
-            dateDelivery: dispensary.dateDelivery
+            dateDelivery: dispensary.dateDelivery,
+
+            isEdit: true
+
 
         };
 
