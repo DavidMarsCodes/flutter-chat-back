@@ -51,9 +51,6 @@ const getDispensaryActive = async (req, res = response) => {
                                                 const countLikes = (favorites) ? favorites.length : 0;
 
 
-
-
-
                                                 const productDispensary = {
 
                                                     id: product._id,
@@ -105,7 +102,7 @@ const getDispensaryActive = async (req, res = response) => {
 
             else {
 
-                return res(404).json({
+                return res.json({
                     ok: true,
                     dispensary: dispensary,
                     productsDispensary
@@ -118,7 +115,7 @@ const getDispensaryActive = async (req, res = response) => {
 
         else {
 
-            return res.status(404).json({
+            return res.json({
                 ok: false,
                 dispensary: dispensary,
                 productsDispensary
@@ -219,12 +216,11 @@ const createDispensary = async (req, res = response) => {
 
 
 const UpdateDispensary = async (req, res = response) => {
-    const { subscriptor,
-        id,
-
-
-
+    const {
+        dispensary,
+        products
     } = req.body;
+
 
 
 
@@ -233,15 +229,17 @@ const UpdateDispensary = async (req, res = response) => {
 
 
         const update = {
-            isUpload: true,
-            subscribeActive: true,
-            isClubNotifi: true
+
+            gramsRecipe: gramsRecipe,
+
+            dateDelivery: dateDelivery
+
         };
 
 
         await Dispensary.updateOne(
             {
-                _id: id
+                _id: dispensary.id
             },
             {
                 $set: update
@@ -250,8 +248,75 @@ const UpdateDispensary = async (req, res = response) => {
 
 
 
-        const dispensary = await Dispensary
-            .findOne({ _id: id })
+
+        const promises = products.map((obj) =>
+
+            new Promise((resolve, reject) => {
+
+                const newProduct = new ProductDispensary({
+                    product: obj.id,
+                    dispensary: dispensary.id,
+                    quantity: obj.quantityDispensary,
+
+                });
+
+
+                ProductDispensary.findOne({ dispensary: dispensary.id, product: obj.id })
+                    .then((productDispensary) => {
+
+                        if (productDispensary) {
+
+                            const updateProductDispensary = {
+                                quantity: obj.quantityDispensary
+                            }
+
+
+                            ProductDispensary.updateOne(
+
+                                {
+                                    _id: productDispensary._id
+                                },
+                                {
+                                    $set: updateProductDispensary
+                                }
+                            )
+
+                        }
+
+                        else {
+
+
+                            ProductDispensary.create(newProduct,
+                                (err, data) => {
+                                    if (err) console.log(err);
+                                    else
+
+                                        resolve();
+                                });
+
+
+                        }
+
+                    })
+
+            }));
+        Promise.all(promises)
+            .then(() => {
+
+
+
+
+
+                return res.json({
+                    ok: true,
+                    dispensary: dispensary,
+                    //productsDispensary
+
+
+                })
+
+            })
+
 
 
 
@@ -543,7 +608,8 @@ const approveSubscription = async (req, res = response) => {
 
 module.exports = {
     createDispensary,
-    getDispensaryActive
+    getDispensaryActive,
+    UpdateDispensary
 
 
 }
