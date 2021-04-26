@@ -38,7 +38,7 @@ const DispensarySchema = Schema({
         default: true
     },
 
-    isDelivery:
+    isDelivered:
     {
         type: Boolean,
         required: false,

@@ -339,6 +339,64 @@ const UpdateDispensary = async (req, res = response) => {
     }
 }
 
+
+const UpdateDeliveredDispensary = async (req, res = response) => {
+    const {
+        dispensary,
+
+    } = req.body;
+
+
+
+
+    try {
+
+
+
+        const update = {
+
+            isDelivered: true
+        };
+
+
+        await Dispensary.updateOne(
+            {
+                _id: dispensary.id
+            },
+            {
+                $set: update
+            }
+        );
+
+
+
+        const dispensaryUpdate = await Dispensary.findById(dispensary.id);
+
+
+
+
+        return res.json({
+            ok: true,
+            dispensary: dispensaryUpdate,
+            //productsDispensary
+
+
+
+
+        })
+
+
+
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: 'Hable con el administrador'
+        });
+    }
+}
+
 const UnSubscription = async (req, res = response) => {
     const {
         id,
@@ -612,7 +670,8 @@ const approveSubscription = async (req, res = response) => {
 module.exports = {
     createDispensary,
     getDispensaryActive,
-    UpdateDispensary
+    UpdateDispensary,
+    UpdateDeliveredDispensary
 
 
 }

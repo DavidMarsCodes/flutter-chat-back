@@ -6,7 +6,7 @@
 */
 const { Router } = require('express');
 
-const { createDispensary, getDispensaryActive, UpdateDispensary } = require('../controllers/dispensary');
+const { createDispensary, getDispensaryActive, UpdateDispensary, UpdateDeliveredDispensary } = require('../controllers/dispensary');
 const { validateJWT } = require('../middlewares/validar-jwt');
 
 
@@ -25,6 +25,10 @@ router.post('/update-dispensary', [
 
 ], UpdateDispensary, validateJWT);
 
+
+router.post('/update-delivered-dispensary', [
+
+], UpdateDeliveredDispensary, validateJWT);
 
 
 router.get('/active/products/user/:uid', [
