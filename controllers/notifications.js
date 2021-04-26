@@ -104,8 +104,11 @@ const getProfilesSubscriptorsByUser = async (req, res) => {
                 .then((resolve) => {
 
 
-                    const profilesOrder = profiles.sort((a, b) => (a.messageDate > b.messageDate) ? 1 : -1)
 
+                    const profilesOrder = profiles.sort((a, b) => {
+
+                        return new Date(b.messageDate) - new Date(a.messageDate);
+                    });
 
 
                     return res.json({
@@ -208,7 +211,11 @@ const getProfilesSubscriptorsByUser = async (req, res) => {
             Promise.all(promises)
                 .then((resolve) => {
 
-                    const profilesOrder = profiles.sort((a, b) => (a.messageDate > b.messageDate) ? 1 : -1)
+                    const profilesOrder = profiles.sort((a, b) => {
+
+                        return new Date(b.messageDate) - new Date(a.messageDate);
+                    });
+
 
 
 
