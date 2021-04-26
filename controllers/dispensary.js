@@ -379,9 +379,6 @@ const UpdateDeliveredDispensary = async (req, res = response) => {
             dispensary: dispensaryUpdate,
             //productsDispensary
 
-
-
-
         })
 
 
