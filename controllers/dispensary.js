@@ -323,13 +323,6 @@ const UpdateDispensary = async (req, res = response) => {
 
 
 
-        res.json({
-            ok: true,
-            dispensary,
-
-        });
-
-
     } catch (error) {
         console.log(error);
         res.status(500).json({
