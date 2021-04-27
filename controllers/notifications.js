@@ -317,7 +317,7 @@ const getProfilesSubscriptorsApproveByUser = async (req, res) => {
 
 
 
-
+                                            const isDispensary = (dispensary) ? dispensary : null;
 
 
                                             const profileDispensary = {
@@ -354,7 +354,7 @@ const getProfilesSubscriptorsApproveByUser = async (req, res) => {
 
                                                 },
 
-                                                dispensary
+                                                dispensary: isDispensary
 
                                             }
 
