@@ -15,7 +15,7 @@ const getDispensaryActive = async (req, res = response) => {
 
         const productsDispensary = [];
 
-        const dispensary = await Dispensary.findOne({ isActive: true, subscriptor: uid });
+        const dispensary = await Dispensary.findOne({ isActive: true, subscriptor: uid, isDelivered: false });
 
         if (dispensary) {
 
