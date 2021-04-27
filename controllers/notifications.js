@@ -353,7 +353,23 @@ const getProfilesSubscriptorsApproveByUser = async (req, res) => {
 
                                                 },
 
-                                                dispensary: (dispensary) ? dispensary : new Dispensary({})
+                                                dispensary: (dispensary) ? dispensary : new Dispensary({
+                                                    gramsRecipe: 0,
+                                                    dateDelivery: "",
+
+                                                    isActive: false,
+                                                    isDelivered: false,
+                                                    isCancel: false,
+                                                    isUpdate: false,
+                                                    isUserNotifi: false,
+                                                    isClubNotifi: false,
+                                                    isEdit: false,
+                                                    subscriptor: user._id,
+                                                    club: uid,
+                                                    createdAt: new Date(),
+                                                    updatedAt: new Date(),
+                                                    id: "",
+                                                })
 
                                             }
 
