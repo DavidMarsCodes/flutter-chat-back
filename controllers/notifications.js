@@ -287,6 +287,8 @@ const getProfilesSubscriptorsApproveByUser = async (req, res) => {
                 .sort({ createdAt: 'asc' })
 
 
+
+
             const profiles = [];
 
             const promises = subscription.map((obj) =>
@@ -298,43 +300,69 @@ const getProfilesSubscriptorsApproveByUser = async (req, res) => {
                         .then(item => {
 
 
+
+
+
                             User.findById(obj.subscriptor
                             )
 
                                 .then(user => {
 
-                                    const profile = {
-                                        name: item.name,
-                                        lastName: item.lastName,
-                                        imageHeader: item.imageHeader,
-                                        imageAvatar: item.imageAvatar,
-                                        imageRecipe: item.imageRecipe,
 
-                                        about: item.about,
-                                        id: item._id,
-                                        user: {
-                                            online: user.online,
-                                            uid: user._id,
-                                            email: user.email,
-                                            username: user.username,
 
-                                        },
-                                        messageDate: obj.createdAt,
+                                    Dispensary.findOne({ club: uid, subscriptor: obj._id })
 
-                                        subscribeActive: obj.subscribeActive,
-                                        subscribeApproved: obj.subscribeApproved,
-                                        subId: obj._id,
-                                        isClub: item.isClub,
-                                        isUpload: obj.isUpload,
-                                        createdAt: item.createdAt,
-                                        updatedAt: item.updatedAt
+                                        .then((dispensary) => {
 
-                                    }
 
-                                    profiles.push(profile);
-                                    resolve();
 
-                                });
+
+
+
+                                            const profileDispensary = {
+
+
+
+
+                                                profile: {
+                                                    name: item.name,
+                                                    lastName: item.lastName,
+                                                    imageHeader: item.imageHeader,
+                                                    imageAvatar: item.imageAvatar,
+                                                    imageRecipe: item.imageRecipe,
+
+                                                    about: item.about,
+                                                    id: item._id,
+                                                    user: {
+                                                        online: user.online,
+                                                        uid: user._id,
+                                                        email: user.email,
+                                                        username: user.username,
+
+                                                    },
+                                                    messageDate: obj.createdAt,
+
+                                                    subscribeActive: obj.subscribeActive,
+                                                    subscribeApproved: obj.subscribeApproved,
+                                                    subId: obj._id,
+                                                    isClub: item.isClub,
+                                                    isUpload: obj.isUpload,
+                                                    createdAt: item.createdAt,
+                                                    updatedAt: item.updatedAt,
+
+
+                                                },
+
+                                                dispensary
+
+                                            }
+
+                                            profiles.push(profileDispensary);
+                                            resolve();
+
+                                        });
+
+                                })
 
                         })
                         ;
