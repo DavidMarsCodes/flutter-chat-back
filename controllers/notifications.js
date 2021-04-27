@@ -311,13 +311,12 @@ const getProfilesSubscriptorsApproveByUser = async (req, res) => {
 
 
 
-                                    Dispensary.findOne({ club: uid, subscriptor: obj._id })
+                                    Dispensary.findOne({ club: uid, subscriptor: obj.subscriptor })
 
                                         .then((dispensary) => {
 
 
 
-                                            const isDispensary = (dispensary) ? dispensary : null;
 
 
                                             const profileDispensary = {
@@ -354,7 +353,7 @@ const getProfilesSubscriptorsApproveByUser = async (req, res) => {
 
                                                 },
 
-                                                dispensary: isDispensary
+                                                dispensary: dispensary
 
                                             }
 
