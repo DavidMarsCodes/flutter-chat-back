@@ -393,7 +393,7 @@ const getProfilesSubscriptorsApproveByUser = async (req, res) => {
 
 
 
-                        return new Date(b.dispensary.createdAt) - new Date(b.dispensary.createdAt);
+                        return new Date(a.dispensary.createdAt) - new Date(b.dispensary.createdAt);
                     });
 
 
