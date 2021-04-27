@@ -393,7 +393,7 @@ const getProfilesSubscriptorsApproveByUser = async (req, res) => {
 
 
 
-                        return new Date(a.dispensary.createdAt) - new Date(b.dispensary.createdAt);
+                        return new Date(b.dispensary.createdAt) - new Date(a.dispensary.createdAt);
                     });
 
 
@@ -408,22 +408,6 @@ const getProfilesSubscriptorsApproveByUser = async (req, res) => {
         }
 
         else {
-            /* 
-                        const update = { 
-                               
-                            isUserNotifi: false
-                         };
-                
-                
-                   await Subscription.updateMany(
-                        {
-                            subscriptor: uid
-                        },
-                        {
-                            $set: update
-                        }
-                    );
-                 */
 
 
             console.log('else!!!')
