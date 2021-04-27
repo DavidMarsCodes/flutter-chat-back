@@ -353,7 +353,7 @@ const getProfilesSubscriptorsApproveByUser = async (req, res) => {
 
                                                 },
 
-                                                dispensary: (dispensary) ? dispensary : new dispensary()
+                                                dispensary: (dispensary) ? dispensary : new Dispensary({})
 
                                             }
 
