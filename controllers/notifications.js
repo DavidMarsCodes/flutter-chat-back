@@ -3,6 +3,7 @@ const Subscription = require('../models/subscription');
 const Profile = require('../models/profile');
 const User = require('../models/user');
 const Message = require('../models/message');
+const Dispensary = require('../models/dispensary');
 
 
 const getProfilesSubscriptorsByUser = async (req, res) => {
