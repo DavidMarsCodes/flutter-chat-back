@@ -366,8 +366,8 @@ const getProfilesSubscriptorsApproveByUser = async (req, res) => {
                                                     isEdit: false,
                                                     subscriptor: user._id,
                                                     club: uid,
-                                                    createdAt: new Date(1995, 11, 17, 3, 24, 0),
-                                                    updatedAt: new Date(1995, 11, 17, 3, 24, 0),
+                                                    createdAt: item.createdAt,
+                                                    updatedAt: item.createdAt,
                                                     id: "",
                                                 })
 
