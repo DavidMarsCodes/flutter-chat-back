@@ -35,7 +35,7 @@ router.get('/active/products/user/:uid', [
 
 ], getDispensaryActive, validateJWT);
 
-router.get('/dispensaries/products/club/:uid/user/:subId', [
+router.get('/dispensaries/products/club/:clubId/user/:subId', [
 
 ], getDispensariesProductsByUser, validateJWT);
 
