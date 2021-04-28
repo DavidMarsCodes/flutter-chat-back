@@ -165,49 +165,122 @@ const getDispensariesProductsByUser = async (req, res = response) => {
 
 
 
-                    const dispensaryId = dispensary._id;
-
-                    ProductDispensary.find({ dispensary: dispensaryId })
-                        .then((productsDispensary) => {
 
 
 
 
 
-                            const dispensaryItem = {
-
-                                id: dispensary._id,
-                                subscriptor: dispensary.subscriptor,
-                                gramsRecipe: dispensary.gramsRecipe,
-                                club: dispensary.club,
-                                dateDelivery: dispensary.dateDelivery,
-                                isActive: dispensary.isActive,
-                                isDelivered: dispensary.isDelivered,
-                                isCancel: dispensary.isCancel,
-                                isUpdate: dispensary.isUpdate,
-                                isUserNotifi: dispensary.isUserNotifi,
-
-                                isClubNotifi: dispensary.isClubNotifi,
-                                isEdit: dispensary.isEdit,
-                                createdAt: dispensary.createdAt,
-                                updatedAt: dispensary.updatedAt,
-                                productsDispensary
-
-                            }
 
 
-                            dispensariesProducts.push(dispensaryItem);
-                            resolve();
+                    const dispensaryItem = {
+
+                        id: dispensary._id,
+                        subscriptor: dispensary.subscriptor,
+                        gramsRecipe: dispensary.gramsRecipe,
+                        club: dispensary.club,
+                        dateDelivery: dispensary.dateDelivery,
+                        isActive: dispensary.isActive,
+                        isDelivered: dispensary.isDelivered,
+                        isCancel: dispensary.isCancel,
+                        isUpdate: dispensary.isUpdate,
+                        isUserNotifi: dispensary.isUserNotifi,
+
+                        isClubNotifi: dispensary.isClubNotifi,
+                        isEdit: dispensary.isEdit,
+                        createdAt: dispensary.createdAt,
+                        updatedAt: dispensary.updatedAt,
+                        productsDispensary: []
+
+                    }
+
+
+                    dispensariesProducts.push(dispensaryItem);
+                    resolve();
 
 
 
-                        })
+
 
 
 
                 }));
             Promise.all(promises)
                 .then(() => {
+
+                    Product
+                        .find({ user: clubId })
+
+                        .then((products) => {
+
+                            productsSort = [];
+
+
+
+                            if (products.length > 0) {
+
+                                const promisesFavorite = products.map((product) =>
+
+
+                                    new Promise((resolve, reject) => {
+
+
+                                        ProductDispensary.findById(product._id)
+                                            .then((productDispensary) => {
+
+                                                const productQuantity = {
+
+                                                    id: product._id,
+                                                    user: product.user,
+                                                    name: product.name,
+                                                    description: product.description,
+                                                    dateCreate: product.createdAt,
+                                                    dateUpdate: product.updateAt,
+                                                    totalProducts: product.totalProducts,
+                                                    coverImage: product.coverImage,
+                                                    catalogo: product.catalogo,
+                                                    ratingInit: product.ratingInit,
+                                                    cbd: product.cbd,
+                                                    thc: product.thc,
+                                                    isLike: isLike,
+                                                    countLikes: countLikes,
+                                                    quantityDispensary: (productDispensary) ? productDispensary.quantity : 0
+
+                                                };
+
+                                                var dispensaryId = String(productDispensary.dispensary);
+
+                                                const find = dispensariesProducts.find(function (item) {
+                                                    return String(item.id) == dispensaryId
+                                                });
+
+
+                                                if (find) {
+
+
+
+                                                    console.log('FIN!', find);
+
+                                                    find.products.push(productQuantity);
+                                                    resolve();
+
+                                                }
+
+                                                else {
+
+                                                    resolve();
+                                                }
+
+                                            })
+
+
+
+
+
+                                    }))
+
+                            }
+
+                        })
 
 
                     return res.json({
