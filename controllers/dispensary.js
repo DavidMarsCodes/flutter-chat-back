@@ -217,54 +217,48 @@ const getDispensariesProductsByUser = async (req, res = response) => {
 
                                     new Promise((resolve, reject) => {
 
+                                        const productId = product._id;
 
-                                        ProductDispensary.findOne({ product: product._id })
+                                        ProductDispensary.findOne({ product: productId })
                                             .then((productDispensary) => {
 
 
-                                                if (promisesProducts) {
-
-                                                    const productQuantity = {
-
-                                                        id: product._id,
-                                                        user: product.user,
-                                                        name: product.name,
-                                                        description: product.description,
-                                                        dateCreate: product.createdAt,
-                                                        dateUpdate: product.updateAt,
-                                                        totalProducts: product.totalProducts,
-                                                        coverImage: product.coverImage,
-                                                        catalogo: product.catalogo,
-                                                        ratingInit: product.ratingInit,
-                                                        cbd: product.cbd,
-                                                        thc: product.thc,
-                                                        isLike: isLike,
-                                                        countLikes: countLikes,
-                                                        quantityDispensary: (productDispensary) ? productDispensary.quantity : 0
-
-                                                    };
 
 
-                                                    const find = dispensariesProducts.find(function (item) {
-                                                        return String(item.id) == productDispensary.dispensary
-                                                    });
+                                                const productQuantity = {
+
+                                                    id: product._id,
+                                                    user: product.user,
+                                                    name: product.name,
+                                                    description: product.description,
+                                                    dateCreate: product.createdAt,
+                                                    dateUpdate: product.updateAt,
+                                                    totalProducts: product.totalProducts,
+                                                    coverImage: product.coverImage,
+                                                    catalogo: product.catalogo,
+                                                    ratingInit: product.ratingInit,
+                                                    cbd: product.cbd,
+                                                    thc: product.thc,
+                                                    isLike: isLike,
+                                                    countLikes: countLikes,
+                                                    //  quantityDispensary: (productDispensary) ? productDispensary.quantity : 0
+
+                                                };
 
 
-                                                    if (find) {
+                                                const find = dispensariesProducts.find(function (item) {
+                                                    return String(item.id) == productDispensary.dispensary
+                                                });
+
+
+                                                if (find) {
 
 
 
-                                                        console.log('FIN!', find);
+                                                    console.log('FIN!', find);
 
-                                                        find.productsDispensary.push(productQuantity);
-                                                        resolve();
-
-                                                    }
-
-                                                    else {
-
-                                                        resolve();
-                                                    }
+                                                    find.productsDispensary.push(productQuantity);
+                                                    resolve();
 
                                                 }
 
@@ -272,6 +266,8 @@ const getDispensariesProductsByUser = async (req, res = response) => {
 
                                                     resolve();
                                                 }
+
+
 
                                             })
 
