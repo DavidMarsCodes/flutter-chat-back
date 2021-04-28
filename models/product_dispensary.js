@@ -24,9 +24,6 @@ const ProductDispensarySchema = Schema({
 
 
 
-
-
-
 },
 
     {

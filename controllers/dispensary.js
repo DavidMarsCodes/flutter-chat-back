@@ -212,7 +212,7 @@ const getDispensariesProductsByUser = async (req, res = response) => {
 
                         .then((products) => {
 
-                            productsSort = [];
+
 
 
 
@@ -224,7 +224,7 @@ const getDispensariesProductsByUser = async (req, res = response) => {
                                     new Promise((resolve, reject) => {
 
 
-                                        ProductDispensary.findById(product._id)
+                                        ProductDispensary.findOne({ product: product._id })
                                             .then((productDispensary) => {
 
                                                 const productQuantity = {
@@ -293,6 +293,17 @@ const getDispensariesProductsByUser = async (req, res = response) => {
 
 
                                     });
+
+                            }
+                            else {
+
+                                return res.json({
+                                    ok: false,
+                                    dispensariesProducts
+
+
+                                });
+
 
                             }
 
