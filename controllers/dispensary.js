@@ -247,10 +247,9 @@ const getDispensariesProductsByUser = async (req, res = response) => {
 
                                                 };
 
-                                                var dispensaryId = String(productDispensary.dispensary);
 
                                                 const find = dispensariesProducts.find(function (item) {
-                                                    return String(item.id) == dispensaryId
+                                                    return String(item.id) == productDispensary.dispensary
                                                 });
 
 
@@ -260,7 +259,7 @@ const getDispensariesProductsByUser = async (req, res = response) => {
 
                                                     console.log('FIN!', find);
 
-                                                    find.products.push(productQuantity);
+                                                    find.productsDispensary.push(productQuantity);
                                                     resolve();
 
                                                 }
