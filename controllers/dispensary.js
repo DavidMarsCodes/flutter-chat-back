@@ -218,7 +218,7 @@ const getDispensariesProductsByUser = async (req, res = response) => {
 
                             if (products.length > 0) {
 
-                                const promisesFavorite = products.map((product) =>
+                                const promises = products.map((product) =>
 
 
                                     new Promise((resolve, reject) => {
@@ -278,16 +278,28 @@ const getDispensariesProductsByUser = async (req, res = response) => {
 
                                     }))
 
+                                Promise.all(promises)
+                                    .then((resolve) => {
+
+
+
+
+                                        return res.json({
+                                            ok: true,
+                                            dispensariesProducts
+
+                                        });
+
+
+
+                                    });
+
                             }
 
                         })
 
 
-                    return res.json({
-                        ok: true,
-                        dispensariesProducts
 
-                    });
 
                 })
 
