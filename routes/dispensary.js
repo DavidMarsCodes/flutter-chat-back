@@ -6,7 +6,7 @@
 */
 const { Router } = require('express');
 
-const { createDispensary, getDispensaryActive, UpdateDispensary, UpdateDeliveredDispensary } = require('../controllers/dispensary');
+const { createDispensary, getDispensaryActive, UpdateDispensary, UpdateDeliveredDispensary, getDispensariesProductsByUser } = require('../controllers/dispensary');
 const { validateJWT } = require('../middlewares/validar-jwt');
 
 
@@ -34,6 +34,11 @@ router.get('/update-delivered-dispensary/:id', [
 router.get('/active/products/user/:uid', [
 
 ], getDispensaryActive, validateJWT);
+
+router.get('/dispensaries/products/club/:uid/user:subId', [
+
+], getDispensariesProductsByUser, validateJWT);
+
 
 
 module.exports = router;

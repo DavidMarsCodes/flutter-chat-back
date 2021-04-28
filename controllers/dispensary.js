@@ -138,6 +138,112 @@ const getDispensaryActive = async (req, res = response) => {
 
 }
 
+
+const getDispensariesProductsByUser = async (req, res = response) => {
+
+
+    const uid = req.params.clubId;
+    const subId = req.params.subId;
+
+    try {
+
+        const dispensariesProducts = [];
+
+
+        const dispensaries = await Dispensary.find({ subscriptor: subId, club: uid });
+
+        if (dispensaries.length > 0) {
+
+            // const dispensaryId = dispensary._id;
+
+            // const products = await ProductDispensary.find({ dispensary: dispensaryId })
+
+            const promises = dispensaries.map((dispensary) =>
+
+
+                new Promise((resolve, reject) => {
+
+
+
+                    const dispensaryId = dispensary._id;
+
+                    ProductDispensary.find({ dispensary: dispensaryId })
+                        .then((productsDispensary) => {
+
+
+
+
+
+                            const dispensaryItem = {
+
+                                id: dispensary._id,
+                                subscriptor: dispensary.subscriptor,
+                                gramsRecipe: dispensary.gramsRecipe,
+                                club: dispensary.club,
+                                dateDelivery: dispensary.dateDelivery,
+                                isActive: dispensary.isActive,
+                                isDelivered: dispensary.isDelivered,
+                                isCancel: dispensary.isCancel,
+                                isUpdate: dispensary.isUpdate,
+                                isUserNotifi: dispensary.isUserNotifi,
+
+                                isClubNotifi: dispensary.isClubNotifi,
+                                isEdit: dispensary.isEdit,
+                                productsDispensary
+
+                            }
+
+
+                            dispensariesProducts.push(dispensaryItem);
+                            resolve();
+
+
+
+                        })
+
+
+
+                }));
+            Promise.all(promises)
+                .then(() => {
+
+
+                    return res.json({
+                        ok: true,
+                        dispensariesProducts
+
+                    });
+
+                })
+
+        }
+
+        else {
+
+            return res.json({
+                ok: false,
+                dispensariesProducts
+
+
+            });
+
+
+        }
+
+
+    } catch (error) {
+
+
+        res.status(500).json({
+            ok: false,
+            msg: 'Hable con el administrador'
+        });
+
+    }
+
+}
+
+
 const createDispensary = async (req, res = response) => {
 
     const {
@@ -667,7 +773,8 @@ module.exports = {
     createDispensary,
     getDispensaryActive,
     UpdateDispensary,
-    UpdateDeliveredDispensary
+    UpdateDeliveredDispensary,
+    getDispensariesProductsByUser
 
 
 }
