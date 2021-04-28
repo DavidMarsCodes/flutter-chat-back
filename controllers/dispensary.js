@@ -166,12 +166,6 @@ const getDispensariesProductsByUser = async (req, res = response) => {
 
 
 
-
-
-
-
-
-
                     const dispensaryItem = {
 
                         id: dispensary._id,
@@ -208,7 +202,7 @@ const getDispensariesProductsByUser = async (req, res = response) => {
                 .then(() => {
 
                     Product
-                        .find({ user: clubId })
+                        .find({ user: uid })
 
                         .then((products) => {
 
