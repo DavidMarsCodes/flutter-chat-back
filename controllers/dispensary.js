@@ -190,7 +190,7 @@ const getDispensariesProductsByUser = async (req, res = response) => {
                                 isClubNotifi: dispensary.isClubNotifi,
                                 isEdit: dispensary.isEdit,
                                 createdAt: dispensary.createdAt,
-                                updatedAt: dispensary.updateAt,
+                                updatedAt: dispensary.updatedAt,
                                 productsDispensary
 
                             }
