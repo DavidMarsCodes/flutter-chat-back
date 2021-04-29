@@ -18,6 +18,7 @@ const PlantProduct = require('../models/plants_product');
 
 const ProductDispensary = require('../models/product_dispensary');
 const Dispensary = require('../models/dispensary');
+const { Request } = require('aws-sdk');
 
 const createProduct = async (req, res = response) => {
     const {
@@ -498,7 +499,7 @@ const getProductsLikedDispensary = async (req, res = response) => {
         const clubId = req.params.clubId;
 
         const userId = req.params.userId;
-        const dispensaryId = re.params.dispensaryId;
+        const dispensaryId = Request.params.dispensaryId;
 
         const dispensary = await Dispensary.findById(dispensaryId);
 
