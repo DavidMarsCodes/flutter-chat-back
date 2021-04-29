@@ -590,10 +590,15 @@ const getProductsLikedDispensary = async (req, res = response) => {
 
 
 
-                const productsLike = products.sort((a, b) => {
 
-                    return (a.isLike) - (b.isLike);
-                });
+
+                const productsLike =
+
+                    (products.length > 0) ?
+                        products.sort((a, b) => {
+
+                            return (a.isLike) - (b.isLike);
+                        }) : [];
 
 
                 res.json({
