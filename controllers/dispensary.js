@@ -228,7 +228,7 @@ const getDispensariesProductsByUser = async (req, res = response) => {
                                                     name: product.name,
                                                     description: product.description,
                                                     createdAt: product.createdAt,
-                                                    updateAt: product.updateAt,
+                                                    updatedAt: product.updatedAt,
                                                     totalProducts: product.totalProducts,
                                                     coverImage: product.coverImage,
                                                     catalogo: product.catalogo,
