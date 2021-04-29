@@ -499,7 +499,7 @@ const getProductsLikedDispensary = async (req, res = response) => {
         const clubId = req.params.clubId;
 
         const userId = req.params.userId;
-        const dispensaryId = Request.params.dispensaryId;
+        const dispensaryId = req.params.dispensaryId;
 
         const dispensary = await Dispensary.findById(dispensaryId);
 
