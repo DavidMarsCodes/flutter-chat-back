@@ -498,8 +498,9 @@ const getProductsLikedDispensary = async (req, res = response) => {
         const clubId = req.params.clubId;
 
         const userId = req.params.userId;
+        const dispensaryId = re.params.dispensaryId;
 
-        const dispensary = await Dispensary.findOne({ isActive: true, subscriptor: userId, club: clubId });
+        const dispensary = await Dispensary.findById(dispensaryId);
 
 
         const productsClub = await Product

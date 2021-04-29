@@ -20,7 +20,7 @@ router.post('/new', [
 
 router.get('/products/catalogo/:id', validateJWT, getProductsByCatalogo);
 
-router.get('/dispensary/products/club/:clubId/user/:userId', validateJWT, getProductsLikedDispensary);
+router.get('/dispensary/products/club/:clubId/user/:userId/dispensary/:dispensaryId', validateJWT, getProductsLikedDispensary);
 
 
 router.get('/principal/products/:uid', validateJWT, getLastProducts);
