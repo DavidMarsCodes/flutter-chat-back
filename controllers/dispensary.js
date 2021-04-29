@@ -221,16 +221,14 @@ const getDispensariesProductsByUser = async (req, res = response) => {
                                             .then((productDispensary) => {
 
 
-
-
                                                 const productQuantity = {
 
                                                     id: product._id,
                                                     user: product.user,
                                                     name: product.name,
                                                     description: product.description,
-                                                    dateCreate: product.createdAt,
-                                                    dateUpdate: product.updateAt,
+                                                    createdAt: product.createdAt,
+                                                    updateAt: product.updateAt,
                                                     totalProducts: product.totalProducts,
                                                     coverImage: product.coverImage,
                                                     catalogo: product.catalogo,
