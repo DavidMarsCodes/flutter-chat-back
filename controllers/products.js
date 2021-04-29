@@ -521,61 +521,54 @@ const getProductsLikedDispensary = async (req, res = response) => {
 
 
 
-                    ProductDispensary.findOne({ product: product._id, dispensary: dispensary._id })
-                        .then((productDispesary) => {
 
 
+                    Favorite.findOne({
+                        product: product._id, user: userId
+                    })
+                        .then((favorite) => {
+                            console.log('favorite', favorite)
 
+                            const isLike = (favorite) ? favorite.isLike : false;
 
-                            const quantityDispensary = (productDispesary) ? productDispesary.quantity : 0;
-                            Favorite.findOne({
-                                product: product._id, user: userId
+                            Favorite.find({
+                                product: product._id, isLike: true
                             })
-                                .then((favorite) => {
-                                    console.log('favorite', favorite)
+                                .then((favorites) => {
 
-                                    const isLike = (favorite) ? favorite.isLike : false;
+                                    console.log('favorites', favorites)
 
-                                    Favorite.find({
-                                        product: product._id, isLike: true
-                                    })
-                                        .then((favorites) => {
-
-                                            console.log('favorites', favorites)
-
-                                            const countLikes = (favorites) ? favorites.length : 0;
+                                    const countLikes = (favorites) ? favorites.length : 0;
 
 
 
 
 
-                                            const productObj = {
+                                    const productObj = {
 
-                                                id: product._id,
-                                                user: product.user,
-                                                name: product.name,
-                                                description: product.description,
-                                                dateCreate: product.createdAt,
-                                                dateUpdate: product.updateAt,
-                                                totalProducts: product.totalProducts,
-                                                coverImage: product.coverImage,
-                                                catalogo: product.catalogo,
-                                                ratingInit: product.ratingInit,
-                                                cbd: product.cbd,
-                                                thc: product.thc,
-                                                isLike: isLike,
-                                                countLikes: countLikes,
-                                                quantityDispensary: quantityDispensary,
-
-
-                                            };
-
-                                            products.push(productObj);
-                                            resolve()
+                                        id: product._id,
+                                        user: product.user,
+                                        name: product.name,
+                                        description: product.description,
+                                        dateCreate: product.createdAt,
+                                        dateUpdate: product.updateAt,
+                                        totalProducts: product.totalProducts,
+                                        coverImage: product.coverImage,
+                                        catalogo: product.catalogo,
+                                        ratingInit: product.ratingInit,
+                                        cbd: product.cbd,
+                                        thc: product.thc,
+                                        isLike: isLike,
+                                        countLikes: countLikes,
+                                        quantityDispensary: 0,
 
 
+                                    };
 
-                                        })
+                                    products.push(productObj);
+                                    resolve()
+
+
 
                                 })
 
