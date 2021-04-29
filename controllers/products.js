@@ -510,9 +510,9 @@ const getProductsLikedDispensary = async (req, res = response) => {
         const products = []
 
 
-        if (dispensaryId != "1") {
+        if (dispensaryId == "1") {
 
-            const dispensary = await Dispensary.findById(dispensaryId);
+
 
 
             const promises = productsClub.map((product) =>
@@ -611,122 +611,73 @@ const getProductsLikedDispensary = async (req, res = response) => {
 
         else {
 
+            const dispensary = await Dispensary.findById(dispensaryId);
+
             const promises = productsClub.map((product) =>
 
                 new Promise((resolve, reject) => {
 
-                    (dispensary) ?
-
-                        ProductDispensary.findOne({ product: product._id, dispensary: dispensary._id })
-                            .then((productDispesary) => {
 
 
-
-
-                                const quantityDispensary = (productDispesary) ? productDispesary.quantity : 0;
-                                Favorite.findOne({
-                                    product: product._id, user: userId
-                                })
-                                    .then((favorite) => {
-                                        console.log('favorite', favorite)
-
-                                        const isLike = (favorite) ? favorite.isLike : false;
-
-                                        Favorite.find({
-                                            product: product._id, isLike: true
-                                        })
-                                            .then((favorites) => {
-
-                                                console.log('favorites', favorites)
-
-                                                const countLikes = (favorites) ? favorites.length : 0;
+                    ProductDispensary.findOne({ product: product._id, dispensary: dispensary._id })
+                        .then((productDispesary) => {
 
 
 
 
-
-                                                const productObj = {
-
-                                                    id: product._id,
-                                                    user: product.user,
-                                                    name: product.name,
-                                                    description: product.description,
-                                                    dateCreate: product.createdAt,
-                                                    dateUpdate: product.updateAt,
-                                                    totalProducts: product.totalProducts,
-                                                    coverImage: product.coverImage,
-                                                    catalogo: product.catalogo,
-                                                    ratingInit: product.ratingInit,
-                                                    cbd: product.cbd,
-                                                    thc: product.thc,
-                                                    isLike: isLike,
-                                                    countLikes: countLikes,
-                                                    quantityDispensary: quantityDispensary,
-
-
-                                                };
-
-                                                products.push(productObj);
-                                                resolve()
-
-
-
-                                            })
-
-                                    })
-
-                            }) :
-
-                        Favorite.findOne({
-                            product: product._id, user: userId
-                        })
-                            .then((favorite) => {
-                                console.log('favorite', favorite)
-
-                                const isLike = (favorite) ? favorite.isLike : false;
-
-                                Favorite.find({
-                                    product: product._id, isLike: true
-                                })
-                                    .then((favorites) => {
-
-                                        console.log('favorites', favorites)
-
-                                        const countLikes = (favorites) ? favorites.length : 0;
-
-
-
-
-
-                                        const productObj = {
-
-                                            id: product._id,
-                                            user: product.user,
-                                            name: product.name,
-                                            description: product.description,
-                                            dateCreate: product.createdAt,
-                                            dateUpdate: product.updateAt,
-                                            totalProducts: product.totalProducts,
-                                            coverImage: product.coverImage,
-                                            catalogo: product.catalogo,
-                                            ratingInit: product.ratingInit,
-                                            cbd: product.cbd,
-                                            thc: product.thc,
-                                            isLike: isLike,
-                                            countLikes: countLikes,
-                                            quantityDispensary: 0,
-
-
-                                        };
-
-                                        products.push(productObj);
-                                        resolve()
-
-
-
-                                    })
-
+                            const quantityDispensary = (productDispesary) ? productDispesary.quantity : 0;
+                            Favorite.findOne({
+                                product: product._id, user: userId
                             })
+                                .then((favorite) => {
+                                    console.log('favorite', favorite)
+
+                                    const isLike = (favorite) ? favorite.isLike : false;
+
+                                    Favorite.find({
+                                        product: product._id, isLike: true
+                                    })
+                                        .then((favorites) => {
+
+                                            console.log('favorites', favorites)
+
+                                            const countLikes = (favorites) ? favorites.length : 0;
+
+
+
+
+
+                                            const productObj = {
+
+                                                id: product._id,
+                                                user: product.user,
+                                                name: product.name,
+                                                description: product.description,
+                                                dateCreate: product.createdAt,
+                                                dateUpdate: product.updateAt,
+                                                totalProducts: product.totalProducts,
+                                                coverImage: product.coverImage,
+                                                catalogo: product.catalogo,
+                                                ratingInit: product.ratingInit,
+                                                cbd: product.cbd,
+                                                thc: product.thc,
+                                                isLike: isLike,
+                                                countLikes: countLikes,
+                                                quantityDispensary: quantityDispensary,
+
+
+                                            };
+
+                                            products.push(productObj);
+                                            resolve()
+
+
+
+                                        })
+
+                                })
+
+                        })
 
 
 
