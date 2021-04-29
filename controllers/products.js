@@ -514,7 +514,7 @@ const getProductsLikedDispensary = async (req, res = response) => {
 
             new Promise((resolve, reject) => {
 
-                (dispensary) ?
+                if (dispensary) {
 
                     ProductDispensary.findOne({ product: product._id, dispensary: dispensary._id })
                         .then((productDispesary) => {
@@ -574,9 +574,16 @@ const getProductsLikedDispensary = async (req, res = response) => {
 
                                 })
 
-                        }) :
+                        })
+
+                }
+
+                else {
 
                     resolve();
+                }
+
+
 
 
 
