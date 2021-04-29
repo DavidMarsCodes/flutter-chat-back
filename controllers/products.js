@@ -500,7 +500,7 @@ const getProductsLikedDispensary = async (req, res = response) => {
         const userId = req.params.userId;
         const dispensaryId = req.params.dispensaryId;
 
-        const dispensary = await Dispensary.findById(dispensaryId);
+
 
 
         const productsClub = await Product
@@ -510,7 +510,9 @@ const getProductsLikedDispensary = async (req, res = response) => {
         const products = []
 
 
-        if (dispensaryId = "1") {
+        if (dispensaryId != "1") {
+
+            const dispensary = await Dispensary.findById(dispensaryId);
 
 
             const promises = productsClub.map((product) =>
