@@ -200,7 +200,7 @@ const getDispensariesProductsByUser = async (req, res = response) => {
                 .then(() => {
 
                     ProductDispensary
-                        .find().findOne
+                        .find()
                         .populate('product')
 
                         .then((products) => {
