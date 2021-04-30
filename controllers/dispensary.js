@@ -213,7 +213,7 @@ const getDispensariesProductsByUser = async (req, res = response) => {
 
                                     new Promise((resolve, reject) => {
 
-                                        const productId = product._id;
+                                        //const productId = product._id;
 
 
 
