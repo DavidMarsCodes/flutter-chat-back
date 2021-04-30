@@ -173,6 +173,7 @@ const login = async (req, res = response) => {
 const renewToken = async (req, res = response) => {
 
     const uid = req.uid;
+    console.log('helloooo')
 
     // generar un nuevo JWT, generarJWT... uid...
     const token = await generateJWT(uid);
