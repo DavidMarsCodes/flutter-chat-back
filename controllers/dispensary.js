@@ -163,41 +163,32 @@ const getDispensariesProductsByUser = async (req, res = response) => {
 
                     console.log('ello!');
 
-                    ProductDispensary.find({ dispensary: dispensary._id })
-                        .populate('product')
-                        .then((products) => {
+
+                    const dispensaryItem = {
+
+                        id: dispensary._id,
+                        subscriptor: dispensary.subscriptor,
+                        gramsRecipe: dispensary.gramsRecipe,
+                        club: dispensary.club,
+                        dateDelivery: dispensary.dateDelivery,
+                        isActive: dispensary.isActive,
+                        isDelivered: dispensary.isDelivered,
+                        isCancel: dispensary.isCancel,
+                        isUpdate: dispensary.isUpdate,
+                        isUserNotifi: dispensary.isUserNotifi,
+
+                        isClubNotifi: dispensary.isClubNotifi,
+                        isEdit: dispensary.isEdit,
+                        createdAt: dispensary.createdAt,
+                        updatedAt: dispensary.updatedAt,
+                        productsDispensary: []
+
+                    }
 
 
-                            const dispensaryItem = {
+                    dispensariesProducts.push(dispensaryItem);
+                    resolve();
 
-                                id: dispensary._id,
-                                subscriptor: dispensary.subscriptor,
-                                gramsRecipe: dispensary.gramsRecipe,
-                                club: dispensary.club,
-                                dateDelivery: dispensary.dateDelivery,
-                                isActive: dispensary.isActive,
-                                isDelivered: dispensary.isDelivered,
-                                isCancel: dispensary.isCancel,
-                                isUpdate: dispensary.isUpdate,
-                                isUserNotifi: dispensary.isUserNotifi,
-
-                                isClubNotifi: dispensary.isClubNotifi,
-                                isEdit: dispensary.isEdit,
-                                createdAt: dispensary.createdAt,
-                                updatedAt: dispensary.updatedAt,
-                                productsDispensary: products
-
-                            }
-
-
-                            dispensariesProducts.push(dispensaryItem);
-                            resolve();
-
-
-
-
-
-                        })
 
 
 
@@ -208,13 +199,92 @@ const getDispensariesProductsByUser = async (req, res = response) => {
             Promise.all(promises)
                 .then(() => {
 
+                    ProductDispensary
+                        .find()
+                        .populate('product')
 
-                    return res.json({
-                        ok: false,
-                        dispensariesProducts
+                        .then((products) => {
 
 
-                    });
+                            if (products.length > 0) {
+
+                                const promisesProducts = products.map((productDispensary) =>
+
+
+                                    new Promise((resolve, reject) => {
+
+                                        const productId = product._id;
+
+
+
+
+                                        /*            const productQuantity = {
+           
+                                                       id: product._id,
+                                                       user: product.user,
+                                                       name: product.name,
+                                                       description: product.description,
+                                                       createdAt: product.createdAt,
+                                                       updatedAt: product.updatedAt,
+                                                       totalProducts: product.totalProducts,
+                                                       coverImage: product.coverImage,
+                                                       catalogo: product.catalogo,
+                                                       ratingInit: product.ratingInit,
+                                                       cbd: product.cbd,
+                                                       thc: product.thc,
+                                                       isLike: false,
+                                                       countLikes: 0,
+                                                       quantityDispensary: productDispensary.quantity
+           
+                                                   };
+            */
+
+
+                                        dispensariesProducts[0].productsDispensary.push(productDispensary)
+
+
+
+                                        resolve();
+
+
+
+
+
+
+                                    }))
+
+                                Promise.all(promisesProducts)
+                                    .then((resolve) => {
+
+
+
+
+                                        return res.json({
+                                            ok: true,
+                                            dispensariesProducts
+
+                                        });
+
+
+
+                                    });
+
+                            }
+                            else {
+
+                                return res.json({
+                                    ok: false,
+                                    dispensariesProducts
+
+
+                                });
+
+
+                            }
+
+                        })
+
+
 
 
                 })
