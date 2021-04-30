@@ -163,32 +163,41 @@ const getDispensariesProductsByUser = async (req, res = response) => {
 
                     console.log('ello!');
 
-
-                    const dispensaryItem = {
-
-                        id: dispensary._id,
-                        subscriptor: dispensary.subscriptor,
-                        gramsRecipe: dispensary.gramsRecipe,
-                        club: dispensary.club,
-                        dateDelivery: dispensary.dateDelivery,
-                        isActive: dispensary.isActive,
-                        isDelivered: dispensary.isDelivered,
-                        isCancel: dispensary.isCancel,
-                        isUpdate: dispensary.isUpdate,
-                        isUserNotifi: dispensary.isUserNotifi,
-
-                        isClubNotifi: dispensary.isClubNotifi,
-                        isEdit: dispensary.isEdit,
-                        createdAt: dispensary.createdAt,
-                        updatedAt: dispensary.updatedAt,
-                        productsDispensary: []
-
-                    }
+                    ProductDispensary.find({ dispensary: dispensary._id })
+                        .populate('product')
+                        .then((products) => {
 
 
-                    dispensariesProducts.push(dispensaryItem);
-                    resolve();
+                            const dispensaryItem = {
 
+                                id: dispensary._id,
+                                subscriptor: dispensary.subscriptor,
+                                gramsRecipe: dispensary.gramsRecipe,
+                                club: dispensary.club,
+                                dateDelivery: dispensary.dateDelivery,
+                                isActive: dispensary.isActive,
+                                isDelivered: dispensary.isDelivered,
+                                isCancel: dispensary.isCancel,
+                                isUpdate: dispensary.isUpdate,
+                                isUserNotifi: dispensary.isUserNotifi,
+
+                                isClubNotifi: dispensary.isClubNotifi,
+                                isEdit: dispensary.isEdit,
+                                createdAt: dispensary.createdAt,
+                                updatedAt: dispensary.updatedAt,
+                                productsDispensary: products
+
+                            }
+
+
+                            dispensariesProducts.push(dispensaryItem);
+                            resolve();
+
+
+
+
+
+                        })
 
 
 
@@ -199,63 +208,13 @@ const getDispensariesProductsByUser = async (req, res = response) => {
             Promise.all(promises)
                 .then(() => {
 
-                    ProductDispensary
-                        .find()
-                        .populate('product')
 
-                        .then((products) => {
-
-
-                            if (products.length > 0) {
-
-                                const promisesProducts = products.map((product) =>
+                    return res.json({
+                        ok: false,
+                        dispensariesProducts
 
 
-                                    new Promise((resolve, reject) => {
-
-                                        const productId = product._id;
-
-
-
-
-                                        dispensariesProducts[0].productsDispensary.push(product);
-                                        resolve();
-
-
-                                    }))
-
-                                Promise.all(promisesProducts)
-                                    .then((resolve) => {
-
-
-
-
-                                        return res.json({
-                                            ok: true,
-                                            dispensariesProducts
-
-                                        });
-
-
-
-                                    });
-
-                            }
-                            else {
-
-                                return res.json({
-                                    ok: false,
-                                    dispensariesProducts
-
-
-                                });
-
-
-                            }
-
-                        })
-
-
+                    });
 
 
                 })
