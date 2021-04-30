@@ -257,7 +257,7 @@ const getDispensariesProductsByUser = async (req, res = response) => {
                                                 }
 
                                                 else {
-                                                    productDispensary[0].productsDispensary.push(productQuantity);
+                                                    dispensariesProducts[0].productsDispensary.push(productQuantity);
                                                     resolve();
                                                 }
 
