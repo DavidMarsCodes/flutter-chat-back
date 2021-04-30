@@ -394,7 +394,7 @@ const createDispensary = async (req, res = response) => {
                         return res.json({
                             ok: true,
                             dispensary: dispensaryCreate,
-                            //productsDispensary
+                            productsDispensary
 
                         });
                     })
