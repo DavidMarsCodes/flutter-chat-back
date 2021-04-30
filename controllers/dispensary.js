@@ -218,29 +218,52 @@ const getDispensariesProductsByUser = async (req, res = response) => {
 
 
 
-                                        /*            const productQuantity = {
-           
-                                                       id: product._id,
-                                                       user: product.user,
-                                                       name: product.name,
-                                                       description: product.description,
-                                                       createdAt: product.createdAt,
-                                                       updatedAt: product.updatedAt,
-                                                       totalProducts: product.totalProducts,
-                                                       coverImage: product.coverImage,
-                                                       catalogo: product.catalogo,
-                                                       ratingInit: product.ratingInit,
-                                                       cbd: product.cbd,
-                                                       thc: product.thc,
-                                                       isLike: false,
-                                                       countLikes: 0,
-                                                       quantityDispensary: productDispensary.quantity
-           
-                                                   };
-            */
+                                        const productQuantity = {
+
+                                            id: productDispensary.product._id,
+                                            user: productDispensary.product.user,
+                                            name: productDispensary.product.name,
+                                            description: productDispensary.product.description,
+                                            createdAt: productDispensary.product.createdAt,
+                                            updatedAt: productDispensary.product.updatedAt,
+                                            totalProducts: productDispensary.product.totalProducts,
+                                            coverImage: productDispensary.product.coverImage,
+                                            catalogo: productDispensary.product.catalogo,
+                                            ratingInit: productDispensary.product.ratingInit,
+                                            cbd: productDispensary.product.cbd,
+                                            thc: productDispensary.product.thc,
+                                            isLike: false,
+                                            countLikes: 0,
+                                            quantityDispensary: productDispensary.quantity
+
+                                        };
 
 
-                                        dispensariesProducts[0].productsDispensary.push(productDispensary)
+
+                                        var dispensaryId = String(productDispensary.dispensary);
+
+                                        const find = dispensariesProducts.find(function (item) {
+                                            return String(item.id) == dispensaryId
+                                        });
+
+
+                                        if (find) {
+
+
+
+                                            console.log('FIN!', find);
+
+                                            find.productsDispensary.push(productQuantity);
+                                            resolve();
+
+                                        }
+
+                                        else {
+
+                                            resolve();
+                                        }
+
+
 
 
 
