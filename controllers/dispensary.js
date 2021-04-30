@@ -154,9 +154,6 @@ const getDispensariesProductsByUser = async (req, res = response) => {
 
         if (dispensaries.length > 0) {
 
-            // const dispensaryId = dispensary._id;
-
-            // const products = await ProductDispensary.find({ dispensary: dispensaryId })
 
             const promises = dispensaries.map((dispensary) =>
 
@@ -242,7 +239,7 @@ const getDispensariesProductsByUser = async (req, res = response) => {
                                                 };
 
 
-                                                const dispensaryId = String(productDispensary.dispensary);
+                                                const dispensaryId = (productDispensary) ? String(productDispensary.dispensary) : "0";
                                                 const find = dispensariesProducts.find(function (item) {
                                                     return String(item.id) == dispensaryId
                                                 });
