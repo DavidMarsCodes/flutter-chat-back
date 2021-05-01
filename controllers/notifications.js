@@ -337,7 +337,7 @@ const getProfilesSubscriptorsApproveByUser = async (req, res) => {
 
 
             const subscription = await Subscription
-                .find({ club: uid, subscribeApproved: false, isUpload: true, subscribeActive: true })
+                .find({ club: uid, isUpload: true, subscribeActive: true })
                 .sort({ createdAt: 'asc' })
 
 
@@ -654,94 +654,340 @@ const getProfilesSubscriptorsPendingByClub = async (req, res) => {
 
         const uid = req.params.uid;
 
-
-        const update = {
-
-            isClubNotifi: false
-        };
+        const myprofile = await Profile.findOne({ user: uid })
 
 
-        await Subscription.updateMany(
-            {
-                club: uid
-            },
-            {
-                $set: update
-            }
-        );
+        const isClub = myprofile.isClub;
 
 
 
-        const subscription = await Subscription
-            .find({ club: uid, subscribeApproved: false, isUpload: true, subscribeActive: true })
-            .sort({ createdAt: 'asc' })
+        if (isClub) {
 
 
-        const profiles = [];
+            const updateSub = {
 
-        const promises = subscription.map((obj) =>
-
-            new Promise((resolve, reject) => {
-
-                Profile.findOne({ user: obj.subscriptor }
-                )
-                    .then(item => {
+                isClubNotifi: true
+            };
 
 
-                        User.findById(obj.subscriptor
-                        )
+            await Subscription.updateMany(
+                {
+                    club: uid
+                },
+                {
+                    $set: updateSub
+                }
+            );
 
-                            .then(user => {
+            const updateDis = {
 
-                                const profile = {
-                                    name: item.name,
-                                    lastName: item.lastName,
-                                    imageHeader: item.imageHeader,
-                                    imageAvatar: item.imageAvatar,
-                                    imageRecipe: item.imageRecipe,
+                isClubNotifi: true
+            };
 
-                                    about: item.about,
-                                    id: item._id,
-                                    user: {
-                                        online: user.online,
-                                        uid: user._id,
-                                        email: user.email,
-                                        username: user.username,
 
-                                    },
-                                    messageDate: obj.updatedAt,
+            await Dispensary.updateMany(
+                {
+                    club: uid
+                },
+                {
+                    $set: updateDis
+                }
+            );
 
-                                    subscribeActive: obj.subscribeActive,
-                                    subscribeApproved: obj.subscribeApproved,
-                                    subId: obj._id,
-                                    isClub: item.isClub,
-                                    isUpload: obj.isUpload,
-                                    createdAt: item.createdAt,
-                                    updatedAt: item.updatedAt
 
-                                }
 
-                                profiles.push(profile);
-                                resolve();
 
-                            });
+            const subscription = await Subscription
+                .find({ club: uid, subscribeApproved: true, isUpload: true, subscribeActive: true })
+                .sort({ createdAt: 'asc' })
 
+
+
+
+            const profiles = [];
+
+            const promises = subscription.map((obj) =>
+
+                new Promise((resolve, reject) => {
+
+                    Profile.findOne({ user: obj.subscriptor }
+                    )
+                        .then(item => {
+
+
+
+
+
+                            User.findById(obj.subscriptor
+                            )
+
+                                .then(user => {
+
+
+
+                                    Dispensary.findOne({ club: uid, subscriptor: obj.subscriptor })
+
+                                        .then((dispensary) => {
+
+
+
+
+
+                                            const profileDispensary = {
+
+
+
+
+                                                profile: {
+                                                    name: item.name,
+                                                    lastName: item.lastName,
+                                                    imageHeader: item.imageHeader,
+                                                    imageAvatar: item.imageAvatar,
+                                                    imageRecipe: item.imageRecipe,
+
+                                                    about: item.about,
+                                                    id: item._id,
+                                                    user: {
+                                                        online: user.online,
+                                                        uid: user._id,
+                                                        email: user.email,
+                                                        username: user.username,
+
+                                                    },
+                                                    messageDate: obj.createdAt,
+
+                                                    subscribeActive: obj.subscribeActive,
+                                                    subscribeApproved: obj.subscribeApproved,
+                                                    subId: obj._id,
+                                                    isClub: item.isClub,
+                                                    isUpload: obj.isUpload,
+                                                    createdAt: item.createdAt,
+                                                    updatedAt: item.updatedAt,
+
+
+                                                },
+
+                                                dispensary: (dispensary) ? dispensary : new Dispensary({
+                                                    gramsRecipe: 0,
+                                                    dateDelivery: "",
+
+                                                    isActive: false,
+                                                    isDelivered: false,
+                                                    isCancel: false,
+                                                    isUpdate: false,
+                                                    isUserNotifi: false,
+                                                    isClubNotifi: false,
+                                                    isEdit: false,
+                                                    subscriptor: user._id,
+                                                    club: uid,
+                                                    createdAt: item.createdAt,
+                                                    updatedAt: item.createdAt,
+                                                    id: "",
+                                                })
+
+                                            }
+
+                                            profiles.push(profileDispensary);
+                                            resolve();
+
+                                        });
+
+                                })
+
+                        })
+                        ;
+                }));
+
+            Promise.all(promises)
+                .then((resolve) => {
+
+
+
+                    const subscriptionProfilesDate = profiles.sort((a, b) => {
+
+
+
+                        return new Date(b.dispensary.createdAt) - new Date(a.dispensary.createdAt);
+                    });
+
+
+                    return res.json({
+                        ok: true,
+
+                        profilesDispensaries: subscriptionProfilesDate
                     })
-                    ;
-            }));
-        Promise.all(promises)
-            .then((resolve) => {
-
-
-
-                const profilesOrder = profiles.sort((a, b) => (a.messageDate > b.messageDate) ? 1 : -1)
-
-
-                return res.json({
-                    ok: true,
-                    profiles: profilesOrder
                 })
-            })
+
+
+        }
+
+        else {
+
+
+            const updateSub = {
+
+                isUserNotifi: true
+            };
+
+
+            await Subscription.updateMany(
+                {
+                    subscriptor: uid
+                },
+                {
+                    $set: updateSub
+                }
+            );
+
+            const updateDis = {
+
+                isUserNotifi: true
+            };
+
+
+            await Dispensary.updateMany(
+                {
+                    subscriptor: uid
+                },
+                {
+                    $set: updateDis
+                }
+            );
+
+
+            console.log('else!!!')
+
+            const subscription = await Subscription
+                .find({ subscriptor: uid, subscribeApproved: true, isUpload: true, subscribeActive: true })
+                .sort({ createdAt: 'asc' })
+
+
+
+            const profiles = [];
+
+
+
+            const promises = subscription.map((obj) =>
+
+                new Promise((resolve, reject) => {
+
+                    Profile.findOne({ user: obj.club }
+                    )
+                        .then(item => {
+
+
+
+                            if (item.user._id != uid) {
+
+                                User.findById(obj.club
+                                )
+
+                                    .then(user => {
+
+                                        Dispensary.findOne({ club: obj.club, subscriptor: uid })
+
+                                            .then((dispensary) => {
+
+
+                                                const profileDispensary = {
+
+
+
+
+                                                    profile: {
+                                                        name: item.name,
+                                                        lastName: item.lastName,
+                                                        imageHeader: item.imageHeader,
+                                                        imageAvatar: item.imageAvatar,
+                                                        imageRecipe: item.imageRecipe,
+
+                                                        about: item.about,
+                                                        id: item._id,
+                                                        user: {
+                                                            online: user.online,
+                                                            uid: user._id,
+                                                            email: user.email,
+                                                            username: user.username,
+
+                                                        },
+                                                        messageDate: obj.createdAt,
+
+                                                        subscribeActive: obj.subscribeActive,
+                                                        subscribeApproved: obj.subscribeApproved,
+                                                        subId: obj._id,
+                                                        isClub: item.isClub,
+                                                        isUpload: obj.isUpload,
+                                                        createdAt: item.createdAt,
+                                                        updatedAt: item.updatedAt,
+
+
+                                                    },
+
+                                                    dispensary: (dispensary) ? dispensary : new Dispensary({
+                                                        gramsRecipe: 0,
+                                                        dateDelivery: "",
+
+                                                        isActive: false,
+                                                        isDelivered: false,
+                                                        isCancel: false,
+                                                        isUpdate: false,
+                                                        isUserNotifi: false,
+                                                        isClubNotifi: false,
+                                                        isEdit: false,
+                                                        subscriptor: user._id,
+                                                        club: uid,
+                                                        createdAt: item.createdAt,
+                                                        updatedAt: item.createdAt,
+                                                        id: "",
+                                                    })
+
+                                                }
+
+
+
+                                                profiles.push(profileDispensary);
+                                                resolve();
+
+                                            });
+
+                                    });
+
+
+                            }
+                            else {
+
+                                resolve();
+                            }
+                        })
+                        ;
+                }));
+            Promise.all(promises)
+                .then((resolve) => {
+
+
+
+
+                    const subscriptionProfilesDate = profiles.sort((a, b) => {
+
+
+
+                        return new Date(b.dispensary.createdAt) - new Date(a.dispensary.createdAt);
+                    });
+
+
+                    return res.json({
+                        ok: true,
+                        profilesDispensaries: subscriptionProfilesDate
+                    })
+                })
+
+        }
+
+
+
+
+
+
 
 
 
@@ -750,6 +996,7 @@ const getProfilesSubscriptorsPendingByClub = async (req, res) => {
 
     }
     catch (error) {
+
 
         res.status(500).json({
             ok: false,
