@@ -337,7 +337,7 @@ const getProfilesSubscriptorsApproveByUser = async (req, res) => {
 
 
             const subscription = await Subscription
-                .find({ club: uid, subscribeApproved: true, isUpload: true, subscribeActive: true })
+                .find({ club: uid, subscribeApproved: false, isUpload: true, subscribeActive: true })
                 .sort({ createdAt: 'asc' })
 
 
