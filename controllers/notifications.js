@@ -832,8 +832,9 @@ const getNotifications = async (req, res = response) => {
 
     console.log('messages for,', id, messagesNotifi);
 
+    const query = { $or: [{ subscriptor: id }, { isActive: true }] };
     const dispensaryNotifi = await Dispensary
-        .find({ $and: [{ $or: [{ subscriptor: id }, { isActive: true }] }, { isEdit: true }, { isDelivered: true }] })
+        .find(query)
 
 
 
