@@ -348,7 +348,7 @@ const getProfilesSubscriptorsApproveByUser = async (req, res) => {
 
 
 
-                                    Dispensary.findOnel({ club: uid, subscriptor: obj.subscriptor })
+                                    Dispensary.findOne({ club: uid, subscriptor: obj.subscriptor })
 
                                         .then((dispensary) => {
 
@@ -812,6 +812,7 @@ const getClubSubscriptionBySubid = async (req, res) => {
 
 
 
+
 const getNotifications = async (req, res = response) => {
 
     const {
@@ -877,7 +878,6 @@ const getNotifications = async (req, res = response) => {
     }
 
 }
-
 const getNotificationsMessages = async (req, res = response) => {
 
     const {
