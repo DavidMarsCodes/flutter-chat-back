@@ -812,7 +812,6 @@ const getClubSubscriptionBySubid = async (req, res) => {
 
 
 
-
 const getNotifications = async (req, res = response) => {
 
     const {
@@ -829,13 +828,11 @@ const getNotifications = async (req, res = response) => {
     const messagesNotifi = await Message
         .find({ isForNotifi: true, for: id })
 
-
-    console.log('messages for,', id, messagesNotifi);
-
     const query = { $or: [{ subscriptor: id }, { isActive: true }] };
     const dispensaryNotifi = await Dispensary
         .find(query);
 
+    console.log('messages for,', id, messagesNotifi);
 
 
     if (isClub) {
@@ -858,11 +855,6 @@ const getNotifications = async (req, res = response) => {
 
     else {
 
-
-        const messagesNotifi = await DispensaryMessage
-            .find({ subscriptor: uid, isActive: true })
-
-
         const subscriptionsNotifi = await Subscription
             .find({ isUserNotifi: true, subscriptor: id })
 
@@ -879,6 +871,7 @@ const getNotifications = async (req, res = response) => {
     }
 
 }
+
 const getNotificationsMessages = async (req, res = response) => {
 
     const {
