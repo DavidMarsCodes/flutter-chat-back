@@ -305,7 +305,7 @@ const getProfilesSubscriptorsApproveByUser = async (req, res) => {
 
             const update = {
 
-                isClubNotifi: false
+                isClubNotifi: true
             };
 
 
@@ -320,7 +320,7 @@ const getProfilesSubscriptorsApproveByUser = async (req, res) => {
 
             const update = {
 
-                isClubNotifi: false
+                isClubNotifi: true
             };
 
 
@@ -465,7 +465,7 @@ const getProfilesSubscriptorsApproveByUser = async (req, res) => {
 
             const update = {
 
-                isUserNotifi: false
+                isUserNotifi: true
             };
 
 
@@ -480,7 +480,7 @@ const getProfilesSubscriptorsApproveByUser = async (req, res) => {
 
             const update = {
 
-                isUserNotifi: false
+                isUserNotifi: true
             };
 
 
@@ -880,7 +880,7 @@ const getNotifications = async (req, res = response) => {
 
 
     if (isClub) {
-        const query = { $or: [{ subscriptor: id }, { isActive: true }, { isEdit: true }, { isDelivered: true }] };
+        const query = { $or: [{ subscriptor: id }, { isClubNotifi: true }, { isActive: true }, { isEdit: true }, { isDelivered: true }] };
         const dispensaryNotifi = await Dispensary
             .find(query);
 
@@ -902,6 +902,10 @@ const getNotifications = async (req, res = response) => {
     }
 
     else {
+
+        const query = { $or: [{ subscriptor: id }, { isUserNotifi: true }, { isActive: true }, { isEdit: true }, { isDelivered: true }] };
+        const dispensaryNotifi = await Dispensary
+            .find(query);
 
         const subscriptionsNotifi = await Subscription
             .find({ isUserNotifi: true, subscriptor: id })
