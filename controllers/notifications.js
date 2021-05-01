@@ -856,7 +856,6 @@ const getNotifications = async (req, res = response) => {
 
     else {
 
-        Dispensary.findOnel({ club: uid, subscriptor: obj.subscriptor })
 
         const messagesNotifi = await DispensaryMessage
             .find({ subscriptor: uid, isActive: true })
