@@ -831,7 +831,7 @@ const getNotifications = async (req, res = response) => {
     console.log('messages for,', id, messagesNotifi);
 
     const dispensaryNotifi = await Dispensary.find({
-        subscriptor: uid,
+        $and: [{ subscriptor: id }],
         $or: [{ isActive: true }, { isEdit: true }, { isDelivered: true }]
     })
 
