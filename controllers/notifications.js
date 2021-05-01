@@ -302,22 +302,38 @@ const getProfilesSubscriptorsApproveByUser = async (req, res) => {
 
         if (isClub) {
 
-            /* 
-                        const update = { 
-                               
-                            isClubNotifi: false
-                         };
-                
-                
-                   await Subscription.updateMany(
-                        {
-                            club: uid
-                        },
-                        {
-                            $set: update
-                        }
-                    );
-                 */
+
+            const update = {
+
+                isClubNotifi: false
+            };
+
+
+            await Subscription.updateMany(
+                {
+                    club: uid
+                },
+                {
+                    $set: update
+                }
+            );
+
+            const update = {
+
+                isClubNotifi: false
+            };
+
+
+            await Dispensary.updateMany(
+                {
+                    club: uid
+                },
+                {
+                    $set: update
+                }
+            );
+
+
 
 
             const subscription = await Subscription
@@ -445,6 +461,37 @@ const getProfilesSubscriptorsApproveByUser = async (req, res) => {
         }
 
         else {
+
+
+            const update = {
+
+                isUserNotifi: false
+            };
+
+
+            await Subscription.updateMany(
+                {
+                    subscriptor: uid
+                },
+                {
+                    $set: update
+                }
+            );
+
+            const update = {
+
+                isUserNotifi: false
+            };
+
+
+            await Dispensary.updateMany(
+                {
+                    subscriptor: uid
+                },
+                {
+                    $set: update
+                }
+            );
 
 
             console.log('else!!!')
@@ -828,14 +875,15 @@ const getNotifications = async (req, res = response) => {
     const messagesNotifi = await Message
         .find({ isForNotifi: true, for: id })
 
-    const query = { $or: [{ subscriptor: id }, { isActive: true }] };
-    const dispensaryNotifi = await Dispensary
-        .find(query);
 
     console.log('messages for,', id, messagesNotifi);
 
 
     if (isClub) {
+        const query = { $or: [{ subscriptor: id }, { isActive: true }, { isEdit: true }, { isDelivered: true }] };
+        const dispensaryNotifi = await Dispensary
+            .find(query);
+
 
 
         const subscriptionsNotifi = await Subscription
