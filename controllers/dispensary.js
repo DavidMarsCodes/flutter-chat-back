@@ -379,13 +379,21 @@ const createDispensary = async (req, res = response) => {
 
                 });
 
-                ProductDispensary.create(newPlantsProduct,
-                    (err, data) => {
-                        if (err) console.log(err);
-                        else
+                if (newPlantsProduct.quantity > 0) {
+                    ProductDispensary.create(newPlantsProduct,
+                        (err, data) => {
+                            if (err) console.log(err);
+                            else
 
-                            resolve();
-                    });
+                                resolve();
+                        });
+                }
+                else {
+                    resolve();
+                }
+
+
+
             }));
         Promise.all(promises)
             .then(() => {
