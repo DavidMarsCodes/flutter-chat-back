@@ -151,10 +151,10 @@ const getDispensariesProductsByUser = async (req, res = response) => {
 
         const profile = await Profile.findOne({ user: uid });
 
-        const dispensaries = [];
+
         if (profile.isClub) {
 
-            dispensaries = await Dispensary.find({ subscriptor: subId, club: uid });
+            const dispensaries = await Dispensary.find({ subscriptor: subId, club: uid });
 
 
 
@@ -339,7 +339,7 @@ const getDispensariesProductsByUser = async (req, res = response) => {
 
         else {
 
-            dispensaries = await Dispensary.find({ subscriptor: subId });
+            const dispensaries = await Dispensary.find({ subscriptor: subId });
 
 
             if (dispensaries.length > 0) {
