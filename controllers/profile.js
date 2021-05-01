@@ -261,6 +261,7 @@ const editUserProfile = async (req, res = response) => {
         // Encriptar contraseña
         const salt = bcrypt.genSaltSync();
 
+
         const passEncript = bcrypt.hashSync(password, salt);
 
 

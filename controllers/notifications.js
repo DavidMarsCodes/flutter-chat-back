@@ -167,35 +167,72 @@ const getProfilesSubscriptorsByUser = async (req, res) => {
 
                                     .then(user => {
 
-                                        const profile = {
-                                            name: item.name,
-                                            lastName: item.lastName,
-                                            imageHeader: item.imageHeader,
-                                            imageAvatar: item.imageAvatar,
-                                            imageRecipe: item.imageRecipe,
+                                        Dispensary.findOne({ club: obj.club, subscriptor: uid })
 
-                                            about: item.about,
-                                            id: item._id,
-                                            user: {
-                                                online: user.online,
-                                                uid: user._id,
-                                                email: user.email,
-                                                username: user.username,
+                                            .then((dispensary) => {
 
-                                            },
-                                            messageDate: obj.createdAt,
-                                            isClub: item.isClub,
-                                            subscribeActive: obj.subscribeActive,
-                                            subscribeApproved: obj.subscribeApproved,
-                                            subId: obj._id,
-                                            isUpload: obj.isUpload,
-                                            createdAt: item.createdAt,
-                                            updatedAt: item.updatedAt
+                                                const profileDispensary = {
 
-                                        }
 
-                                        profiles.push(profile);
-                                        resolve();
+
+
+
+                                                    profile: {
+                                                        name: item.name,
+                                                        lastName: item.lastName,
+                                                        imageHeader: item.imageHeader,
+                                                        imageAvatar: item.imageAvatar,
+                                                        imageRecipe: item.imageRecipe,
+
+                                                        about: item.about,
+                                                        id: item._id,
+                                                        user: {
+                                                            online: user.online,
+                                                            uid: user._id,
+                                                            email: user.email,
+                                                            username: user.username,
+
+                                                        },
+                                                        messageDate: obj.createdAt,
+                                                        isClub: item.isClub,
+                                                        subscribeActive: obj.subscribeActive,
+                                                        subscribeApproved: obj.subscribeApproved,
+                                                        subId: obj._id,
+                                                        isUpload: obj.isUpload,
+                                                        createdAt: item.createdAt,
+                                                        updatedAt: item.updatedAt
+
+                                                    },
+
+                                                    dispensary: (dispensary) ? dispensary : new Dispensary({
+                                                        gramsRecipe: 0,
+                                                        dateDelivery: "",
+
+                                                        isActive: false,
+                                                        isDelivered: false,
+                                                        isCancel: false,
+                                                        isUpdate: false,
+                                                        isUserNotifi: false,
+                                                        isClubNotifi: false,
+                                                        isEdit: false,
+                                                        subscriptor: user._id,
+                                                        club: uid,
+                                                        createdAt: item.createdAt,
+                                                        updatedAt: item.createdAt,
+                                                        id: "",
+                                                    })
+
+                                                }
+
+
+                                                profiles.push(profileDispensary);
+                                                resolve();
+
+                                            })
+
+
+
+
 
                                     });
 
@@ -212,17 +249,17 @@ const getProfilesSubscriptorsByUser = async (req, res) => {
             Promise.all(promises)
                 .then((resolve) => {
 
-                    const profilesOrder = profiles.sort((a, b) => {
+                    const subscriptionProfilesDate = profiles.sort((a, b) => {
 
-                        return new Date(b.messageDate) - new Date(a.messageDate);
+
+
+                        return new Date(b.dispensary.createdAt) - new Date(a.dispensary.createdAt);
                     });
-
-
 
 
                     return res.json({
                         ok: true,
-                        profiles: profilesOrder
+                        profilesDispensaries: subscriptionProfilesDate
                     })
                 })
 
@@ -311,7 +348,7 @@ const getProfilesSubscriptorsApproveByUser = async (req, res) => {
 
 
 
-                                    Dispensary.findOne({ club: uid, subscriptor: obj.subscriptor })
+                                    Dispensary.findOnel({ club: uid, subscriptor: obj.subscriptor })
 
                                         .then((dispensary) => {
 
@@ -793,6 +830,11 @@ const getNotifications = async (req, res = response) => {
 
     console.log('messages for,', id, messagesNotifi);
 
+    const dispensaryNotifi = await Dispensary.find({
+        subscriptor: uid,
+        $or: [{ isActive: true }, { isEdit: true }, { isDelivered: true }]
+    })
+
 
     if (isClub) {
 
@@ -804,7 +846,8 @@ const getNotifications = async (req, res = response) => {
         res.json({
             ok: true,
             subscriptionsNotifi,
-            messagesNotifi
+            messagesNotifi,
+            dispensaryNotifi
 
         });
 
@@ -813,6 +856,12 @@ const getNotifications = async (req, res = response) => {
 
     else {
 
+        Dispensary.findOnel({ club: uid, subscriptor: obj.subscriptor })
+
+        const messagesNotifi = await DispensaryMessage
+            .find({ subscriptor: uid, isActive: true })
+
+
         const subscriptionsNotifi = await Subscription
             .find({ isUserNotifi: true, subscriptor: id })
 
@@ -820,7 +869,8 @@ const getNotifications = async (req, res = response) => {
         res.json({
             ok: true,
             subscriptionsNotifi,
-            messagesNotifi
+            messagesNotifi,
+            dispensaryNotifi
 
         });
 
