@@ -465,7 +465,7 @@ const getProfilesSubscriptorsApproveByUser = async (req, res) => {
 
             const updateSub = {
 
-                isUserNotifi: true
+                isUserNotifi: false
             };
 
 
@@ -480,7 +480,7 @@ const getProfilesSubscriptorsApproveByUser = async (req, res) => {
 
             const updateDis = {
 
-                isUserNotifi: true
+                isUserNotifi: false
             };
 
 
