@@ -305,7 +305,7 @@ const getProfilesSubscriptorsApproveByUser = async (req, res) => {
 
             const updateSub = {
 
-                isClubNotifi: true
+                isClubNotifi: false
             };
 
 
@@ -320,7 +320,7 @@ const getProfilesSubscriptorsApproveByUser = async (req, res) => {
 
             const updateDis = {
 
-                isClubNotifi: true
+                isClubNotifi: false
             };
 
 
@@ -666,7 +666,7 @@ const getProfilesSubscriptorsPendingByClub = async (req, res) => {
 
             const updateSub = {
 
-                isClubNotifi: true
+                isClubNotifi: false
             };
 
 
@@ -681,7 +681,7 @@ const getProfilesSubscriptorsPendingByClub = async (req, res) => {
 
             const updateDis = {
 
-                isClubNotifi: true
+                isClubNotifi: false
             };
 
 
