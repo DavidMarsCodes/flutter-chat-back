@@ -303,7 +303,7 @@ const getProfilesSubscriptorsApproveByUser = async (req, res) => {
         if (isClub) {
 
 
-            const update = {
+            const updateSub = {
 
                 isClubNotifi: true
             };
@@ -314,11 +314,11 @@ const getProfilesSubscriptorsApproveByUser = async (req, res) => {
                     club: uid
                 },
                 {
-                    $set: update
+                    $set: updateSub
                 }
             );
 
-            const update = {
+            const updateDis = {
 
                 isClubNotifi: true
             };
@@ -329,7 +329,7 @@ const getProfilesSubscriptorsApproveByUser = async (req, res) => {
                     club: uid
                 },
                 {
-                    $set: update
+                    $set: updateDis
                 }
             );
 
@@ -463,7 +463,7 @@ const getProfilesSubscriptorsApproveByUser = async (req, res) => {
         else {
 
 
-            const update = {
+            const updateSub = {
 
                 isUserNotifi: true
             };
@@ -474,11 +474,11 @@ const getProfilesSubscriptorsApproveByUser = async (req, res) => {
                     subscriptor: uid
                 },
                 {
-                    $set: update
+                    $set: updateSub
                 }
             );
 
-            const update = {
+            const updateDis = {
 
                 isUserNotifi: true
             };
@@ -489,7 +489,7 @@ const getProfilesSubscriptorsApproveByUser = async (req, res) => {
                     subscriptor: uid
                 },
                 {
-                    $set: update
+                    $set: updateDis
                 }
             );
 
