@@ -524,7 +524,9 @@ const getProfilesSubscriptorsApproveByUser = async (req, res) => {
 
                     const subscriptionProfilesDate = profiles.sort((a, b) => {
 
-                        return new Date(b.messageDate) - new Date(a.messageDate);
+
+
+                        return new Date(b.dispensary.createdAt) - new Date(a.dispensary.createdAt);
                     });
 
 
