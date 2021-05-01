@@ -420,82 +420,94 @@ const getProfilesSubscriptorsApproveByUser = async (req, res) => {
 
             const profiles = [];
 
-            const promises = subscription.map((obj) =>
+            if (subscription.length > 0) {
 
-                new Promise((resolve, reject) => {
+                const promises = subscription.map((obj) =>
 
-                    Profile.findOne({ user: obj.club }
-                    )
-                        .then(item => {
+                    new Promise((resolve, reject) => {
+
+                        Profile.findOne({ user: obj.club }
+                        )
+                            .then(item => {
 
 
 
-                            if (item.user._id != uid) {
+                                if (item.user._id != uid) {
 
-                                User.findById(obj.club
-                                )
+                                    User.findById(obj.club
+                                    )
 
-                                    .then(user => {
+                                        .then(user => {
 
-                                        const profile = {
-                                            name: item.name,
-                                            lastName: item.lastName,
-                                            imageHeader: item.imageHeader,
-                                            imageAvatar: item.imageAvatar,
-                                            imageRecipe: item.imageRecipe,
+                                            const profile = {
+                                                name: item.name,
+                                                lastName: item.lastName,
+                                                imageHeader: item.imageHeader,
+                                                imageAvatar: item.imageAvatar,
+                                                imageRecipe: item.imageRecipe,
 
-                                            about: item.about,
-                                            id: item._id,
-                                            user: {
-                                                online: user.online,
-                                                uid: user._id,
-                                                email: user.email,
-                                                username: user.username,
+                                                about: item.about,
+                                                id: item._id,
+                                                user: {
+                                                    online: user.online,
+                                                    uid: user._id,
+                                                    email: user.email,
+                                                    username: user.username,
 
-                                            },
-                                            messageDate: obj.createdAt,
-                                            isClub: item.isClub,
-                                            subscribeActive: obj.subscribeActive,
-                                            subscribeApproved: obj.subscribeApproved,
-                                            subId: obj._id,
-                                            isUpload: obj.isUpload,
-                                            createdAt: item.createdAt,
-                                            updatedAt: item.updatedAt
+                                                },
+                                                messageDate: obj.createdAt,
+                                                isClub: item.isClub,
+                                                subscribeActive: obj.subscribeActive,
+                                                subscribeApproved: obj.subscribeApproved,
+                                                subId: obj._id,
+                                                isUpload: obj.isUpload,
+                                                createdAt: item.createdAt,
+                                                updatedAt: item.updatedAt
 
-                                        }
+                                            }
 
-                                        profiles.push(profile);
-                                        resolve();
+                                            profiles.push(profile);
+                                            resolve();
 
-                                    });
+                                        });
 
-                            }
+                                }
 
-                            else {
+                                else {
 
-                                resolve();
-                            }
+                                    resolve();
+                                }
 
+                            })
+                            ;
+                    }));
+                Promise.all(promises)
+                    .then((resolve) => {
+
+
+
+
+                        const subscriptionProfilesDate = profiles.sort((a, b) => {
+
+                            return new Date(b.messageDate) - new Date(a.messageDate);
+                        });
+
+
+                        return res.json({
+                            ok: true,
+                            profiles: subscriptionProfilesDate
                         })
-                        ;
-                }));
-            Promise.all(promises)
-                .then((resolve) => {
-
-
-
-
-                    const subscriptionProfilesDate = profiles.sort((a, b) => {
-
-                        return new Date(b.messageDate) - new Date(a.messageDate);
-                    });
-
-
-                    return res.json({
-                        ok: true,
-                        profiles: subscriptionProfilesDate
                     })
+
+            }
+
+            else {
+
+                return res.json({
+                    ok: true,
+                    profiles: []
                 })
+            }
 
         }
 
