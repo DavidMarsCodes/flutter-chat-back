@@ -504,15 +504,24 @@ const UpdateDispensary = async (req, res = response) => {
                         }
 
                         else {
+                            if (newProduct.quantity > 0) {
+
+                                ProductDispensary.create(newProduct,
+                                    (err, data) => {
+                                        if (err) console.log(err);
+                                        else
+
+                                            resolve();
+                                    });
+                            }
+
+                            else {
+
+                                resolve();
+                            }
 
 
-                            ProductDispensary.create(newProduct,
-                                (err, data) => {
-                                    if (err) console.log(err);
-                                    else
 
-                                        resolve();
-                                });
 
 
                         }
