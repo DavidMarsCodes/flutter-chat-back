@@ -553,6 +553,7 @@ const createDispensary = async (req, res = response) => {
             subscriptor: subscriptor,
             gramsRecipe: gramsRecipe,
             club: club,
+            isUserNotifi: true,
             dateDelivery: dateDelivery
         })
 
@@ -662,6 +663,7 @@ const UpdateDispensary = async (req, res = response) => {
                     product: obj.id,
                     dispensary: dispensary.id,
                     quantity: obj.quantityDispensary,
+                    isUserNotifi: true,
 
                 });
 
@@ -764,7 +766,8 @@ const UpdateDeliveredDispensary = async (req, res = response) => {
 
         const update = {
 
-            isDelivered: true
+            isDelivered: true,
+            isUserNotifi: true,
         };
 
 
