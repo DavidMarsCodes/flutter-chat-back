@@ -292,7 +292,7 @@ const getDispensariesProductsByUser = async (req, res = response) => {
 
 
 
-                                                return new Date(b.createdAt) - new Date(a.createdAt);
+                                                return new Date(a.createdAt) - new Date(b.createdAt);
                                             });
 
 
