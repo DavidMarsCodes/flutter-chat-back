@@ -288,12 +288,18 @@ const getDispensariesProductsByUser = async (req, res = response) => {
                                     Promise.all(promisesProducts)
                                         .then((resolve) => {
 
+                                            const dispensaryCreateAt = dispensariesProducts.sort((a, b) => {
+
+
+
+                                                return new Date(b.createdAt) - new Date(a.createdAt);
+                                            });
 
 
 
                                             return res.json({
                                                 ok: true,
-                                                dispensariesProducts
+                                                dispensariesProducts: dispensaryCreateAt
 
                                             });
 
@@ -304,9 +310,16 @@ const getDispensariesProductsByUser = async (req, res = response) => {
                                 }
                                 else {
 
+                                    const dispensaryCreateAt = dispensariesProducts.sort((a, b) => {
+
+
+
+                                        return new Date(b.createdAt) - new Date(a.createdAt);
+                                    });
+
                                     return res.json({
                                         ok: false,
-                                        dispensariesProducts
+                                        dispensariesProducts: dispensaryCreateAt
 
 
                                     });
@@ -325,9 +338,18 @@ const getDispensariesProductsByUser = async (req, res = response) => {
 
             else {
 
+
+                const dispensaryCreateAt = dispensariesProducts.sort((a, b) => {
+
+
+
+                    return new Date(b.createdAt) - new Date(a.createdAt);
+                });
+
+
                 return res.json({
                     ok: false,
-                    dispensariesProducts
+                    dispensariesProducts: dispensaryCreateAt
 
 
                 });
