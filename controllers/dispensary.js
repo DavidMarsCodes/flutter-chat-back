@@ -292,7 +292,7 @@ const getDispensariesProductsByUser = async (req, res = response) => {
 
 
 
-                                                return new Date(a.createdAt) - new Date(b.createdAt);
+                                                return new Date(b.createdAt) - new Date(a.createdAt);
                                             });
 
 
@@ -339,17 +339,11 @@ const getDispensariesProductsByUser = async (req, res = response) => {
             else {
 
 
-                const dispensaryCreateAt = dispensariesProducts.sort((a, b) => {
-
-
-
-                    return new Date(b.createdAt) - new Date(a.createdAt);
-                });
 
 
                 return res.json({
                     ok: false,
-                    dispensariesProducts: dispensaryCreateAt
+                    dispensariesProducts
 
 
                 });
@@ -492,11 +486,16 @@ const getDispensariesProductsByUser = async (req, res = response) => {
                                         .then((resolve) => {
 
 
+                                            const dispensaryCreateAt = dispensariesProducts.sort((a, b) => {
 
+
+
+                                                return new Date(b.createdAt) - new Date(a.createdAt);
+                                            });
 
                                             return res.json({
                                                 ok: true,
-                                                dispensariesProducts
+                                                dispensariesProducts: dispensaryCreateAt
 
                                             });
 
@@ -507,9 +506,16 @@ const getDispensariesProductsByUser = async (req, res = response) => {
                                 }
                                 else {
 
+                                    const dispensaryCreateAt = dispensariesProducts.sort((a, b) => {
+
+
+
+                                        return new Date(b.createdAt) - new Date(a.createdAt);
+                                    });
+
                                     return res.json({
                                         ok: false,
-                                        dispensariesProducts
+                                        dispensariesProducts: dispensaryCreateAt
 
 
                                     });
@@ -527,6 +533,8 @@ const getDispensariesProductsByUser = async (req, res = response) => {
             }
 
             else {
+
+
 
                 return res.json({
                     ok: false,
