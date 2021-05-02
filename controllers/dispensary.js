@@ -276,7 +276,7 @@ const getDispensariesProductsByUser = async (req, res = response) => {
 
 
 
-                                            resolve();
+
 
 
 

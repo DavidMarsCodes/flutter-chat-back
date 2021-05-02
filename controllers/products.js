@@ -643,6 +643,7 @@ const getProductsLikedDispensary = async (req, res = response) => {
 
                     Profile.findOne({ user: product.user }
                     )
+                        .populate('user')
 
                         .then(item => {
 
@@ -707,10 +708,10 @@ const getProductsLikedDispensary = async (req, res = response) => {
                                                             about: item.about,
                                                             id: item._id,
                                                             user: {
-                                                                online: user.online,
-                                                                uid: user._id,
-                                                                email: user.email,
-                                                                username: user.username,
+                                                                online: item.user.online,
+                                                                uid: item.user._id,
+                                                                email: item.user.email,
+                                                                username: item.user.username,
 
                                                             },
                                                             subscribeApproved: subscribeApproved,
