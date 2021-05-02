@@ -583,11 +583,11 @@ const getProductsLikedDispensary = async (req, res = response) => {
                                                         username: item.user.username,
 
                                                     },
-                                                    subscribeApproved: subscribeApproved,
-                                                    subscribeActive: subscribeActive,
-                                                    message: obj.message,
+                                                    subscribeApproved: true,
+                                                    subscribeActive: true,
+                                                    message: '',
                                                     isClub: item.isClub,
-                                                    messageDate: obj.createdAt,
+                                                    messageDate: item.createdAt,
                                                     createdAt: item.createdAt,
                                                     updatedAt: item.updatedAt
 
@@ -715,11 +715,11 @@ const getProductsLikedDispensary = async (req, res = response) => {
                                                                 username: item.user.username,
 
                                                             },
-                                                            subscribeApproved: subscribeApproved,
-                                                            subscribeActive: subscribeActive,
-                                                            message: obj.message,
+                                                            subscribeApproved: true,
+                                                            subscribeActive: true,
+                                                            message: '',
                                                             isClub: item.isClub,
-                                                            messageDate: obj.createdAt,
+                                                            messageDate: item.createdAt,
                                                             createdAt: item.createdAt,
                                                             updatedAt: item.updatedAt
 
