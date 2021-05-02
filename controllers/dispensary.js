@@ -406,7 +406,7 @@ const getDispensariesProductsByUser = async (req, res = response) => {
                     .then(() => {
 
                         ProductDispensary
-                            .find({ subscriptor: uid })
+                            .find()
                             .populate('product')
 
                             .then((products) => {
@@ -473,7 +473,7 @@ const getDispensariesProductsByUser = async (req, res = response) => {
 
 
 
-                                            resolve();
+
 
 
 
