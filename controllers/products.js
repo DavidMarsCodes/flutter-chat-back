@@ -502,12 +502,11 @@ const getProductsLikedDispensary = async (req, res = response) => {
 
 
 
-
         const productsClub = await Product
             .find({ user: clubId })
             .sort('-createdAt')
 
-        const products = []
+        const productsProfileDispensary = []
 
 
         if (dispensaryId == "1") {
@@ -521,104 +520,11 @@ const getProductsLikedDispensary = async (req, res = response) => {
 
 
 
+                    Profile.findOne({ user: product.user }
+                    )
 
+                        .then(item => {
 
-                    Favorite.findOne({
-                        product: product._id, user: userId
-                    })
-                        .then((favorite) => {
-                            console.log('favorite', favorite)
-
-                            const isLike = (favorite) ? favorite.isLike : false;
-
-                            Favorite.find({
-                                product: product._id, isLike: true
-                            })
-                                .then((favorites) => {
-
-                                    console.log('favorites', favorites)
-
-                                    const countLikes = (favorites) ? favorites.length : 0;
-
-
-
-
-
-                                    const productObj = {
-
-                                        id: product._id,
-                                        user: product.user,
-                                        name: product.name,
-                                        description: product.description,
-                                        dateCreate: product.createdAt,
-                                        dateUpdate: product.updateAt,
-                                        totalProducts: product.totalProducts,
-                                        coverImage: product.coverImage,
-                                        catalogo: product.catalogo,
-                                        ratingInit: product.ratingInit,
-                                        cbd: product.cbd,
-                                        thc: product.thc,
-                                        isLike: isLike,
-                                        countLikes: countLikes,
-                                        quantityDispensary: 0,
-
-
-                                    };
-
-                                    products.push(productObj);
-                                    resolve()
-
-
-
-                                })
-
-                        })
-
-
-
-                }))
-
-            Promise.all(promises)
-                .then((resolve) => {
-
-
-
-
-
-
-                    const productsLike = products.sort((a, b) => {
-
-                        return (a.isLike) - (b.isLike);
-                    });
-
-
-                    res.json({
-                        ok: true,
-                        products: productsLike,
-                    })
-                })
-
-
-
-        }
-
-        else {
-
-            const dispensary = await Dispensary.findById(dispensaryId);
-
-            const promises = productsClub.map((product) =>
-
-                new Promise((resolve, reject) => {
-
-
-
-                    ProductDispensary.findOne({ product: product._id, dispensary: dispensary._id })
-                        .then((productDispesary) => {
-
-
-
-
-                            const quantityDispensary = (productDispesary) ? productDispesary.quantity : 0;
                             Favorite.findOne({
                                 product: product._id, user: userId
                             })
@@ -637,31 +543,58 @@ const getProductsLikedDispensary = async (req, res = response) => {
                                             const countLikes = (favorites) ? favorites.length : 0;
 
 
+                                            const productProfileDispensary = {
 
 
+                                                product: {
 
-                                            const productObj = {
-
-                                                id: product._id,
-                                                user: product.user,
-                                                name: product.name,
-                                                description: product.description,
-                                                dateCreate: product.createdAt,
-                                                dateUpdate: product.updateAt,
-                                                totalProducts: product.totalProducts,
-                                                coverImage: product.coverImage,
-                                                catalogo: product.catalogo,
-                                                ratingInit: product.ratingInit,
-                                                cbd: product.cbd,
-                                                thc: product.thc,
-                                                isLike: isLike,
-                                                countLikes: countLikes,
-                                                quantityDispensary: quantityDispensary,
+                                                    id: product._id,
+                                                    user: product.user,
+                                                    name: product.name,
+                                                    description: product.description,
+                                                    dateCreate: product.createdAt,
+                                                    dateUpdate: product.updateAt,
+                                                    totalProducts: product.totalProducts,
+                                                    coverImage: product.coverImage,
+                                                    catalogo: product.catalogo,
+                                                    ratingInit: product.ratingInit,
+                                                    cbd: product.cbd,
+                                                    thc: product.thc,
+                                                    isLike: isLike,
+                                                    countLikes: countLikes,
+                                                    quantityDispensary: 0,
 
 
-                                            };
+                                                },
 
-                                            products.push(productObj);
+                                                profile: {
+                                                    name: item.name,
+                                                    lastName: item.lastName,
+                                                    imageHeader: item.imageHeader,
+                                                    imageAvatar: item.imageAvatar,
+                                                    imageRecipe: item.imageRecipe,
+                                                    about: item.about,
+                                                    id: item._id,
+                                                    user: {
+                                                        online: user.online,
+                                                        uid: user._id,
+                                                        email: user.email,
+                                                        username: user.username,
+
+                                                    },
+                                                    subscribeApproved: subscribeApproved,
+                                                    subscribeActive: subscribeActive,
+                                                    message: obj.message,
+                                                    isClub: item.isClub,
+                                                    messageDate: obj.createdAt,
+                                                    createdAt: item.createdAt,
+                                                    updatedAt: item.updatedAt
+
+                                                }
+
+                                            }
+
+                                            productsProfileDispensary.push(productProfileDispensary);
                                             resolve()
 
 
@@ -672,7 +605,138 @@ const getProductsLikedDispensary = async (req, res = response) => {
 
                         })
 
+                }))
 
+            Promise.all(promises)
+                .then((resolve) => {
+
+
+
+
+
+
+                    const productsLike = productsProfileDispensary.sort((a, b) => {
+
+                        return (a.isLike) - (b.isLike);
+                    });
+
+
+                    res.json({
+                        ok: true,
+                        //productsProfileDispensary
+                        productsProfileDispensary: productsLike,
+                    })
+                })
+
+
+
+        }
+
+        else {
+
+            const dispensary = await Dispensary.findById(dispensaryId);
+
+            const promises = productsClub.map((product) =>
+
+                new Promise((resolve, reject) => {
+
+
+                    Profile.findOne({ user: product.user }
+                    )
+
+                        .then(item => {
+
+                            ProductDispensary.findOne({ product: product._id, dispensary: dispensary._id })
+                                .then((productDispesary) => {
+
+
+
+
+                                    const quantityDispensary = (productDispesary) ? productDispesary.quantity : 0;
+                                    Favorite.findOne({
+                                        product: product._id, user: userId
+                                    })
+                                        .then((favorite) => {
+                                            console.log('favorite', favorite)
+
+                                            const isLike = (favorite) ? favorite.isLike : false;
+
+                                            Favorite.find({
+                                                product: product._id, isLike: true
+                                            })
+                                                .then((favorites) => {
+
+                                                    console.log('favorites', favorites)
+
+                                                    const countLikes = (favorites) ? favorites.length : 0;
+
+
+
+                                                    const productProfileDispensary = {
+
+                                                        product: {
+
+                                                            id: product._id,
+                                                            user: product.user,
+                                                            name: product.name,
+                                                            description: product.description,
+                                                            dateCreate: product.createdAt,
+                                                            dateUpdate: product.updateAt,
+                                                            totalProducts: product.totalProducts,
+                                                            coverImage: product.coverImage,
+                                                            catalogo: product.catalogo,
+                                                            ratingInit: product.ratingInit,
+                                                            cbd: product.cbd,
+                                                            thc: product.thc,
+                                                            isLike: isLike,
+                                                            countLikes: countLikes,
+                                                            quantityDispensary: quantityDispensary,
+
+
+                                                        },
+
+
+
+
+                                                        profile: {
+                                                            name: item.name,
+                                                            lastName: item.lastName,
+                                                            imageHeader: item.imageHeader,
+                                                            imageAvatar: item.imageAvatar,
+                                                            imageRecipe: item.imageRecipe,
+                                                            about: item.about,
+                                                            id: item._id,
+                                                            user: {
+                                                                online: user.online,
+                                                                uid: user._id,
+                                                                email: user.email,
+                                                                username: user.username,
+
+                                                            },
+                                                            subscribeApproved: subscribeApproved,
+                                                            subscribeActive: subscribeActive,
+                                                            message: obj.message,
+                                                            isClub: item.isClub,
+                                                            messageDate: obj.createdAt,
+                                                            createdAt: item.createdAt,
+                                                            updatedAt: item.updatedAt
+
+                                                        }
+
+                                                    }
+
+                                                    productsProfileDispensary.push(productProfileDispensary);
+                                                    resolve()
+
+
+
+                                                })
+
+                                        })
+
+                                })
+
+                        })
 
                 }
 
@@ -686,7 +750,7 @@ const getProductsLikedDispensary = async (req, res = response) => {
 
 
 
-                    const productsLike = products.sort((a, b) => {
+                    const productsLike = productsProfileDispensary.sort((a, b) => {
 
                         return (a.isLike) - (b.isLike);
                     });
@@ -694,7 +758,7 @@ const getProductsLikedDispensary = async (req, res = response) => {
 
                     res.json({
                         ok: true,
-                        products: productsLike,
+                        productsProfileDispensary: productsLike,
                     })
                 })
 
