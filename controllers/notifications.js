@@ -337,7 +337,7 @@ const getProfilesSubscriptorsApproveByUser = async (req, res) => {
 
 
             const subscription = await Subscription
-                .find({ club: uid, isUpload: true, subscribeApproved: false, ubscribeActive: true })
+                .find({ club: uid, isUpload: true, subscribeApproved: true, ubscribeActive: true })
                 .sort({ createdAt: 'asc' })
 
 
@@ -650,6 +650,7 @@ const getProfilesSubscriptorsApproveByUser = async (req, res) => {
 const getProfilesSubscriptorsPendingByClub = async (req, res) => {
 
 
+
     try {
 
         const uid = req.params.uid;
@@ -698,7 +699,7 @@ const getProfilesSubscriptorsPendingByClub = async (req, res) => {
 
 
             const subscription = await Subscription
-                .find({ club: uid, subscribeApproved: true, isUpload: true, subscribeActive: true })
+                .find({ club: uid, isUpload: true, subscribeApproved: false, ubscribeActive: true })
                 .sort({ createdAt: 'asc' })
 
 
@@ -826,7 +827,7 @@ const getProfilesSubscriptorsPendingByClub = async (req, res) => {
 
             const updateSub = {
 
-                isUserNotifi: true
+                isUserNotifi: false
             };
 
 
@@ -841,7 +842,7 @@ const getProfilesSubscriptorsPendingByClub = async (req, res) => {
 
             const updateDis = {
 
-                isUserNotifi: true
+                isUserNotifi: false
             };
 
 
