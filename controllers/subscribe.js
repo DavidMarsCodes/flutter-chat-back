@@ -341,7 +341,7 @@ const getSubscriptionsUsersDispensaries = async (req, res = response) => {
 
         const subscriptions = await Subscription
             .find({ club: clubId, subscribeApproved: true })
-            .populate('subscriptor')
+
             .sort('-createdAt')
 
         const subscriptionsDispensaries = []
@@ -414,7 +414,7 @@ const getSubscriptionsUsersDispensaries = async (req, res = response) => {
                                         subscribeApproved: subscription.subscribeApproved,
                                         isClubNotifi: subscription.isClubNotifi,
                                         isUserNotifi: subscription.isUserNotifi,
-                                        dispensaries: dispensaries
+                                        //dispensaries: dispensaries
 
 
                                     }
