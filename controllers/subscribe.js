@@ -437,11 +437,6 @@ const getSubscriptionsUsersDispensaries = async (req, res = response) => {
 
                                         })
 
-
-
-
-
-
                                 })
 
 
@@ -449,9 +444,16 @@ const getSubscriptionsUsersDispensaries = async (req, res = response) => {
 
 
 
+                        })
 
 
-                        }));
+
+
+
+
+
+
+                }));
             Promise.all(promises)
                 .then(() => {
 
