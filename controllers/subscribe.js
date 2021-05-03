@@ -374,7 +374,7 @@ const getSubscriptionsUsersDispensaries = async (req, res = response) => {
                         .populate('user')
                         .then((profileFind) => {
 
-                            Subscription.find({ subscriptor: dispensary.subscriptor })
+                            Subscription.findOne({ subscriptor: dispensary.subscriptor })
                                 .then((subscription) => {
 
 
