@@ -390,6 +390,8 @@ const getSubscriptionsUsersDispensaries = async (req, res = response) => {
                                         isUserNotifi: dispensary.isUserNotifi,
                                         isClubNotifi: dispensary.isClubNotifi,
                                         isEdit: dispensary.isEdit,
+                                        createdAt: dispensary.createdAt,
+                                        updatedAt: dispensary.updatedAt,
                                         subscriptor: {
 
                                             name: profileFind.name,
