@@ -339,12 +339,12 @@ const getSubscriptionsUsersDispensaries = async (req, res = response) => {
         const clubId = req.params.clubId;
 
 
-        const subscriptions = await Subscription
-            .find({ club: clubId, subscribeApproved: true })
+        const dispensaries = await Dispensary
+            .find({ club: clubId, isActive: true })
 
             .sort('-createdAt')
 
-        const subscriptionsDispensaries = []
+        const dispensariesSubscriptors = []
 
 
 
@@ -355,10 +355,10 @@ const getSubscriptionsUsersDispensaries = async (req, res = response) => {
 
 
 
-        if (subscriptions.length > 0) {
+        if (dispensaries.length > 0) {
 
 
-            const promises = subscriptions.map((subscription) =>
+            const promises = dispensaries.map((dispensary) =>
 
 
 
@@ -370,21 +370,26 @@ const getSubscriptionsUsersDispensaries = async (req, res = response) => {
                     console.log('ello!');
 
                     Profile
-                        .findOne({ user: subscription.subscriptor })
+                        .findOne({ user: dispensary.subscriptor })
                         .populate('user')
                         .then((profileFind) => {
 
-                            Dispensary.find({ subscriptor: subscription.subscriptor })
-                                .then((dispensaries) => {
+                            Subscription.find({ subscriptor: dispensary.subscriptor })
+                                .then((subscription) => {
 
 
-                                    const subscriptionItem = {
+                                    const dispensaryItem = {
 
-                                        id: subscription._id,
-                                        subscriptor: subscription.subscriptor,
-                                        imageRecipe: subscription.imageRecipe,
-                                        createdAt: subscription.createdAt,
-                                        updatedAt: subscription.updatedAt,
+                                        gramsRecipe: dispensary.gramsRecipe,
+                                        club: dispensary.club,
+                                        dateDelivery: dispensary.dateDelivery,
+                                        isActive: dispensary.isActive,
+                                        isDelivered: dispensary.isDelivered,
+                                        isCancel: dispensary.isCancel,
+                                        isUpdate: dispensary.isUpdate,
+                                        isUserNotifi: dispensary.isUserNotifi,
+                                        isClubNotifi: dispensary.isClubNotifi,
+                                        isEdit: dispensary.isEdit,
                                         subscriptor: {
 
                                             name: profileFind.name,
@@ -410,20 +415,16 @@ const getSubscriptionsUsersDispensaries = async (req, res = response) => {
 
 
                                         },
-                                        club: subscription.club,
-                                        isUpload: subscription.isUpload,
-                                        subscribeActive: subscription.subscribeActive,
-                                        subscribeApproved: subscription.subscribeApproved,
-                                        isClubNotifi: subscription.isClubNotifi,
-                                        isUserNotifi: subscription.isUserNotifi,
-                                        dispensaries: dispensaries
+                                        subscription: subscription
+
+
 
 
                                     }
 
 
 
-                                    subscriptionsDispensaries.push(subscriptionItem);
+                                    dispensariesSubscriptors.push(dispensaryItem);
                                     resolve();
 
                                 })
@@ -450,7 +451,7 @@ const getSubscriptionsUsersDispensaries = async (req, res = response) => {
 
                     return res.json({
                         ok: false,
-                        subscriptionsDispensaries
+                        dispensariesSubscriptors
 
 
                     });
@@ -466,7 +467,7 @@ const getSubscriptionsUsersDispensaries = async (req, res = response) => {
 
             return res.json({
                 ok: false,
-                subscriptionsDispensaries
+                dispensariesSubscriptors
 
 
             });
