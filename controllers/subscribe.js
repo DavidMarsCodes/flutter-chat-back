@@ -395,10 +395,10 @@ const getSubscriptionsUsersDispensaries = async (req, res = response) => {
 
                                             rooms: profileFind.rooms,
                                             user: {
-                                                online: user.online,
-                                                uid: user.id,
-                                                email: user.email,
-                                                username: user.username,
+                                                online: profileFind.user.online,
+                                                uid: profileFind.user._id,
+                                                email: profileFind.user.email,
+                                                username: profileFind.user.username,
 
                                             },
                                             messageDate: profileFind.createdAt,
@@ -414,7 +414,7 @@ const getSubscriptionsUsersDispensaries = async (req, res = response) => {
                                         subscribeApproved: subscription.subscribeApproved,
                                         isClubNotifi: subscription.isClubNotifi,
                                         isUserNotifi: subscription.isUserNotifi,
-                                        //dispensaries: dispensaries
+                                        dispensaries: dispensaries
 
 
                                     }
