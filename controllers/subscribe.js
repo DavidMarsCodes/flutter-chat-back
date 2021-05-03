@@ -2,6 +2,7 @@ const { response } = require('express');
 const Subscription = require('../models/subscription');
 const Profile = require('../models/profile');
 const Dispensary = require('../models/dispensary');
+const ProductDispensary = require('../models/product_dispensary');
 
 
 const UpdateImageSubscription = async (req, res = response) => {
@@ -378,56 +379,68 @@ const getSubscriptionsUsersDispensaries = async (req, res = response) => {
                                 .then((subscription) => {
 
 
-                                    const dispensaryItem = {
-
-                                        gramsRecipe: dispensary.gramsRecipe,
-                                        club: dispensary.club,
-                                        dateDelivery: dispensary.dateDelivery,
-                                        isActive: dispensary.isActive,
-                                        isDelivered: dispensary.isDelivered,
-                                        isCancel: dispensary.isCancel,
-                                        isUpdate: dispensary.isUpdate,
-                                        isUserNotifi: dispensary.isUserNotifi,
-                                        isClubNotifi: dispensary.isClubNotifi,
-                                        isEdit: dispensary.isEdit,
-                                        createdAt: dispensary.createdAt,
-                                        updatedAt: dispensary.updatedAt,
-                                        subscriptor: {
-
-                                            name: profileFind.name,
-                                            lastName: profileFind.lastName,
-                                            about: profileFind.about,
-                                            imageHeader: profileFind.imageHeader,
-                                            imageAvatar: profileFind.imageAvatar,
-                                            id: profileFind._id,
-                                            isClub: profileFind.isClub,
+                                    ProductDispensary.find({ dispensary: dispensary._id })
+                                        .then((productsDispensary) => {
 
 
-                                            user: {
-                                                online: profileFind.user.online,
-                                                uid: profileFind.user._id,
-                                                email: profileFind.user.email,
-                                                username: profileFind.user.username,
+                                            const dispensaryItem = {
 
-                                            },
-                                            messageDate: profileFind.createdAt,
+                                                gramsRecipe: dispensary.gramsRecipe,
+                                                club: dispensary.club,
+                                                dateDelivery: dispensary.dateDelivery,
+                                                isActive: dispensary.isActive,
+                                                isDelivered: dispensary.isDelivered,
+                                                isCancel: dispensary.isCancel,
+                                                isUpdate: dispensary.isUpdate,
+                                                isUserNotifi: dispensary.isUserNotifi,
+                                                isClubNotifi: dispensary.isClubNotifi,
+                                                isEdit: dispensary.isEdit,
+                                                createdAt: dispensary.createdAt,
+                                                updatedAt: dispensary.updatedAt,
+                                                gramsTotal: productsDispensary.length,
+                                                subscriptor: {
 
-                                            createdAt: profileFind.createdAt,
-                                            updatedAt: profileFind.updatedAt
+                                                    name: profileFind.name,
+                                                    lastName: profileFind.lastName,
+                                                    about: profileFind.about,
+                                                    imageHeader: profileFind.imageHeader,
+                                                    imageAvatar: profileFind.imageAvatar,
+                                                    id: profileFind._id,
+                                                    isClub: profileFind.isClub,
 
 
-                                        },
-                                        subscription: subscription
+                                                    user: {
+                                                        online: profileFind.user.online,
+                                                        uid: profileFind.user._id,
+                                                        email: profileFind.user.email,
+                                                        username: profileFind.user.username,
+
+                                                    },
+                                                    messageDate: profileFind.createdAt,
+
+                                                    createdAt: profileFind.createdAt,
+                                                    updatedAt: profileFind.updatedAt
+
+
+                                                },
+                                                subscription: subscription
 
 
 
 
-                                    }
+                                            }
 
 
 
-                                    dispensariesSubscriptors.push(dispensaryItem);
-                                    resolve();
+                                            dispensariesSubscriptors.push(dispensaryItem);
+                                            resolve();
+
+                                        })
+
+
+
+
+
 
                                 })
 
@@ -436,16 +449,9 @@ const getSubscriptionsUsersDispensaries = async (req, res = response) => {
 
 
 
-                        })
 
 
-
-
-
-
-
-
-                }));
+                        }));
             Promise.all(promises)
                 .then(() => {
 
