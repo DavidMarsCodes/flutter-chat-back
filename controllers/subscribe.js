@@ -1,6 +1,7 @@
 const { response } = require('express');
 const Subscription = require('../models/subscription');
 const Profile = require('../models/profile');
+const Dispensary = require('../models/dispensary');
 
 
 const UpdateImageSubscription = async (req, res = response) => {
@@ -331,12 +332,172 @@ const approveSubscription = async (req, res = response) => {
 
 
 
+
+const getSubscriptionsUsersDispensaries = async (req, res = response) => {
+
+    try {
+        const clubId = req.params.clubId;
+
+
+        const subscriptions = await Subscription
+            .find({ club: clubId, subscribeApproved: true })
+            .populate('subscriptor')
+            .sort('-createdAt')
+
+        const subscriptionsDispensaries = []
+
+
+
+        //const dispensaries = await Dispensary.find({ subscriptor: subId, club: uid });
+
+
+
+
+
+
+        if (subscriptions.length > 0) {
+
+
+            const promises = subscriptions.map((subscription) =>
+
+
+
+
+
+                new Promise((resolve, reject) => {
+
+
+                    console.log('ello!');
+
+                    Profile
+                        .findOne({ user: subscription.subscriptor })
+                        .populate('user')
+                        .then((profileFind) => {
+
+                            Dispensary.find({ subscriptor: subscription.subscriptor })
+                                .then((dispensaries) => {
+
+
+                                    const subscriptionItem = {
+
+                                        id: subscription._id,
+                                        subscriptor: subscription.subscriptor,
+                                        imageRecipe: subscription.imageRecipe,
+                                        subscriptor: {
+
+                                            name: profileFind.name,
+                                            lastName: profileFind.lastName,
+                                            about: profileFind.about,
+                                            imageHeader: profileFind.imageHeader,
+                                            imageAvatar: profileFind.imageAvatar,
+                                            id: profileFind._id,
+                                            isClub: profileFind.isClub,
+
+                                            rooms: profileFind.rooms,
+                                            user: {
+                                                online: user.online,
+                                                uid: user.id,
+                                                email: user.email,
+                                                username: user.username,
+
+                                            },
+                                            messageDate: profileFind.createdAt,
+
+                                            createdAt: profileFind.createdAt,
+                                            updatedAt: profileFind.updatedAt
+
+
+                                        },
+                                        club: subscription.club,
+                                        isUpload: subscription.isUpload,
+                                        subscribeActive: subscription.subscribeActive,
+                                        subscribeApproved: subscription.subscribeApproved,
+                                        isClubNotifi: subscription.isClubNotifi,
+                                        isUserNotifi: subscription.isUserNotifi,
+                                        dispensaries: dispensaries
+
+
+                                    }
+
+
+
+                                    subscriptionsDispensaries.push(subscriptionItem);
+                                    resolve();
+
+                                })
+
+
+
+
+
+
+                        })
+
+
+
+
+
+
+
+
+                }));
+            Promise.all(promises)
+                .then(() => {
+
+
+
+                    return res.json({
+                        ok: false,
+                        subscriptionsDispensaries
+
+
+                    });
+
+                })
+
+        }
+
+        else {
+
+
+
+
+            return res.json({
+                ok: false,
+                subscriptionsDispensaries
+
+
+            });
+
+
+        }
+
+
+
+    }
+
+
+    catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: 'Hable con el administrador'
+        });
+    }
+
+
+
+}
+
+
+
 module.exports = {
     UpdateImageSubscription,
     UnSubscription,
     getSubscribeByClubIdAndSubId,
     disapproveSubscription,
     approveSubscription,
+    getSubscriptionsUsersDispensaries
 
 
 }

@@ -25,9 +25,13 @@ router.get('/dispensary/products/club/:clubId/user/:userId/dispensary/:dispensar
 
 router.get('/principal/products/:uid', validateJWT, getLastProducts);
 
+
+
 router.post('/update/product', validateJWT, editProduct);
 
 router.delete('/delete/:id', validateJWT, deleteProduct);
+
+
 
 
 module.exports = router;

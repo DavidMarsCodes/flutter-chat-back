@@ -1313,13 +1313,16 @@ const deleteProduct = async (req, res = response) => {
 
 
 
+
+
 module.exports = {
     createProduct,
     editProduct,
     getProductsLikedDispensary,
     getProductsByCatalogo,
     getLastProducts,
-    deleteProduct
+    deleteProduct,
+
 
 }
 
