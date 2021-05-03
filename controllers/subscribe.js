@@ -393,7 +393,7 @@ const getSubscriptionsUsersDispensaries = async (req, res = response) => {
                                             id: profileFind._id,
                                             isClub: profileFind.isClub,
 
-                                            rooms: profileFind.rooms,
+
                                             user: {
                                                 online: profileFind.user.online,
                                                 uid: profileFind.user._id,
