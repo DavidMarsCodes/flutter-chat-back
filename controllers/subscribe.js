@@ -383,6 +383,8 @@ const getSubscriptionsUsersDispensaries = async (req, res = response) => {
                                         id: subscription._id,
                                         subscriptor: subscription.subscriptor,
                                         imageRecipe: subscription.imageRecipe,
+                                        createdAt: subscription.createdAt,
+                                        updatedAt: subscription.updatedAt,
                                         subscriptor: {
 
                                             name: profileFind.name,
