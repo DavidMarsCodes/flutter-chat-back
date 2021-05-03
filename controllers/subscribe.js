@@ -383,6 +383,13 @@ const getSubscriptionsUsersDispensaries = async (req, res = response) => {
                                         .then((productsDispensary) => {
 
 
+                                            const initialQuantity =
+                                                (productsDispensary.length > 0)
+                                                    ? productsDispensary
+                                                        .map((item) => item.quantity)
+                                                        .reduce((item1, item2) => item1 + item2)
+                                                    : 0;
+
                                             const dispensaryItem = {
 
                                                 gramsRecipe: dispensary.gramsRecipe,
@@ -397,7 +404,7 @@ const getSubscriptionsUsersDispensaries = async (req, res = response) => {
                                                 isEdit: dispensary.isEdit,
                                                 createdAt: dispensary.createdAt,
                                                 updatedAt: dispensary.updatedAt,
-                                                gramsTotal: productsDispensary.length,
+                                                gramsTotal: initialQuantity,
                                                 subscriptor: {
 
                                                     name: profileFind.name,
