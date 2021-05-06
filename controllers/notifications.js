@@ -525,7 +525,7 @@ const getProfilesSubscriptorsApproveByUser = async (req, res) => {
                                     .then(user => {
 
                                         Dispensary.findOne({ club: obj.club, subscriptor: uid })
-
+                                            .sort({ createdAt: -1 })
                                             .then((dispensary) => {
 
 
