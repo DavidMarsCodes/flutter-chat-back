@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 require('dotenv').config();
-
+var cors = require('cors')
 var fs = require('fs');
 var data = fs.readFileSync('./aws/keys.json', 'utf8');
 var keys = JSON.parse(data);
