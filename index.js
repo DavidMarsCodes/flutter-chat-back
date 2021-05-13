@@ -24,6 +24,9 @@ var bodyParser = require('body-parser');
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(bodyParser.urlencoded({ limit: "70mb", extended: true, parameterLimit: 70000 }));
 
+app.use(cors());
+app.options('*', cors());
+
 var aws = require('aws-sdk');
 
 aws.config.update({
