@@ -27,6 +27,15 @@ app.use(bodyParser.urlencoded({ limit: "70mb", extended: true, parameterLimit: 7
 app.use(cors());
 app.options('*', cors());
 
+app.use((req, res, next) => {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.header(
+        "Access-Control-Allow-Headers",
+        "Origin, X-Requested-With, Content-Type, Accept"
+    );
+    next();
+});
+
 var aws = require('aws-sdk');
 
 aws.config.update({
