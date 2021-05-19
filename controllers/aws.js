@@ -268,21 +268,21 @@ const updateCoverProduct = async (req, res = response) => {
             };
 
 
-            const productId = req.headers.id;
-
-
-            const productUpdate = await Product.updateOne(
-                {
-                    _id: productId,
-
-                },
-                {
-                    $set: {
-                        coverImage: returnData.url,
-
-                    }
-                }
-            );
+            /*   const productId = req.headers.id;
+  
+  
+              const productUpdate = await Product.updateOne(
+                  {
+                      _id: productId,
+  
+                  },
+                  {
+                      $set: {
+                          coverImage: returnData.url,
+  
+                      }
+                  }
+              ); */
 
 
 
