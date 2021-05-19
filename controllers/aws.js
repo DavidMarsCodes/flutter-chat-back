@@ -199,22 +199,22 @@ const updateCoverPlant = async (req, res = response) => {
 
             const plantId = req.headers.id;
 
-
-            const plantUpdate = await Plant.updateOne(
-                {
-                    _id: plantId,
-
-                },
-                {
-                    $set: {
-                        coverImage: returnData.url,
-
-                    }
-                }
-            );
-
-
-
+            /* 
+                        const plantUpdate = await Plant.updateOne(
+                            {
+                                _id: plantId,
+            
+                            },
+                            {
+                                $set: {
+                                    coverImage: returnData.url,
+            
+                                }
+                            }
+                        );
+            
+            
+             */
 
             res.json({ ok: true, url: returnData.url });
 
@@ -268,21 +268,21 @@ const updateCoverProduct = async (req, res = response) => {
             };
 
 
-            /*   const productId = req.headers.id;
-  
-  
-              const productUpdate = await Product.updateOne(
-                  {
-                      _id: productId,
-  
-                  },
-                  {
-                      $set: {
-                          coverImage: returnData.url,
-  
-                      }
-                  }
-              ); */
+            const productId = req.headers.id;
+
+
+            const productUpdate = await Product.updateOne(
+                {
+                    _id: productId,
+
+                },
+                {
+                    $set: {
+                        coverImage: returnData.url,
+
+                    }
+                }
+            );
 
 
 
